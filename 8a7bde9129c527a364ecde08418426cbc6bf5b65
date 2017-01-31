@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "daeb3561_a18cbe80",
+        "filename": "README",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 15
+      },
+      "writtenOn": "2017-01-31T13:07:43Z",
+      "side": 1,
+      "message": "Why do have an empty readme ?",
+      "revId": "8a7bde9129c527a364ecde08418426cbc6bf5b65",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
