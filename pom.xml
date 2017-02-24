@@ -25,7 +25,11 @@
 			<name>OpenECOMP - Snapshot Repository</name>
 			<url>${nexusproxy}/${snapshotNexusPath}</url>
 		</snapshotRepository>
-	</distributionManagement>
+        <site>
+            <id>ecomp-site</id>
+            <url>dav:${nexusproxy}${sitePath}</url>
+        </site>
+    </distributionManagement>
 	<modules>
 		<module>openstack-client</module>
 		<module>nova-model</module>
