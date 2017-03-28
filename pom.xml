@@ -9,18 +9,26 @@
 	<description>OpenStack Java SDK</description>
 	<properties>
 		<skip.sign>false</skip.sign>
+		<nexus.url>https://nexus.openecomp.org</nexus.url>
+		<nexus.snapshot.path>/content/repositories/snapshots/</nexus.snapshot.path>
+		<nexus.release.path>/content/repositories/releases/</nexus.release.path>
+		<nexus.site.path>/content/sites/site/org/openecomp/mso/libs/${project.version}</nexus.site.path>
 	</properties>
 	<distributionManagement>
 		<repository>
 			<id>ecomp-releases</id>
 			<name>OpenECOMP - Release Repository</name>
-			<url>https://nexus.openecomp.org/content/repositories/releases/</url>
+			<url>${nexus.url}${nexus.release.path}</url>
 		</repository>
 		<snapshotRepository>
 			<id>ecomp-snapshots</id>
 			<name>OpenECOMP - Snapshot Repository</name>
-			<url>https://nexus.openecomp.org/content/repositories/snapshots/</url>
+			<url>${nexus.url}${nexus.snapshot.path}</url>
 		</snapshotRepository>
+		<site>
+			<id>ecomp-site</id>
+			<url>dav:${nexus.url}${nexus.site.path}</url>
+		</site>
 	</distributionManagement>
 	<modules>
 		<module>openstack-client</module>
