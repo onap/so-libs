@@ -13,7 +13,7 @@
 		<snapshotNexusPath>/content/repositories/snapshots/</snapshotNexusPath>
 		<releaseNexusPath>/content/repositories/releases/</releaseNexusPath>
 		<stagingNexusPath>/content/repositories/staging/</stagingNexusPath>
-                <siteNexusPath>/content/sites/site/org/openecomp/mso/lib/${project.version}</siteNexusPath>
+                <siteNexusPath>/content/sites/site/org/onap/mso/lib/${project.version}</siteNexusPath>
 	</properties>
 	<distributionManagement>
 		<repository>
