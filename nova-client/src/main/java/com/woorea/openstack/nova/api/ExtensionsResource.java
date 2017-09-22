@@ -7,24 +7,22 @@ import com.woorea.openstack.base.client.OpenStackRequest;
 import com.woorea.openstack.nova.model.Extensions;
 
 public class ExtensionsResource {
-	
-	private final OpenStackClient CLIENT;
-	
-	public ExtensionsResource(OpenStackClient client) {
-		CLIENT = client;
-	}
-	
-	public List list(boolean detail) {
-		return new List(detail);
-	}
-	
-	public class List extends OpenStackRequest<Extensions> {
 
-	    public List(boolean detail) {
-	    	super(CLIENT, HttpMethod.GET, detail ? "extensions/detail" : "extensions", null, Extensions.class);
-	    }
-	    
-	 }
-	
+    private final OpenStackClient client;
+
+    public ExtensionsResource(OpenStackClient client) {
+        this.client = client;
+    }
+
+    public List list(boolean detail) {
+        return new List(detail);
+    }
+
+    public class List extends OpenStackRequest<Extensions> {
+
+        public List(boolean detail) {
+            super(client, HttpMethod.GET, detail ? "extensions/detail" : "extensions", null, Extensions.class);
+        }
+    }
 }
 
