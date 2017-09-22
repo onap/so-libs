@@ -20,11 +20,11 @@ package com.woorea.openstack.heat.model;
  * Modifications copyright (c) 2017 AT&T Intellectual Property
  */
 
+import java.util.Map;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import java.util.Map;
-
 public class CreateStackParam {
+
     @JsonProperty("stack_name")
     private String stackName;
 
@@ -45,7 +45,7 @@ public class CreateStackParam {
 
     @JsonProperty("disable_rollback")
     private boolean disableRollback = true;
-    
+
     @JsonProperty("files")
     private Map<String, Object> files;
 
@@ -119,25 +119,34 @@ public class CreateStackParam {
     public void setDisableRollback(boolean disableRollback) {
         this.disableRollback = disableRollback;
     }
-    
+
     public void setFiles(Map<String, Object> files) {
-    	this.files = files;
+        this.files = files;
     }
+
     public Map<String, Object> getFiles() {
-    	return this.files;
+        return files;
     }
 
     @Override
     public String toString() {
-        return "CreateStackParam{" +
-                "stackName='" + stackName + '\'' +
-                ", templateUrl='" + templateUrl + '\'' +
-                ", template='" + template + '\'' +
-                ", parameters=" + parameters +
-                ", timeoutMinutes=" + timeoutMinutes +
-                ", environment='" + environment + '\'' +
-                ", disableRollback='" + disableRollback + '\'' +
-                ", files=" + files +
-                '}';
+        return String.format("CreateStackParam{"
+                + "stackName='%s',"
+                + " templateUrl='%s',"
+                + " template='%s',"
+                + " parameters=%s,"
+                + " timeoutMinutes=%d,"
+                + " environment='%s',"
+                + " disableRollback='%s',"
+                + " files=%s"
+                + "}",
+            stackName,
+            templateUrl,
+            template,
+            parameters,
+            timeoutMinutes,
+            environment,
+            disableRollback,
+            files);
     }
 }

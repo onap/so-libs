@@ -25,12 +25,14 @@ import com.woorea.openstack.base.client.HttpMethod;
 import com.woorea.openstack.base.client.OpenStackClient;
 import com.woorea.openstack.base.client.OpenStackRequest;
 import com.woorea.openstack.heat.model.CreateStackParam;
-import com.woorea.openstack.heat.model.UpdateStackParam;
 import com.woorea.openstack.heat.model.Stack;
 import com.woorea.openstack.heat.model.Stacks;
+import com.woorea.openstack.heat.model.UpdateStackParam;
 
 public class StackResource {
 
+    private static final String STACKS = "/stacks/";
+    private static final String STACK = "/stacks";
     private final OpenStackClient client;
 
     public StackResource(OpenStackClient client) {
@@ -58,35 +60,38 @@ public class StackResource {
     }
 
     public class CreateStack extends OpenStackRequest<Stack> {
+
         public CreateStack(CreateStackParam params) {
-            super(client, HttpMethod.POST, "/stacks", Entity.json(params), Stack.class);
+            super(client, HttpMethod.POST, STACK, Entity.json(params), Stack.class);
         }
     }
 
     public class UpdateStack extends OpenStackRequest<Void> {
+
         public UpdateStack(String name, UpdateStackParam params) {
-            super(client, HttpMethod.PUT, "/stacks/" + name, Entity.json(params), Void.class);
+            super(client, HttpMethod.PUT, STACKS + name, Entity.json(params), Void.class);
         }
     }
 
     public class DeleteStack extends OpenStackRequest<Void> {
+
         public DeleteStack(String name) {
-            super(client, HttpMethod.DELETE, "/stacks/" + name, null, Void.class);
+            super(client, HttpMethod.DELETE, STACKS + name, null, Void.class);
         }
     }
 
 
     public class GetStack extends OpenStackRequest<Stack> {
+
         public GetStack(String name) {
-            super(client, HttpMethod.GET, "/stacks/" + name, null, Stack.class);
+            super(client, HttpMethod.GET, STACKS + name, null, Stack.class);
         }
     }
 
     public class List extends OpenStackRequest<Stacks> {
+
         public List() {
-            super(client, HttpMethod.GET, "/stacks", null, Stacks.class);
+            super(client, HttpMethod.GET, STACK, null, Stacks.class);
         }
     }
-
-
 }
