@@ -124,7 +124,7 @@ public class CreateStackParam {
     	this.files = files;
     }
     public Map<String, Object> getFiles() {
-    	return this.files;
+    	return files;
     }
 
     @Override
