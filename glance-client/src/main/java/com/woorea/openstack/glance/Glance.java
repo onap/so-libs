@@ -4,27 +4,26 @@ import com.woorea.openstack.base.client.OpenStackClient;
 import com.woorea.openstack.base.client.OpenStackClientConnector;
 
 public class Glance extends OpenStackClient {
-	
-	private final ImagesResource IMAGES;
-	
-	private final SharedImagesResource SHARED_IMAGES;
 
-	public Glance(String endpoint, OpenStackClientConnector connector) {
-		super(endpoint, connector);
-		IMAGES = new ImagesResource(this);
-		SHARED_IMAGES = new SharedImagesResource(this);
-	}
-	
-	public Glance(String endpoint) {
-		this(endpoint, null);
-	}
-	
-	public final ImagesResource images() {
-		return IMAGES;
-	}
-	
-	public final SharedImagesResource sharedImages() {
-		return SHARED_IMAGES;
-	}
+    private final ImagesResource images;
 
+    private final SharedImagesResource sharedImages;
+
+    public Glance(String endpoint, OpenStackClientConnector connector) {
+        super(endpoint, connector);
+        images = new ImagesResource(this);
+        sharedImages = new SharedImagesResource(this);
+    }
+
+    public Glance(String endpoint) {
+        this(endpoint, null);
+    }
+
+    public final ImagesResource images() {
+        return images;
+    }
+
+    public final SharedImagesResource sharedImages() {
+        return sharedImages;
+    }
 }
