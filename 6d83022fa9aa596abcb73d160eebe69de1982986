@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_a63d202d",
+        "filename": "docs/index.rst",
+        "patchSetId": 2
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 19
+      },
+      "writtenOn": "2017-10-03T14:40:32Z",
+      "side": 1,
+      "message": "Add at least a header with TODO or description\n\nSO Libraries\n\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\u003d\nTODO or description of libraries",
+      "revId": "6d83022fa9aa596abcb73d160eebe69de1982986",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
