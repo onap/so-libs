@@ -21,7 +21,7 @@
 		<snapshotNexusPath>/content/repositories/snapshots/</snapshotNexusPath>
 		<releaseNexusPath>/content/repositories/releases/</releaseNexusPath>
 		<stagingNexusPath>/content/repositories/staging/</stagingNexusPath>
-                <siteNexusPath>/content/sites/site/org/onap/so/lib/${project.version}</siteNexusPath>
+		<siteNexusPath>/content/sites/site/org/onap/so/libs/${project.version}</siteNexusPath>
 	</properties>
 	<distributionManagement>
 		<repository>
