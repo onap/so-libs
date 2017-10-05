@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9a437d4f_b9d9baf4",
+        "filename": "heat-client/src/main/java/com/woorea/openstack/heat/StackResource.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 2079
+      },
+      "writtenOn": "2017-10-05T06:16:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_fa4d263f",
+      "range": {
+        "startLine": 77,
+        "startChar": 11,
+        "endLine": 77,
+        "endChar": 73
+      },
+      "revId": "81e3e930590432e15bd9a8cd9f8f1a9ebdf403ad",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a437d4f_ba531ee1",
         "filename": "heat-model/src/main/java/com/woorea/openstack/heat/model/CreateStackParam.java",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-09-25T07:51:32Z",
       "side": 1,
       "message": "Use a string buffer/builder instead of +...",
+      "range": {
+        "startLine": 117,
+        "startChar": 15,
+        "endLine": 121,
+        "endChar": 54
+      },
+      "revId": "81e3e930590432e15bd9a8cd9f8f1a9ebdf403ad",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_99e4b6ac",
+        "filename": "heat-model/src/main/java/com/woorea/openstack/heat/model/CreateStackParam.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 2079
+      },
+      "writtenOn": "2017-10-05T06:16:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a437d4f_ba531ee1",
       "range": {
         "startLine": 117,
         "startChar": 15,
