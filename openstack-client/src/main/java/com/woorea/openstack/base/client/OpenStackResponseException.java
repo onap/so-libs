@@ -43,6 +43,7 @@ public class OpenStackResponseException extends OpenStackBaseException {
 		this.response = response;
 	}
 
+	@Override
 	public String getMessage() {
 		return message;
 	}

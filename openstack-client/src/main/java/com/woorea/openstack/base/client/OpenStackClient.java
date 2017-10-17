@@ -100,7 +100,7 @@ public class OpenStackClient {
 	}
 	
 	public <R> OpenStackRequest<R> get(String path, Class<R> returnType) {
-		return new OpenStackRequest<R>(this, HttpMethod.GET, path, null, returnType);
+		return new OpenStackRequest<>(this, HttpMethod.GET, path, null, returnType);
 	}
 	
 }

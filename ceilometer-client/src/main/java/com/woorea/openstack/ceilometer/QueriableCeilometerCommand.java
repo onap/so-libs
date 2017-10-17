@@ -24,11 +24,11 @@ import com.woorea.openstack.base.client.OpenStackRequest;
 
 public abstract class QueriableCeilometerCommand<T,R> extends OpenStackRequest<R> {
 	
-	protected List<String> fields = new ArrayList<String>();
+	protected List<String> fields = new ArrayList<>();
 	
-	protected List<String> ops = new ArrayList<String>();
+	protected List<String> ops = new ArrayList<>();
 	
-	protected List<Serializable> values = new ArrayList<Serializable>();
+	protected List<Serializable> values = new ArrayList<>();
 	
 	private T filter(String field, String op, Serializable value) {
 		fields.add(field);
