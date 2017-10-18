@@ -32,7 +32,7 @@ public class Credential {
 	
 	private String userId;
 	
-	private Map<String, String> blob = new HashMap<String, String>();
+	private Map<String, String> blob = new HashMap<>();
 
 	public String getId() {
 		return id;

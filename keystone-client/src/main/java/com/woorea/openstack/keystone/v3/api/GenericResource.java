@@ -38,23 +38,23 @@ public class GenericResource<One, Many> {
 	}
 	
 	public OpenStackRequest<Many> list() {
-		return new OpenStackRequest<Many>(CLIENT, HttpMethod.GET, path, null, manyClass);
+		return new OpenStackRequest<>(CLIENT, HttpMethod.GET, path, null, manyClass);
 	}
 	
 	public OpenStackRequest<One> create(One one) {
-		return new OpenStackRequest<One>(CLIENT, HttpMethod.POST, path, Entity.json(one), oneClass);
+		return new OpenStackRequest<>(CLIENT, HttpMethod.POST, path, Entity.json(one), oneClass);
 	}
 	
 	public OpenStackRequest<One> show(String id) {
-		return new OpenStackRequest<One>(CLIENT, HttpMethod.GET, new StringBuilder(path).append("/").append(id).toString(), null, oneClass);
+		return new OpenStackRequest<>(CLIENT, HttpMethod.GET, new StringBuilder(path).append("/").append(id).toString(), null, oneClass);
 	}
 	
 	public OpenStackRequest<One> update(String id, One one) {
-		return new OpenStackRequest<One>(CLIENT, HttpMethod.PATCH, new StringBuilder(path).append("/").append(id).toString(), Entity.json(one), oneClass);
+		return new OpenStackRequest<>(CLIENT, HttpMethod.PATCH, new StringBuilder(path).append("/").append(id).toString(), Entity.json(one), oneClass);
 	}
 	
 	public OpenStackRequest<One> delete(String id) {
-		return new OpenStackRequest<One>(CLIENT, HttpMethod.DELETE, new StringBuilder(path).append("/").append(id).toString(), null, oneClass);
+		return new OpenStackRequest<>(CLIENT, HttpMethod.DELETE, new StringBuilder(path).append("/").append(id).toString(), null, oneClass);
 	}
 	
 }
