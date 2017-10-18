@@ -104,6 +104,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
 		return type.getAnnotation(JsonRootName.class) == null ? DEFAULT_MAPPER : WRAPPED_MAPPER;
 	}
 
+	@Override
 	public <T> OpenStackResponse request(OpenStackRequest<T> request) {
 		
 		CloseableHttpClient httpClient = null; //HttpClients.createDefault();
@@ -136,8 +137,8 @@ public class HttpClientConnector implements OpenStackClientConnector {
 
 				String entityJson = mapper.writeValueAsString (request.entity().getEntity());
 				entity = new StringEntity(entityJson, ContentType.create(request.entity().getContentType()));
-				
-				System.out.println("Openstack query JSON:"+entityJson);
+
+				LOGGER.debug("Openstack query JSON:"+entityJson);
 				LOGGER.debug ("Request JSON Body: " + entityJson.replaceAll("\"password\":\"[^\"]*\"", "\"password\":\"***\""));
 
 			} catch (JsonProcessingException e) {

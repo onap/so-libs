@@ -67,7 +67,7 @@ public class JaxRs20Response implements OpenStackResponse {
 
 	@Override
 	public Map<String, String> headers() {
-		Map<String, String> headers = new HashMap<String, String>();
+		Map<String, String> headers = new HashMap<>();
 		for(String k : response.getHeaders().keySet()) {
 			headers.put(k, response.getHeaderString(k));
 		}

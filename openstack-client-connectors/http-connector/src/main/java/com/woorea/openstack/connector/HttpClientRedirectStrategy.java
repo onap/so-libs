@@ -113,7 +113,7 @@ public class HttpClientRedirectStrategy extends DefaultRedirectStrategy {
 
             final int status = response.getStatusLine().getStatusCode();
             
-        	HttpUriRequest newRequest = null;
+        	HttpUriRequest newRequest;
         	if (status == HttpStatus.SC_TEMPORARY_REDIRECT || status == HttpStatus.SC_MOVED_TEMPORARILY) {
                 newRequest = RequestBuilder.copy(request).setUri(uri).build();
             } else {
