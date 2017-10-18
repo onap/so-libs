@@ -225,7 +225,7 @@ public class Stack {
 	{
 		try {
 			String s = mapper.writeValueAsString(_findOutputValue(key));
-			return (mapper.readValue(s, type));
+			return mapper.readValue(s, type);
 		}
 		catch (IOException e) {
 			return null;
@@ -233,7 +233,7 @@ public class Stack {
 	}
 	
 	@JsonProperty("parameters")
-	private Map<String,Object> parameters = new HashMap<String,Object>();
+	private Map<String,Object> parameters = new HashMap<>();
 	
 	public void setParameters (Map<String,Object> params)
 	{

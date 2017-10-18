@@ -57,12 +57,12 @@ public class RESTEasyResponse implements OpenStackResponse {
 
     @Override
     public String header(String name) {
-        return response.getHeaders().getFirst(name).toString();
+        return response.getHeaders().getFirst(name);
     }
 
     @Override
     public Map<String, String> headers() {
-        Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<>();
         MultivaluedMap<String, Object> responseHeaders = response.getHeaders();
 
         for (String key : responseHeaders.keySet()) {
