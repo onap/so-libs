@@ -67,7 +67,7 @@ public class OpenStack {
 		
 		try {
 			
-			SSLContext context = null;
+			SSLContext context;
             context = SSLContext.getInstance("SSL");
             context.init(null, null, null);
             
@@ -103,6 +103,7 @@ public class OpenStack {
 			
 			CLIENT.register(new JacksonFeature()).register(new ContextResolver<ObjectMapper>() {
 
+				@Override
 				public ObjectMapper getContext(Class<?> type) {
 					return type.getAnnotation(JsonRootName.class) == null ? DEFAULT_MAPPER : WRAPPED_MAPPER;
 				}
@@ -111,6 +112,7 @@ public class OpenStack {
 			
 			CLIENT.register(new ClientRequestFilter() {
 				
+				@Override
 				public void filter(ClientRequestContext requestContext) throws IOException {
 					requestContext.getHeaders().remove("Content-Language");
 					requestContext.getHeaders().remove("Content-Encoding");

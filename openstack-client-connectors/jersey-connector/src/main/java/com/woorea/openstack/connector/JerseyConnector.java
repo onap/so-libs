@@ -78,7 +78,7 @@ public class JerseyConnector implements OpenStackClientConnector {
 			headers.add("Content-Type", "application/json");
 		}
 		try {
-			ClientResponse response = null;
+			ClientResponse response;
 			if (request.entity() != null && request.entity().getEntity() != null) {
 				response = target.getHeadHandler().handle(new ClientRequestImpl(target.getURI(), request.method().name(), request.entity().getEntity(), headers));
 			} else {
