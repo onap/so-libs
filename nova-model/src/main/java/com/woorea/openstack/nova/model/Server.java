@@ -102,7 +102,7 @@ public class Server implements Serializable {
 			}
 		}
 
-		private Map<String, List<Address>> addresses = new HashMap<String, List<Address>>();
+		private Map<String, List<Address>> addresses = new HashMap<>();
 
 		@JsonAnySetter
 		public void add(String key, List<Address> value) {

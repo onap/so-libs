@@ -111,6 +111,7 @@ public class SecurityGroupRuleForCreate implements Serializable {
 	 * @param parentGroupId the parentGroupId to set
 	 * @deprecated Use {@link #setParentGroupId(String)}
 	 */
+	@Deprecated
 	public void setParentGroupId(Integer parentGroupId) {
 		this.parentGroupId = String.valueOf(parentGroupId);
 	}
@@ -189,6 +190,7 @@ public class SecurityGroupRuleForCreate implements Serializable {
 	 * @param groupId the groupId to set
 	 * @deprecated Use {@link #setGroupId(String)}
 	 */
+	@Deprecated
 	public void setGroupId(Integer groupId) {
 		this.groupId = String.valueOf(groupId);
 	}

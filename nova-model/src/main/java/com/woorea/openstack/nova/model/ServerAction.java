@@ -91,9 +91,9 @@ public interface ServerAction extends Serializable {
 		
 		private String accessIPv6;
 		
-		private Map<String, String> metadata = new HashMap<String, String>();
+		private Map<String, String> metadata = new HashMap<>();
 		
-		private List<PersonalityFile> personality = new ArrayList<PersonalityFile>();
+		private List<PersonalityFile> personality = new ArrayList<>();
 		
 		@JsonProperty("OS-DCF:diskConfig")
 		private String diskConfig;

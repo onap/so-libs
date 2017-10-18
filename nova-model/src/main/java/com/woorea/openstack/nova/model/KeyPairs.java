@@ -39,11 +39,11 @@ public class KeyPairs implements Iterable<KeyPair>, Serializable {
 	 * @return the list
 	 */
 	public List<KeyPair> getList() {
-		List<KeyPair> list = new ArrayList<KeyPair>();
+		List<KeyPair> keyPairList = new ArrayList<>();
 		for(KeyPairWrapper wrapper : this.list) {
-			list.add(wrapper.keypair);
+			keyPairList.add(wrapper.keypair);
 		}
-		return list;
+		return keyPairList;
 	}
 	
 	@Override
