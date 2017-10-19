@@ -21,6 +21,7 @@ import org.codehaus.jackson.map.annotate.JsonRootName;
 
 /**
  * Please use {@link Subnet} directly.
+ * @Deprecated
  */
 @SuppressWarnings("serial")
 @JsonRootName("subnet")

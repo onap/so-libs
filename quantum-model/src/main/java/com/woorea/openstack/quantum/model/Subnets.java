@@ -41,10 +41,12 @@ public class Subnets implements Serializable, Iterable<Subnet> {
 		this.list = list;
 	}
 
+	@Override
 	public String toString() {
 		return "Subnets [list=" + list + "]";
 	}
 	
+	@Override
 	public Iterator<Subnet> iterator() {
 		return list.iterator();
 	}
