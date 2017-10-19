@@ -104,6 +104,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
 		return type.getAnnotation(JsonRootName.class) == null ? DEFAULT_MAPPER : WRAPPED_MAPPER;
 	}
 
+	@Override
 	public <T> OpenStackResponse request(OpenStackRequest<T> request) {
 		
 		CloseableHttpClient httpClient = null; //HttpClients.createDefault();

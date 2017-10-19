@@ -41,12 +41,12 @@ public class Networks implements Iterable<Network>, Serializable{
 		this.list = list;
 	}
 
-
+	@Override
 	public String toString() {
 		return "Networks [list=" + list + "]";
 	}
 
-
+	@Override
 	public Iterator<Network> iterator() {
 		return list.iterator();
 	}
