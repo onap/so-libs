@@ -319,7 +319,7 @@ public class Network implements Serializable {
      */
     @Override
     public String toString() {
-    	StringBuffer buf = new StringBuffer("Network [id=" + id + ", name=" + name + ", subnets="
+    	StringBuilder buf = new StringBuilder("Network [id=" + id + ", name=" + name + ", subnets="
                 + subnets + ", status=" + status + ", admin_state_up=" + adminStateUp + ", tenant_id=" +
                 tenantId + ", shared=" + shared + ", router:external=" + routerExternal);
     	if (getNetworkType() == NetworkType.PROVIDER)

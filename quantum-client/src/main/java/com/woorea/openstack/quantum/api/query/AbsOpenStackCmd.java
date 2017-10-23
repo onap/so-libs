@@ -62,7 +62,7 @@ public class AbsOpenStackCmd<T> extends OpenStackRequest<T> {
 
 	private Map<String, String> getObjectParamMap(T target)
 	{
-		Map<String, String> resultMap = new HashMap<String, String>();
+		Map<String, String> resultMap = new HashMap<>();
 		if (target == null)
 			return resultMap;
 

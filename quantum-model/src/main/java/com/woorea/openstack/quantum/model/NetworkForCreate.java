@@ -18,6 +18,9 @@ package com.woorea.openstack.quantum.model;
 
 import org.codehaus.jackson.map.annotate.JsonRootName;
 
+/**
+ * @deprecated
+ */
 @SuppressWarnings("serial")
 @JsonRootName("network")
 @Deprecated
