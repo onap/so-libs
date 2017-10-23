@@ -59,7 +59,7 @@ public class Authentication implements Serializable {
 			return identity;
 		}
 		
-		private List<String> methods = new ArrayList<String>();
+		private List<String> methods = new ArrayList<>();
 		
 		public static final class Password {
 			
