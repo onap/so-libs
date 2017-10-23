@@ -61,7 +61,7 @@ public class ImageUpload {
 	 */
 	public Map<String, Object> getProperties() {
 		if(properties == null) {
-			properties = new HashMap<String, Object>();
+			properties = new HashMap<>();
 		}
 		return properties;
 	}

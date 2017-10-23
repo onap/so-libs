@@ -55,6 +55,7 @@ public class RESTEasyConnector implements OpenStackClientConnector {
 			super();
 
 			addContextResolver(new ContextResolver<ObjectMapper>() {
+				@Override
 				public ObjectMapper getContext(Class<?> type) {
 					return type.getAnnotation(JsonRootName.class) == null ? DEFAULT_MAPPER : WRAPPED_MAPPER;
 				}
@@ -95,6 +96,7 @@ public class RESTEasyConnector implements OpenStackClientConnector {
 		providerFactory = new OpenStackProviderFactory();
 	}
 
+	@Override
 	public <T> OpenStackResponse request(OpenStackRequest<T> request) {
 		ClientRequest client = new ClientRequest(UriBuilder.fromUri(request.endpoint() + "/" + request.path()),
 				ClientRequest.getDefaultExecutor(), providerFactory);
