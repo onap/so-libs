@@ -100,6 +100,7 @@ public class JerseyLoggingFilter extends ClientFilter {
             this.b = b;
         }
 
+        @Override
         public OutputStream adapt(ClientRequest request, OutputStream out) throws IOException {
             return new LoggingOutputStream(getAdapter().adapt(request, out), b);
         }
