@@ -59,6 +59,7 @@ public class SecurityGroupsExtension {
 		 * @deprecated
 		 * @param id
 		 */
+		@Deprecated
 		public Show(Integer id) {
 			super(CLIENT, HttpMethod.GET, new StringBuilder("/os-security-groups/").append(id).toString(), null, SecurityGroup.class);
 		}
@@ -75,6 +76,7 @@ public class SecurityGroupsExtension {
 		 * @param id
 		 * @deprecated
 		 */
+		@Deprecated
 		public Delete(Integer id) {
 			super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-security-groups/").append(String.valueOf(id)).toString(), null, Void.class);
 		}
@@ -101,6 +103,7 @@ public class SecurityGroupsExtension {
 		 * @param id
 		 * @deprecated
 		 */
+		@Deprecated
 		public DeleteRule(Integer id) {
 			super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-security-group-rules/").append(String.valueOf(id)).toString(), null, Void.class);
 		}
@@ -148,6 +151,7 @@ public class SecurityGroupsExtension {
 	 * @return
 	 * @deprecated Use {@link #createSecurityGroupRule(String, String, Integer, Integer, String)}
 	 */
+	@Deprecated
 	public CreateRule createSecurityGroupRule(
 			Integer parentSecurityGroupId, String ipProtocol, Integer fromPort,
 			Integer toPort, String cidr) {
@@ -165,6 +169,7 @@ public class SecurityGroupsExtension {
 	 * @return
 	 * @deprecated Use {@link #createSecurityGroupRule(String, String, String, Integer, Integer)}
 	 */
+	@Deprecated
 	public CreateRule createSecurityGroupRule(
 			Integer parentSecurityGroupId, String ipProtocol, Integer fromPort,
 			Integer toPort, Integer sourceGroupId) {
