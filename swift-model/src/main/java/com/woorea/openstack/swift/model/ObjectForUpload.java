@@ -64,7 +64,7 @@ public class ObjectForUpload {
 	 */
 	public Map<String, java.lang.Object> getProperties() {
 		if(properties == null) {
-			properties = new HashMap<String, java.lang.Object>();
+			properties = new HashMap<>();
 		}
 		return properties;
 	}
