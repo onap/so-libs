@@ -4,6 +4,7 @@
 
 ONAP SO/libs Documentation
 ===========================
+    Following are SDN clients supported by SO library :
 
 **Ceilometer client**:
     Ceilometer client will collect, normalise and transform data produced by OpenStack services. The data it produces is intended to be used to create different views and help solve various telemetry use cases.

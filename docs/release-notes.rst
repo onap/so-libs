@@ -25,21 +25,6 @@ Orchestration services can consume a process workflow and execute it.
 The service model maintains consistency and reusability across all orchestration activities and ensures consistent methods, structure and version of the workflow execution environment.
 Orchestration processes interact with other platform components or external systems via standard and well-defined APIs.
 
-**Bug Fixes**
-This is the initial release of ONAP SO.
-Issues of the Ecomp 1710 release are fixed in this release.
-
-**Known Issues**
-1. The articatfs of SO are under the openecomp/mso folder in nexus.
-   This is not impacting the release but is good to be moved to the ONAP 
-2. Current SO release does not support PNF orchestration.
-   The usecases demonstrated in ONAP Amsterdam release does not include PNF.
-3. ARIA Plugin is not in full fledged in the current release.
-   The VNFs provided in the vCPE and vFW usecase are heat based and dont require ARIA.
-
-**Security Issues**
-This is the initial release of ONAP SO.
-Security aspects are not included in the current release.
 
 **Upgrade Notes**
 This is the initial release of ONAP SO.
