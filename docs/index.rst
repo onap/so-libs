@@ -4,6 +4,7 @@
 
 ONAP SO/libs Documentation
 ===========================
+    Openstack Java SDK v2.0 used by SO components.
 
 **Ceilometer client**:
     Ceilometer client will collect, normalise and transform data produced by OpenStack services. The data it produces is intended to be used to create different views and help solve various telemetry use cases.

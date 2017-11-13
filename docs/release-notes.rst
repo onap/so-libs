@@ -6,7 +6,7 @@
 SO Release Notes
 ================
 
-		   
+Openstack Java SDK v2.0 used by SO components.
 
 Version: 1.1.0
 --------------
@@ -16,45 +16,43 @@ Version: 1.1.0
 
 
 
-**New Features**
-The SO provides the highest level of service orchestration in the ONAP architecture.
-SO is implemented via BPMN flows that operate on Models distributed from SDC that describe the Services and associated VNFs and other Resource components.
-Cloud orchestration currently based on HEAT and TOSCA templates.	
-The orchestration engine is a reusable service. Any component of the architecture can execute process workflows. 
-Orchestration services can consume a process workflow and execute it. 
-The service model maintains consistency and reusability across all orchestration activities and ensures consistent methods, structure and version of the workflow execution environment.
-Orchestration processes interact with other platform components or external systems via standard and well-defined APIs.
+**Included Features**
 
-**Bug Fixes**
-This is the initial release of ONAP SO.
-Issues of the Ecomp 1710 release are fixed in this release.
+*Ceilometer client*:
+    Ceilometer client will collect, normalise and transform data produced by OpenStack services. The data it produces is intended to be used to create different views and help solve various telemetry use cases.
+    
+*Glance client*: 
+    Glance client discover, register, and retrieve virtual machine images.it provide RESTful client to query of VM image metadata as well as retrieval of the actual image.
+    
+*Heat client*:
+    Heat client used for orchestrating the infrastructure resources for a cloud application based on templates in the form of text files that can be treated like code.
+    
+*Keystone client*:
+    Keystone client provides API client authentication, service discovery, and distributed multi-tenant authorization.
+    
+*Nova client*:
+    To implement services and associated libraries to provide massively scalable, on demand, self service access to compute resources, including bare metal, virtual machines, and containers.
+    
+*Openstack client* :
+    Provide a single command-line interface for OpenStack services with a uniform command set and format.
+    
+*Quantum client* :
+    It provides API for delivering networking-as-a-service (NaaS) in virtual compute environments.
 
-**Known Issues**
-1. The articatfs of SO are under the openecomp/mso folder in nexus.
-   This is not impacting the release but is good to be moved to the ONAP 
-2. Current SO release does not support PNF orchestration.
-   The usecases demonstrated in ONAP Amsterdam release does not include PNF.
-3. ARIA Plugin is not in full fledged in the current release.
-   The VNFs provided in the vCPE and vFW usecase are heat based and dont require ARIA.
+*Swift client* :
+    Swift client provides functionalities for object storage in OpenStack. Swift is ideal for storing unstructured data that can grow without bound.
 
-**Security Issues**
-This is the initial release of ONAP SO.
-Security aspects are not included in the current release.
 
-**Upgrade Notes**
-This is the initial release of ONAP SO.
 
 **Deprecation Notes**
+
 There is a MSO 1.0.0 SO implementation existing in the pre-R1 ONAP Gerrit system.  
 The MSO1.0.0 is deprecated by the R1 release and the current release is built over this release.
 The Gerrit repos of mso/* are voided and already locked as read-only.
 Following are the deprecated SO projects in gerrit repo:
-mso
-mso/chef-repo
-mso/docker-config
-mso/libs
-mso/mso-config
-	
+
+* mso/libs
+
 
 **Other**
 
