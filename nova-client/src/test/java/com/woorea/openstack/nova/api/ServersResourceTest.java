@@ -16,538 +16,310 @@
 
 package com.woorea.openstack.nova.api;
 
+import com.woorea.openstack.base.client.OpenStackClientMockUtils;
+import com.woorea.openstack.nova.Nova;
+import com.woorea.openstack.nova.model.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mockito;
 
-import com.woorea.openstack.base.client.Entity;
-import com.woorea.openstack.base.client.HttpMethod;
-import com.woorea.openstack.base.client.OpenStackClient;
-import com.woorea.openstack.base.client.OpenStackRequest;
-import com.woorea.openstack.nova.model.Metadata;
-import com.woorea.openstack.nova.model.Server;
-import com.woorea.openstack.nova.model.Server.Addresses;
-import com.woorea.openstack.nova.model.ServerAction.ChangePassword;
-import com.woorea.openstack.nova.model.ServerAction.ConfirmResize;
-import com.woorea.openstack.nova.model.ServerAction.ConsoleOutput;
-import com.woorea.openstack.nova.model.ServerAction.CreateBackup;
-import com.woorea.openstack.nova.model.ServerAction.CreateImage;
-import com.woorea.openstack.nova.model.ServerAction.GetConsoleOutput;
-import com.woorea.openstack.nova.model.ServerAction.GetVncConsole;
-import com.woorea.openstack.nova.model.ServerAction.Lock;
-import com.woorea.openstack.nova.model.ServerAction.Pause;
-import com.woorea.openstack.nova.model.ServerAction.Reboot;
-import com.woorea.openstack.nova.model.ServerAction.Rebuild;
-import com.woorea.openstack.nova.model.ServerAction.Rescue;
-import com.woorea.openstack.nova.model.ServerAction.Resize;
-import com.woorea.openstack.nova.model.ServerAction.Resume;
-import com.woorea.openstack.nova.model.ServerAction.RevertResize;
-import com.woorea.openstack.nova.model.ServerAction.Start;
-import com.woorea.openstack.nova.model.ServerAction.Stop;
-import com.woorea.openstack.nova.model.ServerAction.Suspend;
-import com.woorea.openstack.nova.model.ServerAction.Unlock;
-import com.woorea.openstack.nova.model.ServerAction.Unpause;
-import com.woorea.openstack.nova.model.ServerAction.Unrescue;
-import com.woorea.openstack.nova.model.ServerAction.VncConsole;
-import com.woorea.openstack.nova.model.ServerForCreate;
-import com.woorea.openstack.nova.model.Servers;
-import com.woorea.openstack.nova.model.VolumeAttachment;
-import com.woorea.openstack.nova.model.VolumeAttachments;
-import java.util.Map;
+import java.util.Collections;
 
 public class ServersResourceTest {
 
-    private final OpenStackClient client;
-    private static final String SERVERS = "/servers/";
-    private static final String ACTION = "/action";
-
-    public ServersResourceTest(OpenStackClient client) {
-        this.client = client;
-    }
-
-    public List list(boolean detail) {
-        return new List(detail);
-    }
-
-    public Boot boot(ServerForCreate server) {
-        return new Boot(server);
-    }
-
-    public Show show(String id) {
-        return new Show(id);
-    }
-
-    public ShowMetadata showMetadata(String id) {
-        return new ShowMetadata(id);
-    }
-
-    public CreateOrUpdateMetadata createOrUpdateMetadata(String id, Metadata metadata) {
-        return new CreateOrUpdateMetadata(id, metadata);
-    }
-
-    public ReplaceMetadata replaceMetadata(String id, Metadata metadata) {
-        return new ReplaceMetadata(id, metadata);
-    }
-
-    public DeleteMetadata deleteMetadata(String id, String key) {
-        return new DeleteMetadata(id, key);
-    }
-
-    public Delete delete(String id) {
-        return new Delete(id);
-    }
-
-    public class List extends OpenStackRequest<Servers> {
-
-        public List(boolean detail) {
-            super(client, HttpMethod.GET, detail ? "/servers/detail" : "/servers", null, Servers.class);
-        }
-    }
-
-    public class Boot extends OpenStackRequest<Server> {
-
-        private ServerForCreate server;
-
-        public Boot(ServerForCreate server) {
-            super(client, HttpMethod.POST, "/servers", Entity.json(server), Server.class);
-            this.server = server;
-        }
-    }
-
-    public class Show extends OpenStackRequest<Server> {
-
-        public Show(String id) {
-            super(client, HttpMethod.GET, new StringBuilder(SERVERS).append(id), null, Server.class);
-        }
-    }
-
-    public class ShowMetadata extends OpenStackRequest<Metadata> {
-
-        public ShowMetadata(String id) {
-            super(client, HttpMethod.GET, new StringBuilder(SERVERS).append(id).append("/metadata"), null,
-                Metadata.class);
-        }
-    }
-
-    public class CreateOrUpdateMetadata extends OpenStackRequest<Metadata> {
-
-        public CreateOrUpdateMetadata(String id, Metadata metadata) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append("/metadata"),
-                Entity.json(metadata), Metadata.class);
-        }
-    }
-
-    public class ReplaceMetadata extends OpenStackRequest<Metadata> {
-
-        public ReplaceMetadata(String id, Metadata metadata) {
-            super(client, HttpMethod.PUT, new StringBuilder(SERVERS).append(id).append("/metadata"),
-                Entity.json(metadata), Metadata.class);
-        }
-    }
-
-    public class DeleteMetadata extends OpenStackRequest<Void> {
-
-        public DeleteMetadata(String id, String key) {
-            super(client, HttpMethod.DELETE, new StringBuilder(SERVERS).append(id).append("/metadata/").append(key),
-                null, Void.class);
-        }
-    }
-
-
-    public class Delete extends OpenStackRequest<Void> {
-
-        public Delete(String id) {
-            super(client, HttpMethod.DELETE, new StringBuilder(SERVERS).append(id), null, Void.class);
-        }
-    }
-
-    public class ShowServerAddresses extends OpenStackRequest<Addresses> {
-
-        public ShowServerAddresses(String id) {
-            super(client, HttpMethod.GET, new StringBuilder(SERVERS).append(id).append("/ips"), null,
-                Addresses.class);
-        }
-    }
-
-    public class UpdateServer extends OpenStackRequest<Server> {
-
-        private Server server;
-
-        public UpdateServer(String id, Server server) {
-            super(client, HttpMethod.PUT, new StringBuilder(SERVERS).append(id), Entity.json(server), Server.class);
-            this.server = server;
-        }
-    }
-
-    public UpdateServer update(String serverId, String name, String accessIPv4, String accessIPv6) {
-        Server server = new Server();
-        //server.setName(name);
-        //server.setAccessIPv4(accessIPv4);
-        //server.setAccessIPv6(accessIPv6);
-        return new UpdateServer(serverId, server);
-    }
-
-    public abstract class Action<T> extends OpenStackRequest<T> {
-
-        public Action(String id, Entity<?> entity, Class<T> returnType) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION), entity,
-                returnType);
-        }
-    }
-
-    public class ChangePasswordAction extends Action<Server> {
-
-        private ChangePassword action;
-
-        public ChangePasswordAction(String id, ChangePassword action) {
-            super(id, Entity.json(action), Server.class);
-        }
-    }
-
-    public ChangePasswordAction changePassword(String serverId, String adminPass) {
-        ChangePassword changePassword = new ChangePassword();
-        changePassword.setAdminPass(adminPass);
-        return new ChangePasswordAction(serverId, changePassword);
-    }
-
-    public class RebootAction extends Action<Void> {
-
-        private Reboot action;
-
-        public RebootAction(String id, Reboot action) {
-            super(id, Entity.json(action), Void.class);
-        }
-    }
-
-    public RebootAction reboot(String serverId, String rebootType) {
-        Reboot reboot = new Reboot();
-        reboot.setType(rebootType);
-        return new RebootAction(serverId, reboot);
-    }
-
-    public class RebuildAction extends Action<Server> {
-
-        private Rebuild action;
-
-        public RebuildAction(String id, Rebuild action) {
-            super(id, Entity.json(action), Server.class);
-        }
-    }
-
-    public RebuildAction rebuild(String serverId, Rebuild rebuild) {
-        return new RebuildAction(serverId, rebuild);
+    private static final String NOVA_ENDPOINT = "nova_endpoint";
+    private static final String I_PV_4 = "127.0.0.1";
+    private static final String SERVER_AVAILABILITY_ZONE = "server_availability_zone";
+    private static final String SERVER_USER_DATA = "server_user_data";
+    private static final String SERVER_NAME = "server_name";
+    private static final String SERVER_KEY = "server_key";
+    private static final String SERVER_IMAGE = "server_image";
+    private static final String SERVER_FLAVOR = "m1.medium";
+    public static final String REBOOT_TYPE = "reboot_type";
+    public static final String DISK_CONFIG = "disk_config";
+    public static final String CONSOLE_TYPE = "console_type";
+    private ServersResource serversResource = null;
+
+    @Before
+    public void setUp() {
+        Nova client = new Nova(NOVA_ENDPOINT, OpenStackClientMockUtils.getInstance().getConnector());
+        serversResource = client.servers();
+    }
+
+    @Test
+    public void list() {
+        final Servers expectedServers = Mockito.mock(Servers.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Servers.class, expectedServers);
+        final ServersResource.List list = serversResource.list(true);
+        final Servers actualServers = list.execute();
+        Assert.assertEquals(expectedServers, actualServers);
+    }
+
+    @Test
+    public void boot() {
+        final Server expectedServer = Mockito.mock(Server.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
+        ServerForCreate createServer = createServerForCreate();
+        final ServersResource.Boot boot = serversResource.boot(createServer);
+        final Server actualServer = boot.execute();
+        Assert.assertEquals(expectedServer, actualServer);
+    }
+
+    @Test
+    public void show() {
+        final Server expectedServer = Mockito.mock(Server.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
+        final ServersResource.Show show = serversResource.show(SERVER_KEY);
+        final Server actualServer = show.execute();
+        Assert.assertEquals(expectedServer, actualServer);
+    }
+
+    @Test
+    public void showMetadata() {
+        final Metadata expectedServer = Mockito.mock(Metadata.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Metadata.class, expectedServer);
+        final ServersResource.ShowMetadata show = serversResource.showMetadata(SERVER_KEY);
+        final Metadata actualServer = show.execute();
+        Assert.assertEquals(expectedServer, actualServer);
+    }
+
+    @Test
+    public void createOrUpdateMetadata() {
+        final Metadata expectedServer = Mockito.mock(Metadata.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Metadata.class, expectedServer);
+        Metadata metadata = Mockito.mock(Metadata.class);
+        final ServersResource.CreateOrUpdateMetadata metadataCreateUpdate = serversResource.createOrUpdateMetadata(SERVER_KEY, metadata);
+        final Metadata actualServer = metadataCreateUpdate.execute();
+        Assert.assertEquals(expectedServer, actualServer);
+    }
+
+    @Test
+    public void replaceMetadata() {
+        final Metadata expectedServer = Mockito.mock(Metadata.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Metadata.class, expectedServer);
+        Metadata metadata = Mockito.mock(Metadata.class);
+        final ServersResource.ReplaceMetadata metadataCreateUpdate = serversResource.replaceMetadata(SERVER_KEY, metadata);
+        final Metadata actualServer = metadataCreateUpdate.execute();
+        Assert.assertEquals(expectedServer, actualServer);
+    }
+
+    @Test
+    public void deleteMetadata() {
+        final ServersResource.DeleteMetadata metadataCreateUpdate = serversResource.deleteMetadata(SERVER_NAME, SERVER_KEY);
+        metadataCreateUpdate.execute();
+    }
+
+    @Test
+    public void delete() {
+        final ServersResource.Delete metadataCreateUpdate = serversResource.delete(SERVER_NAME);
+        metadataCreateUpdate.execute();
+    }
+
+    @Test
+    public void update() {
+        final Server expectedServer = Mockito.mock(Server.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
+        final ServersResource.UpdateServer metadataCreateUpdate = serversResource.update(SERVER_NAME, SERVER_KEY, I_PV_4, "");
+        final Server actualServer = metadataCreateUpdate.execute();
+        Assert.assertEquals(expectedServer, actualServer);
+    }
+
+    @Test
+    public void changePassword() {
+        final Server expectedServer = Mockito.mock(Server.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
+        final ServersResource.ChangePasswordAction metadataCreateUpdate = serversResource.changePassword(SERVER_NAME, SERVER_NAME);
+        final Server actualServer = metadataCreateUpdate.execute();
+        Assert.assertEquals(expectedServer, actualServer);
     }
 
-    public class ResizeAction extends Action<Server> {
-
-        private Resize action;
-
-        public ResizeAction(String id, Resize action) {
-            super(id, Entity.json(action), Server.class);
-        }
-    }
-
-    public ResizeAction resize(String serverId, String flavorId, String diskConfig) {
-        Resize resize = new Resize();
-        resize.setFlavorRef(flavorId);
-        resize.setDiskConfig(diskConfig);
-        return new ResizeAction(serverId, resize);
-    }
-
-    public class ConfirmResizeAction extends Action<Server> {
-
-        public ConfirmResizeAction(String id) {
-            super(id, Entity.json(new ConfirmResize()), Server.class);
-        }
-    }
-
-    public ConfirmResizeAction confirmResize(String serverId) {
-        return new ConfirmResizeAction(serverId);
-    }
-
-    public class RevertResizeAction extends Action<Server> {
-
-        public RevertResizeAction(String id) {
-            super(id, Entity.json(new RevertResize()), Server.class);
-        }
-    }
-
-    public RevertResizeAction revertResize(String serverId) {
-        return new RevertResizeAction(serverId);
-    }
-
-    public class CreateImageAction extends Action<Void> {
-
-        public CreateImageAction(String id, CreateImage createImage) {
-            super(id, Entity.json(createImage), Void.class);
-        }
-    }
-
-    public CreateImageAction createImage(String serverId, String name, Map<String, String> metadata) {
-        CreateImage createImage = new CreateImage();
-        createImage.setName(name);
-        createImage.setMetadata(metadata);
-        return new CreateImageAction(serverId, createImage);
-    }
-
-    public class StartServer extends OpenStackRequest<Void> {
-
-        private Start action;
-
-        private String id;
-
-        public StartServer(String id) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Start()), Void.class);
-        }
-    }
-
-    public class StopServer extends OpenStackRequest<Void> {
-
-        private Stop action;
-
-        private String id;
-
-        public StopServer(String id) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Stop()), Void.class);
-        }
-    }
-
-    public StartServer start(String id) {
-        return new StartServer(id);
-    }
-
-    public StopServer stop(String id) {
-        return new StopServer(id);
-    }
-
-    public class GetVncConsoleServer extends OpenStackRequest<VncConsole> {
-
-        private GetVncConsole action;
-
-        private String id;
-
-        public GetVncConsoleServer(String id, GetVncConsole action) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), VncConsole.class);
-        }
-    }
-
-    public GetVncConsoleServer getVncConsole(String id, String type) {
-        GetVncConsole action = new GetVncConsole(type);
-        return new GetVncConsoleServer(id, action);
-    }
-
-    public class GetConsoleOutputServer extends OpenStackRequest<ConsoleOutput> {
-
-        public GetConsoleOutputServer(String id, GetConsoleOutput action) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), ConsoleOutput.class);
-        }
-    }
-
-    public GetConsoleOutputServer getConsoleOutput(String id, int length) {
-        GetConsoleOutput action = new GetConsoleOutput(length);
-        return new GetConsoleOutputServer(id, action);
-    }
-
-    public class PauseServer extends OpenStackRequest<Void> {
-
-        public PauseServer(String id) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Pause()), Void.class);
-        }
-    }
-
-    public class UnpauseServer extends OpenStackRequest<Void> {
-
-        public UnpauseServer(String id) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Unpause()), Void.class);
-        }
-    }
-
-    public class LockServer extends OpenStackRequest<Void> {
-
-        private Lock action;
-
-        private String id;
-
-        public LockServer(String id) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Lock()), Void.class);
-        }
-    }
-
-    public class UnlockServer extends OpenStackRequest<Void> {
-
-        private Unlock action;
-
-        private String id;
-
-        public UnlockServer(String id) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Unlock()), Void.class);
-        }
-    }
-
-    public class SuspendServer extends OpenStackRequest<Void> {
-
-        public SuspendServer(String id) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Suspend()), Void.class);
-        }
+    @Test
+    public void reboot() {
+        final ServersResource.RebootAction reboot = serversResource.reboot(SERVER_NAME, REBOOT_TYPE);
+        reboot.execute();
     }
 
-    public class ResumeServer extends OpenStackRequest<Void> {
-
-        public ResumeServer(String id) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Resume()), Void.class);
-        }
+    @Test
+    public void rebuild() {
+        final ServerAction.Rebuild rebuild = new ServerAction.Rebuild();
+        final Server expectedServer = Mockito.mock(Server.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
+        final ServersResource.RebuildAction metadataCreateUpdate = serversResource.rebuild(SERVER_NAME, rebuild);
+        final Server actualServer = metadataCreateUpdate.execute();
+        Assert.assertEquals(expectedServer, actualServer);
     }
-
-    public class CreateBackupServer extends OpenStackRequest<Void> {
 
-        public CreateBackupServer(String id, CreateBackup action) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), Void.class);
-        }
+    @Test
+    public void resize() {
+        final Server expectedServer = Mockito.mock(Server.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
+        final ServersResource.ResizeAction metadataCreateUpdate = serversResource.resize(SERVER_NAME, SERVER_FLAVOR, DISK_CONFIG);
+        final Server actualServer = metadataCreateUpdate.execute();
+        Assert.assertEquals(expectedServer, actualServer);
     }
 
-    public PauseServer pause(String serverId) {
-        return new PauseServer(serverId);
+    @Test
+    public void confirmResize() {
+        final Server expectedServer = Mockito.mock(Server.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
+        final ServersResource.ConfirmResizeAction metadataCreateUpdate = serversResource.confirmResize(SERVER_NAME);
+        final Server actualServer = metadataCreateUpdate.execute();
+        Assert.assertEquals(expectedServer, actualServer);
     }
 
-    public UnpauseServer unpause(String serverId) {
-        return new UnpauseServer(serverId);
+    @Test
+    public void revertResize() {
+        final Server expectedServer = Mockito.mock(Server.class);
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
+        final ServersResource.RevertResizeAction metadataCreateUpdate = serversResource.revertResize(SERVER_NAME);
+        final Server actualServer = metadataCreateUpdate.execute();
+        Assert.assertEquals(expectedServer, actualServer);
     }
 
-    public LockServer lock(String serverId) {
-        return new LockServer(serverId);
+    @Test
+    public void createImage() {
+        final ServersResource.CreateImageAction metadataCreateUpdate = serversResource.createImage(SERVER_NAME, SERVER_KEY, Collections.<String, String>emptyMap());
+        metadataCreateUpdate.execute();
     }
 
-    public UnlockServer unlock(String serverId) {
-        return new UnlockServer(serverId);
+    @Test
+    public void start() {
+        final ServersResource.StartServer metadataCreateUpdate = serversResource.start(SERVER_NAME);
+        metadataCreateUpdate.execute();
     }
 
-    public SuspendServer suspend(String serverId) {
-        return new SuspendServer(serverId);
+    @Test
+    public void stop() {
+        final ServersResource.StopServer metadataCreateUpdate = serversResource.stop(SERVER_NAME);
+        metadataCreateUpdate.execute();
     }
 
-    public ResumeServer resume(String serverId) {
-        return new ResumeServer(serverId);
+    @Test
+    public void getVncConsole() {
+        final ServerAction.VncConsole console = new ServerAction.VncConsole();
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(ServerAction.VncConsole.class, console);
+        final ServersResource.GetVncConsoleServer metadataCreateUpdate = serversResource.getVncConsole(SERVER_NAME, CONSOLE_TYPE);
+        final ServerAction.VncConsole actualConsole = metadataCreateUpdate.execute();
+        Assert.assertEquals(console, actualConsole);
     }
 
-    public CreateBackupServer createBackup(String serverId, CreateBackup action) {
-        return new CreateBackupServer(serverId, action);
+    @Test
+    public void getConsoleOutput() {
+        final ServerAction.ConsoleOutput console = new ServerAction.ConsoleOutput();
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(ServerAction.ConsoleOutput.class, console);
+        final ServersResource.GetConsoleOutputServer metadataCreateUpdate = serversResource.getConsoleOutput(SERVER_NAME, Integer.MAX_VALUE);
+        final ServerAction.ConsoleOutput actualConsole = metadataCreateUpdate.execute();
+        Assert.assertEquals(console, actualConsole);
     }
 
-    public class RescueServer extends OpenStackRequest<Void> {
-
-        public RescueServer(String id, Rescue action) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), Void.class);
-        }
+    @Test
+    public void pause() {
+        final ServersResource.PauseServer metadataCreateUpdate = serversResource.pause(SERVER_NAME);
+        metadataCreateUpdate.execute();
     }
 
-    public class UnrescueServer extends OpenStackRequest<Void> {
-
-        public UnrescueServer(String id) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Unrescue()), Void.class);
-        }
+    @Test
+    public void unpause() {
+        final ServersResource.UnpauseServer metadataCreateUpdate = serversResource.unpause(SERVER_NAME);
+        metadataCreateUpdate.execute();
     }
 
-    public RescueServer rescue(String serverId, String adminPass) {
-        Rescue action = new Rescue(adminPass);
-        return new RescueServer(serverId, action);
+    @Test
+    public void lock() {
+        final ServersResource.LockServer metadataCreateUpdate = serversResource.lock(SERVER_NAME);
+        metadataCreateUpdate.execute();
     }
 
-    public UnrescueServer unrescue(String serverId) {
-        return new UnrescueServer(serverId);
+    @Test
+    public void unlock() {
+        final ServersResource.UnlockServer metadataCreateUpdate = serversResource.unlock(SERVER_NAME);
+        metadataCreateUpdate.execute();
     }
-
-    public class AssociateFloatingIp extends OpenStackRequest<Void> {
 
-        public AssociateFloatingIp(String id, com.woorea.openstack.nova.model.ServerAction.AssociateFloatingIp action) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), Void.class);
-        }
+    @Test
+    public void suspend() {
+        final ServersResource.SuspendServer metadataCreateUpdate = serversResource.suspend(SERVER_NAME);
+        metadataCreateUpdate.execute();
     }
 
-    public class DisassociateFloatingIp extends OpenStackRequest<Void> {
-
-        public DisassociateFloatingIp(String id,
-            com.woorea.openstack.nova.model.ServerAction.DisassociateFloatingIp action) {
-            super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), Void.class);
-        }
+    @Test
+    public void resume() {
+        final ServersResource.ResumeServer metadataCreateUpdate = serversResource.resume(SERVER_NAME);
+        metadataCreateUpdate.execute();
     }
 
-    public AssociateFloatingIp associateFloatingIp(String serverId, String floatingIpAddress) {
-        com.woorea.openstack.nova.model.ServerAction.AssociateFloatingIp action = new com.woorea.openstack.nova.model.ServerAction.AssociateFloatingIp(
-            floatingIpAddress);
-        return new AssociateFloatingIp(serverId, action);
+    @Test
+    public void createBackup() {
+        ServerAction.CreateBackup backup = new ServerAction.CreateBackup();
+        final ServersResource.CreateBackupServer metadataCreateUpdate = serversResource.createBackup(SERVER_NAME, backup);
+        metadataCreateUpdate.execute();
     }
 
-    public DisassociateFloatingIp disassociateFloatingIp(String serverId, String floatingIpAddress) {
-        com.woorea.openstack.nova.model.ServerAction.DisassociateFloatingIp action = new com.woorea.openstack.nova.model.ServerAction.DisassociateFloatingIp(
-            floatingIpAddress);
-        return new DisassociateFloatingIp(serverId, action);
+    @Test
+    public void rescue() {
+        final ServerAction.CreateBackup console = new ServerAction.CreateBackup();
+        final ServersResource.CreateBackupServer metadataCreateUpdate = serversResource.createBackup(SERVER_NAME, console);
+        metadataCreateUpdate.execute();
     }
-
-    public class AttachVolume extends OpenStackRequest<Void> {
 
-        public AttachVolume(String serverId, final VolumeAttachment volumeAttachment) {
-            super(client, HttpMethod.POST,
-                new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments"),
-                Entity.json(volumeAttachment), Void.class);
-        }
+    @Test
+    public void unrescue() {
+        final ServersResource.UnrescueServer metadataCreateUpdate = serversResource.unrescue(SERVER_NAME);
+        metadataCreateUpdate.execute();
     }
 
-    public class DetachVolume extends OpenStackRequest<Void> {
-
-        public DetachVolume(String serverId, String volumeId) {
-            super(client, HttpMethod.DELETE,
-                new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments/").append(volumeId),
-                null, Void.class);
-        }
+    @Test
+    public void associateFloatingIp() {
+        final ServersResource.AssociateFloatingIp metadataCreateUpdate = serversResource.associateFloatingIp(SERVER_NAME, I_PV_4);
+        metadataCreateUpdate.execute();
     }
 
-    public class ListVolumeAttachments extends OpenStackRequest<VolumeAttachments> {
-
-        public ListVolumeAttachments(String serverId) {
-            super(client, HttpMethod.GET,
-                new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments"), null,
-                VolumeAttachments.class);
-        }
+    @Test
+    public void disassociateFloatingIp() {
+        final ServersResource.DisassociateFloatingIp metadataCreateUpdate = serversResource.disassociateFloatingIp(SERVER_NAME, I_PV_4);
+        metadataCreateUpdate.execute();
     }
-
-    public class ShowVolumeAttachment extends OpenStackRequest<VolumeAttachment> {
 
-        public ShowVolumeAttachment(String serverId, String volumeAttachmentId) {
-            super(client, HttpMethod.GET,
-                new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments/")
-                    .append(volumeAttachmentId), null, VolumeAttachment.class);
-        }
+    @Test
+    public void attachVolume() {
+        final ServersResource.AttachVolume metadataCreateUpdate = serversResource.attachVolume(SERVER_NAME, "volume_id", "device");
+        metadataCreateUpdate.execute();
     }
 
-    public AttachVolume attachVolume(String serverId, String volumeId, String device) {
-        VolumeAttachment volumeAttachment = new VolumeAttachment();
-        volumeAttachment.setVolumeId(volumeId);
-        volumeAttachment.setDevice(device);
-        return new AttachVolume(serverId, volumeAttachment);
+    @Test
+    public void detachVolume() {
+        final ServersResource.DetachVolume metadataCreateUpdate = serversResource.detachVolume(SERVER_NAME, "volume_id");
+        metadataCreateUpdate.execute();
     }
 
-    public DetachVolume detachVolume(String serverId, String volumeId) {
-        return new DetachVolume(serverId, volumeId);
+    @Test
+    public void listVolumeAttachments() {
+        final VolumeAttachments volumeAttachments = new VolumeAttachments();
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(VolumeAttachments.class, volumeAttachments);
+        final ServersResource.ListVolumeAttachments metadataCreateUpdate = serversResource.listVolumeAttachments(SERVER_NAME);
+        final VolumeAttachments actualVolumeAttachments = metadataCreateUpdate.execute();
+        Assert.assertEquals(volumeAttachments, actualVolumeAttachments);
     }
 
-    public ListVolumeAttachments listVolumeAttachments(String serverId) {
-        return new ListVolumeAttachments(serverId);
+    @Test
+    public void showVolumeAttachment() {
+        final VolumeAttachment volumeAttachment = new VolumeAttachment();
+        OpenStackClientMockUtils.getInstance().mockRequestResponse(VolumeAttachment.class, volumeAttachment);
+        final ServersResource.ShowVolumeAttachment metadataCreateUpdate = serversResource.showVolumeAttachment(SERVER_NAME, "volume_id");
+        final VolumeAttachment actualVolumeAttachment = metadataCreateUpdate.execute();
+        Assert.assertEquals(volumeAttachment, actualVolumeAttachment);
     }
 
-    public ShowVolumeAttachment showVolumeAttachment(String serverId, String volumeAttachmentId) {
-        return new ShowVolumeAttachment(serverId, volumeAttachmentId);
+    private ServerForCreate createServerForCreate() {
+        final ServerForCreate server = new ServerForCreate();
+        server.setAccessIPv4(I_PV_4);
+        server.setAvailabilityZone(SERVER_AVAILABILITY_ZONE);
+        server.setFlavorRef(SERVER_FLAVOR);
+        server.setImageRef(SERVER_IMAGE);
+        server.setKeyName(SERVER_KEY);
+        server.setName(SERVER_NAME);
+        server.setUserData(SERVER_USER_DATA);
+        return server;
     }
 }
-
