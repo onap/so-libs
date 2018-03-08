@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a93c517_282e958c",
+        "filename": "heat-model/src/test/main/java/com.woorea.openstack.heat.model/CreateStackParamTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 897
+      },
+      "writtenOn": "2018-03-08T04:10:42Z",
+      "side": 1,
+      "message": "Please do have the copyright added for every new file added and ensure for every modified file.",
+      "revId": "1bf4b359081a09ce788b1ce9b344252f3328d828",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
