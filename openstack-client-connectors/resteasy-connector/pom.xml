@@ -13,18 +13,31 @@
   	<dependency>
   		<groupId>org.jboss.resteasy</groupId>
   		<artifactId>resteasy-jaxrs</artifactId>
-  		<version>2.3.2.Final</version>
+ 			<!-- replaced with 3.5.0.Final <version>2.3.2.Final</version> -->
+			<version>3.5.0.Final</version>
   	</dependency>
   	<dependency>
   		<groupId>org.codehaus.jackson</groupId>
   		<artifactId>jackson-jaxrs</artifactId>
   		<version>1.9.4</version>
   	</dependency>
+	<!-- replaced with httpclient and httpcore
 	<dependency>
 		<groupId>commons-httpclient</groupId>
 		<artifactId>commons-httpclient</artifactId>
 		<version>3.1</version>
 	</dependency>
+	-->
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.5.5</version>
+	</dependency>
+	  <dependency>
+		  <groupId>org.apache.httpcomponents</groupId>
+		  <artifactId>httpcore</artifactId>
+		  <version>4.4.4</version>
+	  </dependency>
   </dependencies>
 
 </project>

@@ -23,7 +23,9 @@ import java.util.Map.Entry;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.ext.ContextResolver;
 
-import org.apache.commons.httpclient.HttpStatus;
+// bwj: changed the HttpStatus package
+//import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
 import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
