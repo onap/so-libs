@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.onap.so</groupId>
     <artifactId>openstack-java-sdk</artifactId>
-    <version>1.2.0-SNAPSHOT</version>
+    <version>1.2.1-SNAPSHOT</version>
   </parent>
   	 <groupId>org.onap.so.libs.openstack-java-sdk</groupId>
   <artifactId>openstack-examples</artifactId>
@@ -13,37 +13,37 @@
   	<dependency>
   		<groupId>org.onap.so</groupId>
   		<artifactId>keystone-client</artifactId>
-  		<version>1.2.0-SNAPSHOT</version>
+  		<version>${project.version}</version>
   	</dependency>
   	<dependency>
   		<groupId>org.onap.so</groupId>
   		<artifactId>nova-client</artifactId>
-  		<version>1.2.0-SNAPSHOT</version>
+  		<version>${project.version}</version>
   	</dependency>
       <dependency>
           <groupId>org.onap.so</groupId>
           <artifactId>heat-client</artifactId>
-          <version>1.2.0-SNAPSHOT</version>
+          <version>${project.version}</version>
       </dependency>
   	<dependency>
   		<groupId>org.onap.so</groupId>
   		<artifactId>swift-client</artifactId>
-  		<version>1.2.0-SNAPSHOT</version>
+  		<version>${project.version}</version>
   	</dependency>
 	<dependency>
 		<groupId>org.onap.so</groupId>
 		<artifactId>quantum-client</artifactId>
-		<version>1.2.0-SNAPSHOT</version>
+		<version>${project.version}</version>
 	</dependency>
 	<dependency>
 		<groupId>org.onap.so</groupId>
 		<artifactId>ceilometer-client</artifactId>
-		<version>1.2.0-SNAPSHOT</version>
+		<version>${project.version}</version>
 	</dependency>
 	<dependency>
 		<groupId>org.onap.so</groupId>
 		<artifactId>glance-client</artifactId>
-		<version>1.2.0-SNAPSHOT</version>
+		<version>${project.version}</version>
 	</dependency>
   </dependencies>
   <profiles>
