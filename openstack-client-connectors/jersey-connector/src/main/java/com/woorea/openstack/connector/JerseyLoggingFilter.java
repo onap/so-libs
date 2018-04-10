@@ -3,13 +3,12 @@
  * ONAP - SO
  * ================================================================================
  * Copyright (C) 2017 AT&T Intellectual Property. All rights reserved.
- * Copyright (C) 2017 Huawei Intellectual Property. All rights reserved.
  * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *	  http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,46 +17,6 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
-
-/**
- * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
- *
- * Copyright (c) 2010-2011 Oracle and/or its affiliates. All rights reserved.
- *
- * The contents of this file are subject to the terms of either the GNU
- * General Public License Version 2 only ("GPL") or the Common Development
- * and Distribution License("CDDL") (collectively, the "License").  You
- * may not use this file except in compliance with the License.  You can
- * obtain a copy of the License at
- * http://glassfish.java.net/public/CDDL+GPL_1_1.html
- * or packager/legal/LICENSE.txt.  See the License for the specific
- * language governing permissions and limitations under the License.
- *
- * When distributing the software, include this License Header Notice in each
- * file and include the License file at packager/legal/LICENSE.txt.
- *
- * GPL Classpath Exception:
- * Oracle designates this particular file as subject to the "Classpath"
- * exception as provided by Oracle in the GPL Version 2 section of the License
- * file that accompanied this code.
- *
- * Modifications:
- * If applicable, add the following below the License Header, with the fields
- * enclosed by brackets [] replaced by your own identifying information:
- * "Portions Copyright [year] [name of copyright owner]"
- *
- * Contributor(s):
- * If you wish your version of this file to be governed by only the CDDL or
- * only the GPL Version 2, indicate your decision by adding "[Contributor]
- * elects to include this software in this distribution under the [CDDL or GPL
- * Version 2] license."  If you don't indicate a single choice of license, a
- * recipient has the option to distribute your version of this file under
- * either the CDDL, the GPL Version 2 or to extend the choice of license to
- * its licensees as provided above.  However, if you add GPL Version 2 code
- * and therefore, elected the GPL Version 2 license, then the option applies
- * only if the new code is made subject to such option by the copyright
- * holder.
- */
 package com.woorea.openstack.connector;
 
 import java.io.ByteArrayInputStream;
@@ -65,12 +24,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintStream;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Logger;
-
-import javax.ws.rs.core.MultivaluedMap;
 
 import com.sun.jersey.api.client.AbstractClientRequestAdapter;
 import com.sun.jersey.api.client.ClientHandlerException;
@@ -78,224 +35,191 @@ import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientRequestAdapter;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.ClientFilter;
-import com.sun.jersey.api.client.filter.LoggingFilter;
 import com.sun.jersey.core.util.ReaderWriter;
 
 /**
- * A logging filter.
- * 
+ * A Jersey client filter that writes the request and response to a specified logger.
  */
 public class JerseyLoggingFilter extends ClientFilter {
 
-    private static final Logger LOGGER = Logger.getLogger(LoggingFilter.class.getName());
+	private final AtomicLong counter = new AtomicLong(0);
+	private final Logger logger;
 
-    private static final String NOTIFICATION_PREFIX = "* ";
-    
-    private static final String REQUEST_PREFIX = "> ";
-    
-    private static final String RESPONSE_PREFIX = "< ";
+	/**
+	 * Constructor
+	 * @param logger the logger to which the request and response are written.
+	 */
+	public JerseyLoggingFilter(Logger logger) {
+		this.logger = logger;
+	}
 
-    private static final String PASSWORD_PATTERN = "\"password\".*:.*\"(.*)\"";
-    
-    private final class Adapter extends AbstractClientRequestAdapter {
-        private final StringBuilder b;
+	@Override
+	public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
+		long id = counter.incrementAndGet();
+		logRequest(id, request);
+		ClientResponse response = getNext().handle(request);
+		logResponse(id, response);
+		return response;
+	}
 
-        Adapter(ClientRequestAdapter cra, StringBuilder b) {
-            super(cra);
-            this.b = b;
-        }
+	/**
+	 * Logs a request.
+	 * @param id the request id (counter)
+	 * @param request the request
+	 */
+	private void logRequest(long id, ClientRequest request) {
+		StringBuilder builder = new StringBuilder();
 
-        @Override
-        public OutputStream adapt(ClientRequest request, OutputStream out) throws IOException {
-            return new LoggingOutputStream(getAdapter().adapt(request, out), b);
-        }
-        
-    }
+		builder.append(String.valueOf(id));
+		builder.append(" * Client out-bound request\n");
 
-    private final class LoggingOutputStream extends OutputStream {
-        private final OutputStream out;
-        
-        private final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        
-        private final StringBuilder b;
+		builder.append(String.valueOf(id));
+		builder.append(" > ");
+		builder.append(request.getMethod());
+		builder.append(" ");
+		builder.append(request.getURI().toASCIIString());
+		builder.append("\n");
 
-        LoggingOutputStream(OutputStream out, StringBuilder b) {
-            this.out = out;
-            this.b = b;
-        }
-        
-        @Override
-        public void write(byte[] b)  throws IOException {
-            baos.write(b);
-            out.write(b);
-        }
-    
-        @Override
-        public void write(byte[] b, int off, int len)  throws IOException {
-            baos.write(b, off, len);
-            out.write(b, off, len);
-        }
+		// Request headers
 
-        @Override
-        public void write(int b) throws IOException {
-            baos.write(b);
-            out.write(b);
-        }
+		for (Map.Entry<String, List<Object>> entry : request.getHeaders().entrySet()) {
+			String header = entry.getKey();
+			List<Object> values = entry.getValue();
 
-        @Override
-        public void close() throws IOException {
-            printEntity(b, baos.toByteArray());
-            log(b);
-            out.close();
-        }
-    }
+			if (values.size() == 1) {
+				builder.append(String.valueOf(id));
+				builder.append(" > ");
+				builder.append(header);
+				builder.append(": ");
+				builder.append(ClientRequest.getHeaderValue(values.get(0)));
+				builder.append("\n");
+			} else {
+				StringBuilder buf = new StringBuilder();
+				boolean first = true;
 
-    private final PrintStream loggingStream;
+				for(Object value : values) {
+					if (first) {
+						first = false;
+					} else {
+						buf.append(",");
+					}
 
-    private final Logger logger;
+					buf.append(ClientRequest.getHeaderValue(value));
+				}
 
-    private long _id = 0;
+				builder.append(String.valueOf(id));
+				builder.append(" > ");
+				builder.append(header);
+				builder.append(": ");
+				builder.append(buf.toString());
+				builder.append("\n");
+			}
+		}
 
-    /**
-     * Create a logging filter logging the request and response to
-     * a default JDK logger, named as the fully qualified class name of this
-     * class.
-     */
-    public JerseyLoggingFilter() {
-        this(LOGGER);
-    }
+		// Request body
 
-    /**
-     * Create a logging filter logging the request and response to
-     * a JDK logger.
-     * 
-     * @param logger the logger to log requests and responses.
-     */
-    public JerseyLoggingFilter(Logger logger) {
-        this.loggingStream = null;
-        this.logger = logger;
-    }
+		if (request.getEntity() != null) {
+			request.setAdapter(new JerseyLoggingAdapter(request.getAdapter(), builder));
+		} else {
+			logger.info(builder.toString());
+		}
+	}
 
-    /**
-     * Create a logging filter logging the request and response to
-     * print stream.
-     *
-     * @param loggingStream the print stream to log requests and responses.
-     */
-    public JerseyLoggingFilter(PrintStream loggingStream) {
-        this.loggingStream = loggingStream;
-        this.logger = null;
-    }
+	/**
+	 * Logs a response.
+	 * @param id the request id (counter)
+	 * @param response the response
+	 */
+	private void logResponse(long id, ClientResponse response) {
+		StringBuilder builder = new StringBuilder();
 
-    private void log(StringBuilder b) {
-        if (logger != null) {
-            logger.info(b.toString());
-        } else {
-            loggingStream.print(b);
-        }
-    }
+		builder.append(String.valueOf(id));
+		builder.append(" * Client in-bound response\n");
 
-    private StringBuilder prefixId(StringBuilder b, long id) {
-        b.append(Long.toString(id)).append(" ");
-        return b;
-    }
+		builder.append(String.valueOf(id));
+		builder.append(" < ");
+		builder.append(String.valueOf(response.getStatus()));
+		builder.append("\n");
 
-    @Override
-    public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
-        long id = ++this._id;
+		// Response headers
 
-        logRequest(id, request);
+		for (Map.Entry<String, List<String>> entry : response.getHeaders().entrySet()) {
+			String header = entry.getKey();
+			for (String value : entry.getValue()) {
+				builder.append(String.valueOf(id));
+				builder.append(" < ");
+				builder.append(header);
+				builder.append(": ");
+				builder.append(value).append("\n");
+			}
+		}
 
-        ClientResponse response = getNext().handle(request);
+		// Response body
 
-        logResponse(id, response);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		InputStream in = response.getEntityInputStream();
+		try {
+			ReaderWriter.writeTo(in, out);
 
-        return response;
-    }
+			byte[] requestEntity = out.toByteArray();
+			appendToBuffer(builder, requestEntity);
+			response.setEntityInputStream(new ByteArrayInputStream(requestEntity));
+		} catch (IOException ex) {
+			throw new ClientHandlerException(ex);
+		}
 
-    private void logRequest(long id, ClientRequest request) {
-        StringBuilder b = new StringBuilder();
-        
-        printRequestLine(b, id, request);
-        printRequestHeaders(b, id, request.getHeaders());
+		logger.info(builder.toString());
+	}
 
-        if (request.getEntity() != null) {
-            request.setAdapter(new Adapter(request.getAdapter(), b));
-        } else {
-            log(b);
-        }
-    }
+	/**
+	 * Appends bytes to the builder. If the bytes contain the password pattern,
+	 * the password is obliterated.
+	 * @param builder the builder
+	 * @param bytes the bytes to append
+	 */
+	private void appendToBuffer(StringBuilder builder, byte[] bytes) {
+		if (bytes.length != 0) {
+			String s = new String(bytes);
+			builder.append(s.replaceAll("\"password\".*:.*\"(.*)\"", "\"password\" : \"******\""));
+			builder.append("\n");
+		}
+	}
 
-    private void printRequestLine(StringBuilder b, long id, ClientRequest request) {
-        prefixId(b, id).append(NOTIFICATION_PREFIX).append("Client out-bound request").append("\n");
-        prefixId(b, id).append(REQUEST_PREFIX).append(request.getMethod()).append(" ").
-                append(request.getURI().toASCIIString()).append("\n");
-    }
+	private class JerseyLoggingAdapter extends AbstractClientRequestAdapter {
+		private final StringBuilder builder;
 
-    private void printRequestHeaders(StringBuilder b, long id, MultivaluedMap<String, Object> headers) {
-        for (Map.Entry<String, List<Object>> e : headers.entrySet()) {
-            List<Object> val = e.getValue();
-            String header = e.getKey();
+		JerseyLoggingAdapter(ClientRequestAdapter adapter, StringBuilder builder) {
+			super(adapter);
+			this.builder = builder;
+		}
 
-            if(val.size() == 1) {
-                prefixId(b, id).append(REQUEST_PREFIX).append(header).append(": ").append(ClientRequest.getHeaderValue(val.get(0))).append("\n");
-            } else {
-                StringBuilder sb = new StringBuilder();
-                boolean add = false;
-                for(Object o : val) {
-                    if(add) sb.append(',');
-                    add = true;
-                    sb.append(ClientRequest.getHeaderValue(o));
-                }
-                prefixId(b, id).append(REQUEST_PREFIX).append(header).append(": ").append(sb.toString()).append("\n");
-            }
-        }
-    }
+		@Override
+		public OutputStream adapt(ClientRequest request, OutputStream out) throws IOException {
+			return new JerseyLoggingOutputStream(getAdapter().adapt(request, out), builder);
+		}
+	}
 
-    private void logResponse(long id, ClientResponse response) {
-        StringBuilder b = new StringBuilder();
+	private class JerseyLoggingOutputStream extends OutputStream {
+		private final OutputStream stream;
+		private final StringBuilder builder;
+		private final ByteArrayOutputStream logStream = new ByteArrayOutputStream();
 
-        printResponseLine(b, id, response);
-        printResponseHeaders(b, id, response.getHeaders());
+		JerseyLoggingOutputStream(OutputStream stream, StringBuilder builder) {
+			this.stream = stream;
+			this.builder = builder;
+		}
 
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        InputStream in = response.getEntityInputStream();
-        try {
-            ReaderWriter.writeTo(in, out);
+		@Override
+		public void write(int value) throws IOException {
+			logStream.write(value);
+			stream.write(value);
+		}
 
-            byte[] requestEntity = out.toByteArray();
-            printEntity(b, requestEntity);
-            response.setEntityInputStream(new ByteArrayInputStream(requestEntity));
-        } catch (IOException ex) {
-            throw new ClientHandlerException(ex);
-        }
-        log(b);
-    }
-
-    private void printResponseLine(StringBuilder b, long id, ClientResponse response) {
-        prefixId(b, id).append(NOTIFICATION_PREFIX).
-                append("Client in-bound response").append("\n");
-        prefixId(b, id).append(RESPONSE_PREFIX).
-                append(Integer.toString(response.getStatus())).
-                append("\n");
-    }
-    
-    private void printResponseHeaders(StringBuilder b, long id, MultivaluedMap<String, String> headers) {
-        for (Map.Entry<String, List<String>> e : headers.entrySet()) {
-            String header = e.getKey();
-            for (String value : e.getValue()) {
-                prefixId(b, id).append(RESPONSE_PREFIX).append(header).append(": ").
-                        append(value).append("\n");
-            }
-        }
-        prefixId(b, id).append(RESPONSE_PREFIX).append("\n");
-    }
-
-    private void printEntity(StringBuilder b, byte[] entity) throws IOException {
-        if (entity.length == 0)
-            return;
-        String entityString = new String(entity);
-        entityString = entityString.replaceAll(PASSWORD_PATTERN, "\"password\" : \"******\"");
-        b.append(entityString).append("\n");
-    }
+		@Override
+		public void close() throws IOException {
+			appendToBuffer(builder, logStream.toByteArray());
+			logger.info(builder.toString());
+			stream.close();
+		}
+	}
 }
