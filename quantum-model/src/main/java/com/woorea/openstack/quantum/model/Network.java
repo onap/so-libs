@@ -304,12 +304,12 @@ public class Network implements Serializable {
     
     @JsonIgnore
     public NetworkType getNetworkType () {
-    	if (segments != null)
-    		return NetworkType.MULTI_PROVIDER;
-    	else if (providerNetworkType != null)
-    		return NetworkType.PROVIDER;
-    	else
-    		return NetworkType.BASIC;
+        if (segments != null)
+            return NetworkType.MULTI_PROVIDER;
+        else if (providerNetworkType != null)
+            return NetworkType.PROVIDER;
+        else
+            return NetworkType.BASIC;
     }
 
     /*
@@ -319,19 +319,19 @@ public class Network implements Serializable {
      */
     @Override
     public String toString() {
-    	StringBuilder buf = new StringBuilder("Network [id=" + id + ", name=" + name + ", subnets="
+        StringBuilder buf = new StringBuilder("Network [id=" + id + ", name=" + name + ", subnets="
                 + subnets + ", status=" + status + ", admin_state_up=" + adminStateUp + ", tenant_id=" +
                 tenantId + ", shared=" + shared + ", router:external=" + routerExternal);
-    	if (getNetworkType() == NetworkType.PROVIDER)
-    		buf.append (", provider:physical_network=" + providerPhysicalNetwork +
+        if (getNetworkType() == NetworkType.PROVIDER)
+            buf.append (", provider:physical_network=" + providerPhysicalNetwork +
                 ", provider:network_type=" + providerNetworkType  +
                 ", provider:segmentation_id=" + providerSegmentationId);
-    	if (getNetworkType() == NetworkType.MULTI_PROVIDER) {
-    		buf.append (", segments: ");
-    		for (Segment s : segments)
-    			buf.append (s.toString()).append(" ");
-    	}
-    	buf.append ("]");
-    	return buf.toString();
+        if (getNetworkType() == NetworkType.MULTI_PROVIDER) {
+            buf.append (", segments: ");
+            for (Segment s : segments)
+                buf.append (s.toString()).append(" ");
+        }
+        buf.append ("]");
+        return buf.toString();
     }
 }

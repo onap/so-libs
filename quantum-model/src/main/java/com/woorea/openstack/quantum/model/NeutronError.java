@@ -46,40 +46,40 @@ import org.codehaus.jackson.map.annotate.JsonRootName;
 @JsonRootName("NeutronError")
 public class NeutronError implements Serializable {
 
-	private String type;
-	
-	private String message;
+    private String type;
+    
+    private String message;
 
-	private String detail;
-	
-	/**
-	 * @return the code
-	 */
-	public String getType() {
-		return type;
-	}
+    private String detail;
+    
+    /**
+     * @return the code
+     */
+    public String getType() {
+        return type;
+    }
 
-	/**
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
+    /**
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
 
-	/**
-	 * @return the title
-	 */
-	public String getDetail() {
-		return detail;
-	}
+    /**
+     * @return the title
+     */
+    public String getDetail() {
+        return detail;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "NeutronError [type=" + type + ", title=" + detail + ", message="
-				+ message + "]";
-	}
-	
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "NeutronError [type=" + type + ", title=" + detail + ", message="
+                + message + "]";
+    }
+    
 }

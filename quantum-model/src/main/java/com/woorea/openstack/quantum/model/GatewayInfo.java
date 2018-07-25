@@ -23,18 +23,18 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class GatewayInfo implements Serializable {
 
-	@JsonProperty("network_id")
-	private String networkId;
+    @JsonProperty("network_id")
+    private String networkId;
 
-	public String getNetworkId() {
-		return networkId;
-	}
+    public String getNetworkId() {
+        return networkId;
+    }
 
-	public void setNetworkId(String id) {
-		this.networkId = id;
-	}
+    public void setNetworkId(String id) {
+        this.networkId = id;
+    }
 
-	@Override public String toString() {
-		return "[networkId=" + networkId + "]";
-	}
+    @Override public String toString() {
+        return "[networkId=" + networkId + "]";
+    }
 }
