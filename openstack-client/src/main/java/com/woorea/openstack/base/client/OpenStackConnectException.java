@@ -46,13 +46,13 @@ package com.woorea.openstack.base.client;
  */
 public class OpenStackConnectException extends OpenStackBaseException {
 
-	private static final long serialVersionUID = 7294957362769575271L;
+    private static final long serialVersionUID = 7294957362769575271L;
 
-	public OpenStackConnectException(String message) {
-		super(message);
-	}
+    public OpenStackConnectException(String message) {
+        super(message);
+    }
 
-	public OpenStackConnectException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public OpenStackConnectException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }

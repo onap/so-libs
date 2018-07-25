@@ -45,18 +45,18 @@ package com.woorea.openstack.base.client;
  */
 public abstract class OpenStackBaseException extends RuntimeException
 {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/*
-	 * Implement only the basic constructors
-	 */
-	public OpenStackBaseException () {}
-	
-	public OpenStackBaseException(String message) {
-		super(message);
-	}
+    /*
+     * Implement only the basic constructors
+     */
+    public OpenStackBaseException () {}
+    
+    public OpenStackBaseException(String message) {
+        super(message);
+    }
 
-	public OpenStackBaseException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public OpenStackBaseException(String message, Throwable cause) {
+        super(message, cause);
+    }
 }
