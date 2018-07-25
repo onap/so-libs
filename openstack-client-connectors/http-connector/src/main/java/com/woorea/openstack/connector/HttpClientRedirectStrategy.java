@@ -102,7 +102,7 @@ public class HttpClientRedirectStrategy extends DefaultRedirectStrategy {
             final HttpRequest request,
             final HttpResponse response,
             final HttpContext context) throws ProtocolException {
-    	
+        
         final URI uri = getLocationURI(request, response, context);
         final String method = request.getRequestLine().getMethod();
         if (method.equalsIgnoreCase(HttpHead.METHOD_NAME)) {
@@ -113,13 +113,13 @@ public class HttpClientRedirectStrategy extends DefaultRedirectStrategy {
 
             final int status = response.getStatusLine().getStatusCode();
             
-        	HttpUriRequest newRequest;
-        	if (status == HttpStatus.SC_TEMPORARY_REDIRECT || status == HttpStatus.SC_MOVED_TEMPORARILY) {
+            HttpUriRequest newRequest;
+            if (status == HttpStatus.SC_TEMPORARY_REDIRECT || status == HttpStatus.SC_MOVED_TEMPORARILY) {
                 newRequest = RequestBuilder.copy(request).setUri(uri).build();
             } else {
                 newRequest =  new HttpGet(uri);
             }
-        	return newRequest;
+            return newRequest;
         }
     }
 }

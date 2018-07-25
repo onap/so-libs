@@ -55,8 +55,8 @@ import java.util.Map;
 
 public class HttpClientResponse implements OpenStackResponse {
 
-	private static Logger LOGGER = Logger.getLogger(HttpClientConnector.class);
-	
+    private static Logger LOGGER = Logger.getLogger(HttpClientConnector.class);
+    
     private HttpResponse response = null;
     private String entityBody = null;
 
@@ -66,34 +66,34 @@ public class HttpClientResponse implements OpenStackResponse {
         
         // Read the body so InputStream can be closed
         if (response.getEntity() == null) {
-        	// No body
-        	LOGGER.debug ("No Response Body");
-        	return;
+            // No body
+            LOGGER.debug ("No Response Body");
+            return;
         }
         
-		ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
-		try {
-			response.getEntity().writeTo(responseBody);
-		} catch (IOException e) {
-			throw new HttpClientException ("Error Reading Response Body", e);
-		}
-		entityBody = responseBody.toString();
-		LOGGER.debug (entityBody);
+        ByteArrayOutputStream responseBody = new ByteArrayOutputStream();
+        try {
+            response.getEntity().writeTo(responseBody);
+        } catch (IOException e) {
+            throw new HttpClientException ("Error Reading Response Body", e);
+        }
+        entityBody = responseBody.toString();
+        LOGGER.debug (entityBody);
     }
 
     
     @Override
-	public <T> T getEntity (Class<T> returnType) {
-    	// Get appropriate mapper, based on existence of a root element
-		ObjectMapper mapper = HttpClientConnector.getObjectMapper (returnType);
+    public <T> T getEntity (Class<T> returnType) {
+        // Get appropriate mapper, based on existence of a root element
+        ObjectMapper mapper = HttpClientConnector.getObjectMapper (returnType);
 
-		T resp = null;
-		try {
-			resp = mapper.readValue(entityBody, returnType);
-		} catch (Exception e) {
-			throw new HttpClientException ("Caught exception in getEntity", e);
-		}
-		return resp;
+        T resp = null;
+        try {
+            resp = mapper.readValue(entityBody, returnType);
+        } catch (Exception e) {
+            throw new HttpClientException ("Caught exception in getEntity", e);
+        }
+        return resp;
     }
 
     @Override
@@ -103,7 +103,7 @@ public class HttpClientResponse implements OpenStackResponse {
 
     @Override
     public InputStream getInputStream() {
-   		return new ByteArrayInputStream (entityBody.getBytes());
+           return new ByteArrayInputStream (entityBody.getBytes());
     }
 
     @Override

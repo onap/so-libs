@@ -56,212 +56,212 @@ import com.sun.jersey.api.client.filter.ClientFilter;
 
 public class JerseyLoggingFilterTest {
 
-	private static Logger logger;
-	private static LogFormatter logFormatter;
-	
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-		logger = Logger.getLogger(JerseyLoggingFilterTest.class.getSimpleName());
-		logger.setLevel(Level.ALL);
-		logger.setUseParentHandlers(false);
+    private static Logger logger;
+    private static LogFormatter logFormatter;
+    
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+        logger = Logger.getLogger(JerseyLoggingFilterTest.class.getSimpleName());
+        logger.setLevel(Level.ALL);
+        logger.setUseParentHandlers(false);
 
-		ConsoleHandler handler = new ConsoleHandler();
-		logFormatter = new LogFormatter();
-		handler.setFormatter(logFormatter);
-		handler.setLevel(Level.ALL);
-		logger.addHandler(handler);
-	}
+        ConsoleHandler handler = new ConsoleHandler();
+        logFormatter = new LogFormatter();
+        handler.setFormatter(logFormatter);
+        handler.setLevel(Level.ALL);
+        logger.addHandler(handler);
+    }
 
-	@Before
-	public void setUpTest() {
-		logFormatter.clearLog();
-	}
-	
-	/**
-	 * Tests a scenario with no request content (GET).
-	 * @throws Exception for unexpected errors
-	 */
-	@Test
-	public void testGET() throws Exception {
-		String responseContent = "<response>Hello, I am Eliza.</response>";
-		execute("GET", "http://www.onap.org/eliza", null, responseContent);
-	}
-	
-	/**
-	 * Tests a scenario with request content (POST).
-	 * @throws Exception for unexpected errors
-	 */
-	@Test
-	public void testPOST() throws Exception {
-		String requestContent = "<request>I feel sad.</request>";
-		String responseContent = "<response>Do you often feel sad?</response>";
-		execute("POST", "http://www.onap.org/eliza", requestContent, responseContent);
-	}
+    @Before
+    public void setUpTest() {
+        logFormatter.clearLog();
+    }
+    
+    /**
+     * Tests a scenario with no request content (GET).
+     * @throws Exception for unexpected errors
+     */
+    @Test
+    public void testGET() throws Exception {
+        String responseContent = "<response>Hello, I am Eliza.</response>";
+        execute("GET", "http://www.onap.org/eliza", null, responseContent);
+    }
+    
+    /**
+     * Tests a scenario with request content (POST).
+     * @throws Exception for unexpected errors
+     */
+    @Test
+    public void testPOST() throws Exception {
+        String requestContent = "<request>I feel sad.</request>";
+        String responseContent = "<response>Do you often feel sad?</response>";
+        execute("POST", "http://www.onap.org/eliza", requestContent, responseContent);
+    }
 
-	/**
-	 * Runs a single test.
-	 * @param httpMethod any HTTP method (POST, GET, ...)
-	 * @param url any URL
-	 * @param requestContent mock request content, possibly null
-	 * @param responseContent mock response content, never null
-	 * @throws Exception for unexpected errors
-	 */
-	private void execute(String httpMethod, String url, String requestContent, String responseContent)
-			throws Exception {
-		JerseyLoggingFilter loggingFilter = new JerseyLoggingFilter(logger);
+    /**
+     * Runs a single test.
+     * @param httpMethod any HTTP method (POST, GET, ...)
+     * @param url any URL
+     * @param requestContent mock request content, possibly null
+     * @param responseContent mock response content, never null
+     * @throws Exception for unexpected errors
+     */
+    private void execute(String httpMethod, String url, String requestContent, String responseContent)
+            throws Exception {
+        JerseyLoggingFilter loggingFilter = new JerseyLoggingFilter(logger);
 
-		// Mock multi-valued and single valued request headers
+        // Mock multi-valued and single valued request headers
 
-		HashMap<String, List<Object>> requestHeaderMap = new HashMap<>();
-		requestHeaderMap.put("Accept", Arrays.asList(new Object[]{"application/xml","application/json"}));
+        HashMap<String, List<Object>> requestHeaderMap = new HashMap<>();
+        requestHeaderMap.put("Accept", Arrays.asList(new Object[]{"application/xml","application/json"}));
 
-		if (requestContent != null) {
-			requestHeaderMap.put("Content-Type", Arrays.asList(new Object[]{"application/xml"}));
-			requestHeaderMap.put("Content-Length", Arrays.asList(new Object[]{String.valueOf(requestContent.length())}));
-		}
+        if (requestContent != null) {
+            requestHeaderMap.put("Content-Type", Arrays.asList(new Object[]{"application/xml"}));
+            requestHeaderMap.put("Content-Length", Arrays.asList(new Object[]{String.valueOf(requestContent.length())}));
+        }
 
-		@SuppressWarnings("unchecked")
-		MultivaluedMap<String, Object> requestHeaders = mock(MultivaluedMap.class);
-		when(requestHeaders.entrySet()).thenReturn(requestHeaderMap.entrySet());
+        @SuppressWarnings("unchecked")
+        MultivaluedMap<String, Object> requestHeaders = mock(MultivaluedMap.class);
+        when(requestHeaders.entrySet()).thenReturn(requestHeaderMap.entrySet());
 
-		// Mock the request object
+        // Mock the request object
 
-		ClientRequest request = mock(TestClientRequest.class);
-		when(request.getURI()).thenReturn(new URI(url));
-		when(request.getMethod()).thenReturn(httpMethod);
-		when(request.getHeaders()).thenReturn(requestHeaders);
+        ClientRequest request = mock(TestClientRequest.class);
+        when(request.getURI()).thenReturn(new URI(url));
+        when(request.getMethod()).thenReturn(httpMethod);
+        when(request.getHeaders()).thenReturn(requestHeaders);
 
-		if (requestContent != null) {
-			when(request.getEntity()).thenReturn(requestContent.getBytes("UTF-8"));
-		}
+        if (requestContent != null) {
+            when(request.getEntity()).thenReturn(requestContent.getBytes("UTF-8"));
+        }
 
-		doCallRealMethod().when(request).setAdapter(any(ClientRequestAdapter.class));
-		when(request.getAdapter()).thenCallRealMethod();
-		request.setAdapter(new DefaultClientRequestAdapter());
+        doCallRealMethod().when(request).setAdapter(any(ClientRequestAdapter.class));
+        when(request.getAdapter()).thenCallRealMethod();
+        request.setAdapter(new DefaultClientRequestAdapter());
 
-		// Mock multi-valued and single valued response headers
+        // Mock multi-valued and single valued response headers
 
-		HashMap<String, List<String>> responseHeaderMap = new HashMap<>();
-		responseHeaderMap.put("Cache-Control", Arrays.asList(new String[]{"no-cache","no-store"}));
-		responseHeaderMap.put("Content-Type", Arrays.asList(new String[]{"application/xml"}));
-		responseHeaderMap.put("Content-Length", Arrays.asList(new String[]{String.valueOf(responseContent.length())}));
-		@SuppressWarnings("unchecked")
-		MultivaluedMap<String, String> responseHeaders = mock(MultivaluedMap.class);
-		when(responseHeaders.entrySet()).thenReturn(responseHeaderMap.entrySet());
+        HashMap<String, List<String>> responseHeaderMap = new HashMap<>();
+        responseHeaderMap.put("Cache-Control", Arrays.asList(new String[]{"no-cache","no-store"}));
+        responseHeaderMap.put("Content-Type", Arrays.asList(new String[]{"application/xml"}));
+        responseHeaderMap.put("Content-Length", Arrays.asList(new String[]{String.valueOf(responseContent.length())}));
+        @SuppressWarnings("unchecked")
+        MultivaluedMap<String, String> responseHeaders = mock(MultivaluedMap.class);
+        when(responseHeaders.entrySet()).thenReturn(responseHeaderMap.entrySet());
 
-		// Mock the response object
+        // Mock the response object
 
-		ClientResponse response = mock(ClientResponse.class);
-		when(response.getStatus()).thenReturn(200);
-		when(response.getHeaders()).thenReturn(responseHeaders);
-		when(response.getEntityInputStream()).thenReturn(
-				new ByteArrayInputStream(responseContent.getBytes("UTF-8")));
+        ClientResponse response = mock(ClientResponse.class);
+        when(response.getStatus()).thenReturn(200);
+        when(response.getHeaders()).thenReturn(responseHeaders);
+        when(response.getEntityInputStream()).thenReturn(
+                new ByteArrayInputStream(responseContent.getBytes("UTF-8")));
 
-		// Mock a handler that returns the response object and set
-		// it to be the next filter after the logging filter.
+        // Mock a handler that returns the response object and set
+        // it to be the next filter after the logging filter.
 
-		ClientFilter handler = mock(ClientFilter.class);
-		when(handler.handle(request)).then(produceResponse(response));
-		Method setNext = ClientFilter.class.getDeclaredMethod("setNext", new Class<?>[]{ClientHandler.class});
-		setNext.setAccessible(true);
-		setNext.invoke(loggingFilter, new Object[]{handler});
+        ClientFilter handler = mock(ClientFilter.class);
+        when(handler.handle(request)).then(produceResponse(response));
+        Method setNext = ClientFilter.class.getDeclaredMethod("setNext", new Class<?>[]{ClientHandler.class});
+        setNext.setAccessible(true);
+        setNext.invoke(loggingFilter, new Object[]{handler});
 
-		// Run the request into the logging filter
+        // Run the request into the logging filter
 
-		loggingFilter.handle(request);
+        loggingFilter.handle(request);
 
-		// Validate resulting the log content
+        // Validate resulting the log content
 
-		String log = logFormatter.getLog();
+        String log = logFormatter.getLog();
 
-		assertContains(log, "* Client out-bound request");
-		assertContains(log, "> " + httpMethod + " " + url);
+        assertContains(log, "* Client out-bound request");
+        assertContains(log, "> " + httpMethod + " " + url);
 
-		for (String header : requestHeaderMap.keySet()) {
-			assertContains(log, "> " + header + ": ");
-		}
+        for (String header : requestHeaderMap.keySet()) {
+            assertContains(log, "> " + header + ": ");
+        }
 
-		if (requestContent != null) {
-			assertContains(log, requestContent);
-		}
+        if (requestContent != null) {
+            assertContains(log, requestContent);
+        }
 
-		assertContains(log, "* Client in-bound response");
-		assertContains(log, "< 200");
+        assertContains(log, "* Client in-bound response");
+        assertContains(log, "< 200");
 
-		for (String header : responseHeaderMap.keySet()) {
-			assertContains(log, "< " + header + ": ");
-		}
+        for (String header : responseHeaderMap.keySet()) {
+            assertContains(log, "< " + header + ": ");
+        }
 
-		assertContains(log, responseContent);
-	}
-	
-	private void assertContains(String log, String expect) {
-		assertTrue("Log does not contain '" + expect + "'", log.contains(expect));
-	}
+        assertContains(log, responseContent);
+    }
+    
+    private void assertContains(String log, String expect) {
+        assertTrue("Log does not contain '" + expect + "'", log.contains(expect));
+    }
 
-	private class DefaultClientRequestAdapter implements ClientRequestAdapter {
-		@Override
-		public OutputStream adapt(ClientRequest request, OutputStream out) throws IOException {
-			return out;
-		}
-	}
+    private class DefaultClientRequestAdapter implements ClientRequestAdapter {
+        @Override
+        public OutputStream adapt(ClientRequest request, OutputStream out) throws IOException {
+            return out;
+        }
+    }
 
-	private abstract class TestClientRequest extends ClientRequest {
-		private ClientRequestAdapter adapter;
+    private abstract class TestClientRequest extends ClientRequest {
+        private ClientRequestAdapter adapter;
 
-		@Override
-		public ClientRequestAdapter getAdapter() {
-			return adapter;
-		}
+        @Override
+        public ClientRequestAdapter getAdapter() {
+            return adapter;
+        }
 
-		@Override
-		public void setAdapter(ClientRequestAdapter adapter) {
-			this.adapter = adapter;
-		}
-	}
-	
-	private Answer<ClientResponse> produceResponse(final ClientResponse response) { 
-		return new Answer<ClientResponse>() {
-			public ClientResponse answer(InvocationOnMock invocation) throws IOException {
-				ClientRequest request = (ClientRequest) invocation.getArguments()[0];
-				byte[] entity = (byte[]) request.getEntity();
+        @Override
+        public void setAdapter(ClientRequestAdapter adapter) {
+            this.adapter = adapter;
+        }
+    }
+    
+    private Answer<ClientResponse> produceResponse(final ClientResponse response) { 
+        return new Answer<ClientResponse>() {
+            public ClientResponse answer(InvocationOnMock invocation) throws IOException {
+                ClientRequest request = (ClientRequest) invocation.getArguments()[0];
+                byte[] entity = (byte[]) request.getEntity();
 
-				if (entity != null) {
-					ClientRequestAdapter adapter = request.getAdapter();
-	
-					OutputStream nullOutputStream = new OutputStream() {
-						@Override
-						public void write(int b) {
-							// Discard
-						}
-					};
+                if (entity != null) {
+                    ClientRequestAdapter adapter = request.getAdapter();
+    
+                    OutputStream nullOutputStream = new OutputStream() {
+                        @Override
+                        public void write(int b) {
+                            // Discard
+                        }
+                    };
 
-					OutputStream outputStream = adapter.adapt(request, nullOutputStream);
-					outputStream.write(entity);
-					outputStream.close();
-				}
+                    OutputStream outputStream = adapter.adapt(request, nullOutputStream);
+                    outputStream.write(entity);
+                    outputStream.close();
+                }
 
-				return response;
-			}
-		};
-	}
+                return response;
+            }
+        };
+    }
 
-	private static class LogFormatter extends SimpleFormatter {
-		StringBuilder buffer = new StringBuilder();
+    private static class LogFormatter extends SimpleFormatter {
+        StringBuilder buffer = new StringBuilder();
 
-		public synchronized String getLog() {
-			return buffer.toString();
-		}
+        public synchronized String getLog() {
+            return buffer.toString();
+        }
 
-		public synchronized void clearLog() {
-			buffer.setLength(0);
-		}
+        public synchronized void clearLog() {
+            buffer.setLength(0);
+        }
 
-		@Override
-		public synchronized String format(LogRecord record) {
-			String logData = super.format(record);
-			buffer.append(logData);
-			return logData;
-		}
-	}
+        @Override
+        public synchronized String format(LogRecord record) {
+            String logData = super.format(record);
+            buffer.append(logData);
+            return logData;
+        }
+    }
 }

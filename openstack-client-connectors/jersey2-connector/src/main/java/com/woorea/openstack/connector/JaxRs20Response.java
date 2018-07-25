@@ -30,48 +30,48 @@ import com.woorea.openstack.base.client.OpenStackResponse;
 import com.woorea.openstack.base.client.OpenStackResponseException;
 
 public class JaxRs20Response implements OpenStackResponse {
-	
-	private Response response;
-	
-	public JaxRs20Response(Response response) {
-		this.response = response;
-	}
+    
+    private Response response;
+    
+    public JaxRs20Response(Response response) {
+        this.response = response;
+    }
 
-	@Override
-	public <T> T getEntity(Class<T> returnType) {
-		if(response.getStatus() >= 400) {
-			throw new OpenStackResponseException(response.getStatusInfo().getReasonPhrase(),
-					response.getStatusInfo().getStatusCode(), this);
-		}
-		return response.readEntity(returnType);
-	}
+    @Override
+    public <T> T getEntity(Class<T> returnType) {
+        if(response.getStatus() >= 400) {
+            throw new OpenStackResponseException(response.getStatusInfo().getReasonPhrase(),
+                    response.getStatusInfo().getStatusCode(), this);
+        }
+        return response.readEntity(returnType);
+    }
 
-	@Override
-	public <T> T getErrorEntity(Class<T> returnType) {
-		if(response.getStatus() >= 400 && response.hasEntity()) {
-			return response.readEntity(returnType);
-		}
-		return null;
-	}
-	
+    @Override
+    public <T> T getErrorEntity(Class<T> returnType) {
+        if(response.getStatus() >= 400 && response.hasEntity()) {
+            return response.readEntity(returnType);
+        }
+        return null;
+    }
+    
 
-	@Override
-	public InputStream getInputStream() {
-		return (InputStream) response.getEntity();
-	}
+    @Override
+    public InputStream getInputStream() {
+        return (InputStream) response.getEntity();
+    }
 
-	@Override
-	public String header(String name) {
-		return response.getHeaderString(name);
-	}
+    @Override
+    public String header(String name) {
+        return response.getHeaderString(name);
+    }
 
-	@Override
-	public Map<String, String> headers() {
-		Map<String, String> headers = new HashMap<>();
-		for(String k : response.getHeaders().keySet()) {
-			headers.put(k, response.getHeaderString(k));
-		}
-		return headers;
-	}
+    @Override
+    public Map<String, String> headers() {
+        Map<String, String> headers = new HashMap<>();
+        for(String k : response.getHeaders().keySet()) {
+            headers.put(k, response.getHeaderString(k));
+        }
+        return headers;
+    }
 
 }

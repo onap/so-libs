@@ -8,7 +8,7 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *	  http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -42,184 +42,184 @@ import com.sun.jersey.core.util.ReaderWriter;
  */
 public class JerseyLoggingFilter extends ClientFilter {
 
-	private final AtomicLong counter = new AtomicLong(0);
-	private final Logger logger;
+    private final AtomicLong counter = new AtomicLong(0);
+    private final Logger logger;
 
-	/**
-	 * Constructor
-	 * @param logger the logger to which the request and response are written.
-	 */
-	public JerseyLoggingFilter(Logger logger) {
-		this.logger = logger;
-	}
+    /**
+     * Constructor
+     * @param logger the logger to which the request and response are written.
+     */
+    public JerseyLoggingFilter(Logger logger) {
+        this.logger = logger;
+    }
 
-	@Override
-	public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
-		long id = counter.incrementAndGet();
-		logRequest(id, request);
-		ClientResponse response = getNext().handle(request);
-		logResponse(id, response);
-		return response;
-	}
+    @Override
+    public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
+        long id = counter.incrementAndGet();
+        logRequest(id, request);
+        ClientResponse response = getNext().handle(request);
+        logResponse(id, response);
+        return response;
+    }
 
-	/**
-	 * Logs a request.
-	 * @param id the request id (counter)
-	 * @param request the request
-	 */
-	private void logRequest(long id, ClientRequest request) {
-		StringBuilder builder = new StringBuilder();
+    /**
+     * Logs a request.
+     * @param id the request id (counter)
+     * @param request the request
+     */
+    private void logRequest(long id, ClientRequest request) {
+        StringBuilder builder = new StringBuilder();
 
-		builder.append(String.valueOf(id));
-		builder.append(" * Client out-bound request\n");
+        builder.append(String.valueOf(id));
+        builder.append(" * Client out-bound request\n");
 
-		builder.append(String.valueOf(id));
-		builder.append(" > ");
-		builder.append(request.getMethod());
-		builder.append(" ");
-		builder.append(request.getURI().toASCIIString());
-		builder.append("\n");
+        builder.append(String.valueOf(id));
+        builder.append(" > ");
+        builder.append(request.getMethod());
+        builder.append(" ");
+        builder.append(request.getURI().toASCIIString());
+        builder.append("\n");
 
-		// Request headers
+        // Request headers
 
-		for (Map.Entry<String, List<Object>> entry : request.getHeaders().entrySet()) {
-			String header = entry.getKey();
-			List<Object> values = entry.getValue();
+        for (Map.Entry<String, List<Object>> entry : request.getHeaders().entrySet()) {
+            String header = entry.getKey();
+            List<Object> values = entry.getValue();
 
-			if (values.size() == 1) {
-				builder.append(String.valueOf(id));
-				builder.append(" > ");
-				builder.append(header);
-				builder.append(": ");
-				builder.append(ClientRequest.getHeaderValue(values.get(0)));
-				builder.append("\n");
-			} else {
-				StringBuilder buf = new StringBuilder();
-				boolean first = true;
+            if (values.size() == 1) {
+                builder.append(String.valueOf(id));
+                builder.append(" > ");
+                builder.append(header);
+                builder.append(": ");
+                builder.append(ClientRequest.getHeaderValue(values.get(0)));
+                builder.append("\n");
+            } else {
+                StringBuilder buf = new StringBuilder();
+                boolean first = true;
 
-				for(Object value : values) {
-					if (first) {
-						first = false;
-					} else {
-						buf.append(",");
-					}
+                for(Object value : values) {
+                    if (first) {
+                        first = false;
+                    } else {
+                        buf.append(",");
+                    }
 
-					buf.append(ClientRequest.getHeaderValue(value));
-				}
+                    buf.append(ClientRequest.getHeaderValue(value));
+                }
 
-				builder.append(String.valueOf(id));
-				builder.append(" > ");
-				builder.append(header);
-				builder.append(": ");
-				builder.append(buf.toString());
-				builder.append("\n");
-			}
-		}
+                builder.append(String.valueOf(id));
+                builder.append(" > ");
+                builder.append(header);
+                builder.append(": ");
+                builder.append(buf.toString());
+                builder.append("\n");
+            }
+        }
 
-		// Request body
+        // Request body
 
-		if (request.getEntity() != null) {
-			request.setAdapter(new JerseyLoggingAdapter(request.getAdapter(), builder));
-		} else {
-			logger.info(builder.toString());
-		}
-	}
+        if (request.getEntity() != null) {
+            request.setAdapter(new JerseyLoggingAdapter(request.getAdapter(), builder));
+        } else {
+            logger.info(builder.toString());
+        }
+    }
 
-	/**
-	 * Logs a response.
-	 * @param id the request id (counter)
-	 * @param response the response
-	 */
-	private void logResponse(long id, ClientResponse response) {
-		StringBuilder builder = new StringBuilder();
+    /**
+     * Logs a response.
+     * @param id the request id (counter)
+     * @param response the response
+     */
+    private void logResponse(long id, ClientResponse response) {
+        StringBuilder builder = new StringBuilder();
 
-		builder.append(String.valueOf(id));
-		builder.append(" * Client in-bound response\n");
+        builder.append(String.valueOf(id));
+        builder.append(" * Client in-bound response\n");
 
-		builder.append(String.valueOf(id));
-		builder.append(" < ");
-		builder.append(String.valueOf(response.getStatus()));
-		builder.append("\n");
+        builder.append(String.valueOf(id));
+        builder.append(" < ");
+        builder.append(String.valueOf(response.getStatus()));
+        builder.append("\n");
 
-		// Response headers
+        // Response headers
 
-		for (Map.Entry<String, List<String>> entry : response.getHeaders().entrySet()) {
-			String header = entry.getKey();
-			for (String value : entry.getValue()) {
-				builder.append(String.valueOf(id));
-				builder.append(" < ");
-				builder.append(header);
-				builder.append(": ");
-				builder.append(value).append("\n");
-			}
-		}
+        for (Map.Entry<String, List<String>> entry : response.getHeaders().entrySet()) {
+            String header = entry.getKey();
+            for (String value : entry.getValue()) {
+                builder.append(String.valueOf(id));
+                builder.append(" < ");
+                builder.append(header);
+                builder.append(": ");
+                builder.append(value).append("\n");
+            }
+        }
 
-		// Response body
+        // Response body
 
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
-		InputStream in = response.getEntityInputStream();
-		try {
-			ReaderWriter.writeTo(in, out);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        InputStream in = response.getEntityInputStream();
+        try {
+            ReaderWriter.writeTo(in, out);
 
-			byte[] requestEntity = out.toByteArray();
-			appendToBuffer(builder, requestEntity);
-			response.setEntityInputStream(new ByteArrayInputStream(requestEntity));
-		} catch (IOException ex) {
-			throw new ClientHandlerException(ex);
-		}
+            byte[] requestEntity = out.toByteArray();
+            appendToBuffer(builder, requestEntity);
+            response.setEntityInputStream(new ByteArrayInputStream(requestEntity));
+        } catch (IOException ex) {
+            throw new ClientHandlerException(ex);
+        }
 
-		logger.info(builder.toString());
-	}
+        logger.info(builder.toString());
+    }
 
-	/**
-	 * Appends bytes to the builder. If the bytes contain the password pattern,
-	 * the password is obliterated.
-	 * @param builder the builder
-	 * @param bytes the bytes to append
-	 */
-	private void appendToBuffer(StringBuilder builder, byte[] bytes) {
-		if (bytes.length != 0) {
-			String s = new String(bytes);
-			builder.append(s.replaceAll("\"password\".*:.*\"(.*)\"", "\"password\" : \"******\""));
-			builder.append("\n");
-		}
-	}
+    /**
+     * Appends bytes to the builder. If the bytes contain the password pattern,
+     * the password is obliterated.
+     * @param builder the builder
+     * @param bytes the bytes to append
+     */
+    private void appendToBuffer(StringBuilder builder, byte[] bytes) {
+        if (bytes.length != 0) {
+            String s = new String(bytes);
+            builder.append(s.replaceAll("\"password\".*:.*\"(.*)\"", "\"password\" : \"******\""));
+            builder.append("\n");
+        }
+    }
 
-	private class JerseyLoggingAdapter extends AbstractClientRequestAdapter {
-		private final StringBuilder builder;
+    private class JerseyLoggingAdapter extends AbstractClientRequestAdapter {
+        private final StringBuilder builder;
 
-		JerseyLoggingAdapter(ClientRequestAdapter adapter, StringBuilder builder) {
-			super(adapter);
-			this.builder = builder;
-		}
+        JerseyLoggingAdapter(ClientRequestAdapter adapter, StringBuilder builder) {
+            super(adapter);
+            this.builder = builder;
+        }
 
-		@Override
-		public OutputStream adapt(ClientRequest request, OutputStream out) throws IOException {
-			return new JerseyLoggingOutputStream(getAdapter().adapt(request, out), builder);
-		}
-	}
+        @Override
+        public OutputStream adapt(ClientRequest request, OutputStream out) throws IOException {
+            return new JerseyLoggingOutputStream(getAdapter().adapt(request, out), builder);
+        }
+    }
 
-	private class JerseyLoggingOutputStream extends OutputStream {
-		private final OutputStream stream;
-		private final StringBuilder builder;
-		private final ByteArrayOutputStream logStream = new ByteArrayOutputStream();
+    private class JerseyLoggingOutputStream extends OutputStream {
+        private final OutputStream stream;
+        private final StringBuilder builder;
+        private final ByteArrayOutputStream logStream = new ByteArrayOutputStream();
 
-		JerseyLoggingOutputStream(OutputStream stream, StringBuilder builder) {
-			this.stream = stream;
-			this.builder = builder;
-		}
+        JerseyLoggingOutputStream(OutputStream stream, StringBuilder builder) {
+            this.stream = stream;
+            this.builder = builder;
+        }
 
-		@Override
-		public void write(int value) throws IOException {
-			logStream.write(value);
-			stream.write(value);
-		}
+        @Override
+        public void write(int value) throws IOException {
+            logStream.write(value);
+            stream.write(value);
+        }
 
-		@Override
-		public void close() throws IOException {
-			appendToBuffer(builder, logStream.toByteArray());
-			logger.info(builder.toString());
-			stream.close();
-		}
-	}
+        @Override
+        public void close() throws IOException {
+            appendToBuffer(builder, logStream.toByteArray());
+            logger.info(builder.toString());
+            stream.close();
+        }
+    }
 }
