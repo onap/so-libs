@@ -62,8 +62,8 @@ import com.woorea.openstack.base.client.OpenStackResponseException;
 
 public class HttpClientConnector implements OpenStackClientConnector {
 
-	public static final ObjectMapper DEFAULT_MAPPER;
-	public static final ObjectMapper WRAPPED_MAPPER;
+	public static ObjectMapper DEFAULT_MAPPER;
+	public static ObjectMapper WRAPPED_MAPPER;
 	
 	private static Logger LOGGER = Logger.getLogger(HttpClientConnector.class);
 
@@ -207,7 +207,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
 		}
 		catch (Exception e) {
 			// Catchall for anything else, must throw as a RuntimeException
-			e.printStackTrace();
+			LOGGER.error ("Unexpected client exception: " +e.getMessage());
 			throw new RuntimeException("Unexpected client exception", e);
 		}
 		finally {
