@@ -62,8 +62,8 @@ import com.woorea.openstack.base.client.OpenStackResponseException;
 
 public class HttpClientConnector implements OpenStackClientConnector {
 
-	public static ObjectMapper DEFAULT_MAPPER;
-	public static ObjectMapper WRAPPED_MAPPER;
+	public static final ObjectMapper DEFAULT_MAPPER;
+	public static final ObjectMapper WRAPPED_MAPPER;
 	
 	private static Logger LOGGER = Logger.getLogger(HttpClientConnector.class);
 
