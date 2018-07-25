@@ -24,39 +24,39 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class KeyPairs implements Iterable<KeyPair>, Serializable {
-	
-	public static final class KeyPairWrapper implements Serializable {
-		
-		@JsonProperty
-		private KeyPair keypair;
-		
-	}
+    
+    public static final class KeyPairWrapper implements Serializable {
+        
+        @JsonProperty
+        private KeyPair keypair;
+        
+    }
 
-	@JsonProperty("keypairs")
-	private List<KeyPairWrapper> list;
+    @JsonProperty("keypairs")
+    private List<KeyPairWrapper> list;
 
-	/**
-	 * @return the list
-	 */
-	public List<KeyPair> getList() {
-		List<KeyPair> keyPairList = new ArrayList<>();
-		for(KeyPairWrapper wrapper : this.list) {
-			keyPairList.add(wrapper.keypair);
-		}
-		return keyPairList;
-	}
-	
-	@Override
-	public Iterator<KeyPair> iterator() {
-		return getList().iterator();
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "KeyPairs [list=" + getList() + "]";
-	}
+    /**
+     * @return the list
+     */
+    public List<KeyPair> getList() {
+        List<KeyPair> keyPairList = new ArrayList<>();
+        for(KeyPairWrapper wrapper : this.list) {
+            keyPairList.add(wrapper.keypair);
+        }
+        return keyPairList;
+    }
+    
+    @Override
+    public Iterator<KeyPair> iterator() {
+        return getList().iterator();
+    }
+    
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "KeyPairs [list=" + getList() + "]";
+    }
 
 }
