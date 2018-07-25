@@ -22,8 +22,8 @@ import com.woorea.openstack.keystone.v3.model.Roles;
 
 public class DomainGroupRolesResource extends GenericResource<Role, Roles> {
 
-	public DomainGroupRolesResource(OpenStackClient client, String path) {
-		super(client, path, Role.class, Roles.class);
-	}
+    public DomainGroupRolesResource(OpenStackClient client, String path) {
+        super(client, path, Role.class, Roles.class);
+    }
 
 }

@@ -22,8 +22,8 @@ import com.woorea.openstack.keystone.v3.model.Credentials;
 
 public class CredentialsResources extends GenericResource<Credential, Credentials> {
 
-	public CredentialsResources(OpenStackClient client) {
-		super(client, "/credentials", Credential.class, Credentials.class);
-	}
+    public CredentialsResources(OpenStackClient client) {
+        super(client, "/credentials", Credential.class, Credentials.class);
+    }
 
 }
