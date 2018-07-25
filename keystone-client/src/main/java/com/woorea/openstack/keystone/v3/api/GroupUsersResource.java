@@ -23,8 +23,8 @@ import com.woorea.openstack.keystone.v3.model.Users;
 
 public class GroupUsersResource extends GenericResource<User, Users> {
 
-	public GroupUsersResource(OpenStackClient client, String path) {
-		super(client, path, User.class, Users.class);
-	}
+    public GroupUsersResource(OpenStackClient client, String path) {
+        super(client, path, User.class, Users.class);
+    }
 
 }
