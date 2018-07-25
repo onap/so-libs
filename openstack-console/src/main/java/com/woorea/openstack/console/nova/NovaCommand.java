@@ -24,18 +24,18 @@ import com.woorea.openstack.nova.Nova;
 
 
 public abstract class NovaCommand extends Command {
-	
-	public NovaCommand(String name) {
-		super(name);
-	}
+    
+    public NovaCommand(String name) {
+        super(name);
+    }
 
-	@Override
-	public void execute(Console console, CommandLine args) {
-		NovaEnvironment environment = (NovaEnvironment) console.getEnvironment();
-		execute(environment.CLIENT, args);
-		
-	}
+    @Override
+    public void execute(Console console, CommandLine args) {
+        NovaEnvironment environment = (NovaEnvironment) console.getEnvironment();
+        execute(environment.CLIENT, args);
+        
+    }
 
-	protected abstract void execute(Nova nova, CommandLine args);
+    protected abstract void execute(Nova nova, CommandLine args);
 
 }
