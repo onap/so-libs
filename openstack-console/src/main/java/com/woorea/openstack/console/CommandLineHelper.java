@@ -21,7 +21,7 @@ import java.util.Vector;
 
 public class CommandLineHelper {
 
-	public static String[] parse(String input) {
+    public static String[] parse(String input) {
         if (input == null || input.length() == 0) {
             //no command? no string
             return new String[0];
