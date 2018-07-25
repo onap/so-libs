@@ -207,7 +207,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
 		}
 		catch (Exception e) {
 			// Catchall for anything else, must throw as a RuntimeException
-			e.printStackTrace();
+			LOGGER.error ("Unexpected client exception: " +e.getMessage());
 			throw new RuntimeException("Unexpected client exception", e);
 		}
 		finally {
