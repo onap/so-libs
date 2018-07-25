@@ -18,19 +18,19 @@ package com.woorea.openstack.base.client;
 
 public class OpenStackSimpleTokenProvider implements OpenStackTokenProvider {
 
-	String token;
+    String token;
 
-	public OpenStackSimpleTokenProvider(String token) {
-		this.token = token;
-	}
+    public OpenStackSimpleTokenProvider(String token) {
+        this.token = token;
+    }
 
-	@Override
-	public String getToken() {
-		return this.token;
-	}
+    @Override
+    public String getToken() {
+        return this.token;
+    }
 
-	@Override
-	public void expireToken() {
-	}
+    @Override
+    public void expireToken() {
+    }
 
 }

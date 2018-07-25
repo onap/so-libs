@@ -18,8 +18,8 @@ package com.woorea.openstack.base.client;
 
 public interface OpenStackTokenProvider {
 
-	String getToken();
+    String getToken();
 
-	void expireToken();
+    void expireToken();
 
 }
