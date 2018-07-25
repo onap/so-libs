@@ -22,8 +22,8 @@ import com.woorea.openstack.keystone.model.Services;
 
 public class ServicesResource extends GenericResource<Service, Services> {
 
-	public ServicesResource(OpenStackClient client) {
-		super(client, "/services", Service.class, Services.class);
-	}
+    public ServicesResource(OpenStackClient client) {
+        super(client, "/services", Service.class, Services.class);
+    }
 
 }

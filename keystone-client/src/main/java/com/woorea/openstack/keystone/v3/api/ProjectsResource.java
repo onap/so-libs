@@ -24,20 +24,20 @@ import com.woorea.openstack.keystone.v3.model.Projects;
 
 public class ProjectsResource extends GenericResource<Project, Projects> {
 
-	public ProjectsResource(OpenStackClient client) {
-		super(client, "/projects", Project.class, Projects.class);
-	}
-	
-	public OpenStackRequest<Users> users(String projectId) {
-		return CLIENT.get(new StringBuilder(path).append("/").append(projectId).append("/users/").toString(), Users.class);
-	}
-	
-	public ProjectUserRolesResource userRoles(String projectId, String userId) {
-		return new ProjectUserRolesResource(CLIENT, new StringBuilder(path).append("/").append(projectId).append("/users/").append(userId).append("/roles").toString());
-	}
-	
-	public ProjectUserRolesResource groupRoles(String projectId, String groupId) {
-		return new ProjectUserRolesResource(CLIENT, new StringBuilder(path).append("/").append(projectId).append("/groups/").append(groupId).append("/roles").toString());
-	}
+    public ProjectsResource(OpenStackClient client) {
+        super(client, "/projects", Project.class, Projects.class);
+    }
+    
+    public OpenStackRequest<Users> users(String projectId) {
+        return CLIENT.get(new StringBuilder(path).append("/").append(projectId).append("/users/").toString(), Users.class);
+    }
+    
+    public ProjectUserRolesResource userRoles(String projectId, String userId) {
+        return new ProjectUserRolesResource(CLIENT, new StringBuilder(path).append("/").append(projectId).append("/users/").append(userId).append("/roles").toString());
+    }
+    
+    public ProjectUserRolesResource groupRoles(String projectId, String groupId) {
+        return new ProjectUserRolesResource(CLIENT, new StringBuilder(path).append("/").append(projectId).append("/groups/").append(groupId).append("/roles").toString());
+    }
 
 }
