@@ -23,32 +23,32 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 public class Subnets implements Serializable, Iterable<Subnet> {
-	
-	@JsonProperty("subnets")
-	private List<Subnet> list;
-	
-	/**
-	 * @return the list
-	 */
-	public List<Subnet> getList() {
-		return list;
-	}
+    
+    @JsonProperty("subnets")
+    private List<Subnet> list;
+    
+    /**
+     * @return the list
+     */
+    public List<Subnet> getList() {
+        return list;
+    }
 
-	/**
-	 * @param list the list to set
-	 */
-	public void setList(List<Subnet> list) {
-		this.list = list;
-	}
+    /**
+     * @param list the list to set
+     */
+    public void setList(List<Subnet> list) {
+        this.list = list;
+    }
 
-	@Override
-	public String toString() {
-		return "Subnets [list=" + list + "]";
-	}
-	
-	@Override
-	public Iterator<Subnet> iterator() {
-		return list.iterator();
-	}
+    @Override
+    public String toString() {
+        return "Subnets [list=" + list + "]";
+    }
+    
+    @Override
+    public Iterator<Subnet> iterator() {
+        return list.iterator();
+    }
 
 }
