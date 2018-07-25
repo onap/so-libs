@@ -24,19 +24,19 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class ImageMembers implements Iterable<ImageMember>, Serializable {
 
-	@JsonProperty("members")
-	private List<ImageMember> list;
+    @JsonProperty("members")
+    private List<ImageMember> list;
 
-	/**
-	 * @return the list
-	 */
-	public List<ImageMember> getList() {
-		return list;
-	}
+    /**
+     * @return the list
+     */
+    public List<ImageMember> getList() {
+        return list;
+    }
 
-	@Override
-	public Iterator<ImageMember> iterator() {
-		return list.iterator();
-	}
-	
+    @Override
+    public Iterator<ImageMember> iterator() {
+        return list.iterator();
+    }
+    
 }

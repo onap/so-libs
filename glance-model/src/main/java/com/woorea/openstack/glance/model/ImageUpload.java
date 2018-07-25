@@ -22,62 +22,62 @@ import java.util.Map;
 
 public class ImageUpload {
 
-	private Image image;
+    private Image image;
 
-	private String store;
+    private String store;
 
-	private Map<String, Object> properties;
+    private Map<String, Object> properties;
 
-	private InputStream inputStream;
+    private InputStream inputStream;
 
-	public ImageUpload(Image image) {
-		setImage(image);
-	}
+    public ImageUpload(Image image) {
+        setImage(image);
+    }
 
-	public Image getImage() {
-		return image;
-	}
+    public Image getImage() {
+        return image;
+    }
 
-	public void setImage(Image image) {
-		this.image = image;
-	}
+    public void setImage(Image image) {
+        this.image = image;
+    }
 
-	/**
-	 * @return the store
-	 */
-	public String getStore() {
-		return store;
-	}
+    /**
+     * @return the store
+     */
+    public String getStore() {
+        return store;
+    }
 
-	/**
-	 * @param store the store to set
-	 */
-	public void setStore(String store) {
-		this.store = store;
-	}
+    /**
+     * @param store the store to set
+     */
+    public void setStore(String store) {
+        this.store = store;
+    }
 
-	/**
-	 * @return the properties
-	 */
-	public Map<String, Object> getProperties() {
-		if(properties == null) {
-			properties = new HashMap<>();
-		}
-		return properties;
-	}
+    /**
+     * @return the properties
+     */
+    public Map<String, Object> getProperties() {
+        if(properties == null) {
+            properties = new HashMap<>();
+        }
+        return properties;
+    }
 
-	/**
-	 * @return the inputStream
-	 */
-	public InputStream getInputStream() {
-		return inputStream;
-	}
+    /**
+     * @return the inputStream
+     */
+    public InputStream getInputStream() {
+        return inputStream;
+    }
 
-	/**
-	 * @param inputStream the inputStream to set
-	 */
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
+    /**
+     * @param inputStream the inputStream to set
+     */
+    public void setInputStream(InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
 
 }

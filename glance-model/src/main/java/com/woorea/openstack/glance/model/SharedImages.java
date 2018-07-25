@@ -24,19 +24,19 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class SharedImages implements Iterable<SharedImage>, Serializable {
 
-	@JsonProperty("shared_images")
-	private List<SharedImage> list;
+    @JsonProperty("shared_images")
+    private List<SharedImage> list;
 
-	/**
-	 * @return the list
-	 */
-	public List<SharedImage> getList() {
-		return list;
-	}
+    /**
+     * @return the list
+     */
+    public List<SharedImage> getList() {
+        return list;
+    }
 
-	@Override
-	public Iterator<SharedImage> iterator() {
-		return list.iterator();
-	}
-	
+    @Override
+    public Iterator<SharedImage> iterator() {
+        return list.iterator();
+    }
+    
 }
