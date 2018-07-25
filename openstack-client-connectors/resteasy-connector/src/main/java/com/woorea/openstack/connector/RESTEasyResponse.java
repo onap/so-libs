@@ -52,7 +52,7 @@ public class RESTEasyResponse implements OpenStackResponse {
 
     @Override
     public InputStream getInputStream() {
-		return new RESTEasyInputStream((InputStream) response.getEntity(InputStream.class), client.getExecutor());
+        return new RESTEasyInputStream((InputStream) response.getEntity(InputStream.class), client.getExecutor());
     }
 
     @Override
