@@ -22,45 +22,45 @@ import org.codehaus.jackson.map.annotate.JsonRootName;
 @JsonRootName("group")
 public class Group {
 
-	private String id;
-	
-	@JsonProperty("domain_id")
-	private String domainId;
-	
-	private String name;
-	
-	private String description;
+    private String id;
+    
+    @JsonProperty("domain_id")
+    private String domainId;
+    
+    private String name;
+    
+    private String description;
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getDomainId() {
-		return domainId;
-	}
+    public String getDomainId() {
+        return domainId;
+    }
 
-	public void setDomainId(String domainId) {
-		this.domainId = domainId;
-	}
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
 }

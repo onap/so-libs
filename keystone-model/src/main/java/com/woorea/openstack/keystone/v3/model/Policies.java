@@ -24,27 +24,27 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class Policies implements Iterable<Policy>,  Serializable {
 
-	@JsonProperty("policies")
-	private List<Policy> list;
+    @JsonProperty("policies")
+    private List<Policy> list;
 
-	/**
-	 * @return the list
-	 */
-	public List<Policy> getList() {
-		return list;
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Policies [list=" + list + "]";
-	}
+    /**
+     * @return the list
+     */
+    public List<Policy> getList() {
+        return list;
+    }
+    
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Policies [list=" + list + "]";
+    }
 
-	@Override
-	public Iterator<Policy> iterator() {
-		return list.iterator();
-	}
-	
+    @Override
+    public Iterator<Policy> iterator() {
+        return list.iterator();
+    }
+    
 }

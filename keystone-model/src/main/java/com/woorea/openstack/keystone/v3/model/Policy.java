@@ -23,55 +23,55 @@ import org.codehaus.jackson.map.annotate.JsonRootName;
 
 @JsonRootName("policy")
 public class Policy {
-	
-	private String id;
+    
+    private String id;
 
-	private String projectId;
-	
-	private String type;
-	
-	private String userId;
-	
-	private Map<String, String> blob = new HashMap<>();
+    private String projectId;
+    
+    private String type;
+    
+    private String userId;
+    
+    private Map<String, String> blob = new HashMap<>();
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getProjectId() {
-		return projectId;
-	}
+    public String getProjectId() {
+        return projectId;
+    }
 
-	public void setProjectId(String projectId) {
-		this.projectId = projectId;
-	}
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getUserId() {
-		return userId;
-	}
+    public String getUserId() {
+        return userId;
+    }
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
-	public Map<String, String> getBlob() {
-		return blob;
-	}
+    public Map<String, String> getBlob() {
+        return blob;
+    }
 
-	public void setBlob(Map<String, String> blob) {
-		this.blob = blob;
-	}
-	
+    public void setBlob(Map<String, String> blob) {
+        this.blob = blob;
+    }
+    
 }
