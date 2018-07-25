@@ -65,7 +65,7 @@ public class Stack {
     
     // ObjectMapper instance to parse Json stack outputs
     @JsonIgnore
-	private static ObjectMapper mapper = new ObjectMapper();
+    private static ObjectMapper mapper = new ObjectMapper();
 
     public Date getUpdatedTime() {
         return updatedTime;
@@ -133,10 +133,10 @@ public class Stack {
     }
     
     public Map<String, Object> getFiles() {
-    	return this.files;
+        return this.files;
     }
     public void setFiles(Map<String, Object> files) {
-    	this.files = files;
+        this.files = files;
     }
 
 
@@ -157,103 +157,103 @@ public class Stack {
                 '}';
     }
     
-	@JsonIgnoreProperties(ignoreUnknown=true)
-	public static final class Output {
-	    @JsonProperty("output_value")
-		private Object outputValue;
-		
-		private String description;
-		
-	    @JsonProperty("output_key")
-		private String outputKey;
-		
-		public Object getOutputValue() {
-			return outputValue;
-		}
+    @JsonIgnoreProperties(ignoreUnknown=true)
+    public static final class Output {
+        @JsonProperty("output_value")
+        private Object outputValue;
+        
+        private String description;
+        
+        @JsonProperty("output_key")
+        private String outputKey;
+        
+        public Object getOutputValue() {
+            return outputValue;
+        }
 
-		public String getDescription() {
-			return description;
-		}
+        public String getDescription() {
+            return description;
+        }
 
-		public String getOutputKey() {
-			return outputKey;
-		}
+        public String getOutputKey() {
+            return outputKey;
+        }
 
-		/* (non-Javadoc)
-		 * @see java.lang.Object#toString()
-		 */
-		@Override
-		public String toString() {
-			return "Output [key=" + outputKey + ", value="
-					+ outputValue + "]";
-		}
-	}
-	
-	private List<Output> outputs;
+        /* (non-Javadoc)
+         * @see java.lang.Object#toString()
+         */
+        @Override
+        public String toString() {
+            return "Output [key=" + outputKey + ", value="
+                    + outputValue + "]";
+        }
+    }
+    
+    private List<Output> outputs;
 
-	public List<Output> getOutputs() {
-		return outputs;
-	}
-	
-	private Object _findOutputValue (String key) {
-		for (Output o : outputs) {
-			if (o.getOutputKey().equals(key)) {
-				return o.getOutputValue();
-			}
-		}
-		return null;
-	}
-	
-	/*
-	 * Return a stack output as a String.
-	 * Generally speaking, most outputs will be Strings.
-	 */
-	public String getOutputValue (String key)
-	{
-		Object value = _findOutputValue(key);
-		if (value != null)
-			return value.toString();
-		else
-			return null;
-	}
-	
-	/*
-	 * Return a stack output as a Json-mapped Object of the provided type.
-	 * This is useful for json-object stack outputs.
-	 */
-	public <T> T getOutputValue (String key, Class<T> type)
-	{
-		try {
-			String s = mapper.writeValueAsString(_findOutputValue(key));
-			return mapper.readValue(s, type);
-		}
-		catch (IOException e) {
-			return null;
-		}
-	}
-	
-	@JsonProperty("parameters")
-	private Map<String,Object> parameters = new HashMap<>();
-	
-	public void setParameters (Map<String,Object> params)
-	{
-		// Need to "fix" comma-delimited-list parameters for pre-Juno Heat
-		// (see https://bugs.launchpad.net/heat/+bug/1367393)
-		parameters = params;
-		
-		for (Entry<String,Object> param : parameters.entrySet())
-		{
-			// CDL params are returned as a string with format:
-			// "[u'<value1>',u'<value2>',...]"
-			String value = param.getValue().toString();
-			if (value.startsWith("[") && value.endsWith("]"))
-			{
-				param.setValue(value.substring(1,value.length()-1).replaceAll("u'([^\']+)'","$1"));
-			}
-		}
-	}
-	
-	public Map<String,Object> getParameters() {
-		return parameters;
-	}
+    public List<Output> getOutputs() {
+        return outputs;
+    }
+    
+    private Object _findOutputValue (String key) {
+        for (Output o : outputs) {
+            if (o.getOutputKey().equals(key)) {
+                return o.getOutputValue();
+            }
+        }
+        return null;
+    }
+    
+    /*
+     * Return a stack output as a String.
+     * Generally speaking, most outputs will be Strings.
+     */
+    public String getOutputValue (String key)
+    {
+        Object value = _findOutputValue(key);
+        if (value != null)
+            return value.toString();
+        else
+            return null;
+    }
+    
+    /*
+     * Return a stack output as a Json-mapped Object of the provided type.
+     * This is useful for json-object stack outputs.
+     */
+    public <T> T getOutputValue (String key, Class<T> type)
+    {
+        try {
+            String s = mapper.writeValueAsString(_findOutputValue(key));
+            return mapper.readValue(s, type);
+        }
+        catch (IOException e) {
+            return null;
+        }
+    }
+    
+    @JsonProperty("parameters")
+    private Map<String,Object> parameters = new HashMap<>();
+    
+    public void setParameters (Map<String,Object> params)
+    {
+        // Need to "fix" comma-delimited-list parameters for pre-Juno Heat
+        // (see https://bugs.launchpad.net/heat/+bug/1367393)
+        parameters = params;
+        
+        for (Entry<String,Object> param : parameters.entrySet())
+        {
+            // CDL params are returned as a string with format:
+            // "[u'<value1>',u'<value2>',...]"
+            String value = param.getValue().toString();
+            if (value.startsWith("[") && value.endsWith("]"))
+            {
+                param.setValue(value.substring(1,value.length()-1).replaceAll("u'([^\']+)'","$1"));
+            }
+        }
+    }
+    
+    public Map<String,Object> getParameters() {
+        return parameters;
+    }
 }

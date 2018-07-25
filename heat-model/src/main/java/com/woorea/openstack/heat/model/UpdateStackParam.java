@@ -112,10 +112,10 @@ public class UpdateStackParam {
     }    
 
     public void setFiles(Map<String, Object> files) {
-    	this.files = files;
+        this.files = files;
     }
     public Map<String, Object> getFiles() {
-    	return this.files;
+        return this.files;
     }
 
     /**

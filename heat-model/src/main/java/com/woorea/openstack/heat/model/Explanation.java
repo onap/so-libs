@@ -47,47 +47,47 @@ public class Explanation {
         private String type;
 
         public String getMessage() {
-        	return message;
+            return message;
         }
         
         public String getTraceback() {
-        	return traceback;
+            return traceback;
         }
         
         public String getType() {
-        	return type;
+            return type;
         }
     }
  
     private Error error;
     
     public String getExplanation() {
-    	return explanation;
+        return explanation;
     }
     
     public int getCode() {
-    	return code;
+        return code;
     }
     
     public String getTitle() {
-    	return title;
+        return title;
     }
     
     public Error getError() {
-    	return error;
+        return error;
     }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Explanation [ " +
-				"code='" + code +
-				"', title='" + title +
-				"', explanation='" + explanation +
-				"', Error [type='" + error.type +
-				"', message='" + error.message + "' ] ]";
-	}
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "Explanation [ " +
+                "code='" + code +
+                "', title='" + title +
+                "', explanation='" + explanation +
+                "', Error [type='" + error.type +
+                "', message='" + error.message + "' ] ]";
+    }
 
 }
