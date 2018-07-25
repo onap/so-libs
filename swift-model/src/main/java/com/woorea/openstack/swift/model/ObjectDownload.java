@@ -22,36 +22,36 @@ import java.io.InputStream;
 
 public class ObjectDownload {
 
-	private Object object;
-	
-	private InputStream inputStream;
+    private Object object;
+    
+    private InputStream inputStream;
 
-	/**
-	 * @return the object
-	 */
-	public Object getObject() {
-		return object;
-	}
+    /**
+     * @return the object
+     */
+    public Object getObject() {
+        return object;
+    }
 
-	/**
-	 * @param object the object to set
-	 */
-	public void setObject(Object object) {
-		this.object = object;
-	}
+    /**
+     * @param object the object to set
+     */
+    public void setObject(Object object) {
+        this.object = object;
+    }
 
-	/**
-	 * @return the inputStream
-	 */
-	public InputStream getInputStream() {
-		return inputStream;
-	}
+    /**
+     * @return the inputStream
+     */
+    public InputStream getInputStream() {
+        return inputStream;
+    }
 
-	/**
-	 * @param inputStream the inputStream to set
-	 */
-	public void setInputStream(InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
+    /**
+     * @param inputStream the inputStream to set
+     */
+    public void setInputStream(InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
 
 }
