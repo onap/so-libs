@@ -23,53 +23,53 @@ import org.codehaus.jackson.map.annotate.JsonRootName;
 @JsonRootName("volumeAttachment")
 public class VolumeAttachment implements Serializable {
 
-	private String id;
+    private String id;
 
-	private String volumeId;
+    private String volumeId;
 
-	private String serverId;
+    private String serverId;
 
-	private String device;
+    private String device;
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getVolumeId() {
-		return volumeId;
-	}
+    public String getVolumeId() {
+        return volumeId;
+    }
 
-	public void setVolumeId(String volumeId) {
-		this.volumeId = volumeId;
-	}
+    public void setVolumeId(String volumeId) {
+        this.volumeId = volumeId;
+    }
 
-	public String getServerId() {
-		return serverId;
-	}
+    public String getServerId() {
+        return serverId;
+    }
 
-	public void setServerId(String serverId) {
-		this.serverId = serverId;
-	}
+    public void setServerId(String serverId) {
+        this.serverId = serverId;
+    }
 
-	public String getDevice() {
-		return device;
-	}
+    public String getDevice() {
+        return device;
+    }
 
-	public void setDevice(String device) {
-		this.device = device;
-	}
+    public void setDevice(String device) {
+        this.device = device;
+    }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "VolumeAttachment [id=" + id + ", volumeId=" + volumeId
-				+ ", serverId=" + serverId + ", device=" + device + "]";
-	}
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return "VolumeAttachment [id=" + id + ", volumeId=" + volumeId
+                + ", serverId=" + serverId + ", device=" + device + "]";
+    }
 
 }
