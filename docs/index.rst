@@ -1,6 +1,6 @@
 .. This work is licensed under a Creative Commons Attribution 4.0 International License.
 .. http://creativecommons.org/licenses/by/4.0
-.. Copyright 2017 Huawei Technologies Co., Ltd.
+.. Copyright 2018 Huawei Technologies Co., Ltd.
 
 ONAP SO/libs Documentation
 ===========================
@@ -30,3 +30,25 @@ ONAP SO/libs Documentation
 **Swift client** :
     Swift client provides functionalities for object storage in OpenStack. Swift is ideal for storing unstructured data that can grow without bound.
 
+
+Building SO/libs
+===================	
+
+Build software with unit tests
+------------------------------
+
+.. code-block:: bash
+
+  cd $HOME/onap/workspace/SO/libs
+
+  $HOME/onap/apache-maven-3.3.9/bin/mvn -s $HOME/onap/.m2/settings.xml clean install
+
+
+Build software without unit tests
+----------------------------------
+
+.. code-block:: bash
+
+  cd $HOME/onap/workspace/SO/libs
+
+  $HOME/onap/apache-maven-3.3.9/bin/mvn -s $HOME/onap/.m2/settings.xml -DskipTests -Dmaven.test.skip=true clean install
