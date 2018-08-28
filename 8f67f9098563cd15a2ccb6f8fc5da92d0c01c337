@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a76adc5_4951fad6",
+        "filename": "pom.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 667
+      },
+      "writtenOn": "2018-08-28T20:45:58Z",
+      "side": 1,
+      "message": "Any reason we are not moving to 2.8.9 or newer?\n\nIt seems 2.8.7 is still affected by CVE-2017-7525, which is the reason for the change. (http://web.nvd.nist.gov/view/vuln/detail?vulnId\u003dCVE-2017-7525)\n\n\"A deserialization flaw was discovered in the jackson-databind, versions before 2.6.7.1, 2.7.9.1 and 2.8.9, which could allow an unauthenticated user to perform code execution by sending the maliciously crafted input to the readValue method of the ObjectMapper.\"",
+      "range": {
+        "startLine": 160,
+        "startChar": 12,
+        "endLine": 160,
+        "endChar": 17
+      },
+      "revId": "8f67f9098563cd15a2ccb6f8fc5da92d0c01c337",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
