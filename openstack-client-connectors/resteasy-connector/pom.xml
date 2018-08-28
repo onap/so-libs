@@ -16,11 +16,6 @@
  			<!-- replaced with 3.5.0.Final <version>2.3.2.Final</version> -->
 			<version>3.5.0.Final</version>
   	</dependency>
-  	<dependency>
-  		<groupId>org.codehaus.jackson</groupId>
-  		<artifactId>jackson-jaxrs</artifactId>
-  		<version>1.9.4</version>
-  	</dependency>
 	<!-- replaced with httpclient and httpcore
 	<dependency>
 		<groupId>commons-httpclient</groupId>

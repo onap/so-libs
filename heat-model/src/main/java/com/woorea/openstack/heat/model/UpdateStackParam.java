@@ -17,7 +17,7 @@
 /*
  * ============LICENSE_START==========================================
  * ===================================================================
- * Copyright © 2017 AT&T Intellectual Property. All rights reserved.
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
  * ===================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,9 +39,9 @@
 
 package com.woorea.openstack.heat.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UpdateStackParam {
     @JsonProperty("template_url")

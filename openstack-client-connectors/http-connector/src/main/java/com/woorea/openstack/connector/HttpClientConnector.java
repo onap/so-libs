@@ -2,7 +2,7 @@
  * ONAP-SO
  * ============LICENSE_START==========================================
  * ===================================================================
- * Copyright � 2017 AT&T Intellectual Property. All rights reserved.
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
  * ===================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,13 +47,13 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.map.annotate.JsonRootName;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.base.client.OpenStackClientConnector;
 import com.woorea.openstack.base.client.OpenStackConnectException;
 import com.woorea.openstack.base.client.OpenStackRequest;
@@ -70,19 +70,19 @@ public class HttpClientConnector implements OpenStackClientConnector {
     static {
         DEFAULT_MAPPER = new ObjectMapper();
 
-        DEFAULT_MAPPER.setSerializationInclusion(Inclusion.NON_NULL);
-        DEFAULT_MAPPER.disable(SerializationConfig.Feature.INDENT_OUTPUT);
-        DEFAULT_MAPPER.enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-        DEFAULT_MAPPER.disable(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES);
+        DEFAULT_MAPPER.setSerializationInclusion(Include.NON_NULL);
+        DEFAULT_MAPPER.disable(SerializationFeature.INDENT_OUTPUT);
+        DEFAULT_MAPPER.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        DEFAULT_MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
         WRAPPED_MAPPER = new ObjectMapper();
 
-        WRAPPED_MAPPER.setSerializationInclusion(Inclusion.NON_NULL);
-        WRAPPED_MAPPER.disable(SerializationConfig.Feature.INDENT_OUTPUT);
-        WRAPPED_MAPPER.enable(SerializationConfig.Feature.WRAP_ROOT_VALUE);
-        WRAPPED_MAPPER.enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE);
-        WRAPPED_MAPPER.enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-        WRAPPED_MAPPER.disable(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES);
+        WRAPPED_MAPPER.setSerializationInclusion(Include.NON_NULL);
+        WRAPPED_MAPPER.disable(SerializationFeature.INDENT_OUTPUT);
+        WRAPPED_MAPPER.enable(SerializationFeature.WRAP_ROOT_VALUE);
+        WRAPPED_MAPPER.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
+        WRAPPED_MAPPER.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        WRAPPED_MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
     }
     
     protected static <T> ObjectMapper getObjectMapper (Class<T> type) {
