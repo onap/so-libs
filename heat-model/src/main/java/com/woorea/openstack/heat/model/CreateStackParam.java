@@ -21,7 +21,8 @@ package com.woorea.openstack.heat.model;
  */
 
 import java.util.Map;
-import org.codehaus.jackson.annotate.JsonProperty;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateStackParam {
 

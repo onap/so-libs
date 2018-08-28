@@ -16,12 +16,12 @@
 
 package com.woorea.openstack.heat.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /*
  * Modifications copyright (c) 2017 AT&T Intellectual Property
  */
-
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonRootName;
 
 // There is no Root element for the Explanation return
 //@JsonRootName("error")

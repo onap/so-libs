@@ -16,6 +16,7 @@
 
 package com.woorea.openstack.glance;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.woorea.openstack.base.client.Entity;
 import com.woorea.openstack.base.client.HttpMethod;
 import com.woorea.openstack.base.client.OpenStackClient;
@@ -31,7 +32,6 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 public class ImagesResource {
 

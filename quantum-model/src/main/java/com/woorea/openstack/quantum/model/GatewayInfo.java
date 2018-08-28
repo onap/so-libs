@@ -17,9 +17,10 @@
 package com.woorea.openstack.quantum.model;
 
 import java.util.List;
-import java.io.Serializable;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.io.Serializable;
 
 public class GatewayInfo implements Serializable {
 

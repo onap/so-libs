@@ -16,8 +16,7 @@
 
 package com.woorea.openstack.keystone.model.authentication;
 
-import org.codehaus.jackson.map.annotate.JsonRootName;
-
+import com.fasterxml.jackson.annotation.JsonRootName;
 import com.woorea.openstack.keystone.model.Authentication;
 
 @JsonRootName("auth")

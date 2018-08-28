@@ -20,11 +20,11 @@ import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 public class ImageMembers implements Iterable<ImageMember>, Serializable {
 
-    @JsonProperty("members")
+    @JsonPropertyDescription("members")
     private List<ImageMember> list;
 
     /**

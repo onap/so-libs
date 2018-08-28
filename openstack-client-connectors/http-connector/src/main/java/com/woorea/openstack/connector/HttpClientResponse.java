@@ -17,7 +17,7 @@
 /*
  * ============LICENSE_START==========================================
  * ===================================================================
- * Copyright © 2017 AT&T Intellectual Property. All rights reserved.
+ * Copyright ï¿½ 2017 AT&T Intellectual Property. All rights reserved.
  * ===================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,8 @@ package com.woorea.openstack.connector;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.log4j.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.woorea.openstack.base.client.OpenStackResponse;
 
 import java.io.ByteArrayInputStream;
