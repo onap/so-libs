@@ -32,7 +32,7 @@ ONAP SO/libs Documentation
 
 
 Building SO/libs
-===================	
+-----------------
 
 Build software with unit tests
 ------------------------------
