@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * ===================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,45 +20,64 @@
 
 package com.woorea.openstack.keystone.model;
 
+import com.woorea.openstack.keystone.model.Service;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ServiceTest {
 
-    Service service = new Service();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"OS-KSADM:service\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"type\" : \"type\"," + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"description\" : \"description\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        service.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Service.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Service service = objectMapper.readValue(JSON_FULL, Service.class);
+        String json = objectMapper.writeValueAsString(service);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getType() throws Exception {
-        service.getType();
+    public void testMethods() throws Exception {
+        Service service = objectMapper.readValue(JSON_FULL, Service.class);
+        service.toString();
+        
+        String name = service.getName();
+        Assert.assertNotNull(name);
+        service.setName(name);
+        
+        String description = service.getDescription();
+        Assert.assertNotNull(description);
+        service.setDescription(description);
+        
+        String id = service.getId();
+        Assert.assertNotNull(id);
+        
+        String type = service.getType();
+        Assert.assertNotNull(type);
+        service.setType(type);
     }
-
-    @Test
-    public void setType() throws Exception {
-        service.setType("type");
-    }
-
-    @Test
-    public void getName() throws Exception {
-        service.getName();
-    }
-
-    @Test
-    public void setName() throws Exception {
-        service.setName("name");
-    }
-
-    @Test
-    public void getDescription() throws Exception {
-        service.getDescription();
-    }
-
-    @Test
-    public void setDescription() throws Exception {
-        service.setDescription("desc");
-    }
-
 }

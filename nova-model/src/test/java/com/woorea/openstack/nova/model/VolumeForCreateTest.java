@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,74 +17,83 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.VolumeForCreate;
+import java.util.Map;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.HashMap;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class VolumeForCreateTest {
 
-    VolumeForCreate volumeForCreate = new VolumeForCreate();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"volume\" : {" + EOL
+        + "    \"size\" : 61," + EOL
+        + "    \"metadata\" : {" + EOL
+        + "      \"metadata-k1\" : \"metadata-v1\"," + EOL
+        + "      \"metadata-k2\" : \"metadata-v2\"" + EOL
+        + "    }," + EOL
+        + "    \"availability_zone\" : \"availabilityzone\"," + EOL
+        + "    \"display_name\" : \"name\"," + EOL
+        + "    \"display_description\" : \"description\"," + EOL
+        + "    \"snapshot_id\" : 3" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getSize() throws Exception {
-        volumeForCreate.getSize();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + VolumeForCreate.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        VolumeForCreate volumeforcreate = objectMapper.readValue(JSON_FULL, VolumeForCreate.class);
+        String json = objectMapper.writeValueAsString(volumeforcreate);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setSize() throws Exception {
-        volumeForCreate.setSize(1);
+    public void testMethods() throws Exception {
+        VolumeForCreate volumeforcreate = objectMapper.readValue(JSON_FULL, VolumeForCreate.class);
+        volumeforcreate.toString();
+        
+        Map<String,String> metadata = volumeforcreate.getMetadata();
+        Assert.assertNotNull(metadata);
+        Assert.assertEquals(2, metadata.size());
+        volumeforcreate.setMetadata(metadata);
+        
+        Integer snapshotId = volumeforcreate.getSnapshotId();
+        Assert.assertNotNull(snapshotId);
+        volumeforcreate.setSnapshotId(snapshotId);
+        
+        Integer size = volumeforcreate.getSize();
+        Assert.assertNotNull(size);
+        volumeforcreate.setSize(size);
+        
+        String name = volumeforcreate.getName();
+        Assert.assertNotNull(name);
+        volumeforcreate.setName(name);
+        
+        String description = volumeforcreate.getDescription();
+        Assert.assertNotNull(description);
+        volumeforcreate.setDescription(description);
+        
+        String availabilityZone = volumeforcreate.getAvailabilityZone();
+        Assert.assertNotNull(availabilityZone);
+        volumeforcreate.setAvailabilityZone(availabilityZone);
     }
-
-    @Test
-    public void getAvailabilityZone() throws Exception {
-        volumeForCreate.getAvailabilityZone();
-    }
-
-    @Test
-    public void setAvailabilityZone() throws Exception {
-        volumeForCreate.setAvailabilityZone("test");
-    }
-
-    @Test
-    public void getName() throws Exception {
-        volumeForCreate.getName();
-    }
-
-    @Test
-    public void setName() throws Exception {
-        volumeForCreate.setName("test");
-    }
-
-    @Test
-    public void getDescription() throws Exception {
-        volumeForCreate.getDescription();
-    }
-
-    @Test
-    public void setDescription() throws Exception {
-        volumeForCreate.setDescription("test");
-    }
-
-    @Test
-    public void getSnapshotId() throws Exception {
-        volumeForCreate.getSnapshotId();
-    }
-
-    @Test
-    public void setSnapshotId() throws Exception {
-        volumeForCreate.setSnapshotId(1);
-    }
-
-    @Test
-    public void getMetadata() throws Exception {
-        volumeForCreate.getMetadata();
-    }
-
-    @Test
-    public void setMetadata() throws Exception {
-        volumeForCreate.setMetadata(new HashMap<String, String>());
-    }
-
 }

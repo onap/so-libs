@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * =================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,21 +17,75 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.keystone.v3.model;
 
+import com.woorea.openstack.keystone.v3.model.Credential;
+import com.woorea.openstack.keystone.v3.model.Credentials;
+import java.util.List;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class CredentialsTest {
 
-    Credentials credentials = new Credentials();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"credentials\" : [ {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"projectId\" : \"projectid\"," + EOL
+        + "    \"type\" : \"type\"," + EOL
+        + "    \"userId\" : \"userid\"," + EOL
+        + "    \"blob\" : {" + EOL
+        + "      \"blob-k1\" : \"blob-v1\"," + EOL
+        + "      \"blob-k2\" : \"blob-v2\"" + EOL
+        + "    }" + EOL
+        + "  }, {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"projectId\" : \"projectid\"," + EOL
+        + "    \"type\" : \"type\"," + EOL
+        + "    \"userId\" : \"userid\"," + EOL
+        + "    \"blob\" : {" + EOL
+        + "      \"blob-k1\" : \"blob-v1\"," + EOL
+        + "      \"blob-k2\" : \"blob-v2\"" + EOL
+        + "    }" + EOL
+        + "  } ]" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getList() throws Exception {
-        credentials.getList();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Credentials.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Credentials credentials = objectMapper.readValue(JSON_FULL, Credentials.class);
+        String json = objectMapper.writeValueAsString(credentials);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void iterator() throws Exception {
-        credentials.iterator();
+    @Test
+    public void testMethods() throws Exception {
+        Credentials credentials = objectMapper.readValue(JSON_FULL, Credentials.class);
+        credentials.toString();
+        
+        List<Credential> list = credentials.getList();
+        Assert.assertNotNull(list);
+        Assert.assertEquals(2, list.size());
+        
+        int cnt = 0;
+        for (@SuppressWarnings("unused") Credential x : credentials) {
+            ++cnt;
+        }
+        Assert.assertEquals(2, cnt);
     }
 }

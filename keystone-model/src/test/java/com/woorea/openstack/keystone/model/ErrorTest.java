@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * ===================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,25 +20,57 @@
 
 package com.woorea.openstack.keystone.model;
 
+import com.woorea.openstack.keystone.model.Error;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ErrorTest {
 
-    Error error = new Error();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"error\" : {" + EOL
+        + "    \"code\" : 29," + EOL
+        + "    \"title\" : \"title\"," + EOL
+        + "    \"message\" : \"message\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getCode() throws Exception {
-        error.getCode();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Error.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Error error = objectMapper.readValue(JSON_FULL, Error.class);
+        String json = objectMapper.writeValueAsString(error);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getTitle() throws Exception {
-        error.getTitle();
+    public void testMethods() throws Exception {
+        Error error = objectMapper.readValue(JSON_FULL, Error.class);
+        error.toString();
+        
+        Integer code = error.getCode();
+        Assert.assertNotNull(code);
+        
+        String title = error.getTitle();
+        Assert.assertNotNull(title);
+        
+        String message = error.getMessage();
+        Assert.assertNotNull(message);
     }
-
-    @Test
-    public void getMessage() throws Exception {
-        error.getMessage();
-    }
-
 }

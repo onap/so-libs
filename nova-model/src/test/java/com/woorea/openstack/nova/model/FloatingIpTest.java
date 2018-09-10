@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,36 +20,65 @@
 
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.FloatingIp;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class FloatingIpTest {
 
-    private FloatingIp ip = new FloatingIp();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"floating_ip\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"pool\" : \"pool\"," + EOL
+        + "    \"ip\" : \"ip\"," + EOL
+        + "    \"fixed_ip\" : \"fixedip\"," + EOL
+        + "    \"instance_id\" : \"instanceid\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() {
-        ip.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + FloatingIp.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        FloatingIp floatingip = objectMapper.readValue(JSON_FULL, FloatingIp.class);
+        String json = objectMapper.writeValueAsString(floatingip);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getPool() {
-        ip.getPool();
-    }
-
-    @Test
-    public void getIp() {
-        ip.getIp();
-    }
-
-    @Test
-    public void getFixedIp() {
-        ip.getFixedIp();
-    }
-
-    @Test
-    public void getInstanceId() {
-        ip.getInstanceId();
+    public void testMethods() throws Exception {
+        FloatingIp floatingip = objectMapper.readValue(JSON_FULL, FloatingIp.class);
+        floatingip.toString();
+        
+        String instanceId = floatingip.getInstanceId();
+        Assert.assertNotNull(instanceId);
+        
+        String ip = floatingip.getIp();
+        Assert.assertNotNull(ip);
+        
+        String pool = floatingip.getPool();
+        Assert.assertNotNull(pool);
+        
+        String fixedIp = floatingip.getFixedIp();
+        Assert.assertNotNull(fixedIp);
+        
+        String id = floatingip.getId();
+        Assert.assertNotNull(id);
     }
 }

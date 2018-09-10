@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,82 +17,78 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.SecurityGroupRuleForCreate;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class SecurityGroupRuleForCreateTest {
 
-    SecurityGroupRuleForCreate securityGroupRuleForCreate = new SecurityGroupRuleForCreate();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"security_group_rule\" : {" + EOL
+        + "    \"cidr\" : \"cidr\"," + EOL
+        + "    \"parent_group_id\" : \"parentgroupid\"," + EOL
+        + "    \"ip_protocol\" : \"ipprotocol\"," + EOL
+        + "    \"from_port\" : 7," + EOL
+        + "    \"to_port\" : 98," + EOL
+        + "    \"group_id\" : \"groupid\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getParentGroupId() throws Exception {
-        securityGroupRuleForCreate.getParentGroupId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + SecurityGroupRuleForCreate.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        SecurityGroupRuleForCreate securitygroupruleforcreate = objectMapper.readValue(JSON_FULL, SecurityGroupRuleForCreate.class);
+        String json = objectMapper.writeValueAsString(securitygroupruleforcreate);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setParentGroupId() throws Exception {
-        securityGroupRuleForCreate.setParentGroupId("parent");
+    public void testMethods() throws Exception {
+        SecurityGroupRuleForCreate securitygroupruleforcreate = objectMapper.readValue(JSON_FULL, SecurityGroupRuleForCreate.class);
+        securitygroupruleforcreate.toString();
+        
+        String parentGroupId = securitygroupruleforcreate.getParentGroupId();
+        Assert.assertNotNull(parentGroupId);
+        securitygroupruleforcreate.setParentGroupId(parentGroupId);
+        
+        String ipProtocol = securitygroupruleforcreate.getIpProtocol();
+        Assert.assertNotNull(ipProtocol);
+        securitygroupruleforcreate.setIpProtocol(ipProtocol);
+        
+        String groupId = securitygroupruleforcreate.getGroupId();
+        Assert.assertNotNull(groupId);
+        securitygroupruleforcreate.setGroupId(groupId);
+        
+        Integer fromPort = securitygroupruleforcreate.getFromPort();
+        Assert.assertNotNull(fromPort);
+        securitygroupruleforcreate.setFromPort(fromPort);
+        
+        String cidr = securitygroupruleforcreate.getCidr();
+        Assert.assertNotNull(cidr);
+        securitygroupruleforcreate.setCidr(cidr);
+        
+        Integer toPort = securitygroupruleforcreate.getToPort();
+        Assert.assertNotNull(toPort);
+        securitygroupruleforcreate.setToPort(toPort);
     }
-
-    @Test
-    public void setParentGroupId1() throws Exception {
-        securityGroupRuleForCreate.setParentGroupId(1);
-    }
-
-    @Test
-    public void getFromPort() throws Exception {
-        securityGroupRuleForCreate.getFromPort();
-    }
-
-    @Test
-    public void setFromPort() throws Exception {
-        securityGroupRuleForCreate.setFromPort(80);
-    }
-
-    @Test
-    public void getToPort() throws Exception {
-        securityGroupRuleForCreate.getToPort();
-    }
-
-    @Test
-    public void setToPort() throws Exception {
-        securityGroupRuleForCreate.setToPort(80);
-    }
-
-    @Test
-    public void getIpProtocol() throws Exception {
-        securityGroupRuleForCreate.getIpProtocol();
-    }
-
-    @Test
-    public void setIpProtocol() throws Exception {
-        securityGroupRuleForCreate.setIpProtocol("test");
-    }
-
-    @Test
-    public void getCidr() throws Exception {
-        securityGroupRuleForCreate.getCidr();
-    }
-
-    @Test
-    public void setCidr() throws Exception {
-        securityGroupRuleForCreate.setCidr("test");
-    }
-
-    @Test
-    public void getGroupId() throws Exception {
-        securityGroupRuleForCreate.getGroupId();
-    }
-
-    @Test
-    public void setGroupId() throws Exception {
-        securityGroupRuleForCreate.setGroupId("test");
-    }
-
-    @Test
-    public void setGroupId1() throws Exception {
-        securityGroupRuleForCreate.setGroupId(1);
-    }
-
 }

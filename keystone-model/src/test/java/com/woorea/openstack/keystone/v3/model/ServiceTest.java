@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * =================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,52 +17,76 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.keystone.v3.model;
 
+import com.woorea.openstack.keystone.v3.model.Token.Service;
+import com.woorea.openstack.keystone.v3.model.Token.Service.Endpoint;
+import java.util.List;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ServiceTest {
 
-    Service service = new Service();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"id\" : \"id\"," + EOL
+        + "  \"type\" : \"type\"," + EOL
+        + "  \"endpoints\" : [ {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"url\" : \"url\"," + EOL
+        + "    \"region\" : \"region\"," + EOL
+        + "    \"enabled\" : false," + EOL
+        + "    \"interface\" : \"interface\"," + EOL
+        + "    \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL
+        + "  }, {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"url\" : \"url\"," + EOL
+        + "    \"region\" : \"region\"," + EOL
+        + "    \"enabled\" : false," + EOL
+        + "    \"interface\" : \"interface\"," + EOL
+        + "    \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL
+        + "  } ]" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        service.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Service.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Service service = objectMapper.readValue(JSON_FULL, Service.class);
+        String json = objectMapper.writeValueAsString(service);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() throws Exception {
-        service.setId("test");
+    public void testMethods() throws Exception {
+        Service service = objectMapper.readValue(JSON_FULL, Service.class);
+        service.toString();
+        
+        List<Endpoint> endpoints = service.getEndpoints();
+        Assert.assertNotNull(endpoints);
+        Assert.assertEquals(2, endpoints.size());
+        service.setEndpoints(endpoints);
+        
+        String id = service.getId();
+        Assert.assertNotNull(id);
+        service.setId(id);
+        
+        String type = service.getType();
+        Assert.assertNotNull(type);
+        service.setType(type);
     }
-
-    @Test
-    public void getType() throws Exception {
-        service.getType();
-    }
-
-    @Test
-    public void setType() throws Exception {
-        service.setType("test");
-    }
-
-    @Test
-    public void getName() throws Exception {
-        service.getName();
-    }
-
-    @Test
-    public void setName() throws Exception {
-        service.setName("test");
-    }
-
-    @Test
-    public void getDescription() throws Exception {
-        service.getDescription();
-    }
-
-    @Test
-    public void setDescription() throws Exception {
-        service.setDescription("test");
-    }
-
 }

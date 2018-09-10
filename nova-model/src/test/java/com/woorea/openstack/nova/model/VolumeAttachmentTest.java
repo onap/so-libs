@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,52 +17,68 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.VolumeAttachment;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class VolumeAttachmentTest {
 
-    VolumeAttachment volumeAttachment = new VolumeAttachment();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"volumeAttachment\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"volumeId\" : \"volumeid\"," + EOL
+        + "    \"serverId\" : \"serverid\"," + EOL
+        + "    \"device\" : \"device\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        volumeAttachment.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + VolumeAttachment.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        VolumeAttachment volumeattachment = objectMapper.readValue(JSON_FULL, VolumeAttachment.class);
+        String json = objectMapper.writeValueAsString(volumeattachment);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() throws Exception {
-        volumeAttachment.setId("Test");
+    public void testMethods() throws Exception {
+        VolumeAttachment volumeattachment = objectMapper.readValue(JSON_FULL, VolumeAttachment.class);
+        volumeattachment.toString();
+        
+        String volumeId = volumeattachment.getVolumeId();
+        Assert.assertNotNull(volumeId);
+        volumeattachment.setVolumeId(volumeId);
+        
+        String id = volumeattachment.getId();
+        Assert.assertNotNull(id);
+        volumeattachment.setId(id);
+        
+        String device = volumeattachment.getDevice();
+        Assert.assertNotNull(device);
+        volumeattachment.setDevice(device);
+        
+        String serverId = volumeattachment.getServerId();
+        Assert.assertNotNull(serverId);
+        volumeattachment.setServerId(serverId);
     }
-
-    @Test
-    public void getVolumeId() throws Exception {
-        volumeAttachment.getVolumeId();
-    }
-
-    @Test
-    public void setVolumeId() throws Exception {
-        volumeAttachment.setVolumeId("test");
-    }
-
-    @Test
-    public void getServerId() throws Exception {
-        volumeAttachment.getServerId();
-    }
-
-    @Test
-    public void setServerId() throws Exception {
-        volumeAttachment.setServerId("test");
-    }
-
-    @Test
-    public void getDevice() throws Exception {
-        volumeAttachment.getDevice();
-    }
-
-    @Test
-    public void setDevice() throws Exception {
-        volumeAttachment.setDevice("test");
-    }
-
 }

@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,47 +17,76 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.Snapshot;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class SnapshotTest {
 
-    Snapshot snapshot = new Snapshot();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"snapshot\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"status\" : \"status\"," + EOL
+        + "    \"volumeId\" : \"volumeid\"," + EOL
+        + "    \"size\" : 61," + EOL
+        + "    \"createdAt\" : \"createdat\"," + EOL
+        + "    \"displayName\" : \"name\"," + EOL
+        + "    \"displayDescription\" : \"description\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        snapshot.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Snapshot.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Snapshot snapshot = objectMapper.readValue(JSON_FULL, Snapshot.class);
+        String json = objectMapper.writeValueAsString(snapshot);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getStatus() throws Exception {
-        snapshot.getStatus();
+    public void testMethods() throws Exception {
+        Snapshot snapshot = objectMapper.readValue(JSON_FULL, Snapshot.class);
+        snapshot.toString();
+        
+        String createdAt = snapshot.getCreatedAt();
+        Assert.assertNotNull(createdAt);
+        
+        Integer size = snapshot.getSize();
+        Assert.assertNotNull(size);
+        
+        String name = snapshot.getName();
+        Assert.assertNotNull(name);
+        
+        String volumeId = snapshot.getVolumeId();
+        Assert.assertNotNull(volumeId);
+        
+        String description = snapshot.getDescription();
+        Assert.assertNotNull(description);
+        
+        String id = snapshot.getId();
+        Assert.assertNotNull(id);
+        
+        String status = snapshot.getStatus();
+        Assert.assertNotNull(status);
     }
-
-    @Test
-    public void getName() throws Exception {
-        snapshot.getName();
-    }
-
-    @Test
-    public void getDescription() throws Exception {
-        snapshot.getDescription();
-    }
-
-    @Test
-    public void getVolumeId() throws Exception {
-        snapshot.getVolumeId();
-    }
-
-    @Test
-    public void getSize() throws Exception {
-        snapshot.getSize();
-    }
-
-    @Test
-    public void getCreatedAt() throws Exception {
-        snapshot.getCreatedAt();
-    }
-
 }

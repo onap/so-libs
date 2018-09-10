@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,42 +17,49 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.ServerForCreate.SecurityGroup;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class SecurityGroupTest {
 
-    SecurityGroup securityGroup = new SecurityGroup();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"name\" : \"name\"" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        securityGroup.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + SecurityGroup.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        SecurityGroup securitygroup = objectMapper.readValue(JSON_FULL, SecurityGroup.class);
+        String json = objectMapper.writeValueAsString(securitygroup);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getName() throws Exception {
-        securityGroup.getName();
+    public void testMethods() throws Exception {
+        SecurityGroup securitygroup = objectMapper.readValue(JSON_FULL, SecurityGroup.class);
+        securitygroup.toString();
+        
+        String name = securitygroup.getName();
+        Assert.assertNotNull(name);
+        securitygroup.setName(name);
     }
-
-    @Test
-    public void getDescription() throws Exception {
-        securityGroup.getDescription();
-    }
-
-    @Test
-    public void getTenantId() throws Exception {
-        securityGroup.getTenantId();
-    }
-
-    @Test
-    public void getRules() throws Exception {
-        securityGroup.getRules();
-    }
-
-    @Test
-    public void getLinks() throws Exception {
-        securityGroup.getLinks();
-    }
-
 }

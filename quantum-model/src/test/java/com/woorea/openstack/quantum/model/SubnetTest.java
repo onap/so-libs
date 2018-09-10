@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,138 +20,107 @@
 
 package com.woorea.openstack.quantum.model;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
-
-import java.util.Arrays;
-
-import org.codehaus.jackson.map.ObjectMapper;
-import org.hamcrest.CustomMatcher;
-import org.junit.Before;
-import org.junit.Test;
-
+import com.woorea.openstack.quantum.model.Pool;
+import com.woorea.openstack.quantum.model.Subnet;
 import com.woorea.openstack.quantum.model.Subnet.IpVersion;
+import java.util.List;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
+import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class SubnetTest {
 
-    private static final String POOL_END = "poolEnd";
+    private static final String EOL = System.lineSeparator();
 
-    private static final String POOL_START = "poolStart";
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"subnet\" : {" + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"cidr\" : \"cidr\"," + EOL
+        + "    \"enable_dhcp\" : true," + EOL
+        + "    \"network_id\" : \"networkid\"," + EOL
+        + "    \"tenant_id\" : \"tenantid\"," + EOL
+        + "    \"dns_nameservers\" : [ \"dnsnames-v1\", \"dnsnames-v2\" ]," + EOL
+        + "    \"allocation_pools\" : [ {" + EOL
+        + "      \"start\" : \"start\"," + EOL
+        + "      \"end\" : \"end\"" + EOL
+        + "    }, {" + EOL
+        + "      \"start\" : \"start\"," + EOL
+        + "      \"end\" : \"end\"" + EOL
+        + "    } ]," + EOL
+        + "    \"host_routes\" : [ \"hostroutes-v1\", \"hostroutes-v2\" ]," + EOL
+        + "    \"ip_version\" : 4," + EOL
+        + "    \"gateway_ip\" : \"gw\"" + EOL
+        + "  }" + EOL
+        + "}";
 
-    private static final String TENANT_ID = "tenantId";
-
-    private static final String NETWORK_ID = "networkId";
-
-    private static final String NAME = "name";
-
-    private static final String HOST_ROUTE = "hostRoute";
-
-    private static final String GATEWAY = "gw";
-
-    private static final boolean ENABLE_DHCP = true;
-
-    private static final String ID = "testId";
-
-    private static final String CIDR = "10.0.0.0/8";
-
-    private static final String DNS_SERVER = "dnsServer";
-
-    private static final IpVersion IP_VERSION = IpVersion.IPV4;
-
-    /**
-     * JSON with read only attributes.
-     */
-    private static final String SUBNET_JSON = "{"
-            + "  \"subnet\" : {"
-            + "    \"id\" : \"" + ID + "\""
-            + "  }"
-            + "}";
-
-    private ObjectMapper objectMapper;
-
-    private String serializedSubnet;
-
-    @Before
-    public void setUp() throws Exception {
-        objectMapper = PortTest.initializeObjectMapper();
-    }
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
-        Subnet subnet = new Subnet();
-        subnet.setId(ID);
-        subnet.setCidr(CIDR);
-        subnet.setDnsNames(Arrays.asList(DNS_SERVER));
-        subnet.setEnableDHCP(ENABLE_DHCP);
-        subnet.setIpversion(IP_VERSION);
-        subnet.setGw(GATEWAY);
-        subnet.setHostRoutes(Arrays.asList(HOST_ROUTE));
-        subnet.setName(NAME);
-        subnet.setNetworkId(NETWORK_ID);
-        subnet.setTenantId(TENANT_ID);
-
-        Pool pool = new Pool();
-        pool.setStart(POOL_START);
-        pool.setEnd(POOL_END);
-        subnet.setList(Arrays.asList(pool));
-
-        serializedSubnet = objectMapper.writeValueAsString(subnet);
-        assertThat(serializedSubnet, not(containsString(ID)));
-        assertThat(serializedSubnet, containsString(CIDR));
-        assertThat(serializedSubnet, containsString(DNS_SERVER));
-        assertThat(serializedSubnet, containsString("\"enable_dhcp\" : " + ENABLE_DHCP));
-        assertThat(serializedSubnet, containsString(Integer.toString(IP_VERSION.code())));
-        assertThat(serializedSubnet, containsString(GATEWAY));
-        assertThat(serializedSubnet, containsString(HOST_ROUTE));
-        assertThat(serializedSubnet, containsString(NAME));
-        assertThat(serializedSubnet, containsString(NETWORK_ID));
-        assertThat(serializedSubnet, containsString(TENANT_ID));
-        assertThat(serializedSubnet, containsString(POOL_START));
-        assertThat(serializedSubnet, containsString(POOL_END));
+        System.out.println("CLASS: " + Subnet.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Subnet subnet = objectMapper.readValue(JSON_FULL, Subnet.class);
+        String json = objectMapper.writeValueAsString(subnet);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void testSerializationEmpty() throws Exception {
-        Subnet subnet = new Subnet();
-        serializedSubnet = objectMapper.writeValueAsString(subnet);
-
-        assertThat(serializedSubnet, containsString("\"subnet\" : { }"));
-    }
-
-    @Test
-    public void testDeserializationReadOnlyFields() throws Exception {
-        Subnet subnet = objectMapper.readValue(SUBNET_JSON, Subnet.class);
-
-        assertThat(subnet.getId(), is(equalTo(ID)));
-    }
-
-    @Test
-    public void testDeserializationAfterSerialization() throws Exception {
-        testSerialization();
-        Subnet subnet = objectMapper.readValue(serializedSubnet, Subnet.class);
-
-        assertThat(subnet.getCidr(), is(equalTo(CIDR)));
-        assertThat(subnet.getDnsNames(), hasItem(equalTo(DNS_SERVER)));
-        assertThat(subnet.isEnableDHCP(), is(equalTo(ENABLE_DHCP)));
-        assertThat(subnet.getIpversion(), is(equalTo(IP_VERSION)));
-        assertThat(subnet.getGw(), is(equalTo(GATEWAY)));
-        assertThat(subnet.getHostRoutes(), hasItem(equalTo(HOST_ROUTE)));
-        assertThat(subnet.getName(), is(equalTo(NAME)));
-        assertThat(subnet.getNetworkId(), is(equalTo(NETWORK_ID)));
-        assertThat(subnet.getTenantId(), is(equalTo(TENANT_ID)));
-        assertThat(subnet.getList(), hasItem(new CustomMatcher<Pool>(
-                "a Pool object with start " + POOL_START + " and end " + POOL_END) {
-
-            @Override
-            public boolean matches(Object pool) {
-                return pool instanceof Pool
-                        && POOL_START.equals(((Pool) pool).getStart())
-                        && POOL_END.equals(((Pool) pool).getEnd());
-            }
-        }));
+    public void testMethods() throws Exception {
+        Subnet subnet = objectMapper.readValue(JSON_FULL, Subnet.class);
+        subnet.toString();
+        
+        String gw = subnet.getGw();
+        Assert.assertNotNull(gw);
+        subnet.setGw(gw);
+        
+        List<String> dnsNames = subnet.getDnsNames();
+        Assert.assertNotNull(dnsNames);
+        Assert.assertEquals(2, dnsNames.size());
+        subnet.setDnsNames(dnsNames);
+        
+        List<String> hostRoutes = subnet.getHostRoutes();
+        Assert.assertNotNull(hostRoutes);
+        Assert.assertEquals(2, hostRoutes.size());
+        subnet.setHostRoutes(hostRoutes);
+        
+        String name = subnet.getName();
+        Assert.assertNotNull(name);
+        subnet.setName(name);
+        
+        String tenantId = subnet.getTenantId();
+        Assert.assertNotNull(tenantId);
+        subnet.setTenantId(tenantId);
+        
+        String cidr = subnet.getCidr();
+        Assert.assertNotNull(cidr);
+        subnet.setCidr(cidr);
+        
+        String networkId = subnet.getNetworkId();
+        Assert.assertNotNull(networkId);
+        subnet.setNetworkId(networkId);
+        
+        Boolean enableDHCP = subnet.getEnableDHCP();
+        Assert.assertNotNull(enableDHCP);
+        subnet.setEnableDHCP(enableDHCP);
+        
+        IpVersion ipversion = subnet.getIpversion();
+        Assert.assertNotNull(ipversion);
+        subnet.setIpversion(ipversion);
+        
+        List<Pool> list = subnet.getList();
+        Assert.assertNotNull(list);
+        Assert.assertEquals(2, list.size());
+        subnet.setList(list);
     }
 }

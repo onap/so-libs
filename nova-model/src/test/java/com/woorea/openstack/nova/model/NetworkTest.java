@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,146 +20,154 @@
 
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.Network;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class NetworkTest {
 
-    private Network network = new Network();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"network\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"bridge\" : \"bridge\"," + EOL
+        + "    \"deleted\" : false," + EOL
+        + "    \"vlan\" : \"vlan\"," + EOL
+        + "    \"broadcast\" : \"broadcast\"," + EOL
+        + "    \"netmask\" : \"netmask\"," + EOL
+        + "    \"injected\" : true," + EOL
+        + "    \"host\" : \"host\"," + EOL
+        + "    \"cidr\" : \"cidr\"," + EOL
+        + "    \"gateway\" : \"gateway\"," + EOL
+        + "    \"dns1\" : \"dns1\"," + EOL
+        + "    \"dns2\" : \"dns2\"," + EOL
+        + "    \"label\" : \"label\"," + EOL
+        + "    \"priority\" : \"priority\"," + EOL
+        + "    \"vpn_public_address\" : \"vpnpublicaddress\"," + EOL
+        + "    \"vpn_private_address\" : \"vpnprivateaddress\"," + EOL
+        + "    \"vpn_public_port\" : \"vpnpublicport\"," + EOL
+        + "    \"dhcp_start\" : \"dhcpstart\"," + EOL
+        + "    \"bridge_interface\" : \"bridgeinterface\"," + EOL
+        + "    \"updated_at\" : \"updatedat\"," + EOL
+        + "    \"multi_host\" : false," + EOL
+        + "    \"created_at\" : \"createdat\"," + EOL
+        + "    \"deleted_at\" : \"deletedat\"," + EOL
+        + "    \"cidr_v6\" : \"cidrv6\"," + EOL
+        + "    \"gateway_v6\" : \"gatewayv6\"," + EOL
+        + "    \"netmask_v6\" : \"netmaskv6\"," + EOL
+        + "    \"project_id\" : \"projectid\"," + EOL
+        + "    \"rxtx_base\" : \"rxtxbase\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() {
-        network.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Network.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Network network = objectMapper.readValue(JSON_FULL, Network.class);
+        String json = objectMapper.writeValueAsString(network);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getVpnPublicAddress() {
-        network.getVpnPublicAddress();
-    }
-
-    @Test
-    public void getVpnPublicPort() {
-        network.getVpnPublicPort();
-    }
-
-    @Test
-    public void getDhcpStart() {
-        network.getDhcpStart();
-    }
-
-    @Test
-    public void getBridge() {
-        network.getBridge();
-    }
-
-    @Test
-    public void getBridgeInterface() {
-        network.getBridgeInterface();
-    }
-
-    @Test
-    public void getUpdatedAt() {
-        network.getUpdatedAt();
-    }
-
-    @Test
-    public void getDeleted() {
-        network.getDeleted();
-    }
-
-    @Test
-    public void getVlan() {
-        network.getVlan();
-    }
-
-    @Test
-    public void getBroadcast() {
-        network.getBroadcast();
-    }
-
-    @Test
-    public void getNetmask() {
-        network.getNetmask();
-    }
-
-    @Test
-    public void getInjected() {
-        network.getInjected();
-    }
-
-    @Test
-    public void getHost() {
-        network.getHost();
-    }
-
-    @Test
-    public void getMultiHost() {
-        network.getMultiHost();
-    }
-
-    @Test
-    public void getCreatedAt() {
-        network.getCreatedAt();
-    }
-
-    @Test
-    public void getDeletedAt() {
-        network.getDeletedAt();
-    }
-
-    @Test
-    public void getCidr() {
-        network.getCidr();
-    }
-
-    @Test
-    public void getCidrV6() {
-        network.getCidrV6();
-    }
-
-    @Test
-    public void getGateway() {
-        network.getGateway();
-    }
-
-    @Test
-    public void getGatewayV6() {
-        network.getGatewayV6();
-    }
-
-    @Test
-    public void getNetmaskV6() {
-        network.getNetmaskV6();
-    }
-
-    @Test
-    public void getProjectId() {
-        network.getProjectId();
-    }
-
-    @Test
-    public void getRxtxBase() {
-        network.getRxtxBase();
-    }
-
-    @Test
-    public void getDns1() {
-        network.getDns1();
-    }
-
-    @Test
-    public void getDns2() {
-        network.getDns2();
-    }
-
-    @Test
-    public void getLabel() {
-        network.getLabel();
-    }
-
-    @Test
-    public void getPriority() {
-        network.getPriority();
+    public void testMethods() throws Exception {
+        Network network = objectMapper.readValue(JSON_FULL, Network.class);
+        network.toString();
+        
+        String broadcast = network.getBroadcast();
+        Assert.assertNotNull(broadcast);
+        
+        String gatewayV6 = network.getGatewayV6();
+        Assert.assertNotNull(gatewayV6);
+        
+        String dns2 = network.getDns2();
+        Assert.assertNotNull(dns2);
+        
+        String bridgeInterface = network.getBridgeInterface();
+        Assert.assertNotNull(bridgeInterface);
+        
+        String dns1 = network.getDns1();
+        Assert.assertNotNull(dns1);
+        
+        String cidrV6 = network.getCidrV6();
+        Assert.assertNotNull(cidrV6);
+        
+        String deletedAt = network.getDeletedAt();
+        Assert.assertNotNull(deletedAt);
+        
+        String vlan = network.getVlan();
+        Assert.assertNotNull(vlan);
+        
+        String netmask = network.getNetmask();
+        Assert.assertNotNull(netmask);
+        
+        String netmaskV6 = network.getNetmaskV6();
+        Assert.assertNotNull(netmaskV6);
+        
+        Boolean injected = network.getInjected();
+        Assert.assertNotNull(injected);
+        
+        String host = network.getHost();
+        Assert.assertNotNull(host);
+        
+        String cidr = network.getCidr();
+        Assert.assertNotNull(cidr);
+        
+        String id = network.getId();
+        Assert.assertNotNull(id);
+        
+        String projectId = network.getProjectId();
+        Assert.assertNotNull(projectId);
+        
+        String vpnPublicAddress = network.getVpnPublicAddress();
+        Assert.assertNotNull(vpnPublicAddress);
+        
+        String label = network.getLabel();
+        Assert.assertNotNull(label);
+        
+        String priority = network.getPriority();
+        Assert.assertNotNull(priority);
+        
+        String vpnPublicPort = network.getVpnPublicPort();
+        Assert.assertNotNull(vpnPublicPort);
+        
+        String createdAt = network.getCreatedAt();
+        Assert.assertNotNull(createdAt);
+        
+        Boolean deleted = network.getDeleted();
+        Assert.assertNotNull(deleted);
+        
+        String rxtxBase = network.getRxtxBase();
+        Assert.assertNotNull(rxtxBase);
+        
+        String dhcpStart = network.getDhcpStart();
+        Assert.assertNotNull(dhcpStart);
+        
+        Boolean multiHost = network.getMultiHost();
+        Assert.assertNotNull(multiHost);
+        
+        String bridge = network.getBridge();
+        Assert.assertNotNull(bridge);
+        
+        String gateway = network.getGateway();
+        Assert.assertNotNull(gateway);
+        
+        String updatedAt = network.getUpdatedAt();
+        Assert.assertNotNull(updatedAt);
     }
 }

@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,111 +20,95 @@
 
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.ImageFromVolume;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ImageFromVolumeTest {
 
-    private ImageFromVolume image = new ImageFromVolume();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"os-volume_upload_image\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"updates_at\" : \"updates_at\"," + EOL
+        + "    \"status\" : \"status\"," + EOL
+        + "    \"display_description\" : \"display_description\"," + EOL
+        + "    \"size\" : \"size\"," + EOL
+        + "    \"volume_type\" : \"volume_type\"," + EOL
+        + "    \"image_id\" : \"image_id\"," + EOL
+        + "    \"container_format\" : \"container_format\"," + EOL
+        + "    \"disk_format\" : \"disk_format\"," + EOL
+        + "    \"image_name\" : \"image_name\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() {
-        image.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + ImageFromVolume.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        ImageFromVolume imagefromvolume = objectMapper.readValue(JSON_FULL, ImageFromVolume.class);
+        String json = objectMapper.writeValueAsString(imagefromvolume);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() {
-        image.setId("123");
-    }
-
-    @Test
-    public void getUpdates_at() {
-        image.getUpdates_at();
-    }
-
-    @Test
-    public void setUpdates_at() {
-        image.setUpdates_at("123");
-    }
-
-    @Test
-    public void getStatus() {
-        image.getStatus();
-    }
-
-    @Test
-    public void setStatus() {
-        image.setStatus("123");
-    }
-
-    @Test
-    public void getDisplay_description() {
-        image.getDisplay_description();
-    }
-
-    @Test
-    public void setDisplay_description() {
-        image.setDisplay_description("123");
-    }
-
-    @Test
-    public void getSize() {
-        image.getSize();
-    }
-
-    @Test
-    public void setSize() {
-        image.setSize("123");
-    }
-
-    @Test
-    public void getVolume_type() {
-        image.getVolume_type();
-    }
-
-    @Test
-    public void setVolume_type() {
-        image.setVolume_type("123");
-    }
-
-    @Test
-    public void getImage_id() {
-        image.getImage_id();
-    }
-
-    @Test
-    public void setImage_id() {
-        image.setImage_id("123");
-    }
-
-    @Test
-    public void getContainer_format() {
-        image.getContainer_format();
-    }
-
-    @Test
-    public void setContainer_format() {
-        image.setContainer_format("123");
-    }
-
-    @Test
-    public void getDisk_format() {
-        image.getDisk_format();
-    }
-
-    @Test
-    public void setDisk_format() {
-        image.setDisk_format("123");
-    }
-
-    @Test
-    public void getImage_name() {
-        image.getImage_name();
-    }
-
-    @Test
-    public void setImage_name() {
-        image.setImage_name("123");
+    public void testMethods() throws Exception {
+        ImageFromVolume imagefromvolume = objectMapper.readValue(JSON_FULL, ImageFromVolume.class);
+        imagefromvolume.toString();
+        
+        String image_name = imagefromvolume.getImage_name();
+        Assert.assertNotNull(image_name);
+        imagefromvolume.setImage_name(image_name);
+        
+        String display_description = imagefromvolume.getDisplay_description();
+        Assert.assertNotNull(display_description);
+        imagefromvolume.setDisplay_description(display_description);
+        
+        String updates_at = imagefromvolume.getUpdates_at();
+        Assert.assertNotNull(updates_at);
+        imagefromvolume.setUpdates_at(updates_at);
+        
+        String volume_type = imagefromvolume.getVolume_type();
+        Assert.assertNotNull(volume_type);
+        imagefromvolume.setVolume_type(volume_type);
+        
+        String size = imagefromvolume.getSize();
+        Assert.assertNotNull(size);
+        imagefromvolume.setSize(size);
+        
+        String disk_format = imagefromvolume.getDisk_format();
+        Assert.assertNotNull(disk_format);
+        imagefromvolume.setDisk_format(disk_format);
+        
+        String id = imagefromvolume.getId();
+        Assert.assertNotNull(id);
+        imagefromvolume.setId(id);
+        
+        String image_id = imagefromvolume.getImage_id();
+        Assert.assertNotNull(image_id);
+        imagefromvolume.setImage_id(image_id);
+        
+        String container_format = imagefromvolume.getContainer_format();
+        Assert.assertNotNull(container_format);
+        imagefromvolume.setContainer_format(container_format);
+        
+        String status = imagefromvolume.getStatus();
+        Assert.assertNotNull(status);
+        imagefromvolume.setStatus(status);
     }
 }

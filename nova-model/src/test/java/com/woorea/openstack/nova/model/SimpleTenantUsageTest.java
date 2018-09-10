@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,95 +17,118 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.nova.model;
 
-import org.junit.Test;
-
+import com.woorea.openstack.nova.model.SimpleTenantUsage;
+import com.woorea.openstack.nova.model.SimpleTenantUsage.ServerUsage;
 import java.math.BigDecimal;
-import java.util.Collections;
+import java.util.List;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
+import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class SimpleTenantUsageTest {
 
-    SimpleTenantUsage simpleTenantUsage = new SimpleTenantUsage();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"tenant_usage\" : {" + EOL
+        + "    \"start\" : \"start\"," + EOL
+        + "    \"stop\" : \"stop\"," + EOL
+        + "    \"total_memory_mb_usage\" : 14," + EOL
+        + "    \"total_vcpus_usage\" : 3," + EOL
+        + "    \"total_local_gb_usage\" : 66," + EOL
+        + "    \"tenant_id\" : \"tenantid\"," + EOL
+        + "    \"total_hours\" : \"totalhours\"," + EOL
+        + "    \"server_usages\" : [ {" + EOL
+        + "      \"uptime\" : 78," + EOL
+        + "      \"state\" : \"state\"," + EOL
+        + "      \"hours\" : 64.0," + EOL
+        + "      \"vcpus\" : 79," + EOL
+        + "      \"flavor\" : \"flavor\"," + EOL
+        + "      \"name\" : \"name\"," + EOL
+        + "      \"instance_id\" : \"instanceid\"," + EOL
+        + "      \"started_at\" : \"startedat\"," + EOL
+        + "      \"ended_at\" : \"endedat\"," + EOL
+        + "      \"memory_mb\" : 90," + EOL
+        + "      \"tenant_id\" : \"tenantid\"," + EOL
+        + "      \"local_gb\" : 11" + EOL
+        + "    }, {" + EOL
+        + "      \"uptime\" : 78," + EOL
+        + "      \"state\" : \"state\"," + EOL
+        + "      \"hours\" : 64.0," + EOL
+        + "      \"vcpus\" : 79," + EOL
+        + "      \"flavor\" : \"flavor\"," + EOL
+        + "      \"name\" : \"name\"," + EOL
+        + "      \"instance_id\" : \"instanceid\"," + EOL
+        + "      \"started_at\" : \"startedat\"," + EOL
+        + "      \"ended_at\" : \"endedat\"," + EOL
+        + "      \"memory_mb\" : 90," + EOL
+        + "      \"tenant_id\" : \"tenantid\"," + EOL
+        + "      \"local_gb\" : 11" + EOL
+        + "    } ]" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getTotalMemoryMbUsage() throws Exception {
-        simpleTenantUsage.getTotalMemoryMbUsage();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + SimpleTenantUsage.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        SimpleTenantUsage simpletenantusage = objectMapper.readValue(JSON_FULL, SimpleTenantUsage.class);
+        String json = objectMapper.writeValueAsString(simpletenantusage);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setTotalMemoryMbUsage() throws Exception {
-        simpleTenantUsage.setTotalMemoryMbUsage(new BigDecimal(1));
+    public void testMethods() throws Exception {
+        SimpleTenantUsage simpletenantusage = objectMapper.readValue(JSON_FULL, SimpleTenantUsage.class);
+        simpletenantusage.toString();
+        
+        BigDecimal totalMemoryMbUsage = simpletenantusage.getTotalMemoryMbUsage();
+        Assert.assertNotNull(totalMemoryMbUsage);
+        simpletenantusage.setTotalMemoryMbUsage(totalMemoryMbUsage);
+        
+        String stop = simpletenantusage.getStop();
+        Assert.assertNotNull(stop);
+        simpletenantusage.setStop(stop);
+        
+        BigDecimal totalVcpusUsage = simpletenantusage.getTotalVcpusUsage();
+        Assert.assertNotNull(totalVcpusUsage);
+        simpletenantusage.setTotalVcpusUsage(totalVcpusUsage);
+        
+        String tenantId = simpletenantusage.getTenantId();
+        Assert.assertNotNull(tenantId);
+        simpletenantusage.setTenantId(tenantId);
+        
+        String start = simpletenantusage.getStart();
+        Assert.assertNotNull(start);
+        simpletenantusage.setStart(start);
+        
+        List<ServerUsage> serverUsages = simpletenantusage.getServerUsages();
+        Assert.assertNotNull(serverUsages);
+        Assert.assertEquals(2, serverUsages.size());
+        simpletenantusage.setServerUsages(serverUsages);
+        
+        BigDecimal totalLocalGbUsage = simpletenantusage.getTotalLocalGbUsage();
+        Assert.assertNotNull(totalLocalGbUsage);
+        simpletenantusage.setTotalLocalGbUsage(totalLocalGbUsage);
+        
+        String totalHours = simpletenantusage.getTotalHours();
+        Assert.assertNotNull(totalHours);
+        simpletenantusage.setTotalHours(totalHours);
     }
-
-    @Test
-    public void getTotalVcpusUsage() throws Exception {
-        simpleTenantUsage.getTotalVcpusUsage();
-    }
-
-    @Test
-    public void setTotalVcpusUsage() throws Exception {
-        simpleTenantUsage.setTotalVcpusUsage(new BigDecimal(1));
-    }
-
-    @Test
-    public void getTotalLocalGbUsage() throws Exception {
-        simpleTenantUsage.getTotalLocalGbUsage();
-    }
-
-    @Test
-    public void setTotalLocalGbUsage() throws Exception {
-        simpleTenantUsage.setTotalLocalGbUsage(BigDecimal.ONE);
-    }
-
-    @Test
-    public void getStart() throws Exception {
-        simpleTenantUsage.getStart();
-    }
-
-    @Test
-    public void setStart() throws Exception {
-        simpleTenantUsage.setStart("test");
-    }
-
-    @Test
-    public void getStop() throws Exception {
-        simpleTenantUsage.getStop();
-    }
-
-    @Test
-    public void setStop() throws Exception {
-        simpleTenantUsage.setStop("test");
-    }
-
-    @Test
-    public void getTenantId() throws Exception {
-        simpleTenantUsage.getTenantId();
-    }
-
-    @Test
-    public void setTenantId() throws Exception {
-        simpleTenantUsage.setTenantId("test");
-    }
-
-    @Test
-    public void getTotalHours() throws Exception {
-        simpleTenantUsage.getTotalHours();
-    }
-
-    @Test
-    public void setTotalHours() throws Exception {
-        simpleTenantUsage.setTotalHours("test");
-    }
-
-    @Test
-    public void getServerUsages() throws Exception {
-        simpleTenantUsage.getServerUsages();
-    }
-
-    @Test
-    public void setServerUsages() throws Exception {
-        simpleTenantUsage.setServerUsages(Collections.<SimpleTenantUsage.ServerUsage>emptyList());
-    }
-
 }

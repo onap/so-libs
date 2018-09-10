@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * =================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,52 +17,68 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.keystone.v3.model;
 
+import com.woorea.openstack.keystone.v3.model.Group;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class GroupTest {
 
-    Group group = new Group();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"group\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"description\" : \"description\"," + EOL
+        + "    \"domain_id\" : \"domainid\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        group.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Group.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Group group = objectMapper.readValue(JSON_FULL, Group.class);
+        String json = objectMapper.writeValueAsString(group);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() throws Exception {
-        group.setId("test");
+    public void testMethods() throws Exception {
+        Group group = objectMapper.readValue(JSON_FULL, Group.class);
+        group.toString();
+        
+        String name = group.getName();
+        Assert.assertNotNull(name);
+        group.setName(name);
+        
+        String description = group.getDescription();
+        Assert.assertNotNull(description);
+        group.setDescription(description);
+        
+        String id = group.getId();
+        Assert.assertNotNull(id);
+        group.setId(id);
+        
+        String domainId = group.getDomainId();
+        Assert.assertNotNull(domainId);
+        group.setDomainId(domainId);
     }
-
-    @Test
-    public void getDomainId() throws Exception {
-        group.getDomainId();
-    }
-
-    @Test
-    public void setDomainId() throws Exception {
-        group.setDomainId("test");
-    }
-
-    @Test
-    public void getName() throws Exception {
-        group.getName();
-    }
-
-    @Test
-    public void setName() throws Exception {
-        group.setName("test");
-    }
-
-    @Test
-    public void getDescription() throws Exception {
-        group.getDescription();
-    }
-
-    @Test
-    public void setDescription() throws Exception {
-        group.setDescription("test");
-    }
-
 }

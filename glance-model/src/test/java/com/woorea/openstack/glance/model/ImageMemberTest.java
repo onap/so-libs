@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,32 +17,50 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.glance.model;
 
+import com.woorea.openstack.glance.model.ImageMember;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ImageMemberTest {
 
-    ImageMember imageMember = new ImageMember();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"can_share\" : false," + EOL
+        + "  \"member_id\" : \"memberid\"" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void isCanShareTest() throws Exception {
-        imageMember.isCanShare();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + ImageMember.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        ImageMember imagemember = objectMapper.readValue(JSON_FULL, ImageMember.class);
+        String json = objectMapper.writeValueAsString(imagemember);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setCanShareTest() throws Exception {
-        imageMember.setCanShare(true);
+    public void testMethods() throws Exception {
+        ImageMember imagemember = objectMapper.readValue(JSON_FULL, ImageMember.class);
+        imagemember.toString();
+        
+        String memberId = imagemember.getMemberId();
+        Assert.assertNotNull(memberId);
+        imagemember.setMemberId(memberId);
     }
-
-    @Test
-    public void getMemberIdTest() throws Exception {
-        imageMember.getMemberId();
-    }
-
-    @Test
-    public void setMemberIdTest() throws Exception {
-        imageMember.setMemberId("id");
-    }
-
 }

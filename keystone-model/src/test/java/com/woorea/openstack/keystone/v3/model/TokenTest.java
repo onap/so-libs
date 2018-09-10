@@ -1,9 +1,9 @@
 /*-
-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * ===================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,107 +17,152 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.keystone.v3.model;
 
-import org.junit.Test;
-
+import com.woorea.openstack.keystone.v3.model.Token;
+import com.woorea.openstack.keystone.v3.model.Token.Domain;
+import com.woorea.openstack.keystone.v3.model.Token.Project;
+import com.woorea.openstack.keystone.v3.model.Token.Role;
+import com.woorea.openstack.keystone.v3.model.Token.Service;
+import com.woorea.openstack.keystone.v3.model.Token.User;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.GregorianCalendar;
+import java.util.List;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
+import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class TokenTest {
 
-    Token token = new Token();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"token\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"methods\" : [ \"methods-v1\", \"methods-v2\" ]," + EOL
+        + "    \"domain\" : {" + EOL
+        + "      \"id\" : \"id\"," + EOL
+        + "      \"name\" : \"name\"" + EOL
+        + "    }," + EOL
+        + "    \"project\" : {" + EOL
+        + "      \"domain\" : {" + EOL
+        + "        \"id\" : \"id\"," + EOL
+        + "        \"name\" : \"name\"" + EOL
+        + "      }," + EOL
+        + "      \"id\" : \"id\"," + EOL
+        + "      \"name\" : \"name\"" + EOL
+        + "    }," + EOL
+        + "    \"user\" : {" + EOL
+        + "      \"id\" : \"id\"," + EOL
+        + "      \"name\" : \"name\"" + EOL
+        + "    }," + EOL
+        + "    \"roles\" : [ { }, { } ]," + EOL
+        + "    \"catalog\" : [ {" + EOL
+        + "      \"id\" : \"id\"," + EOL
+        + "      \"type\" : \"type\"," + EOL
+        + "      \"endpoints\" : [ {" + EOL
+        + "        \"id\" : \"id\"," + EOL
+        + "        \"url\" : \"url\"," + EOL
+        + "        \"region\" : \"region\"," + EOL
+        + "        \"enabled\" : false," + EOL
+        + "        \"interface\" : \"interface\"," + EOL
+        + "        \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL
+        + "      }, {" + EOL
+        + "        \"id\" : \"id\"," + EOL
+        + "        \"url\" : \"url\"," + EOL
+        + "        \"region\" : \"region\"," + EOL
+        + "        \"enabled\" : false," + EOL
+        + "        \"interface\" : \"interface\"," + EOL
+        + "        \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL
+        + "      } ]" + EOL
+        + "    }, {" + EOL
+        + "      \"id\" : \"id\"," + EOL
+        + "      \"type\" : \"type\"," + EOL
+        + "      \"endpoints\" : [ {" + EOL
+        + "        \"id\" : \"id\"," + EOL
+        + "        \"url\" : \"url\"," + EOL
+        + "        \"region\" : \"region\"," + EOL
+        + "        \"enabled\" : false," + EOL
+        + "        \"interface\" : \"interface\"," + EOL
+        + "        \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL
+        + "      }, {" + EOL
+        + "        \"id\" : \"id\"," + EOL
+        + "        \"url\" : \"url\"," + EOL
+        + "        \"region\" : \"region\"," + EOL
+        + "        \"enabled\" : false," + EOL
+        + "        \"interface\" : \"interface\"," + EOL
+        + "        \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL
+        + "      } ]" + EOL
+        + "    } ]," + EOL
+        + "    \"expires_at\" : 1489752000000," + EOL
+        + "    \"issued_at\" : 1488456000000" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        token.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Token.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Token token = objectMapper.readValue(JSON_FULL, Token.class);
+        String json = objectMapper.writeValueAsString(token);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() throws Exception {
-        token.setId("test");
+    public void testMethods() throws Exception {
+        Token token = objectMapper.readValue(JSON_FULL, Token.class);
+        token.toString();
+        
+        List<String> methods = token.getMethods();
+        Assert.assertNotNull(methods);
+        Assert.assertEquals(2, methods.size());
+        token.setMethods(methods);
+        
+        List<Service> catalog = token.getCatalog();
+        Assert.assertNotNull(catalog);
+        Assert.assertEquals(2, catalog.size());
+        token.setCatalog(catalog);
+        
+        Domain domain = token.getDomain();
+        Assert.assertNotNull(domain);
+        token.setDomain(domain);
+        
+        List<Role> roles = token.getRoles();
+        Assert.assertNotNull(roles);
+        Assert.assertEquals(2, roles.size());
+        token.setRoles(roles);
+        
+        Project project = token.getProject();
+        Assert.assertNotNull(project);
+        token.setProject(project);
+        
+        Calendar issuedAt = token.getIssuedAt();
+        Assert.assertNotNull(issuedAt);
+        token.setIssuedAt(issuedAt);
+        
+        String id = token.getId();
+        Assert.assertNotNull(id);
+        token.setId(id);
+        
+        User user = token.getUser();
+        Assert.assertNotNull(user);
+        token.setUser(user);
+        
+        Calendar expiresAt = token.getExpiresAt();
+        Assert.assertNotNull(expiresAt);
+        token.setExpiresAt(expiresAt);
     }
-
-    @Test
-    public void getExpiresAt() throws Exception {
-        token.getExpiresAt();
-    }
-
-    @Test
-    public void setExpiresAt() throws Exception {
-        Calendar calendar = new GregorianCalendar();
-        token.setExpiresAt(calendar);
-    }
-
-    @Test
-    public void getIssuedAt() throws Exception {
-        token.getIssuedAt();
-    }
-
-    @Test
-    public void setIssuedAt() throws Exception {
-        token.setIssuedAt(new GregorianCalendar());
-    }
-
-    @Test
-    public void getMethods() throws Exception {
-        token.getMethods();
-    }
-
-    @Test
-    public void setMethods() throws Exception {
-        token.setMethods(Collections.<String>emptyList());
-    }
-
-    @Test
-    public void getDomain() throws Exception {
-        token.getDomain();
-    }
-
-    @Test
-    public void setDomain() throws Exception {
-        token.setDomain(new Token.Domain());
-    }
-
-    @Test
-    public void getProject() throws Exception {
-        token.getProject();
-    }
-
-    @Test
-    public void setProject() throws Exception {
-        token.setProject(new Token.Project());
-    }
-
-    @Test
-    public void getUser() throws Exception {
-        token.getUser();
-    }
-
-    @Test
-    public void setUser() throws Exception {
-        token.setUser(new Token.User());
-    }
-
-    @Test
-    public void getRoles() throws Exception {
-        token.getRoles();
-    }
-
-    @Test
-    public void setRoles() throws Exception {
-        token.setRoles(Collections.<Token.Role>emptyList());
-    }
-
-    @Test
-    public void getCatalog() throws Exception {
-        token.getCatalog();
-    }
-
-    @Test
-    public void setCatalog() throws Exception {
-        token.setCatalog(Collections.<Token.Service>emptyList());
-    }
-
 }

@@ -1,5 +1,9 @@
 /*-
  * ============LICENSE_START=======================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,83 +20,81 @@
 
 package com.woorea.openstack.nova.model;
 
-import org.junit.Test;
-
+import com.woorea.openstack.nova.model.Cloudpipe;
 import java.util.Calendar;
-
-import static org.junit.Assert.*;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
+import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class CloudpipeTest {
 
-    private Cloudpipe pipe = new Cloudpipe();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"cloudpipe\" : {" + EOL
+        + "    \"projectId\" : \"projectid\"," + EOL
+        + "    \"internalIp\" : \"internalip\"," + EOL
+        + "    \"publicIp\" : \"publicip\"," + EOL
+        + "    \"publicPort\" : \"publicport\"," + EOL
+        + "    \"state\" : \"state\"," + EOL
+        + "    \"instanceId\" : \"instanceid\"," + EOL
+        + "    \"createdAt\" : 1486296000000" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getProjectId() {
-        pipe.getProjectId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Cloudpipe.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Cloudpipe cloudpipe = objectMapper.readValue(JSON_FULL, Cloudpipe.class);
+        String json = objectMapper.writeValueAsString(cloudpipe);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setProjectId() {
-        pipe.setProjectId("1234");
-    }
-
-    @Test
-    public void getInternalIp() {
-        pipe.getInternalIp();
-    }
-
-    @Test
-    public void setInternalIp() {
-        pipe.setInternalIp("123");
-    }
-
-    @Test
-    public void getPublicIp() {
-        pipe.getPublicIp();
-    }
-
-    @Test
-    public void setPublicIp() {
-        pipe.setPublicIp("1234");
-    }
-
-    @Test
-    public void getPublicPort() {
-        pipe.getPublicPort();
-    }
-
-    @Test
-    public void setPublicPort() {
-        pipe.setPublicPort("1234");
-    }
-
-    @Test
-    public void getState() {
-        pipe.getState();
-    }
-
-    @Test
-    public void setState() {
-        pipe.setState("1234");
-    }
-
-    @Test
-    public void getInstanceId() {
-        pipe.getInstanceId();
-    }
-
-    @Test
-    public void setInstanceId() {
-        pipe.setInstanceId("1234");
-    }
-
-    @Test
-    public void getCreatedAt() {
-        pipe.getCreatedAt();
-    }
-
-    @Test
-    public void setCreatedAt() {
-        pipe.setCreatedAt(Calendar.getInstance());
+    public void testMethods() throws Exception {
+        Cloudpipe cloudpipe = objectMapper.readValue(JSON_FULL, Cloudpipe.class);
+        cloudpipe.toString();
+        
+        Calendar createdAt = cloudpipe.getCreatedAt();
+        Assert.assertNotNull(createdAt);
+        cloudpipe.setCreatedAt(createdAt);
+        
+        String instanceId = cloudpipe.getInstanceId();
+        Assert.assertNotNull(instanceId);
+        cloudpipe.setInstanceId(instanceId);
+        
+        String publicIp = cloudpipe.getPublicIp();
+        Assert.assertNotNull(publicIp);
+        cloudpipe.setPublicIp(publicIp);
+        
+        String publicPort = cloudpipe.getPublicPort();
+        Assert.assertNotNull(publicPort);
+        cloudpipe.setPublicPort(publicPort);
+        
+        String state = cloudpipe.getState();
+        Assert.assertNotNull(state);
+        cloudpipe.setState(state);
+        
+        String projectId = cloudpipe.getProjectId();
+        Assert.assertNotNull(projectId);
+        cloudpipe.setProjectId(projectId);
+        
+        String internalIp = cloudpipe.getInternalIp();
+        Assert.assertNotNull(internalIp);
+        cloudpipe.setInternalIp(internalIp);
     }
 }

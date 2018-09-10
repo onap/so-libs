@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,125 +20,132 @@
 
 package com.woorea.openstack.nova.model;
 
-import org.junit.Test;
-
-import java.io.PrintStream;
+import com.woorea.openstack.nova.model.Image;
+import com.woorea.openstack.nova.model.Image.Server;
+import com.woorea.openstack.nova.model.Link;
 import java.util.Calendar;
-import java.util.Collections;
-
-import static org.junit.Assert.*;
+import java.util.List;
+import java.util.Map;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
+import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ImageTest {
 
-    private Image image = new Image();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"image\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"status\" : \"status\"," + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"progress\" : 3," + EOL
+        + "    \"minRam\" : 62," + EOL
+        + "    \"minDisk\" : 69," + EOL
+        + "    \"created\" : 1485172800000," + EOL
+        + "    \"updated\" : 1486468800000," + EOL
+        + "    \"metadata\" : {" + EOL
+        + "      \"metadata-k1\" : \"metadata-v1\"," + EOL
+        + "      \"metadata-k2\" : \"metadata-v2\"" + EOL
+        + "    }," + EOL
+        + "    \"server\" : {" + EOL
+        + "      \"id\" : \"id\"," + EOL
+        + "      \"links\" : [ {" + EOL
+        + "        \"rel\" : \"rel\"," + EOL
+        + "        \"href\" : \"href\"," + EOL
+        + "        \"type\" : \"type\"" + EOL
+        + "      }, {" + EOL
+        + "        \"rel\" : \"rel\"," + EOL
+        + "        \"href\" : \"href\"," + EOL
+        + "        \"type\" : \"type\"" + EOL
+        + "      } ]" + EOL
+        + "    }," + EOL
+        + "    \"links\" : [ {" + EOL
+        + "      \"rel\" : \"rel\"," + EOL
+        + "      \"href\" : \"href\"," + EOL
+        + "      \"type\" : \"type\"" + EOL
+        + "    }, {" + EOL
+        + "      \"rel\" : \"rel\"," + EOL
+        + "      \"href\" : \"href\"," + EOL
+        + "      \"type\" : \"type\"" + EOL
+        + "    } ]," + EOL
+        + "    \"OS-EXT-IMG-SIZE:size\" : 43" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() {
-        image.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Image.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Image image = objectMapper.readValue(JSON_FULL, Image.class);
+        String json = objectMapper.writeValueAsString(image);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() {
-        image.setId("123");
-    }
-
-    @Test
-    public void getStatus() {
-        image.getStatus();
-    }
-
-    @Test
-    public void setStatus() {
-        image.setStatus("123");
-    }
-
-    @Test
-    public void getName() {
-        image.setName("123");
-    }
-
-    @Test
-    public void setName() {
-        image.setName("123");
-    }
-
-    @Test
-    public void getProgress() {
-        image.getProgress();
-    }
-
-    @Test
-    public void setProgress() {
-        image.setProgress(123);
-    }
-
-    @Test
-    public void getMinRam() {
-        image.getMinRam();
-    }
-
-    @Test
-    public void setMinRam() {
-        image.setMinRam(123);
-    }
-
-    @Test
-    public void getMinDisk() {
-        image.getMinDisk();
-    }
-
-    @Test
-    public void setMinDisk() {
-        image.setMinDisk(123);
-    }
-
-    @Test
-    public void getCreated() {
-        image.getCreated();
-    }
-
-    @Test
-    public void setCreated() {
-        image.setCreated(Calendar.getInstance());
-    }
-
-    @Test
-    public void getUpdated() {
-        image.getUpdated();
-    }
-
-    @Test
-    public void setUpdated() {
-        image.setUpdated(Calendar.getInstance());
-    }
-
-    @Test
-    public void getMetadata() {
-        image.getMetadata();
-    }
-
-    @Test
-    public void getSize() {
-        image.getSize();
-    }
-
-    @Test
-    public void setMetadata() {
-        image.setMetadata(Collections.<String, String>emptyMap());
-    }
-
-    @Test
-    public void getServer() {
-        image.getServer();
-    }
-
-    @Test
-    public void getLinks() {
-        image.getLinks();
-    }
-
-    @Test
-    public void setLinks() {
-        image.setLinks(Collections.<Link>emptyList());
+    public void testMethods() throws Exception {
+        Image image = objectMapper.readValue(JSON_FULL, Image.class);
+        image.toString();
+        
+        Server server = image.getServer();
+        Assert.assertNotNull(server);
+        
+        Map<String,String> metadata = image.getMetadata();
+        Assert.assertNotNull(metadata);
+        Assert.assertEquals(2, metadata.size());
+        image.setMetadata(metadata);
+        
+        Long size = image.getSize();
+        Assert.assertNotNull(size);
+        
+        Calendar created = image.getCreated();
+        Assert.assertNotNull(created);
+        image.setCreated(created);
+        
+        Integer minRam = image.getMinRam();
+        Assert.assertNotNull(minRam);
+        image.setMinRam(minRam);
+        
+        String name = image.getName();
+        Assert.assertNotNull(name);
+        image.setName(name);
+        
+        Integer progress = image.getProgress();
+        Assert.assertNotNull(progress);
+        image.setProgress(progress);
+        
+        List<Link> links = image.getLinks();
+        Assert.assertNotNull(links);
+        Assert.assertEquals(2, links.size());
+        image.setLinks(links);
+        
+        String id = image.getId();
+        Assert.assertNotNull(id);
+        image.setId(id);
+        
+        Calendar updated = image.getUpdated();
+        Assert.assertNotNull(updated);
+        image.setUpdated(updated);
+        
+        Integer minDisk = image.getMinDisk();
+        Assert.assertNotNull(minDisk);
+        image.setMinDisk(minDisk);
+        
+        String status = image.getStatus();
+        Assert.assertNotNull(status);
+        image.setStatus(status);
     }
 }

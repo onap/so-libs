@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * =================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,52 +17,74 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.keystone.v3.model;
 
+import com.woorea.openstack.keystone.v3.model.Token.Service.Endpoint;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class EndpointTest {
 
-    Endpoint endpoint = new Endpoint();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"id\" : \"id\"," + EOL
+        + "  \"url\" : \"url\"," + EOL
+        + "  \"region\" : \"region\"," + EOL
+        + "  \"enabled\" : false," + EOL
+        + "  \"interface\" : \"interface\"," + EOL
+        + "  \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        endpoint.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Endpoint.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Endpoint endpoint = objectMapper.readValue(JSON_FULL, Endpoint.class);
+        String json = objectMapper.writeValueAsString(endpoint);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() throws Exception {
-        endpoint.setId("test");
+    public void testMethods() throws Exception {
+        Endpoint endpoint = objectMapper.readValue(JSON_FULL, Endpoint.class);
+        endpoint.toString();
+        
+        String legacyEndpointId = endpoint.getLegacyEndpointId();
+        Assert.assertNotNull(legacyEndpointId);
+        endpoint.setLegacyEndpointId(legacyEndpointId);
+        
+        String id = endpoint.getId();
+        Assert.assertNotNull(id);
+        endpoint.setId(id);
+        
+        String region = endpoint.getRegion();
+        Assert.assertNotNull(region);
+        endpoint.setRegion(region);
+        
+        String interfaceProperty = endpoint.getInterface();
+        Assert.assertNotNull(interfaceProperty);
+        endpoint.setInterface(interfaceProperty);
+        
+        String url = endpoint.getUrl();
+        Assert.assertNotNull(url);
+        endpoint.setUrl(url);
+        
+        Boolean enabled = endpoint.getEnabled();
+        Assert.assertNotNull(enabled);
+        endpoint.setEnabled(enabled);
     }
-
-    @Test
-    public void getInterface() throws Exception {
-        endpoint.getInterface();
-    }
-
-    @Test
-    public void setInterface() throws Exception {
-        endpoint.setInterface("test");
-    }
-
-    @Test
-    public void getName() throws Exception {
-        endpoint.getName();
-    }
-
-    @Test
-    public void setName() throws Exception {
-        endpoint.setName("test");
-    }
-
-    @Test
-    public void getServiceId() throws Exception {
-        endpoint.getServiceId();
-    }
-
-    @Test
-    public void setServiceId() throws Exception {
-        endpoint.setServiceId("test");
-    }
-
 }
