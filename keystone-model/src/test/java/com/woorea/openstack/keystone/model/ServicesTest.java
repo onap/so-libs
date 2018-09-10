@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * ===================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,20 +20,64 @@
 
 package com.woorea.openstack.keystone.model;
 
+import com.woorea.openstack.keystone.model.Service;
+import com.woorea.openstack.keystone.model.Services;
+import java.util.List;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ServicesTest {
 
-    Services services = new Services();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"OS-KSADM:services\" : [ {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"type\" : \"type\"," + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"description\" : \"description\"" + EOL
+        + "  }, {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"type\" : \"type\"," + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"description\" : \"description\"" + EOL
+        + "  } ]" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getList() throws Exception {
-        services.getList();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Services.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Services services = objectMapper.readValue(JSON_FULL, Services.class);
+        String json = objectMapper.writeValueAsString(services);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void iterator() throws Exception {
-        services.iterator();
+    @Test
+    public void testMethods() throws Exception {
+        Services services = objectMapper.readValue(JSON_FULL, Services.class);
+        services.toString();
+        
+        List<Service> list = services.getList();
+        Assert.assertNotNull(list);
+        Assert.assertEquals(2, list.size());
+        
+        int cnt = 0;
+        for (@SuppressWarnings("unused") Service x : services) {
+            ++cnt;
+        }
+        Assert.assertEquals(2, cnt);
     }
-
 }

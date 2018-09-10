@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,48 +20,54 @@
 
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.Hosts.Host;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class HostTest {
 
-    private Host host = new Host();
-    private Host.ResourceWrapper wrapper = new Host.ResourceWrapper();
-    private Host.ResourceWrapper.Resource resource = new Host.ResourceWrapper.Resource();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"zone\" : \"zone\"," + EOL
+        + "  \"service\" : \"service\"," + EOL
+        + "  \"host_name\" : \"hostname\"" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getHost() {
-        host.getHost();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Host.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Host host = objectMapper.readValue(JSON_FULL, Host.class);
+        String json = objectMapper.writeValueAsString(host);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getResource() {
-        wrapper.getResource();
-    }
-
-    @Test
-    public void getProject() {
-         resource.getProject();
-    }
-
-    @Test
-    public void getMemoryMb() {
-         resource.getMemoryMb();
-    }
-
-    @Test
-    public void getHostResource() {
-         resource.getHost();
-    }
-
-    @Test
-    public void getCpu() {
-         resource.getCpu();
-    }
-
-    @Test
-    public void getDiskGb() {
-         resource.getDiskGb();
+    public void testMethods() throws Exception {
+        Host host = objectMapper.readValue(JSON_FULL, Host.class);
+        host.toString();
+        
+        String hostName = host.getHostName();
+        Assert.assertNotNull(hostName);
+        
+        String zone = host.getZone();
+        Assert.assertNotNull(zone);
+        host.setZone(zone);
+        
+        String service = host.getService();
+        Assert.assertNotNull(service);
     }
 }

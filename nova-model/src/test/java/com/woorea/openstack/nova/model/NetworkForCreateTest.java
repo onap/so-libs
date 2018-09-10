@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,29 +20,51 @@
 
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.NetworkForCreate;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class NetworkForCreateTest {
 
-    private NetworkForCreate network = new NetworkForCreate();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"uuid\" : \"id\"," + EOL
+        + "  \"fixed_ip\" : \"fixedip\"" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() {
-        network.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + NetworkForCreate.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        NetworkForCreate networkforcreate = objectMapper.readValue(JSON_FULL, NetworkForCreate.class);
+        String json = objectMapper.writeValueAsString(networkforcreate);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getFixedIp() {
-        network.getFixedIp();
-    }
-
-    @Test
-    public void setId() {
-        network.setId("123");
-    }
-
-    @Test
-    public void setFixedIp() {
-        network.setFixedIp("123");
+    public void testMethods() throws Exception {
+        NetworkForCreate networkforcreate = objectMapper.readValue(JSON_FULL, NetworkForCreate.class);
+        networkforcreate.toString();
+        
+        String fixedIp = networkforcreate.getFixedIp();
+        Assert.assertNotNull(fixedIp);
+        networkforcreate.setFixedIp(fixedIp);
+        
+        String id = networkforcreate.getId();
+        Assert.assertNotNull(id);
+        networkforcreate.setId(id);
     }
 }

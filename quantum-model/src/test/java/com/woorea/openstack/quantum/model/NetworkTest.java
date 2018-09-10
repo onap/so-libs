@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,120 +20,101 @@
 
 package com.woorea.openstack.quantum.model;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.assertThat;
-
-import java.util.Arrays;
-
+import com.woorea.openstack.quantum.model.Network;
+import com.woorea.openstack.quantum.model.Segment;
+import java.util.List;
+import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.junit.Before;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class NetworkTest {
 
-    private static final String ID = "testId";
+    private static final String EOL = System.lineSeparator();
 
-    private static final boolean ADMIN_STATE_UP = true;
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"network\" : {" + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"shared\" : \"shared\"," + EOL
+        + "    \"segments\" : [ {" + EOL
+        + "      \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
+        + "      \"provider:network_type\" : \"providernetworktype\"," + EOL
+        + "      \"provider:segmentation_id\" : 92" + EOL
+        + "    }, {" + EOL
+        + "      \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
+        + "      \"provider:network_type\" : \"providernetworktype\"," + EOL
+        + "      \"provider:segmentation_id\" : 92" + EOL
+        + "    } ]," + EOL
+        + "    \"admin_state_up\" : false," + EOL
+        + "    \"tenant_id\" : \"tenantid\"," + EOL
+        + "    \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
+        + "    \"provider:network_type\" : \"providernetworktype\"," + EOL
+        + "    \"provider:segmentation_id\" : 92," + EOL
+        + "    \"router:external\" : \"routerexternal\"" + EOL
+        + "  }" + EOL
+        + "}";
 
-    private static final String NAME = "name";
-
-    private static final String TENANT_ID = "tenantId";
-
-    private static final String SHARED = "shared";
-
-    private static final String STATUS = "status";
-
-    private static final String SUBNET = "subnet";
-
-    private static final String PROVIDER_NETWORK_TYPE = "vlan";
-
-    private static final String PROVIDER_PHYSICAL_NETWORK = "physicalNetwork";
-
-    private static final int PROVIDER_SEGMENTATION_ID = 100;
-
-    private static final String ROUTER_EXTERNAL = "routerExternal";
-
-    /**
-     * JSON with read only attributes.
-     */
-    private static final String NETWORK_JSON = "{"
-            + "  \"network\" : {"
-            + "    \"id\" : \"" + ID + "\","
-            + "    \"status\" : \"" + STATUS + "\","
-            + "    \"subnets\" : [ \"" + SUBNET + "\" ]"
-            + "  }"
-            + "}";
-
-    private ObjectMapper objectMapper;
-
-    private String serializedNetwork;
-
-    @Before
-    public void setUp() throws Exception {
-        objectMapper = PortTest.initializeObjectMapper();
-    }
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
-        Network network = new Network();
-        network.setId(ID);
-        network.setProviderNetworkType(PROVIDER_NETWORK_TYPE);
-        network.setProviderPhysicalNetwork(PROVIDER_PHYSICAL_NETWORK);
-        network.setProviderSegmentationId(PROVIDER_SEGMENTATION_ID);
-        network.setAdminStateUp(ADMIN_STATE_UP);
-        network.setSubnets(Arrays.asList(SUBNET));
-        network.setRouterExternal(ROUTER_EXTERNAL);
-        network.setName(NAME);
-        network.setShared(SHARED);
-        network.setTenantId(TENANT_ID);
-
-        serializedNetwork = objectMapper.writeValueAsString(network);
-        assertThat(serializedNetwork, not(containsString(ID)));
-        assertThat(serializedNetwork, not(containsString(STATUS)));
-        assertThat(serializedNetwork, not(containsString(SUBNET)));
-        assertThat(serializedNetwork, containsString("\"admin_state_up\" : " + ADMIN_STATE_UP));
-        assertThat(serializedNetwork, containsString(NAME));
-        assertThat(serializedNetwork, containsString(SHARED));
-        assertThat(serializedNetwork, containsString(TENANT_ID));
-        assertThat(serializedNetwork, containsString(ROUTER_EXTERNAL));
-        assertThat(serializedNetwork, containsString(PROVIDER_NETWORK_TYPE));
-        assertThat(serializedNetwork, containsString(PROVIDER_PHYSICAL_NETWORK));
-        assertThat(serializedNetwork, containsString(Integer.toString(PROVIDER_SEGMENTATION_ID)));
+        System.out.println("CLASS: " + Network.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Network network = objectMapper.readValue(JSON_FULL, Network.class);
+        String json = objectMapper.writeValueAsString(network);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void testSerializationEmpty() throws Exception {
-        Network network = new Network();
-        serializedNetwork = objectMapper.writeValueAsString(network);
-
-        assertThat(serializedNetwork, containsString("\"network\" : { }"));
-    }
-
-    @Test
-    public void testDeserializationReadOnlyFields() throws Exception {
-        Network network = objectMapper.readValue(NETWORK_JSON, Network.class);
-
-        assertThat(network.getId(), is(equalTo(ID)));
-        assertThat(network.getSubnets(), hasItem(equalTo(SUBNET)));
-        assertThat(network.getStatus(), is(equalTo(STATUS)));
-    }
-
-    @Test
-    public void testDeserialization() throws Exception {
-        testSerialization();
-        Network network = objectMapper.readValue(serializedNetwork, Network.class);
-
-        assertThat(network.getName(), is(equalTo(NAME)));
-        assertThat(network.isAdminStateUp(), is(equalTo(ADMIN_STATE_UP)));
-        assertThat(network.getShared(), is(equalTo(SHARED)));
-        assertThat(network.getTenantId(), is(equalTo(TENANT_ID)));
-        assertThat(network.getRouterExternal(), is(equalTo(ROUTER_EXTERNAL)));
-        assertThat(network.getProviderNetworkType(), is(equalTo(PROVIDER_NETWORK_TYPE)));
-        assertThat(network.getProviderPhysicalNetwork(), is(equalTo(PROVIDER_PHYSICAL_NETWORK)));
-        assertThat(network.getProviderSegmentationId(), is(equalTo(PROVIDER_SEGMENTATION_ID)));
+    public void testMethods() throws Exception {
+        Network network = objectMapper.readValue(JSON_FULL, Network.class);
+        network.toString();
+        
+        String shared = network.getShared();
+        Assert.assertNotNull(shared);
+        network.setShared(shared);
+        
+        String providerNetworkType = network.getProviderNetworkType();
+        Assert.assertNotNull(providerNetworkType);
+        network.setProviderNetworkType(providerNetworkType);
+        
+        String routerExternal = network.getRouterExternal();
+        Assert.assertNotNull(routerExternal);
+        network.setRouterExternal(routerExternal);
+        
+        Integer providerSegmentationId = network.getProviderSegmentationId();
+        Assert.assertNotNull(providerSegmentationId);
+        network.setProviderSegmentationId(providerSegmentationId);
+        
+        List<Segment> segments = network.getSegments();
+        Assert.assertNotNull(segments);
+        Assert.assertEquals(2, segments.size());
+        network.setSegments(segments);
+        
+        Boolean adminStateUp = network.getAdminStateUp();
+        Assert.assertNotNull(adminStateUp);
+        network.setAdminStateUp(adminStateUp);
+        
+        String tenantId = network.getTenantId();
+        Assert.assertNotNull(tenantId);
+        network.setTenantId(tenantId);
+        
+        String name = network.getName();
+        Assert.assertNotNull(name);
+        network.setName(name);
+        
+        String providerPhysicalNetwork = network.getProviderPhysicalNetwork();
+        Assert.assertNotNull(providerPhysicalNetwork);
+        network.setProviderPhysicalNetwork(providerPhysicalNetwork);
     }
 }

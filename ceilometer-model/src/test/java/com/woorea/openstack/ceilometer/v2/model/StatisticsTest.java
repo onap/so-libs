@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,67 +17,89 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.ceilometer.v2.model;
 
+import com.woorea.openstack.ceilometer.v2.model.Statistics;
+import java.math.BigDecimal;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class StatisticsTest {
 
-    Statistics statistics = new Statistics();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"avg\" : 79," + EOL
+        + "  \"count\" : 14," + EOL
+        + "  \"duration\" : 31," + EOL
+        + "  \"max\" : 87," + EOL
+        + "  \"min\" : 85," + EOL
+        + "  \"period\" : 4," + EOL
+        + "  \"sum\" : 2," + EOL
+        + "  \"duration_start\" : \"durationstart\"," + EOL
+        + "  \"duration_end\" : \"durationend\"," + EOL
+        + "  \"period_start\" : \"periodstart\"," + EOL
+        + "  \"period_end\" : \"periodend\"" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getAvgTest() throws Exception {
-        statistics.getAvg();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Statistics.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Statistics statistics = objectMapper.readValue(JSON_FULL, Statistics.class);
+        String json = objectMapper.writeValueAsString(statistics);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getCountTest() throws Exception {
-        statistics.getCount();
+    public void testMethods() throws Exception {
+        Statistics statistics = objectMapper.readValue(JSON_FULL, Statistics.class);
+        statistics.toString();
+        
+        BigDecimal duration = statistics.getDuration();
+        Assert.assertNotNull(duration);
+        
+        BigDecimal period = statistics.getPeriod();
+        Assert.assertNotNull(period);
+        
+        BigDecimal avg = statistics.getAvg();
+        Assert.assertNotNull(avg);
+        
+        BigDecimal min = statistics.getMin();
+        Assert.assertNotNull(min);
+        
+        String durationStart = statistics.getDurationStart();
+        Assert.assertNotNull(durationStart);
+        
+        BigDecimal max = statistics.getMax();
+        Assert.assertNotNull(max);
+        
+        String durationEnd = statistics.getDurationEnd();
+        Assert.assertNotNull(durationEnd);
+        
+        BigDecimal count = statistics.getCount();
+        Assert.assertNotNull(count);
+        
+        BigDecimal sum = statistics.getSum();
+        Assert.assertNotNull(sum);
+        
+        String periodStart = statistics.getPeriodStart();
+        Assert.assertNotNull(periodStart);
+        
+        String periodEnd = statistics.getPeriodEnd();
+        Assert.assertNotNull(periodEnd);
     }
-
-    @Test
-    public void getDurationTest() throws Exception {
-        statistics.getDuration();
-    }
-
-    @Test
-    public void getDurationStartTest() throws Exception {
-        statistics.getDurationStart();
-    }
-
-    @Test
-    public void getDurationEndTest() throws Exception {
-        statistics.getDurationEnd();
-    }
-
-    @Test
-    public void getMaxTest() throws Exception {
-        statistics.getMax();
-    }
-
-    @Test
-    public void getMinTest() throws Exception {
-        statistics.getMin();
-    }
-
-    @Test
-    public void getPeriodTest() throws Exception {
-        statistics.getPeriod();
-    }
-
-    @Test
-    public void getPeriodStartTest() throws Exception {
-        statistics.getPeriodStart();
-    }
-
-    @Test
-    public void getPeriodEndTest() throws Exception {
-        statistics.getPeriodEnd();
-    }
-
-    @Test
-    public void getSumTest() throws Exception {
-        statistics.getSum();
-    }
-
 }

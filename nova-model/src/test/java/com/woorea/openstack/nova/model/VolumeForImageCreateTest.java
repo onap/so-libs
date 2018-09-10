@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,72 +17,78 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.VolumeForImageCreate;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class VolumeForImageCreateTest {
 
-    VolumeForImageCreate volumeForImageCreate = new VolumeForImageCreate();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"os-volume_upload_image\" : {" + EOL
+        + "    \"volumeId\" : \"volumeid\"," + EOL
+        + "    \"tenantId\" : \"tenantid\"," + EOL
+        + "    \"force\" : false," + EOL
+        + "    \"container_format\" : \"container_format\"," + EOL
+        + "    \"disk_format\" : \"disk_format\"," + EOL
+        + "    \"image_name\" : \"image_name\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getTenantId() throws Exception {
-        volumeForImageCreate.getTenantId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + VolumeForImageCreate.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        VolumeForImageCreate volumeforimagecreate = objectMapper.readValue(JSON_FULL, VolumeForImageCreate.class);
+        String json = objectMapper.writeValueAsString(volumeforimagecreate);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setTenantId() throws Exception {
-        volumeForImageCreate.setTenantId("Test");
+    public void testMethods() throws Exception {
+        VolumeForImageCreate volumeforimagecreate = objectMapper.readValue(JSON_FULL, VolumeForImageCreate.class);
+        volumeforimagecreate.toString();
+        
+        String image_name = volumeforimagecreate.getImage_name();
+        Assert.assertNotNull(image_name);
+        volumeforimagecreate.setImage_name(image_name);
+        
+        String tenantId = volumeforimagecreate.getTenantId();
+        Assert.assertNotNull(tenantId);
+        volumeforimagecreate.setTenantId(tenantId);
+        
+        String volumeId = volumeforimagecreate.getVolumeId();
+        Assert.assertNotNull(volumeId);
+        volumeforimagecreate.setVolumeId(volumeId);
+        
+        String disk_format = volumeforimagecreate.getDisk_format();
+        Assert.assertNotNull(disk_format);
+        volumeforimagecreate.setDisk_format(disk_format);
+        
+        Boolean force = volumeforimagecreate.getForce();
+        Assert.assertNotNull(force);
+        volumeforimagecreate.setForce(force);
+        
+        String container_format = volumeforimagecreate.getContainer_format();
+        Assert.assertNotNull(container_format);
+        volumeforimagecreate.setContainer_format(container_format);
     }
-
-    @Test
-    public void getForce() throws Exception {
-        volumeForImageCreate.getForce();
-    }
-
-    @Test
-    public void setForce() throws Exception {
-        volumeForImageCreate.setForce(true);
-    }
-
-    @Test
-    public void getVolumeId() throws Exception {
-        volumeForImageCreate.getVolumeId();
-    }
-
-    @Test
-    public void setVolumeId() throws Exception {
-        volumeForImageCreate.setVolumeId("testid");
-    }
-
-    @Test
-    public void getContainer_format() throws Exception {
-        volumeForImageCreate.getContainer_format();
-    }
-
-    @Test
-    public void setContainer_format() throws Exception {
-        volumeForImageCreate.setContainer_format("test");
-    }
-
-    @Test
-    public void getDisk_format() throws Exception {
-        volumeForImageCreate.getDisk_format();
-    }
-
-    @Test
-    public void setDisk_format() throws Exception {
-        volumeForImageCreate.setDisk_format("test");
-    }
-
-    @Test
-    public void getImage_name() throws Exception {
-        volumeForImageCreate.getImage_name();
-    }
-
-    @Test
-    public void setImage_name() throws Exception {
-        volumeForImageCreate.setImage_name("test");
-    }
-
 }

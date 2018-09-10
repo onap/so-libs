@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * ===================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,70 +20,75 @@
 
 package com.woorea.openstack.keystone.model;
 
+import com.woorea.openstack.keystone.model.Endpoint;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class EndpointTest {
 
-    Endpoint endpoint = new Endpoint();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"endpoint\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"region\" : \"region\"," + EOL
+        + "    \"service_id\" : \"serviceid\"," + EOL
+        + "    \"publicurl\" : \"publicurl\"," + EOL
+        + "    \"internalurl\" : \"internalurl\"," + EOL
+        + "    \"adminurl\" : \"adminurl\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        endpoint.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Endpoint.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Endpoint endpoint = objectMapper.readValue(JSON_FULL, Endpoint.class);
+        String json = objectMapper.writeValueAsString(endpoint);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() throws Exception {
-        endpoint.setId("test");
+    public void testMethods() throws Exception {
+        Endpoint endpoint = objectMapper.readValue(JSON_FULL, Endpoint.class);
+        endpoint.toString();
+        
+        String publicURL = endpoint.getPublicURL();
+        Assert.assertNotNull(publicURL);
+        endpoint.setPublicURL(publicURL);
+        
+        String internalURL = endpoint.getInternalURL();
+        Assert.assertNotNull(internalURL);
+        endpoint.setInternalURL(internalURL);
+        
+        String id = endpoint.getId();
+        Assert.assertNotNull(id);
+        endpoint.setId(id);
+        
+        String region = endpoint.getRegion();
+        Assert.assertNotNull(region);
+        endpoint.setRegion(region);
+        
+        String serviceId = endpoint.getServiceId();
+        Assert.assertNotNull(serviceId);
+        endpoint.setServiceId(serviceId);
+        
+        String adminURL = endpoint.getAdminURL();
+        Assert.assertNotNull(adminURL);
+        endpoint.setAdminURL(adminURL);
     }
-
-    @Test
-    public void getServiceId() throws Exception {
-        endpoint.getServiceId();
-    }
-
-    @Test
-    public void setServiceId() throws Exception {
-        endpoint.setServiceId("test");
-    }
-
-    @Test
-    public void getRegion() throws Exception {
-        endpoint.getRegion();
-    }
-
-    @Test
-    public void setRegion() throws Exception {
-        endpoint.setRegion("region");
-    }
-
-    @Test
-    public void getPublicURL() throws Exception {
-        endpoint.getPublicURL();
-    }
-
-    @Test
-    public void setPublicURL() throws Exception {
-        endpoint.setPublicURL("url");
-    }
-
-    @Test
-    public void getInternalURL() throws Exception {
-        endpoint.getInternalURL();
-    }
-
-    @Test
-    public void setInternalURL() throws Exception {
-        endpoint.setInternalURL("test");
-    }
-
-    @Test
-    public void getAdminURL() throws Exception {
-        endpoint.getAdminURL();
-    }
-
-    @Test
-    public void setAdminURL() throws Exception {
-        endpoint.setAdminURL("admin url");
-    }
-
 }

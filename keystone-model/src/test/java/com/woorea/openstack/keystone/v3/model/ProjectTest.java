@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * =================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,52 +17,63 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.keystone.v3.model;
 
+import com.woorea.openstack.keystone.v3.model.Token.Domain;
+import com.woorea.openstack.keystone.v3.model.Token.Project;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ProjectTest {
 
-    Project project = new Project();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"domain\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"name\" : \"name\"" + EOL
+        + "  }," + EOL
+        + "  \"id\" : \"id\"," + EOL
+        + "  \"name\" : \"name\"" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        project.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Project.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Project project = objectMapper.readValue(JSON_FULL, Project.class);
+        String json = objectMapper.writeValueAsString(project);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() throws Exception {
-        project.setId("test");
+    public void testMethods() throws Exception {
+        Project project = objectMapper.readValue(JSON_FULL, Project.class);
+        project.toString();
+        
+        Domain domain = project.getDomain();
+        Assert.assertNotNull(domain);
+        project.setDomain(domain);
+        
+        String name = project.getName();
+        Assert.assertNotNull(name);
+        project.setName(name);
+        
+        String id = project.getId();
+        Assert.assertNotNull(id);
+        project.setId(id);
     }
-
-    @Test
-    public void getDomainId() throws Exception {
-        project.getDomainId();
-    }
-
-    @Test
-    public void setDomainId() throws Exception {
-        project.setDomainId("test");
-    }
-
-    @Test
-    public void getName() throws Exception {
-        project.getName();
-    }
-
-    @Test
-    public void setName() throws Exception {
-        project.setName("test");
-    }
-
-    @Test
-    public void getEnabled() throws Exception {
-        project.getEnabled();
-    }
-
-    @Test
-    public void setEnabled() throws Exception {
-        project.setEnabled(true);
-    }
-
 }

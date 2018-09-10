@@ -1,7 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,64 +17,78 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.keystone.v3.model;
 
+import com.woorea.openstack.keystone.v3.model.Credential;
+import java.util.Map;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.HashMap;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class CredentialTest {
 
-    Credential credential = new Credential();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"credential\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"projectId\" : \"projectid\"," + EOL
+        + "    \"type\" : \"type\"," + EOL
+        + "    \"userId\" : \"userid\"," + EOL
+        + "    \"blob\" : {" + EOL
+        + "      \"blob-k1\" : \"blob-v1\"," + EOL
+        + "      \"blob-k2\" : \"blob-v2\"" + EOL
+        + "    }" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        credential.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Credential.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Credential credential = objectMapper.readValue(JSON_FULL, Credential.class);
+        String json = objectMapper.writeValueAsString(credential);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() throws Exception {
-        credential.setId("test");
+    public void testMethods() throws Exception {
+        Credential credential = objectMapper.readValue(JSON_FULL, Credential.class);
+        credential.toString();
+        
+        Map<String,String> blob = credential.getBlob();
+        Assert.assertNotNull(blob);
+        Assert.assertEquals(2, blob.size());
+        credential.setBlob(blob);
+        
+        String id = credential.getId();
+        Assert.assertNotNull(id);
+        credential.setId(id);
+        
+        String type = credential.getType();
+        Assert.assertNotNull(type);
+        credential.setType(type);
+        
+        String userId = credential.getUserId();
+        Assert.assertNotNull(userId);
+        credential.setUserId(userId);
+        
+        String projectId = credential.getProjectId();
+        Assert.assertNotNull(projectId);
+        credential.setProjectId(projectId);
     }
-
-    @Test
-    public void getProjectId() throws Exception {
-        credential.getProjectId();
-    }
-
-    @Test
-    public void setProjectId() throws Exception {
-        credential.setProjectId("test");
-    }
-
-    @Test
-    public void getType() throws Exception {
-        credential.getType();
-    }
-
-    @Test
-    public void setType() throws Exception {
-        credential.setType("test");
-    }
-
-    @Test
-    public void getUserId() throws Exception {
-        credential.getUserId();
-    }
-
-    @Test
-    public void setUserId() throws Exception {
-        credential.setUserId("test");
-    }
-
-    @Test
-    public void getBlob() throws Exception {
-        credential.getBlob();
-    }
-
-    @Test
-    public void setBlob() throws Exception {
-        credential.setBlob(new HashMap<String, String>());
-    }
-
 }

@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,42 +17,68 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.ceilometer.v2.model;
 
+import com.woorea.openstack.ceilometer.v2.model.Meter;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class MeterTest {
 
-    Meter meter = new Meter();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"name\" : \"name\"," + EOL
+        + "  \"type\" : \"type\"," + EOL
+        + "  \"unit\" : \"unit\"," + EOL
+        + "  \"user_id\" : \"user\"," + EOL
+        + "  \"resource_id\" : \"resource\"," + EOL
+        + "  \"project_id\" : \"project\"" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getUserTest() throws Exception {
-        meter.getUser();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Meter.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Meter meter = objectMapper.readValue(JSON_FULL, Meter.class);
+        String json = objectMapper.writeValueAsString(meter);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getNameTest() throws Exception {
-        meter.getName();
+    public void testMethods() throws Exception {
+        Meter meter = objectMapper.readValue(JSON_FULL, Meter.class);
+        meter.toString();
+        
+        String unit = meter.getUnit();
+        Assert.assertNotNull(unit);
+        
+        String resource = meter.getResource();
+        Assert.assertNotNull(resource);
+        
+        String name = meter.getName();
+        Assert.assertNotNull(name);
+        
+        String project = meter.getProject();
+        Assert.assertNotNull(project);
+        
+        String type = meter.getType();
+        Assert.assertNotNull(type);
+        
+        String user = meter.getUser();
+        Assert.assertNotNull(user);
     }
-
-    @Test
-    public void getResource() throws Exception {
-        meter.getResource();
-    }
-
-    @Test
-    public void getProjectTest() throws Exception {
-        meter.getProject();
-    }
-
-    @Test
-    public void getTypeTest() throws Exception {
-        meter.getType();
-    }
-
-    @Test
-    public void getUnitTest() throws Exception {
-        meter.getUnit();
-    }
-
 }

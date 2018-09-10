@@ -1,9 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * ===================================================================
- * 
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,80 +20,80 @@
 
 package com.woorea.openstack.keystone.model;
 
+import com.woorea.openstack.keystone.model.User;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class UserTest {
 
-    User user = new User();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"user\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"username\" : \"username\"," + EOL
+        + "    \"password\" : \"password\"," + EOL
+        + "    \"tenantId\" : \"tenantid\"," + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"email\" : \"email\"," + EOL
+        + "    \"enabled\" : false" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        user.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + User.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        User user = objectMapper.readValue(JSON_FULL, User.class);
+        String json = objectMapper.writeValueAsString(user);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() throws Exception {
-        user.setId("test");
+    public void testMethods() throws Exception {
+        User user = objectMapper.readValue(JSON_FULL, User.class);
+        user.toString();
+        
+        String password = user.getPassword();
+        Assert.assertNotNull(password);
+        user.setPassword(password);
+        
+        String name = user.getName();
+        Assert.assertNotNull(name);
+        user.setName(name);
+        
+        String tenantId = user.getTenantId();
+        Assert.assertNotNull(tenantId);
+        user.setTenantId(tenantId);
+        
+        String id = user.getId();
+        Assert.assertNotNull(id);
+        user.setId(id);
+        
+        String email = user.getEmail();
+        Assert.assertNotNull(email);
+        user.setEmail(email);
+        
+        Boolean enabled = user.getEnabled();
+        Assert.assertNotNull(enabled);
+        user.setEnabled(enabled);
+        
+        String username = user.getUsername();
+        Assert.assertNotNull(username);
+        user.setUsername(username);
     }
-
-    @Test
-    public void getUsername() throws Exception {
-        user.getUsername();
-    }
-
-    @Test
-    public void setUsername() throws Exception {
-        user.setUsername("test");
-    }
-
-    @Test
-    public void getPassword() throws Exception {
-        user.getPassword();
-    }
-
-    @Test
-    public void setPassword() throws Exception {
-        user.setPassword("test");
-    }
-
-    @Test
-    public void getTenantId() throws Exception {
-        user.getTenantId();
-    }
-
-    @Test
-    public void setTenantId() throws Exception {
-        user.setTenantId("test");
-    }
-
-    @Test
-    public void getName() throws Exception {
-        user.getName();
-    }
-
-    @Test
-    public void setName() throws Exception {
-        user.setName("test");
-    }
-
-    @Test
-    public void getEmail() throws Exception {
-        user.getEmail();
-    }
-
-    @Test
-    public void setEmail() throws Exception {
-        user.setEmail("test");
-    }
-
-    @Test
-    public void getEnabled() throws Exception {
-        user.getEnabled();
-    }
-
-    @Test
-    public void setEnabled() throws Exception {
-        user.setEnabled(true);
-    }
-
 }

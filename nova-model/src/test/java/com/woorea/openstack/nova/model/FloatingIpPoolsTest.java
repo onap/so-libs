@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,21 +20,58 @@
 
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.FloatingIpPools;
+import com.woorea.openstack.nova.model.FloatingIpPools.FloatingIpPool;
+import java.util.List;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class FloatingIpPoolsTest {
 
-    private FloatingIpPools pools = new FloatingIpPools();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"floating_ip_pools\" : [ {" + EOL
+        + "    \"name\" : \"name\"" + EOL
+        + "  }, {" + EOL
+        + "    \"name\" : \"name\"" + EOL
+        + "  } ]" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getList() {
-        pools.getList();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + FloatingIpPools.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        FloatingIpPools floatingippools = objectMapper.readValue(JSON_FULL, FloatingIpPools.class);
+        String json = objectMapper.writeValueAsString(floatingippools);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void iterator() {
-        pools.getList();
+    public void testMethods() throws Exception {
+        FloatingIpPools floatingippools = objectMapper.readValue(JSON_FULL, FloatingIpPools.class);
+        floatingippools.toString();
+        
+        List<FloatingIpPool> list = floatingippools.getList();
+        Assert.assertNotNull(list);
+        Assert.assertEquals(2, list.size());
+        
+        int cnt = 0;
+        for (@SuppressWarnings("unused") FloatingIpPool x : floatingippools) {
+            ++cnt;
+        }
+        Assert.assertEquals(2, cnt);
     }
 }

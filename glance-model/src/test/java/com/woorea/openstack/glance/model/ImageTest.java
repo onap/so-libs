@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,199 +17,137 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.glance.model;
 
+import com.woorea.openstack.glance.model.Image;
+import java.util.Calendar;
+import java.util.Map;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.GregorianCalendar;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ImageTest {
 
-    Image image = new Image();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"image\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"uri\" : \"uri\"," + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"size\" : 43," + EOL
+        + "    \"checksum\" : \"checksum\"," + EOL
+        + "    \"status\" : \"status\"," + EOL
+        + "    \"owner\" : \"owner\"," + EOL
+        + "    \"properties\" : {" + EOL
+        + "      \"properties-k1\" : \"properties-v1\"," + EOL
+        + "      \"properties-k2\" : \"properties-v2\"" + EOL
+        + "    }," + EOL
+        + "    \"public\" : false," + EOL
+        + "    \"deleted\" : false," + EOL
+        + "    \"protected\" : true," + EOL
+        + "    \"disk_format\" : \"diskformat\"," + EOL
+        + "    \"container_format\" : \"containerformat\"," + EOL
+        + "    \"virtual_size\" : 18," + EOL
+        + "    \"created_at\" : 1486296000000," + EOL
+        + "    \"updated_at\" : 1487592000000," + EOL
+        + "    \"deleted_at\" : 1486209600000," + EOL
+        + "    \"is_public\" : false," + EOL
+        + "    \"min_ram\" : 62," + EOL
+        + "    \"min_disk\" : 69" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getIdTest() throws Exception {
-        image.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Image.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Image image = objectMapper.readValue(JSON_FULL, Image.class);
+        String json = objectMapper.writeValueAsString(image);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setIdTest() throws Exception {
-        image.setId("uuid");
+    public void testMethods() throws Exception {
+        Image image = objectMapper.readValue(JSON_FULL, Image.class);
+        image.toString();
+        
+        String owner = image.getOwner();
+        Assert.assertNotNull(owner);
+        image.setOwner(owner);
+        
+        String containerFormat = image.getContainerFormat();
+        Assert.assertNotNull(containerFormat);
+        image.setContainerFormat(containerFormat);
+        
+        String uri = image.getUri();
+        Assert.assertNotNull(uri);
+        image.setUri(uri);
+        
+        Calendar createdAt = image.getCreatedAt();
+        Assert.assertNotNull(createdAt);
+        image.setCreatedAt(createdAt);
+        
+        Calendar deletedAt = image.getDeletedAt();
+        Assert.assertNotNull(deletedAt);
+        image.setDeletedAt(deletedAt);
+        
+        Long size = image.getSize();
+        Assert.assertNotNull(size);
+        image.setSize(size);
+        
+        Integer minRam = image.getMinRam();
+        Assert.assertNotNull(minRam);
+        image.setMinRam(minRam);
+        
+        String diskFormat = image.getDiskFormat();
+        Assert.assertNotNull(diskFormat);
+        image.setDiskFormat(diskFormat);
+        
+        String checksum = image.getChecksum();
+        Assert.assertNotNull(checksum);
+        image.setChecksum(checksum);
+        
+        String name = image.getName();
+        Assert.assertNotNull(name);
+        image.setName(name);
+        
+        String id = image.getId();
+        Assert.assertNotNull(id);
+        image.setId(id);
+        
+        Long virtualSize = image.getVirtualSize();
+        Assert.assertNotNull(virtualSize);
+        image.setVirtualSize(virtualSize);
+        
+        Map<String,Object> properties = image.getProperties();
+        Assert.assertNotNull(properties);
+        Assert.assertEquals(2, properties.size());
+        
+        Integer minDisk = image.getMinDisk();
+        Assert.assertNotNull(minDisk);
+        image.setMinDisk(minDisk);
+        
+        String status = image.getStatus();
+        Assert.assertNotNull(status);
+        image.setStatus(status);
+        
+        Calendar updatedAt = image.getUpdatedAt();
+        Assert.assertNotNull(updatedAt);
+        image.setUpdatedAt(updatedAt);
     }
-
-    @Test
-    public void getUriTest() throws Exception {
-        image.getUri();
-    }
-
-    @Test
-    public void setUriTest() throws Exception {
-        image.setUri("uri");
-    }
-
-    @Test
-    public void getNameTest() throws Exception {
-        image.getName();
-    }
-
-    @Test
-    public void setNameTest() throws Exception {
-        image.setName("image-123");
-    }
-
-    @Test
-    public void getDiskFormatTest() throws Exception {
-        image.getDiskFormat();
-    }
-
-    @Test
-    public void setDiskFormatTest() throws Exception {
-        image.setDiskFormat("disk-format");
-    }
-
-    @Test
-    public void getContainerFormatTest() throws Exception {
-        image.getContainerFormat();
-    }
-
-    @Test
-    public void setContainerFormatTest() throws Exception {
-        image.setContainerFormat("format");
-    }
-
-    @Test
-    public void getSizeTest() throws Exception {
-        image.getSize();
-    }
-
-    @Test
-    public void setSizeTest() throws Exception {
-        image.setSize(12345L);
-    }
-
-    @Test
-    public void getVirtualSizeTest() throws Exception {
-        image.getVirtualSize();
-    }
-
-    @Test
-    public void setVirtualSizeTest() throws Exception {
-        image.setVirtualSize(1234L);
-    }
-
-    @Test
-    public void getChecksumTest() throws Exception {
-        image.getChecksum();
-    }
-
-    @Test
-    public void setChecksumTest() throws Exception {
-        image.setChecksum("ABC");
-    }
-
-    @Test
-    public void getCreatedAtTest() throws Exception {
-        image.getCreatedAt();
-    }
-
-    @Test
-    public void setCreatedAtTest() throws Exception {
-        image.setCreatedAt(new GregorianCalendar());
-    }
-
-    @Test
-    public void getUpdatedAtTest() throws Exception {
-        image.getUpdatedAt();
-    }
-
-    @Test
-    public void setUpdatedAt() throws Exception {
-        image.setUpdatedAt(new GregorianCalendar());
-    }
-
-    @Test
-    public void getDeletedAtTest() throws Exception {
-        image.getDeletedAt();
-    }
-
-    @Test
-    public void setDeletedAtTest() throws Exception {
-        image.setDeletedAt(new GregorianCalendar());
-    }
-
-    @Test
-    public void getStatus() throws Exception {
-        image.getStatus();
-    }
-
-    @Test
-    public void setStatusTest() throws Exception {
-        image.setStatus("status");
-    }
-
-    @Test
-    public void isPublicTest() throws Exception {
-        image.isPublic();
-    }
-
-    @Test
-    public void setPublicTest() throws Exception {
-        image.setPublic(true);
-    }
-
-    @Test
-    public void getMinRamTest() throws Exception {
-        image.getMinRam();
-    }
-
-    @Test
-    public void setMinRamTest() throws Exception {
-        image.setMinRam(256);
-    }
-
-    @Test
-    public void getMinDiskTest() throws Exception {
-        image.getMinDisk();
-    }
-
-    @Test
-    public void setMinDiskTest() throws Exception {
-        image.setMinDisk(8);
-    }
-
-    @Test
-    public void getOwnerTest() throws Exception {
-        image.getOwner();
-    }
-
-    @Test
-    public void setOwnerTest() throws Exception {
-        image.setOwner("onap");
-    }
-
-    @Test
-    public void isDeletedTest() throws Exception {
-        image.isDeleted();
-    }
-
-    @Test
-    public void setDeletedTest() throws Exception {
-        image.setDeleted(true);
-    }
-
-    @Test
-    public void isProtectedTest() throws Exception {
-        image.isProtected();
-    }
-
-    @Test
-    public void setProtectedTest() throws Exception {
-        image.setProtected(true);
-    }
-
-    @Test
-    public void getPropertiesTest() throws Exception {
-        image.getProperties();
-    }
-
 }

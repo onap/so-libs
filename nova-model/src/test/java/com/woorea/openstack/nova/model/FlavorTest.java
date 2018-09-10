@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,143 +20,118 @@
 
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.Flavor;
+import com.woorea.openstack.nova.model.Link;
+import java.util.List;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Collections;
-
-import static org.junit.Assert.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class FlavorTest {
 
-    private Flavor flavor = new Flavor();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"flavor\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"vcpus\" : 79," + EOL
+        + "    \"ram\" : 38," + EOL
+        + "    \"disk\" : 45," + EOL
+        + "    \"swap\" : \"swap\"," + EOL
+        + "    \"links\" : [ {" + EOL
+        + "      \"rel\" : \"rel\"," + EOL
+        + "      \"href\" : \"href\"," + EOL
+        + "      \"type\" : \"type\"" + EOL
+        + "    }, {" + EOL
+        + "      \"rel\" : \"rel\"," + EOL
+        + "      \"href\" : \"href\"," + EOL
+        + "      \"type\" : \"type\"" + EOL
+        + "    } ]," + EOL
+        + "    \"public\" : false," + EOL
+        + "    \"OS-FLV-EXT-DATA:ephemeral\" : 65," + EOL
+        + "    \"rxtx_factor\" : 11.0," + EOL
+        + "    \"OS-FLV-DISABLED:disabled\" : true," + EOL
+        + "    \"rxtx_quota\" : 42," + EOL
+        + "    \"rxtx_cap\" : 96," + EOL
+        + "    \"os-flavor-access:is_public\" : false" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() {
-        flavor.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Flavor.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Flavor flavor = objectMapper.readValue(JSON_FULL, Flavor.class);
+        String json = objectMapper.writeValueAsString(flavor);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() {
-        flavor.setId("123");
-    }
-
-    @Test
-    public void getName() {
-        flavor.getName();
-    }
-
-    @Test
-    public void setName() {
-        flavor.setName("123");
-    }
-
-    @Test
-    public void getVcpus() {
-        flavor.getVcpus();
-    }
-
-    @Test
-    public void setVcpus() {
-        flavor.setVcpus(123);
-    }
-
-    @Test
-    public void getRam() {
-        flavor.getRam();
-    }
-
-    @Test
-    public void setRam() {
-        flavor.setRam(123);
-    }
-
-    @Test
-    public void getDisk() {
-        flavor.getDisk();
-    }
-
-    @Test
-    public void setDisk() {
-        flavor.setDisk(123);
-    }
-
-    @Test
-    public void getEphemeral() {
-        flavor.getEphemeral();
-    }
-
-    @Test
-    public void setEphemeral() {
-        flavor.setEphemeral(123);
-    }
-
-    @Test
-    public void getSwap() {
-        flavor.getSwap();
-    }
-
-    @Test
-    public void setSwap() {
-        flavor.setSwap("123");
-    }
-
-    @Test
-    public void getRxtxFactor() {
-        flavor.getRxtxFactor();
-    }
-
-    @Test
-    public void setRxtxFactor() {
-        flavor.setRxtxFactor(123.0f);
-    }
-
-    @Test
-    public void getRxtxQuota() {
-        flavor.getRxtxQuota();
-    }
-
-    @Test
-    public void setRxtxQuota() {
-        flavor.setRxtxQuota(123);
-    }
-
-    @Test
-    public void getRxtxCap() {
-        flavor.getRxtxCap();
-    }
-
-    @Test
-    public void setRxtxCap() {
-        flavor.setRxtxCap(123);
-    }
-
-    @Test
-    public void getDisabled() {
-        flavor.getDisabled();
-    }
-
-    @Test
-    public void setDisabled() {
-        flavor.setDisabled(true);
-    }
-
-    @Test
-    public void isPublic() {
-        flavor.isPublic();
-    }
-
-    @Test
-    public void setPublic() {
-        flavor.setPublic(true);
-    }
-
-    @Test
-    public void getLinks() {
-        flavor.getLinks();
-    }
-
-    @Test
-    public void setLinks() {
-        flavor.setLinks(Collections.<Link>emptyList());
+    public void testMethods() throws Exception {
+        Flavor flavor = objectMapper.readValue(JSON_FULL, Flavor.class);
+        flavor.toString();
+        
+        Integer rxtxQuota = flavor.getRxtxQuota();
+        Assert.assertNotNull(rxtxQuota);
+        flavor.setRxtxQuota(rxtxQuota);
+        
+        String swap = flavor.getSwap();
+        Assert.assertNotNull(swap);
+        flavor.setSwap(swap);
+        
+        Float rxtxFactor = flavor.getRxtxFactor();
+        Assert.assertNotNull(rxtxFactor);
+        flavor.setRxtxFactor(rxtxFactor);
+        
+        Integer ephemeral = flavor.getEphemeral();
+        Assert.assertNotNull(ephemeral);
+        flavor.setEphemeral(ephemeral);
+        
+        Integer vcpus = flavor.getVcpus();
+        Assert.assertNotNull(vcpus);
+        flavor.setVcpus(vcpus);
+        
+        Integer rxtxCap = flavor.getRxtxCap();
+        Assert.assertNotNull(rxtxCap);
+        flavor.setRxtxCap(rxtxCap);
+        
+        Integer disk = flavor.getDisk();
+        Assert.assertNotNull(disk);
+        flavor.setDisk(disk);
+        
+        String name = flavor.getName();
+        Assert.assertNotNull(name);
+        flavor.setName(name);
+        
+        List<Link> links = flavor.getLinks();
+        Assert.assertNotNull(links);
+        Assert.assertEquals(2, links.size());
+        flavor.setLinks(links);
+        
+        Boolean disabled = flavor.getDisabled();
+        Assert.assertNotNull(disabled);
+        flavor.setDisabled(disabled);
+        
+        String id = flavor.getId();
+        Assert.assertNotNull(id);
+        flavor.setId(id);
+        
+        Integer ram = flavor.getRam();
+        Assert.assertNotNull(ram);
+        flavor.setRam(ram);
     }
 }

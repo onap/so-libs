@@ -20,6 +20,7 @@ import java.io.Serializable;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonRootName;
 
@@ -112,6 +113,7 @@ public class SecurityGroupRuleForCreate implements Serializable {
      * @deprecated Use {@link #setParentGroupId(String)}
      */
     @Deprecated
+    @JsonIgnore
     public void setParentGroupId(Integer parentGroupId) {
         this.parentGroupId = String.valueOf(parentGroupId);
     }
@@ -191,6 +193,7 @@ public class SecurityGroupRuleForCreate implements Serializable {
      * @deprecated Use {@link #setGroupId(String)}
      */
     @Deprecated
+    @JsonIgnore
     public void setGroupId(Integer groupId) {
         this.groupId = String.valueOf(groupId);
     }

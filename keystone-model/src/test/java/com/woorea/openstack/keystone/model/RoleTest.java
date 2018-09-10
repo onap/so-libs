@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * ===================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -19,45 +20,64 @@
 
 package com.woorea.openstack.keystone.model;
 
+import com.woorea.openstack.keystone.model.Role;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class RoleTest {
 
-    Role role = new Role();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"role\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"description\" : \"description\"," + EOL
+        + "    \"enabled\" : \"enabled\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        role.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Role.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Role role = objectMapper.readValue(JSON_FULL, Role.class);
+        String json = objectMapper.writeValueAsString(role);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void getName() throws Exception {
-        role.getName();
+    public void testMethods() throws Exception {
+        Role role = objectMapper.readValue(JSON_FULL, Role.class);
+        role.toString();
+        
+        String name = role.getName();
+        Assert.assertNotNull(name);
+        role.setName(name);
+        
+        String description = role.getDescription();
+        Assert.assertNotNull(description);
+        role.setDescription(description);
+        
+        String id = role.getId();
+        Assert.assertNotNull(id);
+        
+        String enabled = role.getEnabled();
+        Assert.assertNotNull(enabled);
+        role.setEnabled(enabled);
     }
-
-    @Test
-    public void setName() throws Exception {
-        role.setName("name");
-    }
-
-    @Test
-    public void getDescription() throws Exception {
-        role.getDescription();
-    }
-
-    @Test
-    public void setDescription() throws Exception {
-        role.setDescription("desc");
-    }
-
-    @Test
-    public void getEnabled() throws Exception {
-        role.getEnabled();
-    }
-
-    @Test
-    public void setEnabled() throws Exception {
-        role.setEnabled("test");
-    }
-
 }

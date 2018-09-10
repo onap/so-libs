@@ -1,8 +1,9 @@
 /*-
- * ONAP-SO
  * ============LICENSE_START=======================================================
- * Copyright 2018 Huawei Intellectual Property. All rights reserved.
- * =================================================================
+ * ONAP - SO
+ * ================================================================================
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,64 +17,78 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.keystone.v3.model;
 
+import com.woorea.openstack.keystone.v3.model.Policy;
+import java.util.Map;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.HashMap;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class PolicyTest {
 
-    Policy policy = new Policy();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"policy\" : {" + EOL
+        + "    \"id\" : \"id\"," + EOL
+        + "    \"projectId\" : \"projectid\"," + EOL
+        + "    \"type\" : \"type\"," + EOL
+        + "    \"userId\" : \"userid\"," + EOL
+        + "    \"blob\" : {" + EOL
+        + "      \"blob-k1\" : \"blob-v1\"," + EOL
+        + "      \"blob-k2\" : \"blob-v2\"" + EOL
+        + "    }" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getId() throws Exception {
-        policy.getId();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + Policy.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        Policy policy = objectMapper.readValue(JSON_FULL, Policy.class);
+        String json = objectMapper.writeValueAsString(policy);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setId() throws Exception {
-        policy.setId("test");
+    public void testMethods() throws Exception {
+        Policy policy = objectMapper.readValue(JSON_FULL, Policy.class);
+        policy.toString();
+        
+        Map<String,String> blob = policy.getBlob();
+        Assert.assertNotNull(blob);
+        Assert.assertEquals(2, blob.size());
+        policy.setBlob(blob);
+        
+        String id = policy.getId();
+        Assert.assertNotNull(id);
+        policy.setId(id);
+        
+        String type = policy.getType();
+        Assert.assertNotNull(type);
+        policy.setType(type);
+        
+        String userId = policy.getUserId();
+        Assert.assertNotNull(userId);
+        policy.setUserId(userId);
+        
+        String projectId = policy.getProjectId();
+        Assert.assertNotNull(projectId);
+        policy.setProjectId(projectId);
     }
-
-    @Test
-    public void getProjectId() throws Exception {
-        policy.getProjectId();
-    }
-
-    @Test
-    public void setProjectId() throws Exception {
-        policy.setProjectId("test");
-    }
-
-    @Test
-    public void getType() throws Exception {
-        policy.getType();
-    }
-
-    @Test
-    public void setType() throws Exception {
-        policy.setType("test");
-    }
-
-    @Test
-    public void getUserId() throws Exception {
-        policy.getUserId();
-    }
-
-    @Test
-    public void setUserId() throws Exception {
-        policy.setUserId("test");
-    }
-
-    @Test
-    public void getBlob() throws Exception {
-        policy.getBlob();
-    }
-
-    @Test
-    public void setBlob() throws Exception {
-        policy.setBlob(new HashMap<String, String>());
-    }
-
 }

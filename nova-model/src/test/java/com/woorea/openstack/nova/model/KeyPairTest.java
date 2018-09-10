@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,46 +20,67 @@
 
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.KeyPair;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class KeyPairTest {
 
-    private KeyPair pair = new KeyPair();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"keypair\" : {" + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"fingerprint\" : \"fingerprint\"," + EOL
+        + "    \"user_id\" : \"userid\"," + EOL
+        + "    \"public_key\" : \"publickey\"," + EOL
+        + "    \"private_key\" : \"privatekey\"" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getName() {
-        pair.getName();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + KeyPair.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        KeyPair keypair = objectMapper.readValue(JSON_FULL, KeyPair.class);
+        String json = objectMapper.writeValueAsString(keypair);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setName() {
-        pair.setName("123");
-    }
-
-    @Test
-    public void getUserId() {
-        pair.getUserId();
-    }
-
-    @Test
-    public void getPublicKey() {
-        pair.getPublicKey();
-    }
-
-    @Test
-    public void setPublicKey() {
-        pair.setPublicKey("123");
-    }
-
-    @Test
-    public void getPrivateKey() {
-        pair.getPrivateKey();
-    }
-
-    @Test
-    public void getFingerprint() {
-        pair.getFingerprint();
+    public void testMethods() throws Exception {
+        KeyPair keypair = objectMapper.readValue(JSON_FULL, KeyPair.class);
+        keypair.toString();
+        
+        String privateKey = keypair.getPrivateKey();
+        Assert.assertNotNull(privateKey);
+        
+        String name = keypair.getName();
+        Assert.assertNotNull(name);
+        keypair.setName(name);
+        
+        String fingerprint = keypair.getFingerprint();
+        Assert.assertNotNull(fingerprint);
+        
+        String publicKey = keypair.getPublicKey();
+        Assert.assertNotNull(publicKey);
+        keypair.setPublicKey(publicKey);
+        
+        String userId = keypair.getUserId();
+        Assert.assertNotNull(userId);
     }
 }

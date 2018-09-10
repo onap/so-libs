@@ -2,8 +2,8 @@
  * ============LICENSE_START=======================================================
  * ONAP - SO
  * ================================================================================
- * Copyright (C) 2018 Huawei Intellectual Property. All rights reserved.
- * ================================================================================ 
+ * Copyright (C) 2018 AT&T Intellectual Property. All rights reserved.
+ * ================================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,185 +17,156 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.nova.model;
 
+import com.woorea.openstack.nova.model.NetworkForCreate;
+import com.woorea.openstack.nova.model.PersonalityFile;
+import com.woorea.openstack.nova.model.ServerForCreate;
+import com.woorea.openstack.nova.model.ServerForCreate.SecurityGroup;
+import java.util.List;
+import java.util.Map;
+import org.codehaus.jackson.map.DeserializationConfig;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.Collections;
-import java.util.HashMap;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 public class ServerForCreateTest {
 
-    ServerForCreate serverForCreate = new ServerForCreate();
+    private static final String EOL = System.lineSeparator();
+
+    private static final String JSON_FULL = "{" + EOL
+        + "  \"server\" : {" + EOL
+        + "    \"name\" : \"name\"," + EOL
+        + "    \"adminPass\" : \"adminpass\"," + EOL
+        + "    \"imageRef\" : \"imageref\"," + EOL
+        + "    \"flavorRef\" : \"flavorref\"," + EOL
+        + "    \"accessIPv4\" : \"accessipv4\"," + EOL
+        + "    \"accessIPv6\" : \"accessipv6\"," + EOL
+        + "    \"min\" : 42," + EOL
+        + "    \"max\" : 44," + EOL
+        + "    \"diskConfig\" : \"diskconfig\"," + EOL
+        + "    \"personality\" : [ {" + EOL
+        + "      \"path\" : \"path\"," + EOL
+        + "      \"contents\" : \"contents\"" + EOL
+        + "    }, {" + EOL
+        + "      \"path\" : \"path\"," + EOL
+        + "      \"contents\" : \"contents\"" + EOL
+        + "    } ]," + EOL
+        + "    \"metadata\" : {" + EOL
+        + "      \"metadata-k1\" : \"metadata-v1\"," + EOL
+        + "      \"metadata-k2\" : \"metadata-v2\"" + EOL
+        + "    }," + EOL
+        + "    \"networks\" : [ {" + EOL
+        + "      \"uuid\" : \"id\"," + EOL
+        + "      \"fixed_ip\" : \"fixedip\"" + EOL
+        + "    }, {" + EOL
+        + "      \"uuid\" : \"id\"," + EOL
+        + "      \"fixed_ip\" : \"fixedip\"" + EOL
+        + "    } ]," + EOL
+        + "    \"key_name\" : \"keyname\"," + EOL
+        + "    \"security_groups\" : [ {" + EOL
+        + "      \"name\" : \"name\"" + EOL
+        + "    }, {" + EOL
+        + "      \"name\" : \"name\"" + EOL
+        + "    } ]," + EOL
+        + "    \"user_data\" : \"userdata\"," + EOL
+        + "    \"availability_zone\" : \"availabilityzone\"," + EOL
+        + "    \"config_drive\" : true" + EOL
+        + "  }" + EOL
+        + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper()
+        .setSerializationInclusion(Inclusion.NON_NULL)
+        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
+        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
-    public void getName() throws Exception {
-        serverForCreate.getName();
+    public void testSerialization() throws Exception {
+        System.out.println("CLASS: " + ServerForCreate.class.getName());
+        System.out.println("TEST JSON: " + JSON_FULL);
+        ServerForCreate serverforcreate = objectMapper.readValue(JSON_FULL, ServerForCreate.class);
+        String json = objectMapper.writeValueAsString(serverforcreate);
+        System.out.println("RE-SERIALIZED OBJECT: " + json);
+        JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
     }
 
     @Test
-    public void setName() throws Exception {
-        serverForCreate.setName("test");
+    public void testMethods() throws Exception {
+        ServerForCreate serverforcreate = objectMapper.readValue(JSON_FULL, ServerForCreate.class);
+        serverforcreate.toString();
+        
+        Map<String,String> metadata = serverforcreate.getMetadata();
+        Assert.assertNotNull(metadata);
+        Assert.assertEquals(2, metadata.size());
+        serverforcreate.setMetadata(metadata);
+        
+        Integer max = serverforcreate.getMax();
+        Assert.assertNotNull(max);
+        serverforcreate.setMax(max);
+        
+        List<NetworkForCreate> networks = serverforcreate.getNetworks();
+        Assert.assertNotNull(networks);
+        Assert.assertEquals(2, networks.size());
+        serverforcreate.setNetworks(networks);
+        
+        String userData = serverforcreate.getUserData();
+        Assert.assertNotNull(userData);
+        serverforcreate.setUserData(userData);
+        
+        Integer min = serverforcreate.getMin();
+        Assert.assertNotNull(min);
+        serverforcreate.setMin(min);
+        
+        List<PersonalityFile> personality = serverforcreate.getPersonality();
+        Assert.assertNotNull(personality);
+        Assert.assertEquals(2, personality.size());
+        serverforcreate.setPersonality(personality);
+        
+        String name = serverforcreate.getName();
+        Assert.assertNotNull(name);
+        serverforcreate.setName(name);
+        
+        String flavorRef = serverforcreate.getFlavorRef();
+        Assert.assertNotNull(flavorRef);
+        serverforcreate.setFlavorRef(flavorRef);
+        
+        String keyName = serverforcreate.getKeyName();
+        Assert.assertNotNull(keyName);
+        serverforcreate.setKeyName(keyName);
+        
+        String adminPass = serverforcreate.getAdminPass();
+        Assert.assertNotNull(adminPass);
+        serverforcreate.setAdminPass(adminPass);
+        
+        String imageRef = serverforcreate.getImageRef();
+        Assert.assertNotNull(imageRef);
+        serverforcreate.setImageRef(imageRef);
+        
+        String accessIPv6 = serverforcreate.getAccessIPv6();
+        Assert.assertNotNull(accessIPv6);
+        serverforcreate.setAccessIPv6(accessIPv6);
+        
+        String diskConfig = serverforcreate.getDiskConfig();
+        Assert.assertNotNull(diskConfig);
+        serverforcreate.setDiskConfig(diskConfig);
+        
+        List<SecurityGroup> securityGroups = serverforcreate.getSecurityGroups();
+        Assert.assertNotNull(securityGroups);
+        Assert.assertEquals(2, securityGroups.size());
+        
+        String availabilityZone = serverforcreate.getAvailabilityZone();
+        Assert.assertNotNull(availabilityZone);
+        serverforcreate.setAvailabilityZone(availabilityZone);
+        
+        String accessIPv4 = serverforcreate.getAccessIPv4();
+        Assert.assertNotNull(accessIPv4);
+        serverforcreate.setAccessIPv4(accessIPv4);
     }
-
-    @Test
-    public void getAdminPass() throws Exception {
-        serverForCreate.getAdminPass();
-    }
-
-    @Test
-    public void setAdminPass() throws Exception {
-        serverForCreate.setAdminPass("adminpass");
-    }
-
-    @Test
-    public void getImageRef() throws Exception {
-        serverForCreate.getImageRef();
-    }
-
-    @Test
-    public void setImageRef() throws Exception {
-        serverForCreate.setImageRef("image");
-    }
-
-    @Test
-    public void getFlavorRef() throws Exception {
-        serverForCreate.getFlavorRef();
-    }
-
-    @Test
-    public void setFlavorRef() throws Exception {
-        serverForCreate.setFlavorRef("test");
-    }
-
-    @Test
-    public void getAccessIPv4() throws Exception {
-        serverForCreate.getAccessIPv4();
-    }
-
-    @Test
-    public void setAccessIPv4() throws Exception {
-        serverForCreate.setAccessIPv4("test");
-    }
-
-    @Test
-    public void getAccessIPv6() throws Exception {
-        serverForCreate.getAccessIPv6();
-    }
-
-    @Test
-    public void setAccessIPv6() throws Exception {
-        serverForCreate.setAccessIPv6("ipv6");
-    }
-
-    @Test
-    public void getMin() throws Exception {
-        serverForCreate.getMin();
-    }
-
-    @Test
-    public void setMin() throws Exception {
-        serverForCreate.setMin(1);
-    }
-
-    @Test
-    public void getMax() throws Exception {
-        serverForCreate.setMax(2);
-    }
-
-    @Test
-    public void setMax() throws Exception {
-        serverForCreate.setMax(2);
-    }
-
-    @Test
-    public void getDiskConfig() throws Exception {
-        serverForCreate.getDiskConfig();
-    }
-
-    @Test
-    public void setDiskConfig() throws Exception {
-        serverForCreate.setDiskConfig("config");
-    }
-
-    @Test
-    public void getKeyName() throws Exception {
-        serverForCreate.getKeyName();
-    }
-
-    @Test
-    public void setKeyName() throws Exception {
-        serverForCreate.setKeyName("test");
-    }
-
-    @Test
-    public void getPersonality() throws Exception {
-        serverForCreate.getPersonality();
-    }
-
-    @Test
-    public void setPersonality() throws Exception {
-        serverForCreate.setPersonality(Collections.<PersonalityFile>emptyList());
-    }
-
-    @Test
-    public void getMetadata() throws Exception {
-        serverForCreate.getMetadata();
-    }
-
-    @Test
-    public void setMetadata() throws Exception {
-        serverForCreate.setMetadata(new HashMap<String, String>());
-    }
-
-    @Test
-    public void getSecurityGroups() throws Exception {
-        serverForCreate.getSecurityGroups();
-    }
-
-    @Test
-    public void getUserData() throws Exception {
-        serverForCreate.getUserData();
-    }
-
-    @Test
-    public void setUserData() throws Exception {
-        serverForCreate.setUserData("test");
-    }
-
-    @Test
-    public void getAvailabilityZone() throws Exception {
-        serverForCreate.getAvailabilityZone();
-    }
-
-    @Test
-    public void setAvailabilityZone() throws Exception {
-        serverForCreate.setAvailabilityZone("test");
-    }
-
-    @Test
-    public void isConfigDrive() throws Exception {
-        serverForCreate.isConfigDrive();
-    }
-
-    @Test
-    public void setConfigDrive() throws Exception {
-        serverForCreate.setConfigDrive(true);
-    }
-
-    @Test
-    public void getNetworks() throws Exception {
-        serverForCreate.getNetworks();
-    }
-
-    @Test
-    public void setNetworks() throws Exception {
-        serverForCreate.setNetworks(Collections.<NetworkForCreate>emptyList());
-    }
-
-    @Test
-    public void addNetworks() throws Exception {
-        serverForCreate.addNetworks("test", "localhost");
-    }
-
 }
