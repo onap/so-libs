@@ -17,7 +17,7 @@
 /*
  * ============LICENSE_START==========================================
  * ===================================================================
- * Copyright © 2017 AT&T Intellectual Property. All rights reserved.
+ * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
  * ===================================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ package com.woorea.openstack.quantum.model;
 
 import java.io.Serializable;
 
-import org.codehaus.jackson.map.annotate.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("NeutronError")
 public class NeutronError implements Serializable {

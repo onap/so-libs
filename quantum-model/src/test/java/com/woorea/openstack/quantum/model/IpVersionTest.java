@@ -20,12 +20,12 @@
 
 package com.woorea.openstack.quantum.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.quantum.model.Subnet.IpVersion;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.junit.Assert;
+
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -37,9 +37,10 @@ public class IpVersionTest {
     private static final String JSON_FULL = "4";
 
     private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Inclusion.NON_NULL)
-        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
-        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        .setSerializationInclusion(Include.NON_NULL)
+        .enable(SerializationFeature.INDENT_OUTPUT)
+        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {

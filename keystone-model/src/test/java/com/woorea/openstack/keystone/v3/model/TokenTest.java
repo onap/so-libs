@@ -20,18 +20,19 @@
 
 package com.woorea.openstack.keystone.v3.model;
 
-import com.woorea.openstack.keystone.v3.model.Token;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Token.Domain;
 import com.woorea.openstack.keystone.v3.model.Token.Project;
 import com.woorea.openstack.keystone.v3.model.Token.Role;
 import com.woorea.openstack.keystone.v3.model.Token.Service;
 import com.woorea.openstack.keystone.v3.model.Token.User;
+
 import java.util.Calendar;
 import java.util.List;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -105,11 +106,12 @@ public class TokenTest {
         + "}";
 
     private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Inclusion.NON_NULL)
-        .enable(SerializationConfig.Feature.INDENT_OUTPUT)
-        .enable(SerializationConfig.Feature.WRAP_ROOT_VALUE)
-        .enable(DeserializationConfig.Feature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationConfig.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+        .setSerializationInclusion(Include.NON_NULL)
+        .enable(SerializationFeature.INDENT_OUTPUT)
+        .enable(SerializationFeature.WRAP_ROOT_VALUE)
+        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
+        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
