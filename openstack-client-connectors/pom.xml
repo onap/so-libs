@@ -12,33 +12,6 @@
 	<packaging>pom</packaging>
 	<profiles>
 		<profile>
-			<id>jersey</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<modules>
-				<module>jersey-connector</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>jersey2</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<modules>
-				<module>jersey2-connector</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>resteasy</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<modules>
-				<module>resteasy-connector</module>
-			</modules>
-		</profile>
-		<profile>
 			<id>http</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -47,7 +20,6 @@
 				<module>http-connector</module>
 			</modules>
 		</profile>
-
 	</profiles>
 	<dependencies>
 		<dependency>
@@ -56,5 +28,4 @@
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
-
 </project>
