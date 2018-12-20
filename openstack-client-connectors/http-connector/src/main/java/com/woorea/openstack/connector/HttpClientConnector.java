@@ -46,7 +46,8 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -65,7 +66,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
     public static ObjectMapper DEFAULT_MAPPER;
     public static ObjectMapper WRAPPED_MAPPER;
     
-    private static Logger LOGGER = Logger.getLogger(HttpClientConnector.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(HttpClientConnector.class);
 
     static {
         DEFAULT_MAPPER = new ObjectMapper();
@@ -123,7 +124,6 @@ public class HttpClientConnector implements OpenStackClientConnector {
                 String entityJson = mapper.writeValueAsString (request.entity().getEntity());
                 entity = new StringEntity(entityJson, ContentType.create(request.entity().getContentType()));
 
-                LOGGER.debug("Openstack query JSON:"+entityJson);
                 LOGGER.debug ("Request JSON Body: " + entityJson.replaceAll("\"password\":\"[^\"]*\"", "\"password\":\"***\""));
 
             } catch (JsonProcessingException e) {

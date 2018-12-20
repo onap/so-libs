@@ -41,7 +41,8 @@ package com.woorea.openstack.connector;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.woorea.openstack.base.client.OpenStackResponse;
@@ -55,7 +56,7 @@ import java.util.Map;
 
 public class HttpClientResponse implements OpenStackResponse {
 
-    private static Logger LOGGER = Logger.getLogger(HttpClientConnector.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(HttpClientConnector.class);
     
     private HttpResponse response = null;
     private String entityBody = null;
