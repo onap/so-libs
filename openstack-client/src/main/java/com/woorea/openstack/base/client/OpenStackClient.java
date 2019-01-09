@@ -59,7 +59,7 @@ public class OpenStackClient {
 
     public <T> OpenStackResponse request(OpenStackRequest<T> request) {
         OpenStackResponseException authException = null;
-        System.out.println("Openstack query:"+request.toString());
+        //System.out.println("Openstack query:"+request.toString());
         for (int i = 0; i <= AUTHENTICATION_RETRIES; i++) {
             request.endpoint(endpoint);
 
