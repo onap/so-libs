@@ -76,12 +76,12 @@ public class BindingTest {
         Assert.assertNotNull(vnicType);
         binding.setVnicType(vnicType);
         
-        Map<String,String> vifDetails = binding.getVifDetails();
+        Map<String,Object> vifDetails = binding.getVifDetails();
         Assert.assertNotNull(vifDetails);
         Assert.assertEquals(2, vifDetails.size());
         binding.setVifDetails(vifDetails);
         
-        Map<String,String> profile = binding.getProfile();
+        Map<String,Object> profile = binding.getProfile();
         Assert.assertNotNull(profile);
         Assert.assertEquals(2, profile.size());
         binding.setProfile(profile);

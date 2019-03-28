@@ -100,14 +100,14 @@ public class Port implements Serializable {
          * A map containing additional information needed by the interface driver
          */
         @JsonProperty("binding:vif_details")
-        private Map<String, String> vifDetails;
+        private Map<String, Object> vifDetails;
 
         /**
          * A map to enable applications running on the specific host to pass and receive vif port specific information
          * to the plugin.
          */
         @JsonProperty("binding:profile")
-        private Map<String, String> profile;
+        private Map<String, Object> profile;
 
         public String getHostId() {
             return hostId;
@@ -133,19 +133,19 @@ public class Port implements Serializable {
             this.vnicType = vnicType;
         }
 
-        public Map<String, String> getVifDetails() {
+        public Map<String, Object> getVifDetails() {
             return vifDetails;
         }
 
-        public void setVifDetails(Map<String, String> vifDetails) {
+        public void setVifDetails(Map<String, Object> vifDetails) {
             this.vifDetails = vifDetails;
         }
 
-        public Map<String, String> getProfile() {
+        public Map<String, Object> getProfile() {
             return profile;
         }
 
-        public void setProfile(Map<String, String> profile) {
+        public void setProfile(Map<String, Object> profile) {
             this.profile = profile;
         }
 
