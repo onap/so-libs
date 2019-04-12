@@ -24,12 +24,12 @@ public class OpenStackResponseException extends OpenStackBaseException {
 
     private static final long serialVersionUID = 7294957362769575271L;
 
-    protected String message;
+    protected final String message;
 
-    protected int status;
-    
+    protected final int status;
+
     // Make the response available for exception handling (includes body)
-    protected OpenStackResponse response;
+    protected final OpenStackResponse response;
 
     public OpenStackResponseException(String message, int status) {
         this.message = message;
