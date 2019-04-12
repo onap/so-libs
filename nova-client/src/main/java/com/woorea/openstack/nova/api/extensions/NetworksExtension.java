@@ -25,13 +25,13 @@ import com.woorea.openstack.nova.model.Network;
 import com.woorea.openstack.nova.model.Networks;
 
 public class NetworksExtension {
-    
+
     private final OpenStackClient CLIENT;
-    
+
     public NetworksExtension(OpenStackClient client) {
         CLIENT = client;
     }
-    
+
     public List list() {
         return new List();
     }
@@ -93,6 +93,6 @@ public class NetworksExtension {
 
     }
 
-    
+
 
 }
