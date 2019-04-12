@@ -24,17 +24,17 @@ import java.util.Properties;
 import java.util.ServiceLoader;
 
 public class OpenStackClient {
-    
+
     protected String endpoint;
-    
+
     protected OpenStackTokenProvider tokenProvider;
 
     protected static int AUTHENTICATION_RETRIES = 1;
 
     protected OpenStackClientConnector connector;
-    
+
     protected Properties properties = new Properties();
-    
+
     protected static OpenStackClientConnector DEFAULT_CONNECTOR;
 
     static {
@@ -59,7 +59,7 @@ public class OpenStackClient {
 
     public <T> OpenStackResponse request(OpenStackRequest<T> request) {
         OpenStackResponseException authException = null;
-        //System.out.println("Openstack query:"+request.toString());
+
         for (int i = 0; i <= AUTHENTICATION_RETRIES; i++) {
             request.endpoint(endpoint);
 
@@ -78,10 +78,10 @@ public class OpenStackClient {
                 tokenProvider.expireToken();
             }
         }
-       if(null == authException){
-             authException = new OpenStackResponseException("Unknown issue",500);
+        if(null == authException){
+            authException = new OpenStackResponseException("Unknown issue",500);
         }
-      throw authException;
+        throw authException;
     }
 
     public <T> T execute(OpenStackRequest<T> request) {
@@ -92,17 +92,17 @@ public class OpenStackClient {
     public void property(String property, String value) {
         properties.put(property, value);
     }
-    
+
     public void setTokenProvider(OpenStackTokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
     }
-    
+
     public void token(String token) {
         setTokenProvider(new OpenStackSimpleTokenProvider(token));
     }
-    
+
     public <R> OpenStackRequest<R> get(String path, Class<R> returnType) {
         return new OpenStackRequest<>(this, HttpMethod.GET, path, null, returnType);
     }
-    
+
 }
