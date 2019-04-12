@@ -103,11 +103,11 @@ public class ServersResource {
 
     public class Boot extends OpenStackRequest<Server> {
 
-        private ServerForCreate server;
+
 
         public Boot(ServerForCreate server) {
             super(client, HttpMethod.POST, "/servers", Entity.json(server), Server.class);
-            this.server = server;
+
         }
     }
 
@@ -122,7 +122,7 @@ public class ServersResource {
 
         public ShowMetadata(String id) {
             super(client, HttpMethod.GET, new StringBuilder(SERVERS).append(id).append("/metadata"), null,
-                Metadata.class);
+                    Metadata.class);
         }
     }
 
@@ -130,7 +130,7 @@ public class ServersResource {
 
         public CreateOrUpdateMetadata(String id, Metadata metadata) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append("/metadata"),
-                Entity.json(metadata), Metadata.class);
+                    Entity.json(metadata), Metadata.class);
         }
     }
 
@@ -138,7 +138,7 @@ public class ServersResource {
 
         public ReplaceMetadata(String id, Metadata metadata) {
             super(client, HttpMethod.PUT, new StringBuilder(SERVERS).append(id).append("/metadata"),
-                Entity.json(metadata), Metadata.class);
+                    Entity.json(metadata), Metadata.class);
         }
     }
 
@@ -146,7 +146,7 @@ public class ServersResource {
 
         public DeleteMetadata(String id, String key) {
             super(client, HttpMethod.DELETE, new StringBuilder(SERVERS).append(id).append("/metadata/").append(key),
-                null, Void.class);
+                    null, Void.class);
         }
     }
 
@@ -162,25 +162,23 @@ public class ServersResource {
 
         public ShowServerAddresses(String id) {
             super(client, HttpMethod.GET, new StringBuilder(SERVERS).append(id).append("/ips"), null,
-                Addresses.class);
+                    Addresses.class);
         }
     }
 
     public class UpdateServer extends OpenStackRequest<Server> {
 
-        private Server server;
+
 
         public UpdateServer(String id, Server server) {
             super(client, HttpMethod.PUT, new StringBuilder(SERVERS).append(id), Entity.json(server), Server.class);
-            this.server = server;
+
         }
     }
 
-    public UpdateServer update(String serverId, String name, String accessIPv4, String accessIPv6) {
+    public UpdateServer update(String serverId) {
         Server server = new Server();
-        //server.setName(name);
-        //server.setAccessIPv4(accessIPv4);
-        //server.setAccessIPv6(accessIPv6);
+
         return new UpdateServer(serverId, server);
     }
 
@@ -188,13 +186,13 @@ public class ServersResource {
 
         public Action(String id, Entity<?> entity, Class<T> returnType) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION), entity,
-                returnType);
+                    returnType);
         }
     }
 
     public class ChangePasswordAction extends Action<Server> {
 
-        private ChangePassword action;
+
 
         public ChangePasswordAction(String id, ChangePassword action) {
             super(id, Entity.json(action), Server.class);
@@ -209,7 +207,7 @@ public class ServersResource {
 
     public class RebootAction extends Action<Void> {
 
-        private Reboot action;
+
 
         public RebootAction(String id, Reboot action) {
             super(id, Entity.json(action), Void.class);
@@ -224,7 +222,7 @@ public class ServersResource {
 
     public class RebuildAction extends Action<Server> {
 
-        private Rebuild action;
+
 
         public RebuildAction(String id, Rebuild action) {
             super(id, Entity.json(action), Server.class);
@@ -237,7 +235,7 @@ public class ServersResource {
 
     public class ResizeAction extends Action<Server> {
 
-        private Resize action;
+
 
         public ResizeAction(String id, Resize action) {
             super(id, Entity.json(action), Server.class);
@@ -289,25 +287,23 @@ public class ServersResource {
 
     public class StartServer extends OpenStackRequest<Void> {
 
-        private Start action;
 
-        private String id;
+
+
 
         public StartServer(String id) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Start()), Void.class);
+                    Entity.json(new Start()), Void.class);
         }
     }
 
     public class StopServer extends OpenStackRequest<Void> {
 
-        private Stop action;
 
-        private String id;
 
         public StopServer(String id) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Stop()), Void.class);
+                    Entity.json(new Stop()), Void.class);
         }
     }
 
@@ -321,13 +317,13 @@ public class ServersResource {
 
     public class GetVncConsoleServer extends OpenStackRequest<VncConsole> {
 
-        private GetVncConsole action;
 
-        private String id;
+
+
 
         public GetVncConsoleServer(String id, GetVncConsole action) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), VncConsole.class);
+                    Entity.json(action), VncConsole.class);
         }
     }
 
@@ -340,7 +336,7 @@ public class ServersResource {
 
         public GetConsoleOutputServer(String id, GetConsoleOutput action) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), ConsoleOutput.class);
+                    Entity.json(action), ConsoleOutput.class);
         }
     }
 
@@ -353,7 +349,7 @@ public class ServersResource {
 
         public PauseServer(String id) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Pause()), Void.class);
+                    Entity.json(new Pause()), Void.class);
         }
     }
 
@@ -361,31 +357,27 @@ public class ServersResource {
 
         public UnpauseServer(String id) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Unpause()), Void.class);
+                    Entity.json(new Unpause()), Void.class);
         }
     }
 
     public class LockServer extends OpenStackRequest<Void> {
 
-        private Lock action;
 
-        private String id;
 
         public LockServer(String id) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Lock()), Void.class);
+                    Entity.json(new Lock()), Void.class);
         }
     }
 
     public class UnlockServer extends OpenStackRequest<Void> {
 
-        private Unlock action;
 
-        private String id;
 
         public UnlockServer(String id) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Unlock()), Void.class);
+                    Entity.json(new Unlock()), Void.class);
         }
     }
 
@@ -393,7 +385,7 @@ public class ServersResource {
 
         public SuspendServer(String id) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Suspend()), Void.class);
+                    Entity.json(new Suspend()), Void.class);
         }
     }
 
@@ -401,7 +393,7 @@ public class ServersResource {
 
         public ResumeServer(String id) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Resume()), Void.class);
+                    Entity.json(new Resume()), Void.class);
         }
     }
 
@@ -409,7 +401,7 @@ public class ServersResource {
 
         public CreateBackupServer(String id, CreateBackup action) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), Void.class);
+                    Entity.json(action), Void.class);
         }
     }
 
@@ -445,7 +437,7 @@ public class ServersResource {
 
         public RescueServer(String id, Rescue action) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), Void.class);
+                    Entity.json(action), Void.class);
         }
     }
 
@@ -453,7 +445,7 @@ public class ServersResource {
 
         public UnrescueServer(String id) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(new Unrescue()), Void.class);
+                    Entity.json(new Unrescue()), Void.class);
         }
     }
 
@@ -470,28 +462,28 @@ public class ServersResource {
 
         public AssociateFloatingIp(String id, com.woorea.openstack.nova.model.ServerAction.AssociateFloatingIp action) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), Void.class);
+                    Entity.json(action), Void.class);
         }
     }
 
     public class DisassociateFloatingIp extends OpenStackRequest<Void> {
 
         public DisassociateFloatingIp(String id,
-            com.woorea.openstack.nova.model.ServerAction.DisassociateFloatingIp action) {
+                                      com.woorea.openstack.nova.model.ServerAction.DisassociateFloatingIp action) {
             super(client, HttpMethod.POST, new StringBuilder(SERVERS).append(id).append(ACTION),
-                Entity.json(action), Void.class);
+                    Entity.json(action), Void.class);
         }
     }
 
     public AssociateFloatingIp associateFloatingIp(String serverId, String floatingIpAddress) {
         com.woorea.openstack.nova.model.ServerAction.AssociateFloatingIp action = new com.woorea.openstack.nova.model.ServerAction.AssociateFloatingIp(
-            floatingIpAddress);
+                floatingIpAddress);
         return new AssociateFloatingIp(serverId, action);
     }
 
     public DisassociateFloatingIp disassociateFloatingIp(String serverId, String floatingIpAddress) {
         com.woorea.openstack.nova.model.ServerAction.DisassociateFloatingIp action = new com.woorea.openstack.nova.model.ServerAction.DisassociateFloatingIp(
-            floatingIpAddress);
+                floatingIpAddress);
         return new DisassociateFloatingIp(serverId, action);
     }
 
@@ -499,8 +491,8 @@ public class ServersResource {
 
         public AttachVolume(String serverId, final VolumeAttachment volumeAttachment) {
             super(client, HttpMethod.POST,
-                new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments"),
-                Entity.json(volumeAttachment), Void.class);
+                    new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments"),
+                    Entity.json(volumeAttachment), Void.class);
         }
     }
 
@@ -508,8 +500,8 @@ public class ServersResource {
 
         public DetachVolume(String serverId, String volumeId) {
             super(client, HttpMethod.DELETE,
-                new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments/").append(volumeId),
-                null, Void.class);
+                    new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments/").append(volumeId),
+                    null, Void.class);
         }
     }
 
@@ -517,8 +509,8 @@ public class ServersResource {
 
         public ListVolumeAttachments(String serverId) {
             super(client, HttpMethod.GET,
-                new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments"), null,
-                VolumeAttachments.class);
+                    new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments"), null,
+                    VolumeAttachments.class);
         }
     }
 
@@ -526,8 +518,8 @@ public class ServersResource {
 
         public ShowVolumeAttachment(String serverId, String volumeAttachmentId) {
             super(client, HttpMethod.GET,
-                new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments/")
-                    .append(volumeAttachmentId), null, VolumeAttachment.class);
+                    new StringBuilder(SERVERS).append(serverId).append("/os-volume_attachments/")
+                            .append(volumeAttachmentId), null, VolumeAttachment.class);
         }
     }
 
@@ -550,4 +542,3 @@ public class ServersResource {
         return new ShowVolumeAttachment(serverId, volumeAttachmentId);
     }
 }
-
