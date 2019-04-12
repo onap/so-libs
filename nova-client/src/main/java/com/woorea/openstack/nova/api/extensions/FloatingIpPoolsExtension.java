@@ -23,13 +23,13 @@ import com.woorea.openstack.base.client.OpenStackRequest;
 import com.woorea.openstack.nova.model.FloatingIpPools;
 
 public class FloatingIpPoolsExtension {
-    
+
     private final OpenStackClient CLIENT;
-    
+
     public FloatingIpPoolsExtension(OpenStackClient client) {
         CLIENT = client;
     }
-    
+
     public List list() {
         return new List();
     }
@@ -42,6 +42,6 @@ public class FloatingIpPoolsExtension {
 
     }
 
-    
+
 
 }
