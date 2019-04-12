@@ -124,7 +124,7 @@ public class ServersResourceTest {
     public void update() {
         final Server expectedServer = Mockito.mock(Server.class);
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
-        final ServersResource.UpdateServer metadataCreateUpdate = serversResource.update(SERVER_NAME, SERVER_KEY, I_PV_4, "");
+        final ServersResource.UpdateServer metadataCreateUpdate = serversResource.update(SERVER_NAME);
         final Server actualServer = metadataCreateUpdate.execute();
         Assert.assertEquals(expectedServer, actualServer);
     }
