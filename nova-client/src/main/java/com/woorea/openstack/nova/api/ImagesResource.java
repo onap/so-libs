@@ -63,11 +63,11 @@ public class ImagesResource {
 
     public class Create extends OpenStackRequest<Image> {
 
-        private Image image;
+
 
         public Create(Image image) {
             super(client, HttpMethod.POST, "/images", Entity.json(image), Image.class);
-            this.image = image;
+
         }
     }
 
@@ -82,7 +82,7 @@ public class ImagesResource {
 
         public ShowMetadata(String id) {
             super(client, HttpMethod.GET, "/images/" + id + "/metadata", null,
-                Metadata.class);
+                    Metadata.class);
         }
     }
 
@@ -97,4 +97,3 @@ public class ImagesResource {
         return "/images/" + id;
     }
 }
-

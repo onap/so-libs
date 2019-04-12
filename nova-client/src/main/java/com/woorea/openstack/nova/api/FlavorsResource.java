@@ -63,11 +63,11 @@ public class FlavorsResource {
 
     public class Create extends OpenStackRequest<Flavor> {
 
-        private Flavor flavor;
+
 
         public Create(Flavor flavor) {
             super(client, HttpMethod.POST, "/flavors", Entity.json(flavor), Flavor.class);
-            this.flavor = flavor;
+
         }
     }
 
@@ -96,4 +96,3 @@ public class FlavorsResource {
         return "/flavors/" + id;
     }
 }
-
