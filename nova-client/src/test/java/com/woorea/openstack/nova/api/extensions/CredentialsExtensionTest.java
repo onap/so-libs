@@ -32,7 +32,7 @@ public class CredentialsExtensionTest {
 
     @Test
     public void showCertificate() throws Exception {
-        credentialsExtension.showCertificate("id");
+        credentialsExtension.showCertificate();
     }
 
 }
