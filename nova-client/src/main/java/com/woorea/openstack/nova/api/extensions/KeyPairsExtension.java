@@ -25,13 +25,13 @@ import com.woorea.openstack.nova.model.KeyPair;
 import com.woorea.openstack.nova.model.KeyPairs;
 
 public class KeyPairsExtension {
-    
+
     private final OpenStackClient CLIENT;
-    
+
     public KeyPairsExtension(OpenStackClient client) {
         CLIENT = client;
     }
-    
+
     public List list() {
         return new List();
     }
@@ -62,7 +62,7 @@ public class KeyPairsExtension {
 
     public class Delete extends OpenStackRequest<Void> {
 
-        private String name;
+
 
         public Delete(String name) {
             super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-keypairs/").append(name).toString(), null, Void.class);
@@ -77,5 +77,5 @@ public class KeyPairsExtension {
         }
 
     }
-    
+
 }
