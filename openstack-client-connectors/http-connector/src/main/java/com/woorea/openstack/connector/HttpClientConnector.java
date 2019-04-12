@@ -63,9 +63,9 @@ import com.woorea.openstack.base.client.OpenStackResponseException;
 
 public class HttpClientConnector implements OpenStackClientConnector {
 
-    public static ObjectMapper DEFAULT_MAPPER;
-    public static ObjectMapper WRAPPED_MAPPER;
-    
+    public static final ObjectMapper DEFAULT_MAPPER;
+    public static final ObjectMapper WRAPPED_MAPPER;
+
     private static Logger LOGGER = LoggerFactory.getLogger(HttpClientConnector.class);
 
     static {
@@ -85,19 +85,19 @@ public class HttpClientConnector implements OpenStackClientConnector {
         WRAPPED_MAPPER.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
         WRAPPED_MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
     }
-    
+
     protected static <T> ObjectMapper getObjectMapper (Class<T> type) {
         return type.getAnnotation(JsonRootName.class) == null ? DEFAULT_MAPPER : WRAPPED_MAPPER;
     }
 
     @Override
     public <T> OpenStackResponse request(OpenStackRequest<T> request) {
-        
-        CloseableHttpClient httpClient = null; //HttpClients.createDefault();
+
+        CloseableHttpClient httpClient = null;
         httpClient = HttpClients.custom().setRedirectStrategy(new HttpClientRedirectStrategy()).build();
 
         URI uri = null;
-        
+
         // Build the URI with query params
         try {
             URIBuilder uriBuilder = new URIBuilder(request.endpoint() + request.path());
@@ -107,7 +107,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
                     uriBuilder.setParameter(entry.getKey(), String.valueOf(o));
                 }
             }
-            
+
             uri = uriBuilder.build();
         } catch (URISyntaxException e) {
             throw new HttpClientException (e);
@@ -116,7 +116,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
         HttpEntity entity = null;
         if (request.entity() != null) {
             // Flatten the entity to a Json string
-                    
+
             try {
                 // Get appropriate mapper, based on existence of a root element in Entity class
                 ObjectMapper mapper = getObjectMapper (request.entity().getEntity().getClass());
@@ -132,35 +132,35 @@ public class HttpClientConnector implements OpenStackClientConnector {
                 throw new HttpClientException ("Json IO error on request entity", e);
             }
         }
-        
+
         // Determine the HttpRequest class based on the method
         HttpUriRequest httpRequest;
-        
-        switch (request.method()) {
-        case POST:
-            HttpPost post = new HttpPost(uri);
-            post.setEntity (entity);
-            httpRequest = post;
-            break;
-            
-        case GET:
-            httpRequest = new HttpGet(uri);
-            break;
 
-        case PUT:
-            HttpPut put = new HttpPut(uri);
-            put.setEntity (entity);
-            httpRequest = put;
-            break;
-            
-        case DELETE:
-            httpRequest = new HttpDelete(uri);
-            break;
-            
-        default:
-            throw new HttpClientException ("Unrecognized HTTP Method: " + request.method());
+        switch (request.method()) {
+            case POST:
+                HttpPost post = new HttpPost(uri);
+                post.setEntity (entity);
+                httpRequest = post;
+                break;
+
+            case GET:
+                httpRequest = new HttpGet(uri);
+                break;
+
+            case PUT:
+                HttpPut put = new HttpPut(uri);
+                put.setEntity (entity);
+                httpRequest = put;
+                break;
+
+            case DELETE:
+                httpRequest = new HttpDelete(uri);
+                break;
+
+            default:
+                throw new HttpClientException ("Unrecognized HTTP Method: " + request.method());
         }
-        
+
         for (Entry<String, List<Object>> h : request.headers().entrySet()) {
             StringBuilder sb = new StringBuilder();
             for (Object v : h.getValue()) {
@@ -170,25 +170,25 @@ public class HttpClientConnector implements OpenStackClientConnector {
         }
 
         LOGGER.debug ("Sending HTTP request: " + httpRequest.toString());
-        
+
         // Get the Response.  But don't get the body entity yet, as this response
         // will be wrapped in an HttpClientResponse.  The HttpClientResponse
         // buffers the body in constructor, so can close the response here.
         HttpClientResponse httpClientResponse = null;
         CloseableHttpResponse httpResponse = null;
-        
+
         // Catch known HttpClient exceptions, and wrap them in OpenStack Client Exceptions
         // so calling functions can distinguish.  Only RuntimeExceptions are allowed.
         try {
             httpResponse = httpClient.execute(httpRequest);
 
             LOGGER.debug ("Response status: " + httpResponse.getStatusLine().getStatusCode());
-            
+
             httpClientResponse = new HttpClientResponse (httpResponse);
 
             int status = httpResponse.getStatusLine().getStatusCode();
             if (status == HttpStatus.SC_OK || status == HttpStatus.SC_CREATED ||
-                status == HttpStatus.SC_NO_CONTENT || status == HttpStatus.SC_ACCEPTED)
+                    status == HttpStatus.SC_NO_CONTENT || status == HttpStatus.SC_ACCEPTED)
             {
                 return httpClientResponse;
             }
@@ -219,11 +219,11 @@ public class HttpClientConnector implements OpenStackClientConnector {
                     LOGGER.warn("Unable to close HTTP Response: " + e);
                 }
         }
-        
+
         // Get here on an error response (4XX-5XX)
         throw new OpenStackResponseException(httpResponse.getStatusLine().getReasonPhrase(),
-                                            httpResponse.getStatusLine().getStatusCode(),
-                                            httpClientResponse);
+                httpResponse.getStatusLine().getStatusCode(),
+                httpClientResponse);
     }
 
 }
