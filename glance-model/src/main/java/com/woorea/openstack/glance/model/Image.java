@@ -76,7 +76,7 @@ public class Image implements Serializable {
     @JsonProperty("protected")
     private boolean isProtected;
 
-    private Map<String, Object> properties;
+    private transient Map<String, Object> properties;
 
     /**
      * @return the id
@@ -346,10 +346,10 @@ public class Image implements Serializable {
     @Override
     public String toString() {
         return String.format("Image [id=%s, uri=%s, name=%s, diskFormat=%s containerFormat=%s, size=%d, checksum=%s,"
-                + " createdAt=%s, updatedAt=%s, deletedAt=%s, status=%s, isPublic=%s, minRam=%d, minDisk=%d, owner=%s,"
-                + " isDeleted=%s, isProtected=%s, properties=%s]",
-            id, uri, name, diskFormat, containerFormat, size, checksum,
-            createdAt, updatedAt, deletedAt, status, isPublic, minRam, minDisk, owner,
-            isDeleted, isProtected, properties);
+                        + " createdAt=%s, updatedAt=%s, deletedAt=%s, status=%s, isPublic=%s, minRam=%d, minDisk=%d, owner=%s,"
+                        + " isDeleted=%s, isProtected=%s, properties=%s]",
+                id, uri, name, diskFormat, containerFormat, size, checksum,
+                createdAt, updatedAt, deletedAt, status, isPublic, minRam, minDisk, owner,
+                isDeleted, isProtected, properties);
     }
 }
