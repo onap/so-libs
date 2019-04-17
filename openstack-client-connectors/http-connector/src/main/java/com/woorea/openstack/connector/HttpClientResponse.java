@@ -34,7 +34,7 @@ import java.util.Map;
 
 public class HttpClientResponse implements OpenStackResponse {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(HttpClientConnector.class);
+    private static Logger logger = LoggerFactory.getLogger(HttpClientConnector.class);
 
     private HttpResponse response = null;
     private String entityBody = null;
@@ -46,7 +46,7 @@ public class HttpClientResponse implements OpenStackResponse {
         // Read the body so InputStream can be closed
         if (response.getEntity() == null) {
             // No body
-            LOGGER.debug ("No Response Body");
+            logger.debug ("No Response Body");
             return;
         }
 
@@ -57,7 +57,7 @@ public class HttpClientResponse implements OpenStackResponse {
             throw new HttpClientException ("Error Reading Response Body", e);
         }
         entityBody = responseBody.toString();
-        LOGGER.debug (entityBody);
+        logger.debug (entityBody);
     }
 
 
@@ -94,7 +94,7 @@ public class HttpClientResponse implements OpenStackResponse {
     public Map<String, String> headers() {
         Map<String, String> headers = new HashMap<>();
 
-        Header responseHeaders[] = response.getAllHeaders();
+        Header[] responseHeaders = response.getAllHeaders();
         for (Header h : responseHeaders) {
             headers.put(h.getName(), h.getValue());
         }

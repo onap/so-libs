@@ -18,16 +18,15 @@ package com.woorea.openstack.ceilometer.v2.api;
 
 
 import com.woorea.openstack.base.client.OpenStackClient;
-import com.woorea.openstack.base.client.OpenStackRequest;
 import com.woorea.openstack.ceilometer.QueriableCeilometerCommand;
 import com.woorea.openstack.ceilometer.v2.model.Sample;
 
 public class MetersResource {
 
-    private final OpenStackClient CLIENT;
+    private final OpenStackClient client;
 
     public MetersResource(OpenStackClient client) {
-        CLIENT = client;
+        this.client = client;
     }
 
     public List list() {
@@ -52,13 +51,13 @@ public class MetersResource {
 
         private String name;
 
+        public Show() {
+
+        }
+
         public Show name(String name) {
             this.name = name;
             return this;
-        }
-
-        public Show() {
-
         }
 
     }
@@ -67,13 +66,13 @@ public class MetersResource {
 
         private String name;
 
+        public Statistics() {
+
+        }
+
         public Statistics name(String name) {
             this.name = name;
             return this;
-        }
-
-        public Statistics() {
-
         }
 
     }
