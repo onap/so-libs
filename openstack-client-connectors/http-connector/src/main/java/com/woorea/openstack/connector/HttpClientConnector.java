@@ -102,11 +102,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
         try {
             URIBuilder uriBuilder = new URIBuilder(request.endpoint() + request.path());
 
-            for(Map.Entry<String, List<Object> > entry : request.queryParams().entrySet()) {
-                for (Object o : entry.getValue()) {
-                    uriBuilder.setParameter(entry.getKey(), String.valueOf(o));
-                }
-            }
+            setUriBuilderParams(request, uriBuilder);
 
             uri = uriBuilder.build();
         } catch (URISyntaxException e) {
@@ -136,30 +132,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
         // Determine the HttpRequest class based on the method
         HttpUriRequest httpRequest;
 
-        switch (request.method()) {
-            case POST:
-                HttpPost post = new HttpPost(uri);
-                post.setEntity (entity);
-                httpRequest = post;
-                break;
-
-            case GET:
-                httpRequest = new HttpGet(uri);
-                break;
-
-            case PUT:
-                HttpPut put = new HttpPut(uri);
-                put.setEntity (entity);
-                httpRequest = put;
-                break;
-
-            case DELETE:
-                httpRequest = new HttpDelete(uri);
-                break;
-
-            default:
-                throw new HttpClientException ("Unrecognized HTTP Method: " + request.method());
-        }
+        httpRequest = getHttpUriRequest(request, uri, entity);
 
         for (Entry<String, List<Object>> h : request.headers().entrySet()) {
             StringBuilder sb = new StringBuilder();
@@ -224,6 +197,43 @@ public class HttpClientConnector implements OpenStackClientConnector {
         throw new OpenStackResponseException(httpResponse.getStatusLine().getReasonPhrase(),
                 httpResponse.getStatusLine().getStatusCode(),
                 httpClientResponse);
+    }
+
+    private <T> HttpUriRequest getHttpUriRequest(OpenStackRequest<T> request, URI uri, HttpEntity entity) {
+        HttpUriRequest httpRequest;
+        switch (request.method()) {
+            case POST:
+                HttpPost post = new HttpPost(uri);
+                post.setEntity (entity);
+                httpRequest = post;
+                break;
+
+            case GET:
+                httpRequest = new HttpGet(uri);
+                break;
+
+            case PUT:
+                HttpPut put = new HttpPut(uri);
+                put.setEntity (entity);
+                httpRequest = put;
+                break;
+
+            case DELETE:
+                httpRequest = new HttpDelete(uri);
+                break;
+
+            default:
+                throw new HttpClientException("Unrecognized HTTP Method: " + request.method());
+        }
+        return httpRequest;
+    }
+
+    private <T> void setUriBuilderParams(OpenStackRequest<T> request, URIBuilder uriBuilder) {
+        for(Entry<String, List<Object>> entry : request.queryParams().entrySet()) {
+            for (Object o : entry.getValue()) {
+                uriBuilder.setParameter(entry.getKey(), String.valueOf(o));
+            }
+        }
     }
 
 }
