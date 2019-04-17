@@ -26,6 +26,18 @@ import java.util.Map;
 public class OpenStackRequest<R> {
     
     private OpenStackClient client;
+
+    private String endpoint;
+
+    private HttpMethod method;
+
+    private StringBuilder path = new StringBuilder();
+
+    private Map<String, List<Object>> headers = new HashMap<>();
+
+    private Entity<?> entity;
+
+    private Class<R> returnType;
     
     public OpenStackRequest() {
         
@@ -39,18 +51,7 @@ public class OpenStackRequest<R> {
         this.returnType = returnType;
         header("Accept", "application/json");
     }
-    
-    private String endpoint;
-    
-    private HttpMethod method;
-    
-    private StringBuilder path = new StringBuilder();
-    
-    private Map<String, List<Object>> headers = new HashMap<>();
-    
-    private Entity<?> entity;
-    
-    private Class<R> returnType;
+
     
     public OpenStackRequest<R> endpoint(String endpoint) {
         this.endpoint = endpoint;
