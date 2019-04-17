@@ -69,12 +69,12 @@ public class VolumesExtension {
 
     public class Create extends OpenStackRequest<Volume> {
 
-        // private Volume volume;
+
 
         public Create(VolumeForCreate volume) {
             super(CLIENT, HttpMethod.POST, "/os-volumes", Entity.json(volume),
                     Volume.class);
-            // this.volume = volume;
+
         }
 
     }
@@ -85,7 +85,7 @@ public class VolumesExtension {
 
         public UploadToImage(VolumeForImageCreate volumeForImageCreate) {
             super(CLIENT, HttpMethod.POST, new StringBuilder("/volumes/")
-                    .append(volumeForImageCreate.getVolumeId() + "/action"),
+                            .append(volumeForImageCreate.getVolumeId() + "/action"),
                     Entity.json(volumeForImageCreate), Void.class);
         }
 
@@ -104,7 +104,7 @@ public class VolumesExtension {
 
         public ShowMetadata(String id) {
             super(CLIENT, HttpMethod.GET, new StringBuilder("/os-volumes/")
-                    .append(id).append("/metadata").toString(), null,
+                            .append(id).append("/metadata").toString(), null,
                     Metadata.class);
         }
 
