@@ -92,7 +92,7 @@ public class HttpClientResponse implements OpenStackResponse {
 
     @Override
     public Map<String, String> headers() {
-        Map<String, String> headers = new HashMap<String, String>();
+        Map<String, String> headers = new HashMap<>();
 
         Header responseHeaders[] = response.getAllHeaders();
         for (Header h : responseHeaders) {
