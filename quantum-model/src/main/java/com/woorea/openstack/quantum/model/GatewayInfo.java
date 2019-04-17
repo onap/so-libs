@@ -16,8 +16,6 @@
 
 package com.woorea.openstack.quantum.model;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
