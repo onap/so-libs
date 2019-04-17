@@ -61,7 +61,7 @@ public class Subnet implements Serializable {
 
     private String id;
 
-    public static enum IpVersion implements Serializable {
+    public enum IpVersion implements Serializable {
         IPV4(4),
         IPV6(6);
         private int code;
