@@ -27,9 +27,9 @@ import com.woorea.openstack.nova.model.SecurityGroupRuleForCreate;
 import com.woorea.openstack.nova.model.SecurityGroups;
 
 public class SecurityGroupsExtension {
-    
+
     private final OpenStackClient CLIENT;
-    
+
     public SecurityGroupsExtension(OpenStackClient client) {
         CLIENT = client;
     }
@@ -72,7 +72,7 @@ public class SecurityGroupsExtension {
     public class Delete extends OpenStackRequest<Void> {
 
         /**
-         * 
+         *
          * @param id
          * @deprecated
          */
@@ -99,7 +99,7 @@ public class SecurityGroupsExtension {
     public class DeleteRule extends OpenStackRequest<Void> {
 
         /**
-         * 
+         *
          * @param id
          * @deprecated
          */
@@ -107,7 +107,7 @@ public class SecurityGroupsExtension {
         public DeleteRule(Integer id) {
             super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-security-group-rules/").append(String.valueOf(id)).toString(), null, Void.class);
         }
-        
+
         public DeleteRule(String id) {
             super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-security-group-rules/").append(String.valueOf(id)).toString(), null, Void.class);
         }
@@ -118,7 +118,7 @@ public class SecurityGroupsExtension {
     }
 
     public Create createSecurityGroup(String name,
-            String description) {
+                                      String description) {
         return new Create(new SecurityGroupForCreate(name, description));
     }
 
@@ -129,20 +129,20 @@ public class SecurityGroupsExtension {
     public Show showSecurityGroup(Integer id) {
         return new Show(String.valueOf(id));
     }
-    
+
     public Show showSecurityGroup(String id) {
         return new Show(id);
     }
     public Delete deleteSecurityGroup(Integer id) {
         return new Delete(String.valueOf(id));
     }
-    
+
     public Delete deleteSecurityGroup(String id) {
         return new Delete(id);
     }
 
     /**
-     * 
+     *
      * @param parentSecurityGroupId
      * @param ipProtocol
      * @param fromPort
@@ -160,7 +160,7 @@ public class SecurityGroupsExtension {
         return new CreateRule(securityGroupRuleForCreate);
     }
     /**
-     * 
+     *
      * @param parentSecurityGroupId
      * @param ipProtocol
      * @param fromPort
@@ -178,7 +178,7 @@ public class SecurityGroupsExtension {
                 sourceGroupId);
         return new CreateRule(securityGroupRuleForCreate);
     }
-    
+
     public CreateRule createSecurityGroupRule(
             String parentSecurityGroupId, String ipProtocol, Integer fromPort,
             Integer toPort, String cidr) {
@@ -192,7 +192,7 @@ public class SecurityGroupsExtension {
             Integer toPort) {
         SecurityGroupRuleForCreate securityGroupRuleForCreate = new SecurityGroupRuleForCreate(
                 parentSecurityGroupId, sourceGroupId,ipProtocol, fromPort, toPort
-                );
+        );
         return new CreateRule(securityGroupRuleForCreate);
     }
     public DeleteRule deleteSecurityGroupRule(String id) {
