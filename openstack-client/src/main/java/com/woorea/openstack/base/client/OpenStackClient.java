@@ -29,38 +29,38 @@ public class OpenStackClient {
 
     protected OpenStackTokenProvider tokenProvider;
 
-    protected static int AUTHENTICATION_RETRIES = 1;
+    protected static int authenticationRetries = 1;
 
     protected OpenStackClientConnector connector;
 
     protected Properties properties = new Properties();
 
-    protected static OpenStackClientConnector DEFAULT_CONNECTOR;
+    protected static OpenStackClientConnector defaultConnector;
 
     static {
         ServiceLoader<OpenStackClientConnector> connectorLoader;
         connectorLoader = ServiceLoader.load(OpenStackClientConnector.class);
 
         for (OpenStackClientConnector clientConnector : connectorLoader) {
-            DEFAULT_CONNECTOR = clientConnector;
+            defaultConnector = clientConnector;
             break;
         }
     }
 
     public OpenStackClient(String endpoint) {
         this.endpoint = endpoint;
-        this.connector = DEFAULT_CONNECTOR;
+        this.connector = defaultConnector;
     }
 
     public OpenStackClient(String endpoint, OpenStackClientConnector connector) {
         this.endpoint = endpoint;
-        this.connector = (connector == null) ? DEFAULT_CONNECTOR : connector;
+        this.connector = (connector == null) ? defaultConnector : connector;
     }
 
     public <T> OpenStackResponse request(OpenStackRequest<T> request) {
         OpenStackResponseException authException = null;
 
-        for (int i = 0; i <= AUTHENTICATION_RETRIES; i++) {
+        for (int i = 0; i <= authenticationRetries; i++) {
             request.endpoint(endpoint);
 
             if (tokenProvider != null) {
