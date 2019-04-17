@@ -190,7 +190,7 @@ public class Port implements Serializable {
     private List<String> securityGroups;
 
     @JsonUnwrapped
-    private Binding binding;
+    private transient   Binding binding;
 
     /**
      * @return the adminStateUp
