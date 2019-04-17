@@ -84,9 +84,9 @@ public class RouterTest {
         Assert.assertEquals(2, routes.size());
         router.setRoutes(routes);
         
-        String admin_state_up = router.getAdmin_state_up();
+        String admin_state_up = router.getAdminStateUp();
         Assert.assertNotNull(admin_state_up);
-        router.setAdmin_state_up(admin_state_up);
+        router.setAdminStateUp(admin_state_up);
         
         String name = router.getName();
         Assert.assertNotNull(name);

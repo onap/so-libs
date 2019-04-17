@@ -25,10 +25,10 @@ import com.woorea.openstack.ceilometer.v2.model.Resource;
 
 public class ResourcesResource {
 
-    private final OpenStackClient CLIENT;
+    private final OpenStackClient client;
 
     public ResourcesResource(OpenStackClient client) {
-        CLIENT = client;
+        this.client = client;
     }
 
     public class ResourceList extends QueriableCeilometerCommand<ResourceList, List<Resource>> {
@@ -44,13 +44,13 @@ public class ResourcesResource {
 
         private String id;
 
+        public ResourceShow(OpenStackClient client) {
+
+        }
+
         public ResourceShow id(String id) {
             this.id = id;
             return this;
-        }
-
-        public ResourceShow(OpenStackClient client) {
-
         }
 
     }

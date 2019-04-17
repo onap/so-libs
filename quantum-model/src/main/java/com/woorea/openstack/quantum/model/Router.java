@@ -36,7 +36,7 @@ public class Router implements Serializable {
     private String name;
 
     @JsonProperty("admin_state_up")
-    private String admin_state_up;
+    private String adminStateUp;
 
     @JsonProperty("tenant_id")
     private String tenantId;
@@ -59,11 +59,11 @@ public class Router implements Serializable {
     public void setRoutes(List<HostRoute> routes) {
         this.routes = routes;
     }
-    public String getAdmin_state_up() {
-        return admin_state_up;
+    public String getAdminStateUp() {
+        return adminStateUp;
     }
-    public void setAdmin_state_up(String admin_state_up) {
-        this.admin_state_up = admin_state_up;
+    public void setAdminStateUp(String adminStateUp) {
+        this.adminStateUp = adminStateUp;
     }
     public String getStatus() {
         return status;
