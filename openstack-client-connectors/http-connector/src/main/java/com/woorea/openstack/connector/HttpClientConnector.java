@@ -29,7 +29,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.http.HttpEntity;
@@ -66,7 +65,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
     public static final ObjectMapper DEFAULT_MAPPER;
     public static final ObjectMapper WRAPPED_MAPPER;
 
-    private static Logger LOGGER = LoggerFactory.getLogger(HttpClientConnector.class);
+    private static Logger logger = LoggerFactory.getLogger(HttpClientConnector.class);
 
     static {
         DEFAULT_MAPPER = new ObjectMapper();
@@ -120,7 +119,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
                 String entityJson = mapper.writeValueAsString (request.entity().getEntity());
                 entity = new StringEntity(entityJson, ContentType.create(request.entity().getContentType()));
 
-                LOGGER.debug ("Request JSON Body: " + entityJson.replaceAll("\"password\":\"[^\"]*\"", "\"password\":\"***\""));
+                logger.debug ("Request JSON Body: " + entityJson.replaceAll("\"password\":\"[^\"]*\"", "\"password\":\"***\""));
 
             } catch (JsonProcessingException e) {
                 throw new HttpClientException ("Json processing error on request entity", e);
@@ -142,7 +141,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
             httpRequest.addHeader(h.getKey(), sb.toString());
         }
 
-        LOGGER.debug ("Sending HTTP request: " + httpRequest.toString());
+        logger.debug ("Sending HTTP request: " + httpRequest.toString());
 
         // Get the Response.  But don't get the body entity yet, as this response
         // will be wrapped in an HttpClientResponse.  The HttpClientResponse
@@ -155,7 +154,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
         try {
             httpResponse = httpClient.execute(httpRequest);
 
-            LOGGER.debug ("Response status: " + httpResponse.getStatusLine().getStatusCode());
+            logger.debug ("Response status: " + httpResponse.getStatusLine().getStatusCode());
 
             httpClientResponse = new HttpClientResponse (httpResponse);
 
@@ -180,7 +179,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
         }
         catch (Exception e) {
             // Catchall for anything else, must throw as a RuntimeException
-            LOGGER.error ("Unexpected client exception: " +e.getMessage());
+            logger.error ("Unexpected client exception: " +e.getMessage());
             throw new RuntimeException("Unexpected client exception", e);
         }
         finally {
@@ -189,7 +188,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
                 try {
                     httpResponse.close();
                 } catch (IOException e) {
-                    LOGGER.warn("Unable to close HTTP Response: " + e);
+                    logger.warn("Unable to close HTTP Response: " + e);
                 }
         }
 
