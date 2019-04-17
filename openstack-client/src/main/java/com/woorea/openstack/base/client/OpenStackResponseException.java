@@ -29,7 +29,7 @@ public class OpenStackResponseException extends OpenStackBaseException {
     protected final int status;
 
     // Make the response available for exception handling (includes body)
-    protected final OpenStackResponse response;
+    protected final transient OpenStackResponse response;
 
     public OpenStackResponseException(String message, int status) {
         this.message = message;

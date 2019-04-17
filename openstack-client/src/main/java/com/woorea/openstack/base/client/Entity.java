@@ -19,17 +19,17 @@ package com.woorea.openstack.base.client;
 
 
 public class Entity<T> {
-    
+
     private T entity;
-    
+
     private String contentType;
-    
+
     public static <T> Entity<T> json(T entity) {
-        return new Entity<T>(entity, "application/json");
+        return new Entity<>(entity, "application/json");
     }
-    
+
     public static <T> Entity<T> stream(T entity) {
-        return new Entity<T>(entity, "application/octet-stream");
+        return new Entity<>(entity, "application/octet-stream");
     }
 
     public Entity(T entity, String contentType) {
@@ -65,5 +65,5 @@ public class Entity<T> {
     public void setContentType(String contentType) {
         this.contentType = contentType;
     }
-    
+
 }
