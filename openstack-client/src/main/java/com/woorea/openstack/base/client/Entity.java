@@ -24,18 +24,18 @@ public class Entity<T> {
 
     private String contentType;
 
+    public Entity(T entity, String contentType) {
+        super();
+        this.entity = entity;
+        this.contentType = contentType;
+    }
+
     public static <T> Entity<T> json(T entity) {
         return new Entity<>(entity, "application/json");
     }
 
     public static <T> Entity<T> stream(T entity) {
         return new Entity<>(entity, "application/octet-stream");
-    }
-
-    public Entity(T entity, String contentType) {
-        super();
-        this.entity = entity;
-        this.contentType = contentType;
     }
 
     /**
