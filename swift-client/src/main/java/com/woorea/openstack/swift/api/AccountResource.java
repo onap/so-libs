@@ -30,7 +30,7 @@ public class AccountResource {
     public class ShowAccount extends OpenStackRequest<Void> {
 
         public ShowAccount() {
-//            return target.request(MediaType.APPLICATION_JSON).head();
+
         }
 
     }
