@@ -52,7 +52,6 @@ public class ContainersResource {
     public class List extends OpenStackRequest<java.util.List<Container>> {
 
         public List() {
-            //return target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Container>>(){});
         }
 
     }
@@ -61,7 +60,7 @@ public class ContainersResource {
     public class Create extends OpenStackRequest<Container> {
         
         public Create(String containerName) {
-            //return target.path(containerName).request().method("PUT",Entity.text("*"));
+
         }
 
     }
@@ -71,7 +70,7 @@ public class ContainersResource {
         private String containerName;
         
         public Show(String containerName) {
-//            return target.path(containerName).request(MediaType.APPLICATION_JSON).head();
+
         }
 
     }
@@ -82,7 +81,7 @@ public class ContainersResource {
         
         public Delete(String containerName) {
             this.containerName = containerName;
-            //return target.path(containerName).request(MediaType.APPLICATION_JSON).delete();
+
         }
 
     }
