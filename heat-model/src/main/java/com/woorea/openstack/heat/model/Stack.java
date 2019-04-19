@@ -228,6 +228,7 @@ public class Stack {
             return mapper.readValue(s, type);
         }
         catch (IOException e) {
+
             return null;
         }
     }
