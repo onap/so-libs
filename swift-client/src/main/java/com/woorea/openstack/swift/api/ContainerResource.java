@@ -69,14 +69,6 @@ public class ContainerResource {
         public List(String containerName, Map<String, String> filters) {
             this.containerName = containerName;
             this.filters = filters;
-            //returnType(new TypeToken<List<Object>>(){});
-//            target = target.path(containerName);
-//            for(String filter : new String[]{"prefix","delimiter","path","marker"}) {
-//                if(filters.get(filter) != null) {
-//                    target = target.queryParam(filter, filters.get(filter));
-//                }
-//            }
-//            return target.request(MediaType.APPLICATION_JSON).get(new GenericType<List<Object>>(){});
         }
         
     }
@@ -90,7 +82,6 @@ public class ContainerResource {
         public CreateDirectory(String container, String path) {
             this.container = container;
             this.path = path;
-//            endpoint.path(container).path(path).request().put(Entity.entity(new byte[1],"application/directory"));
         }
         
     }
@@ -104,7 +95,7 @@ public class ContainerResource {
         public Show(String containerName, String objectName) {
             this.containerName = containerName;
             this.objectName = objectName;
-//            return target.path(containerName).path(objectName).request(MediaType.APPLICATION_JSON).head();
+
         }
 
     }
@@ -115,11 +106,7 @@ public class ContainerResource {
         
         public Upload(ObjectForUpload objectForUpload) {
             this.objectForUpload = objectForUpload;
-//            Invocation.Builder invocationBuilder = target.path(objectForUpload.getContainer()).path(objectForUpload.getName()).request(MediaType.APPLICATION_JSON);
-//            for(String key : objectForUpload.getProperties().keySet()) {
-//                invocationBuilder.header("x-object-meta-" + key, objectForUpload.getProperties().get(key));
-//            }
-//            return invocationBuilder.put(Entity.entity(objectForUpload.getInputStream(), MediaType.APPLICATION_OCTET_STREAM), Response.class);
+
         }
 
     }
@@ -133,10 +120,6 @@ public class ContainerResource {
         public Download(String containerName, String objectName) {
             this.containerName = containerName;
             this.objectName = objectName;
-//            Response response = target.path(containerName).path(objectName).request(MediaType.APPLICATION_JSON).get();
-//            ObjectDownload objectDownload = new ObjectDownload();
-//            objectDownload.setInputStream((InputStream) response.getEntity());
-//            return objectDownload;
         }
 
     }
@@ -151,7 +134,6 @@ public class ContainerResource {
         public Delete(String containerName, String objectName) {
             this.containerName = containerName;
             this.objectName = objectName;
-            //return target.path(containerName).path(objectName).request(MediaType.APPLICATION_JSON).delete();
         }
 
     }
