@@ -82,14 +82,4 @@ public class AbsOpenStackCmd<T> extends OpenStackRequest<T> {
         return resultMap;
     }
 
-    /*
-    public WebTarget queryParam(WebTarget target) {
-        Map<String, String> map = getObjectParamMap(this.query);
-        for (String fieldName : map.keySet()) {
-            target = target.queryParam(fieldName, map.get(fieldName));
-        }
-        return target;
-    }
-    */
-
 }
