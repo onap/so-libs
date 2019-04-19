@@ -34,7 +34,6 @@ public interface ServerAction extends Serializable {
 
         public ChangePassword() {
             super();
-            // TODO Auto-generated constructor stub
         }
 
         public ChangePassword(String adminPass) {
@@ -423,7 +422,6 @@ public interface ServerAction extends Serializable {
 
         public GetVncConsole() {
             super();
-            // TODO Auto-generated constructor stub
         }
         
 
@@ -498,7 +496,6 @@ public interface ServerAction extends Serializable {
 
         public AssociateFloatingIp() {
             super();
-            // TODO Auto-generated constructor stub
         }
 
         public AssociateFloatingIp(String address) {
@@ -529,7 +526,6 @@ public interface ServerAction extends Serializable {
         
         public DisassociateFloatingIp() {
             super();
-            // TODO Auto-generated constructor stub
         }
 
         public DisassociateFloatingIp(String address) {
