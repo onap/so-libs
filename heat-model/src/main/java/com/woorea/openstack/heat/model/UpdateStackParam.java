@@ -13,8 +13,6 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
-
-
 package com.woorea.openstack.heat.model;
 
 import java.util.Map;

@@ -108,6 +108,7 @@ public class ServersResource {
         public Boot(ServerForCreate server) {
             super(client, HttpMethod.POST, "/servers", Entity.json(server), Server.class);
             this.server = server;
+
         }
     }
 
