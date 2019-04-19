@@ -62,10 +62,6 @@ public class SubnetsResource {
     public class Query extends OpenStackRequest<Subnets> {
 
         public Query(Subnet subnet) {
-            //super(subnet);
-//            target = target.path("v2.0").path("subnets");
-//            target = queryParam(target);
-//            return target.request(MediaType.APPLICATION_JSON).get(Subnets.class);
         }
     }
 
