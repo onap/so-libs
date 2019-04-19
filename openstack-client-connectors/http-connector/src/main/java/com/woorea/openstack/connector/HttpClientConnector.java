@@ -168,12 +168,15 @@ public class HttpClientConnector implements OpenStackClientConnector {
         catch (HttpResponseException e) {
             // What exactly does this mean?  It does not appear to get thrown for
             // non-2XX responses as documented.
+            logger.error ("HttpResponseException: " +e.getMessage());
             throw new OpenStackResponseException(e.getMessage(), e.getStatusCode());
         }
         catch (UnknownHostException e) {
+            logger.error ("Unknown Host: " +e.getMessage());
             throw new OpenStackConnectException("Unknown Host: " + e.getMessage());
         }
         catch (IOException e) {
+            logger.error ("IOException: " +e.getMessage());
             // Catch all other IOExceptions and throw as OpenStackConnectException
             throw new OpenStackConnectException(e.getMessage());
         }
