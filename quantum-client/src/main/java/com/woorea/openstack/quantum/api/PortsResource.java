@@ -62,10 +62,6 @@ public class PortsResource {
     public class Query extends OpenStackRequest<Ports> {
 
         public Query(Port port) {
-            //super(port);
-//            target = target.path("v2.0").path("ports");
-//            target = queryParam(target);
-//            return target.request(MediaType.APPLICATION_JSON).get(Ports.class);
         }
 
     }
