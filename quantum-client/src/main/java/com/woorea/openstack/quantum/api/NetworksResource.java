@@ -62,10 +62,7 @@ public class NetworksResource {
     public class Query extends OpenStackRequest<Networks> {
 
         public Query(Network network) {
-            //super(network);
-//            target = target.path("v2.0").path("networks");
-//            target = queryParam(target);
-//            return target.request(MediaType.APPLICATION_JSON).get(Networks.class);
+            
         }
     }
 
