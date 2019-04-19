@@ -60,10 +60,6 @@ public class RoutersResource {
         public class Query extends OpenStackRequest<Routers> {
 
             public Query(Router router) {
-                //super(network);
-//                target = target.path("v2.0").path("networks");
-//                target = queryParam(target);
-//                return target.request(MediaType.APPLICATION_JSON).get(Networks.class);
             }
         }
         public class Create extends OpenStackRequest<Router> {
