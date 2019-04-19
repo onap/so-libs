@@ -178,9 +178,7 @@ public class ServersResource {
 
     public UpdateServer update(String serverId, String name, String accessIPv4, String accessIPv6) {
         Server server = new Server();
-        //server.setName(name);
-        //server.setAccessIPv4(accessIPv4);
-        //server.setAccessIPv6(accessIPv6);
+
         return new UpdateServer(serverId, server);
     }
 
