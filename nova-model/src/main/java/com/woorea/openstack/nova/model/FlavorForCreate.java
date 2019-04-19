@@ -17,8 +17,6 @@
 package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
