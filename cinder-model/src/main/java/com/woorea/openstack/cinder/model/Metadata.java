@@ -1,5 +1,4 @@
-/*-
- * ============LICENSE_START=======================================================
+/* ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,34 +12,38 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+package com.woorea.openstack.cinder.model;
 
-package com.woorea.openstack.heat.model;
+import java.util.Map;
 
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
+public class Metadata {
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+    private Map<String, String> metadata;
 
-
-public class Resources implements Iterable<Resource>, Serializable {
-    @JsonProperty("resources")
-    private List<Resource> list;
-
-    public List<Resource> getList() {
-        return list;
+    /**
+     * @return the metadata
+     */
+    public Map<String, String> getMetadata() {
+        return metadata;
     }
 
-    @Override
-    public Iterator<Resource> iterator() {
-        return list.iterator();
+    /**
+     * Set the metadata
+     *
+     * @param metadata
+     */
+    public void setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "Resources{" +
-                "list=" + list +
-                '}';
+        return "Metadata [metadata=" + metadata + "]";
     }
+
 }

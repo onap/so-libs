@@ -16,39 +16,31 @@
 
 package com.woorea.openstack.heat;
 
+import com.woorea.openstack.base.client.HttpMethod;
 import com.woorea.openstack.base.client.OpenStackClient;
-import com.woorea.openstack.base.client.OpenStackClientConnector;
+import com.woorea.openstack.base.client.OpenStackRequest;
 import com.woorea.openstack.heat.model.Events;
 
 /**
- * Reference: http://api.openstack.org/api-ref-orchestration.html
+ * v1/{tenant_id}/stacks/{stack_name}/{stack_id}/events
  */
-public class Heat extends OpenStackClient {
+public class StackEvents {
+	private final OpenStackClient client;
 
-    private final StackResource stacks;
-    private final ResourcesResource resources;
-    private final StackEvents events;
+	public StackEvents(OpenStackClient client) {
+		this.client = client;
+	}
 
-    public Heat(String endpoint, OpenStackClientConnector connector) {
-        super(endpoint, connector);
-        stacks = new StackResource(this);
-        resources = new ResourcesResource(this);
-        events = new StackEvents(this);
-    }
+	public ListEvents listEvents(String name, String id) {
+		return new ListEvents(name, id);
+	}
 
-    public Heat(String endpoint) {
-        this(endpoint, null);
-    }
-
-    public StackResource getStacks() {
-        return stacks;
-    }
-
-    public ResourcesResource getResources() {
-        return resources;
-    }
-    
-    public StackEvents getEvents() {
-        return events;
-    }
+	/**
+	 * v1/​{tenant_id}​/stacks/​{stack_name}​/resources
+	 */
+	public class ListEvents extends OpenStackRequest<Events> {
+		public ListEvents(String name, String id) {
+			super(client, HttpMethod.GET, "/stacks/" + name + "/" + id + "/events", null, Events.class);
+		}
+	}
 }

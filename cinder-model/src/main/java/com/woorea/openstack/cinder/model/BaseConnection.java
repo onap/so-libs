@@ -1,5 +1,4 @@
-/*-
- * ============LICENSE_START=======================================================
+/* ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,34 +12,31 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
-
-package com.woorea.openstack.heat.model;
+package com.woorea.openstack.cinder.model;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
+public abstract class BaseConnection implements Serializable {
+    @JsonProperty("connector")
+    private Map<String, Object> connector = new HashMap<String, Object>();
 
-public class Resources implements Iterable<Resource>, Serializable {
-    @JsonProperty("resources")
-    private List<Resource> list;
-
-    public List<Resource> getList() {
-        return list;
+    /**
+     * @return the connector
+     */
+    public Map<String, Object> getConnector() {
+        return connector;
     }
 
-    @Override
-    public Iterator<Resource> iterator() {
-        return list.iterator();
+    /**
+     * @param connector
+     *            the connector to set
+     */
+    public void setConnector(Map<String, Object> connector) {
+        this.connector = connector;
     }
 
-    @Override
-    public String toString() {
-        return "Resources{" +
-                "list=" + list +
-                '}';
-    }
 }

@@ -74,7 +74,7 @@ public class Network implements Serializable {
     /**
      * @return the status
      */
-    @JsonIgnore
+    
     public String getStatus() {
         return status;
     }
@@ -91,7 +91,7 @@ public class Network implements Serializable {
     /**
      * @return the subnets
      */
-    @JsonIgnore
+    
     public List<String> getSubnets() {
         return subnets;
     }
@@ -125,7 +125,7 @@ public class Network implements Serializable {
      * @deprecated
      */
     @Deprecated
-    @JsonIgnore
+    
     public String getProviderPhyNet() {
         return getProviderPhysicalNetwork();
     }
@@ -136,7 +136,7 @@ public class Network implements Serializable {
      * @deprecated
      */
     @Deprecated
-    @JsonIgnore
+    
     public void setProviderPhyNet(String providerPhyNet) {
         setProviderPhysicalNetwork(providerPhyNet);
     }
@@ -144,7 +144,7 @@ public class Network implements Serializable {
     /**
      * @return the adminStateUp
      */
-    @JsonIgnore
+    
     public boolean isAdminStateUp() {
         return adminStateUp;
     }
@@ -181,7 +181,7 @@ public class Network implements Serializable {
      * @deprecated
      */
     @Deprecated
-    @JsonIgnore
+    
     public String getNetType() {
         return getProviderNetworkType();
     }
@@ -192,7 +192,7 @@ public class Network implements Serializable {
      * @deprecated
      */
     @Deprecated
-    @JsonIgnore
+    
     public void setNetType(String netType) {
         setProviderNetworkType(netType);
     }
@@ -215,7 +215,7 @@ public class Network implements Serializable {
     /**
      * @return the id
      */
-    @JsonIgnore
+    
     public String getId() {
         return id;
     }
@@ -249,7 +249,7 @@ public class Network implements Serializable {
      * @deprecated
      */
     @Deprecated
-    @JsonIgnore
+    
     public String getProviderSegID() {
         return getProviderSegmentationId() == null ? null : Integer.toString(getProviderSegmentationId());
     }
@@ -260,7 +260,7 @@ public class Network implements Serializable {
      * @deprecated
      */
     @Deprecated
-    @JsonIgnore
+    
     public void setProviderSegID(String providerSegID) {
         setProviderSegmentationId(providerSegID == null ? null : Integer.parseInt(providerSegID));
     }
@@ -302,7 +302,7 @@ public class Network implements Serializable {
      */
     public enum NetworkType { BASIC, PROVIDER, MULTI_PROVIDER };
     
-    @JsonIgnore
+    
     public NetworkType getNetworkType () {
         if (segments != null)
             return NetworkType.MULTI_PROVIDER;

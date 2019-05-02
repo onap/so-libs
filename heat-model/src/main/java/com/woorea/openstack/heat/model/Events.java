@@ -17,30 +17,33 @@
 package com.woorea.openstack.heat.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
 
-public class Resources implements Iterable<Resource>, Serializable {
-    @JsonProperty("resources")
-    private List<Resource> list;
 
-    public List<Resource> getList() {
-        return list;
+public class Events implements Iterable<Event>, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3598543745379474704L;
+	
+	@JsonProperty("events")
+	private List<Event> events = new ArrayList<>();
+
+    public List<Event> getEvents() {
+        return events;
     }
-
+	
     @Override
-    public Iterator<Resource> iterator() {
-        return list.iterator();
+    public Iterator<Event> iterator() {
+        return events.iterator();
     }
 
-    @Override
-    public String toString() {
-        return "Resources{" +
-                "list=" + list +
-                '}';
-    }
+
+
 }
