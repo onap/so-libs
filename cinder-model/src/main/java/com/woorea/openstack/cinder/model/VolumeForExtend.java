@@ -1,5 +1,4 @@
-/*-
- * ============LICENSE_START=======================================================
+/* ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,34 +12,42 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
-
-package com.woorea.openstack.heat.model;
+package com.woorea.openstack.cinder.model;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+@JsonRootName("os-extend")
+public class VolumeForExtend implements Serializable {
 
-public class Resources implements Iterable<Resource>, Serializable {
-    @JsonProperty("resources")
-    private List<Resource> list;
+    @JsonProperty("new_size")
+    private Integer size;
 
-    public List<Resource> getList() {
-        return list;
+    /**
+     * @return the size
+     */
+    public Integer getSize() {
+        return size;
     }
 
-    @Override
-    public Iterator<Resource> iterator() {
-        return list.iterator();
+    /**
+     * @param size
+     *            the size to set
+     */
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "Resources{" +
-                "list=" + list +
-                '}';
+        return "VolumeForExtend [size=" + size + "]";
     }
+
 }

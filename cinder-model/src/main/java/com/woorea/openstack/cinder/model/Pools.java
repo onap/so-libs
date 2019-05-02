@@ -1,5 +1,4 @@
-/*-
- * ============LICENSE_START=======================================================
+/* ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,34 +12,36 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
-
-package com.woorea.openstack.heat.model;
+package com.woorea.openstack.cinder.model;
 
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
+/**
+ * Model for List of pools
+ */
+public class Pools implements Iterable<Pool>, Serializable {
 
-public class Resources implements Iterable<Resource>, Serializable {
-    @JsonProperty("resources")
-    private List<Resource> list;
+    @JsonProperty("pools")
+    private List<Pool> list;
 
-    public List<Resource> getList() {
+    public List<Pool> getList() {
         return list;
     }
 
+    public void setList(List<Pool> list) {
+        this.list = list;
+    }
+
     @Override
-    public Iterator<Resource> iterator() {
+    public Iterator<Pool> iterator() {
         return list.iterator();
     }
 
     @Override
     public String toString() {
-        return "Resources{" +
-                "list=" + list +
-                '}';
+        return "Pools [list=" + list + "]";
     }
 }

@@ -1,5 +1,4 @@
-/*-
- * ============LICENSE_START=======================================================
+/* ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,34 +12,53 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
-
-package com.woorea.openstack.heat.model;
+package com.woorea.openstack.cinder.model;
 
 import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
+@JsonRootName("volume_type")
+public class VolumeType implements Serializable {
 
-public class Resources implements Iterable<Resource>, Serializable {
-    @JsonProperty("resources")
-    private List<Resource> list;
+    private String id;
 
-    public List<Resource> getList() {
-        return list;
+    private String name;
+
+    @JsonProperty("extra_specs")
+    private Map<String, String> extraSpecs;
+
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
     }
 
-    @Override
-    public Iterator<Resource> iterator() {
-        return list.iterator();
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
     }
 
+    /**
+     * @return the extra_specs
+     */
+    public Map<String, String> getExtraSpecs() {
+        return extraSpecs;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
-        return "Resources{" +
-                "list=" + list +
-                '}';
+        return "VolumeType [id=" + id + ", name=" + name + ", extra_specs=" + extraSpecs + "]";
     }
+
 }
