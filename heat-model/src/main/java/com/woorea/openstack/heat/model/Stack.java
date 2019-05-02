@@ -41,6 +41,7 @@ public class Stack {
 
     @JsonProperty("links")
     private List<Link> links;
+   
 
     @JsonProperty("stack_status_reason")
     private String stackStatusReason;
@@ -59,6 +60,72 @@ public class Stack {
 
     @JsonProperty("id")
     private String id;
+    
+    @JsonProperty("template_description")
+    private String templateDescription;
+    
+    @JsonProperty("stack_owner")
+    private String stackOwner;
+    
+    @JsonProperty("disable_rollback")
+    private boolean disableRollback;
+    
+    @JsonProperty("stack_user_project_id")
+    private String userProjectId;
+    
+    @JsonProperty("timeout_mins")
+    private int timeouteMinutes;
+    
+    public String getTemplateDescription() {
+		return templateDescription;
+	}
+
+	public void setTemplateDescription(String templateDescription) {
+		this.templateDescription = templateDescription;
+	}
+
+	public String getStackOwner() {
+		return stackOwner;
+	}
+
+	public void setStackOwner(String stackOwner) {
+		this.stackOwner = stackOwner;
+	}
+
+	public boolean isDisableRollback() {
+		return disableRollback;
+	}
+
+	public void setDisableRollback(boolean disableRollback) {
+		this.disableRollback = disableRollback;
+	}
+
+	public String getUserProjectId() {
+		return userProjectId;
+	}
+
+	public void setUserProjectId(String userProjectId) {
+		this.userProjectId = userProjectId;
+	}
+
+	public int getTimeouteMinutes() {
+		return timeouteMinutes;
+	}
+
+	public void setTimeouteMinutes(int timeouteMinutes) {
+		this.timeouteMinutes = timeouteMinutes;
+	}
+
+	public String getProject() {
+		return project;
+	}
+
+	public void setProject(String project) {
+		this.project = project;
+	}
+
+	@JsonProperty("project")
+    private String project;
     
     @JsonProperty("files")
     private Map<String, Object> files = null;

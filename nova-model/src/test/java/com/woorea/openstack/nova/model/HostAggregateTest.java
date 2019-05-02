@@ -39,7 +39,7 @@ public class HostAggregateTest {
 
     private static final String JSON_FULL = "{" + EOL
         + "  \"aggregate\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
+        + "    \"id\" : 1," + EOL
         + "    \"name\" : \"name\"," + EOL
         + "    \"deleted\" : false," + EOL
         + "    \"hosts\" : [ \"hosts-v1\", \"hosts-v2\" ]," + EOL
@@ -48,9 +48,9 @@ public class HostAggregateTest {
         + "      \"metadata-k2\" : \"metadata-v2\"" + EOL
         + "    }," + EOL
         + "    \"availability_zone\" : \"availabilityzone\"," + EOL
-        + "    \"created_at\" : \"createdat\"," + EOL
-        + "    \"updated_at\" : \"updatedat\"," + EOL
-        + "    \"deleted_at\" : \"deletedat\"" + EOL
+        + "    \"created_at\" : \"2013-02-25T02:40:21Z\"," + EOL
+        + "    \"updated_at\" : \"2013-02-25T02:40:21Z\"," + EOL
+        + "    \"deleted_at\" : \"2013-02-25T02:40:21Z\"" + EOL
         + "  }" + EOL
         + "}";
 
@@ -97,7 +97,7 @@ public class HostAggregateTest {
         String name = hostaggregate.getName();
         Assert.assertNotNull(name);
         
-        String id = hostaggregate.getId();
+        Integer id = hostaggregate.getId();
         Assert.assertNotNull(id);
         
         String availabilityZone = hostaggregate.getAvailabilityZone();

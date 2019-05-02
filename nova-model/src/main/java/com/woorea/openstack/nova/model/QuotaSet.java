@@ -57,6 +57,15 @@ public class QuotaSet {
 
     @JsonProperty("key_pairs")
     private Integer keyPairs;
+    
+    @JsonProperty("fixed_ips")
+    private Integer fixedIps;
+    
+    @JsonProperty("server_group_members")
+    private Integer serverGroupMembers;
+    
+    @JsonProperty("server_groups")
+    private Integer serverGroups;
 
     public String getId() {
         return id;
@@ -66,7 +75,31 @@ public class QuotaSet {
         this.id = id;
     }
 
-    public Integer getMetadataItems() {
+    public Integer getFixedIps() {
+		return fixedIps;
+	}
+
+	public void setFixedIps(Integer fixedIps) {
+		this.fixedIps = fixedIps;
+	}
+
+	public Integer getServerGroupMembers() {
+		return serverGroupMembers;
+	}
+
+	public void setServerGroupMembers(Integer serverGroupMembers) {
+		this.serverGroupMembers = serverGroupMembers;
+	}
+
+	public Integer getServerGroups() {
+		return serverGroups;
+	}
+
+	public void setServerGroups(Integer serverGroups) {
+		this.serverGroups = serverGroups;
+	}
+
+	public Integer getMetadataItems() {
         return metadataItems;
     }
 

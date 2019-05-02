@@ -38,7 +38,7 @@ public class HostAggregatesTest {
 
     private static final String JSON_FULL = "{" + EOL
         + "  \"aggregates\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
+        + "    \"id\" : 1," + EOL
         + "    \"name\" : \"name\"," + EOL
         + "    \"deleted\" : false," + EOL
         + "    \"hosts\" : [ \"hosts-v1\", \"hosts-v2\" ]," + EOL
@@ -51,7 +51,7 @@ public class HostAggregatesTest {
         + "    \"updated_at\" : \"updatedat\"," + EOL
         + "    \"deleted_at\" : \"deletedat\"" + EOL
         + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
+        + "    \"id\" : 2," + EOL
         + "    \"name\" : \"name\"," + EOL
         + "    \"deleted\" : false," + EOL
         + "    \"hosts\" : [ \"hosts-v1\", \"hosts-v2\" ]," + EOL
