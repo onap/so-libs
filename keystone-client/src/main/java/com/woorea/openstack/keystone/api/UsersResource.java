@@ -82,8 +82,7 @@ public class UsersResource {
         private User user;
 
         public Update(String id, User user) {
-            super(client, HttpMethod.PUT, getUserString(id), Entity.json(user),
-                User.class);
+            super(client, HttpMethod.PUT, getUserString(id), Entity.json(user), User.class);
             this.user = user;
         }
     }

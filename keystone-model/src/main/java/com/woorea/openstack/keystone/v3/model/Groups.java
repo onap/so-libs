@@ -19,10 +19,9 @@ package com.woorea.openstack.keystone.v3.model;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Groups implements Iterable<Group>,  Serializable {
+public class Groups implements Iterable<Group>, Serializable {
 
     @JsonProperty("groups")
     private List<Group> list;
@@ -33,8 +32,10 @@ public class Groups implements Iterable<Group>,  Serializable {
     public List<Group> getList() {
         return list;
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
@@ -46,5 +47,5 @@ public class Groups implements Iterable<Group>,  Serializable {
     public Iterator<Group> iterator() {
         return list.iterator();
     }
-    
+
 }

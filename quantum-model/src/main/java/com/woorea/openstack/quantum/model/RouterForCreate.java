@@ -17,10 +17,8 @@
 package com.woorea.openstack.quantum.model;
 
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
 import java.io.Serializable;
 
 @JsonRootName("router")
@@ -49,15 +47,19 @@ public class RouterForCreate implements Serializable {
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public List<HostRoute> getRoutes() {
         return routes;
     }
+
     public void setRoutes(List<HostRoute> routes) {
         this.routes = routes;
     }
+
     public String getAdminStateUp() {
         return adminStateUp;
     }
@@ -65,29 +67,37 @@ public class RouterForCreate implements Serializable {
     public void setAdminStateUp(String adminStateUp) {
         this.adminStateUp = adminStateUp;
     }
+
     public String getStatus() {
         return status;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
+
     public GatewayInfo getExternalGatewayInfo() {
         return externalGatewayInfo;
     }
+
     public void setExternalGatewayInfo(GatewayInfo externalGatewayInfo) {
         this.externalGatewayInfo = externalGatewayInfo;
     }
+
     public String getTenantId() {
         return tenantId;
     }
+
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
     }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
-    
+
 }

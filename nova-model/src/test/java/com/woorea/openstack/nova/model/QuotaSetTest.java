@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,32 +33,18 @@ public class QuotaSetTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"quota_set\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"gigabytes\" : 77," + EOL
-        + "    \"ram\" : 38," + EOL
-        + "    \"instances\" : 86," + EOL
-        + "    \"volumes\" : 97," + EOL
-        + "    \"cores\" : 58," + EOL
-        + "    \"metadata_items\" : 97," + EOL
-        + "    \"injected_file_content_bytes\" : 86," + EOL
-        + "    \"injected_files\" : 87," + EOL
-        + "    \"floating_ips\" : 2," + EOL
-        + "    \"security_groups\" : 78," + EOL
-        + "    \"security_group_rules\" : 18," + EOL
-        + "    \"injected_file_path_bytes\" : 52," + EOL
-        + "    \"key_pairs\" : 90" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"quota_set\" : {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"gigabytes\" : 77," + EOL + "    \"ram\" : 38," + EOL + "    \"instances\" : 86," + EOL
+            + "    \"volumes\" : 97," + EOL + "    \"cores\" : 58," + EOL + "    \"metadata_items\" : 97," + EOL
+            + "    \"injected_file_content_bytes\" : 86," + EOL + "    \"injected_files\" : 87," + EOL
+            + "    \"floating_ips\" : 2," + EOL + "    \"security_groups\" : 78," + EOL
+            + "    \"security_group_rules\" : 18," + EOL + "    \"injected_file_path_bytes\" : 52," + EOL
+            + "    \"key_pairs\" : 90" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -75,59 +60,59 @@ public class QuotaSetTest {
     public void testMethods() throws Exception {
         QuotaSet quotaset = objectMapper.readValue(JSON_FULL, QuotaSet.class);
         quotaset.toString();
-        
+
         Integer injectedFileContentBytes = quotaset.getInjectedFileContentBytes();
         Assert.assertNotNull(injectedFileContentBytes);
         quotaset.setInjectedFileContentBytes(injectedFileContentBytes);
-        
+
         Integer injectedFiles = quotaset.getInjectedFiles();
         Assert.assertNotNull(injectedFiles);
         quotaset.setInjectedFiles(injectedFiles);
-        
+
         Integer instances = quotaset.getInstances();
         Assert.assertNotNull(instances);
         quotaset.setInstances(instances);
-        
+
         Integer gigabytes = quotaset.getGigabytes();
         Assert.assertNotNull(gigabytes);
         quotaset.setGigabytes(gigabytes);
-        
+
         Integer metadataItems = quotaset.getMetadataItems();
         Assert.assertNotNull(metadataItems);
         quotaset.setMetadataItems(metadataItems);
-        
+
         Integer volumes = quotaset.getVolumes();
         Assert.assertNotNull(volumes);
         quotaset.setVolumes(volumes);
-        
+
         Integer injectedFilePathBytes = quotaset.getInjectedFilePathBytes();
         Assert.assertNotNull(injectedFilePathBytes);
         quotaset.setInjectedFilePathBytes(injectedFilePathBytes);
-        
+
         Integer securityGroupRules = quotaset.getSecurityGroupRules();
         Assert.assertNotNull(securityGroupRules);
         quotaset.setSecurityGroupRules(securityGroupRules);
-        
+
         Integer floatingIps = quotaset.getFloatingIps();
         Assert.assertNotNull(floatingIps);
         quotaset.setFloatingIps(floatingIps);
-        
+
         Integer cores = quotaset.getCores();
         Assert.assertNotNull(cores);
         quotaset.setCores(cores);
-        
+
         String id = quotaset.getId();
         Assert.assertNotNull(id);
         quotaset.setId(id);
-        
+
         Integer securityGroups = quotaset.getSecurityGroups();
         Assert.assertNotNull(securityGroups);
         quotaset.setSecurityGroups(securityGroups);
-        
+
         Integer ram = quotaset.getRam();
         Assert.assertNotNull(ram);
         quotaset.setRam(ram);
-        
+
         Integer keyPairs = quotaset.getKeyPairs();
         Assert.assertNotNull(keyPairs);
         quotaset.setKeyPairs(keyPairs);

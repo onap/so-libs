@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,79 +33,38 @@ public class StacksTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"stacks\" : [ {" + EOL
-        + "    \"description\" : \"description\"," + EOL
-        + "    \"links\" : [ {" + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"rel\" : \"rel\"" + EOL
-        + "    }, {" + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"rel\" : \"rel\"" + EOL
-        + "    } ]," + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"files\" : {" + EOL
-        + "      \"files-k1\" : \"files-v1\"," + EOL
-        + "      \"files-k2\" : \"files-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"outputs\" : [ {" + EOL
-        + "      \"description\" : \"description\"," + EOL
-        + "      \"output_value\" : \"outputvalue\"," + EOL
-        + "      \"output_key\" : \"outputkey\"" + EOL
-        + "    }, {" + EOL
-        + "      \"description\" : \"description\"," + EOL
-        + "      \"output_value\" : \"outputvalue\"," + EOL
-        + "      \"output_key\" : \"outputkey\"" + EOL
-        + "    } ]," + EOL
-        + "    \"parameters\" : {" + EOL
-        + "      \"parameters-k1\" : \"parameters-v1\"," + EOL
-        + "      \"parameters-k2\" : \"parameters-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"stack_status_reason\" : \"stackstatusreason\"," + EOL
-        + "    \"stack_name\" : \"stackname\"," + EOL
-        + "    \"updated_time\" : 1488110400000," + EOL
-        + "    \"creation_time\" : 1488974400000," + EOL
-        + "    \"stack_status\" : \"stackstatus\"" + EOL
-        + "  }, {" + EOL
-        + "    \"description\" : \"description\"," + EOL
-        + "    \"links\" : [ {" + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"rel\" : \"rel\"" + EOL
-        + "    }, {" + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"rel\" : \"rel\"" + EOL
-        + "    } ]," + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"files\" : {" + EOL
-        + "      \"files-k1\" : \"files-v1\"," + EOL
-        + "      \"files-k2\" : \"files-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"outputs\" : [ {" + EOL
-        + "      \"description\" : \"description\"," + EOL
-        + "      \"output_value\" : \"outputvalue\"," + EOL
-        + "      \"output_key\" : \"outputkey\"" + EOL
-        + "    }, {" + EOL
-        + "      \"description\" : \"description\"," + EOL
-        + "      \"output_value\" : \"outputvalue\"," + EOL
-        + "      \"output_key\" : \"outputkey\"" + EOL
-        + "    } ]," + EOL
-        + "    \"parameters\" : {" + EOL
-        + "      \"parameters-k1\" : \"parameters-v1\"," + EOL
-        + "      \"parameters-k2\" : \"parameters-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"stack_status_reason\" : \"stackstatusreason\"," + EOL
-        + "    \"stack_name\" : \"stackname\"," + EOL
-        + "    \"updated_time\" : 1488110400000," + EOL
-        + "    \"creation_time\" : 1488974400000," + EOL
-        + "    \"stack_status\" : \"stackstatus\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"stacks\" : [ {" + EOL
+            + "    \"description\" : \"description\"," + EOL + "    \"links\" : [ {" + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"rel\" : \"rel\"" + EOL + "    }, {" + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"rel\" : \"rel\"" + EOL + "    } ]," + EOL
+            + "    \"id\" : \"id\"," + EOL + "    \"files\" : {" + EOL + "      \"files-k1\" : \"files-v1\"," + EOL
+            + "      \"files-k2\" : \"files-v2\"" + EOL + "    }," + EOL + "    \"outputs\" : [ {" + EOL
+            + "      \"description\" : \"description\"," + EOL + "      \"output_value\" : \"outputvalue\"," + EOL
+            + "      \"output_key\" : \"outputkey\"" + EOL + "    }, {" + EOL
+            + "      \"description\" : \"description\"," + EOL + "      \"output_value\" : \"outputvalue\"," + EOL
+            + "      \"output_key\" : \"outputkey\"" + EOL + "    } ]," + EOL + "    \"parameters\" : {" + EOL
+            + "      \"parameters-k1\" : \"parameters-v1\"," + EOL + "      \"parameters-k2\" : \"parameters-v2\"" + EOL
+            + "    }," + EOL + "    \"stack_status_reason\" : \"stackstatusreason\"," + EOL
+            + "    \"stack_name\" : \"stackname\"," + EOL + "    \"updated_time\" : 1488110400000," + EOL
+            + "    \"creation_time\" : 1488974400000," + EOL + "    \"stack_status\" : \"stackstatus\"" + EOL + "  }, {"
+            + EOL + "    \"description\" : \"description\"," + EOL + "    \"links\" : [ {" + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"rel\" : \"rel\"" + EOL + "    }, {" + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"rel\" : \"rel\"" + EOL + "    } ]," + EOL
+            + "    \"id\" : \"id\"," + EOL + "    \"files\" : {" + EOL + "      \"files-k1\" : \"files-v1\"," + EOL
+            + "      \"files-k2\" : \"files-v2\"" + EOL + "    }," + EOL + "    \"outputs\" : [ {" + EOL
+            + "      \"description\" : \"description\"," + EOL + "      \"output_value\" : \"outputvalue\"," + EOL
+            + "      \"output_key\" : \"outputkey\"" + EOL + "    }, {" + EOL
+            + "      \"description\" : \"description\"," + EOL + "      \"output_value\" : \"outputvalue\"," + EOL
+            + "      \"output_key\" : \"outputkey\"" + EOL + "    } ]," + EOL + "    \"parameters\" : {" + EOL
+            + "      \"parameters-k1\" : \"parameters-v1\"," + EOL + "      \"parameters-k2\" : \"parameters-v2\"" + EOL
+            + "    }," + EOL + "    \"stack_status_reason\" : \"stackstatusreason\"," + EOL
+            + "    \"stack_name\" : \"stackname\"," + EOL + "    \"updated_time\" : 1488110400000," + EOL
+            + "    \"creation_time\" : 1488974400000," + EOL + "    \"stack_status\" : \"stackstatus\"" + EOL + "  } ]"
+            + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -122,9 +80,10 @@ public class StacksTest {
     public void testMethods() throws Exception {
         Stacks stacks = objectMapper.readValue(JSON_FULL, Stacks.class);
         stacks.toString();
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Stack x : stacks) {
+        for (@SuppressWarnings("unused")
+        Stack x : stacks) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,23 +33,14 @@ public class FloatingIpTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"floating_ip\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"pool\" : \"pool\"," + EOL
-        + "    \"ip\" : \"ip\"," + EOL
-        + "    \"fixed_ip\" : \"fixedip\"," + EOL
-        + "    \"instance_id\" : \"instanceid\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"floating_ip\" : {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"pool\" : \"pool\"," + EOL + "    \"ip\" : \"ip\"," + EOL + "    \"fixed_ip\" : \"fixedip\"," + EOL
+            + "    \"instance_id\" : \"instanceid\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -66,19 +56,19 @@ public class FloatingIpTest {
     public void testMethods() throws Exception {
         FloatingIp floatingip = objectMapper.readValue(JSON_FULL, FloatingIp.class);
         floatingip.toString();
-        
+
         String instanceId = floatingip.getInstanceId();
         Assert.assertNotNull(instanceId);
-        
+
         String ip = floatingip.getIp();
         Assert.assertNotNull(ip);
-        
+
         String pool = floatingip.getPool();
         Assert.assertNotNull(pool);
-        
+
         String fixedIp = floatingip.getFixedIp();
         Assert.assertNotNull(fixedIp);
-        
+
         String id = floatingip.getId();
         Assert.assertNotNull(id);
     }

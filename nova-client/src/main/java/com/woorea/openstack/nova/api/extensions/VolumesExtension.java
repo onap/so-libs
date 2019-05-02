@@ -61,8 +61,7 @@ public class VolumesExtension {
     public class List extends OpenStackRequest<Volumes> {
 
         public List(boolean detail) {
-            super(CLIENT, HttpMethod.GET, detail ? "/os-volumes/detail"
-                    : "/os-volumes", null, Volumes.class);
+            super(CLIENT, HttpMethod.GET, detail ? "/os-volumes/detail" : "/os-volumes", null, Volumes.class);
         }
 
     }
@@ -72,8 +71,7 @@ public class VolumesExtension {
 
 
         public Create(VolumeForCreate volume) {
-            super(CLIENT, HttpMethod.POST, "/os-volumes", Entity.json(volume),
-                    Volume.class);
+            super(CLIENT, HttpMethod.POST, "/os-volumes", Entity.json(volume), Volume.class);
 
         }
 
@@ -84,8 +82,8 @@ public class VolumesExtension {
     public class UploadToImage extends OpenStackRequest<Void> {
 
         public UploadToImage(VolumeForImageCreate volumeForImageCreate) {
-            super(CLIENT, HttpMethod.POST, new StringBuilder("/volumes/")
-                            .append(volumeForImageCreate.getVolumeId() + "/action"),
+            super(CLIENT, HttpMethod.POST,
+                    new StringBuilder("/volumes/").append(volumeForImageCreate.getVolumeId() + "/action"),
                     Entity.json(volumeForImageCreate), Void.class);
         }
 
@@ -94,8 +92,7 @@ public class VolumesExtension {
     public class Show extends OpenStackRequest<Volume> {
 
         public Show(String id) {
-            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-volumes/")
-                    .append(id).toString(), null, Volume.class);
+            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-volumes/").append(id).toString(), null, Volume.class);
         }
 
     }
@@ -103,9 +100,8 @@ public class VolumesExtension {
     public class ShowMetadata extends OpenStackRequest<Metadata> {
 
         public ShowMetadata(String id) {
-            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-volumes/")
-                            .append(id).append("/metadata").toString(), null,
-                    Metadata.class);
+            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-volumes/").append(id).append("/metadata").toString(),
+                    null, Metadata.class);
         }
 
     }
@@ -113,8 +109,7 @@ public class VolumesExtension {
     public class Delete extends OpenStackRequest<Void> {
 
         public Delete(String id) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-volumes/")
-                    .append(id).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-volumes/").append(id).toString(), null, Void.class);
         }
 
     }

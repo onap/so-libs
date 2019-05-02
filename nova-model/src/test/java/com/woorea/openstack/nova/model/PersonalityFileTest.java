@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,16 +33,12 @@ public class PersonalityFileTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"path\" : \"path\"," + EOL
-        + "  \"contents\" : \"contents\"" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"path\" : \"path\"," + EOL + "  \"contents\" : \"contents\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -59,11 +54,11 @@ public class PersonalityFileTest {
     public void testMethods() throws Exception {
         PersonalityFile personalityfile = objectMapper.readValue(JSON_FULL, PersonalityFile.class);
         personalityfile.toString();
-        
+
         String path = personalityfile.getPath();
         Assert.assertNotNull(path);
         personalityfile.setPath(path);
-        
+
         String contents = personalityfile.getContents();
         Assert.assertNotNull(contents);
         personalityfile.setContents(contents);

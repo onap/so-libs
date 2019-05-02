@@ -26,7 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Authentication.Scope;
 import com.woorea.openstack.keystone.v3.model.Authentication.Scope.Project;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,22 +35,13 @@ public class ScopeTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"project\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"domain\" : {" + EOL
-        + "      \"id\" : \"id\"," + EOL
-        + "      \"name\" : \"name\"" + EOL
-        + "    }," + EOL
-        + "    \"name\" : \"name\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"project\" : {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"domain\" : {" + EOL + "      \"id\" : \"id\"," + EOL + "      \"name\" : \"name\"" + EOL + "    },"
+            + EOL + "    \"name\" : \"name\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -67,7 +57,7 @@ public class ScopeTest {
     public void testMethods() throws Exception {
         Scope scope = objectMapper.readValue(JSON_FULL, Scope.class);
         scope.toString();
-        
+
         Project project = scope.getProject();
         Assert.assertNotNull(project);
         scope.setProject(project);

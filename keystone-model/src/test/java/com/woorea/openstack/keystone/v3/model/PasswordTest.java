@@ -26,7 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Authentication.Identity.Password;
 import com.woorea.openstack.keystone.v3.model.Authentication.Identity.Password.User;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,23 +35,14 @@ public class PasswordTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"user\" : {" + EOL
-        + "    \"domain\" : {" + EOL
-        + "      \"id\" : \"id\"," + EOL
-        + "      \"name\" : \"name\"" + EOL
-        + "    }," + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"password\" : \"password\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"user\" : {" + EOL + "    \"domain\" : {" + EOL + "      \"id\" : \"id\"," + EOL
+                    + "      \"name\" : \"name\"" + EOL + "    }," + EOL + "    \"id\" : \"id\"," + EOL
+                    + "    \"name\" : \"name\"," + EOL + "    \"password\" : \"password\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -68,7 +58,7 @@ public class PasswordTest {
     public void testMethods() throws Exception {
         Password password = objectMapper.readValue(JSON_FULL, Password.class);
         password.toString();
-        
+
         User user = password.getUser();
         Assert.assertNotNull(user);
         password.setUser(user);

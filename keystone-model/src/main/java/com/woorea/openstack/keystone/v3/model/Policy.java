@@ -18,20 +18,19 @@ package com.woorea.openstack.keystone.v3.model;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("policy")
 public class Policy {
-    
+
     private String id;
 
     private String projectId;
-    
+
     private String type;
-    
+
     private String userId;
-    
+
     private Map<String, String> blob = new HashMap<>();
 
     public String getId() {
@@ -73,5 +72,5 @@ public class Policy {
     public void setBlob(Map<String, String> blob) {
         this.blob = blob;
     }
-    
+
 }

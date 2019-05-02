@@ -21,22 +21,19 @@ package com.woorea.openstack.nova;
 
 
 import static org.junit.Assert.fail;
-
 import org.junit.Test;
+
 public class NovaTest {
 
     @Test
     public void test() {
-        try
-        {
-            Nova nova = new Nova(null);    
-        }
-        catch(Exception ex)
-        {
+        try {
+            Nova nova = new Nova(null);
+        } catch (Exception ex) {
             fail("Exception while creating Nova");
         }
-        
-        
+
+
     }
 
 }

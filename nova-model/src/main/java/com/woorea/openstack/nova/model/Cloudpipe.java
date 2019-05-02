@@ -18,24 +18,23 @@ package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
-
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("cloudpipe")
 public class Cloudpipe implements Serializable {
-    
+
     private String projectId;
-    
+
     private String internalIp;
-    
+
     private String publicIp;
-    
+
     private String publicPort;
-    
+
     private String state;
-    
+
     private String instanceId;
-    
+
     private Calendar createdAt;
 
     /**
@@ -136,15 +135,16 @@ public class Cloudpipe implements Serializable {
         this.createdAt = createdAt;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "CloudPipe [projectId=" + projectId + ", internalIp="
-                + internalIp + ", publicIp=" + publicIp + ", publicPort="
-                + publicPort + ", state=" + state + ", instanceId="
-                + instanceId + ", createdAt=" + createdAt + "]";
+        return "CloudPipe [projectId=" + projectId + ", internalIp=" + internalIp + ", publicIp=" + publicIp
+                + ", publicPort=" + publicPort + ", state=" + state + ", instanceId=" + instanceId + ", createdAt="
+                + createdAt + "]";
     }
-    
+
 }

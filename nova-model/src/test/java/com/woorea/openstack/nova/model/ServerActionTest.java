@@ -22,21 +22,20 @@ package com.woorea.openstack.nova.model;
 
 import com.woorea.openstack.nova.model.ServerAction.ChangePassword;
 import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail; 
+import static org.junit.Assert.fail;
 
 
 public class ServerActionTest {
     private ChangePassword testObj = new ServerAction.ChangePassword();
 
     @Test
-    public void testSetAdminPass(){
+    public void testSetAdminPass() {
 
         try {
 
             testObj.setAdminPass("sai");
-            assertEquals( testObj.getAdminPass(), "sai");
+            assertEquals(testObj.getAdminPass(), "sai");
 
         } catch (Exception e) {
 
@@ -46,11 +45,11 @@ public class ServerActionTest {
     }
 
     @Test
-    public void testChangePasswdConstructor(){
+    public void testChangePasswdConstructor() {
 
         try {
             ServerAction.ChangePassword test = new ServerAction.ChangePassword("sai");
-            assertEquals( test.getAdminPass(), "sai");
+            assertEquals(test.getAdminPass(), "sai");
 
         } catch (Exception e) {
 
@@ -62,17 +61,16 @@ public class ServerActionTest {
     private ServerAction.Reboot testObj1 = new ServerAction.Reboot();
 
     @Test
-    public void testSetType(){
+    public void testSetType() {
         testObj1.setType("sai");
         assertEquals("sai", testObj1.getType());
     }
 
     private ServerAction.Rebuild testRebuild = new ServerAction.Rebuild();
-    
+
     @Test
-    public void testRebuild()
-    {
+    public void testRebuild() {
         testRebuild.setAccessIPv4("1.1.1.1");
-        assertEquals(testRebuild.getAccessIPv4(),"1.1.1.1");
+        assertEquals(testRebuild.getAccessIPv4(), "1.1.1.1");
     }
 }

@@ -17,7 +17,6 @@
 package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -25,26 +24,26 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class KeyPair implements Serializable {
 
     private String name;
-    
+
     @JsonProperty("user_id")
     private String userId;
-    
+
     @JsonProperty("public_key")
     private String publicKey;
-    
+
     @JsonProperty("private_key")
     private String privateKey;
-    
+
     private String fingerprint;
 
     public KeyPair() {
         super();
     }
-    
+
     public KeyPair(String name) {
         this.name = name;
     }
-    
+
     public KeyPair(String name, String publicKey) {
         this(name);
         this.publicKey = publicKey;
@@ -99,16 +98,17 @@ public class KeyPair implements Serializable {
         return fingerprint;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "KeyPair [name=" + name + ", userId=" + userId + ", publicKey="
-                + publicKey + ", privateKey=" + privateKey + ", fingerprint="
-                + fingerprint + "]";
+        return "KeyPair [name=" + name + ", userId=" + userId + ", publicKey=" + publicKey + ", privateKey="
+                + privateKey + ", fingerprint=" + fingerprint + "]";
     }
 
-    
-    
+
+
 }

@@ -44,11 +44,11 @@ public class NetworksResource {
         return new Update(net);
     }
 
-    public Delete delete(String netId){
+    public Delete delete(String netId) {
         return new Delete(netId);
     }
 
-    public Show show(String netId){
+    public Show show(String netId) {
         return new Show(netId);
     }
 
@@ -62,7 +62,7 @@ public class NetworksResource {
     public class Query extends OpenStackRequest<Networks> {
 
         public Query(Network network) {
-            
+
         }
     }
 
@@ -90,7 +90,7 @@ public class NetworksResource {
 
     public class Delete extends OpenStackRequest<Void> {
 
-        public Delete(String id){
+        public Delete(String id) {
             super(CLIENT, HttpMethod.DELETE, buildPath("networks/", id), null, Void.class);
         }
     }

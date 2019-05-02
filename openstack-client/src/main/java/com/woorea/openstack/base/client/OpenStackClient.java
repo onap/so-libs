@@ -70,23 +70,24 @@ public class OpenStackClient {
             try {
                 return connector.request(request);
             } catch (OpenStackResponseException e) {
-                if (e.getStatus() != OpenStackResponseStatus.NOT_AUTHORIZED
-                        || tokenProvider == null) {
+                if (e.getStatus() != OpenStackResponseStatus.NOT_AUTHORIZED || tokenProvider == null) {
                     throw e;
                 }
                 authException = e;
                 tokenProvider.expireToken();
             }
         }
-        if(null == authException){
-            authException = new OpenStackResponseException("Unknown issue",500);
+        if (null == authException) {
+            authException = new OpenStackResponseException("Unknown issue", 500);
         }
         throw authException;
     }
 
     public <T> T execute(OpenStackRequest<T> request) {
-        OpenStackResponse response =  request(request);
-        return (request.returnType() != null && request.returnType() != Void.class) ? response.getEntity(request.returnType()) : null;
+        OpenStackResponse response = request(request);
+        return (request.returnType() != null && request.returnType() != Void.class)
+                ? response.getEntity(request.returnType())
+                : null;
     }
 
     public void property(String property, String value) {

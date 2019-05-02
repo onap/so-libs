@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,33 +34,19 @@ public class RouterForCreateTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"router\" : {" + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"routes\" : [ {" + EOL
-        + "      \"destination\" : \"destination\"," + EOL
-        + "      \"nexthop\" : \"nexthop\"" + EOL
-        + "    }, {" + EOL
-        + "      \"destination\" : \"destination\"," + EOL
-        + "      \"nexthop\" : \"nexthop\"" + EOL
-        + "    } ]," + EOL
-        + "    \"admin_state_up\" : \"admin_state_up\"," + EOL
-        + "    \"status\" : \"status\"," + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"external_gateway_info\" : {" + EOL
-        + "      \"network_id\" : \"networkid\"" + EOL
-        + "    }," + EOL
-        + "    \"tenant_id\" : \"tenantid\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"router\" : {" + EOL + "    \"name\" : \"name\"," + EOL
+            + "    \"routes\" : [ {" + EOL + "      \"destination\" : \"destination\"," + EOL
+            + "      \"nexthop\" : \"nexthop\"" + EOL + "    }, {" + EOL + "      \"destination\" : \"destination\","
+            + EOL + "      \"nexthop\" : \"nexthop\"" + EOL + "    } ]," + EOL
+            + "    \"admin_state_up\" : \"admin_state_up\"," + EOL + "    \"status\" : \"status\"," + EOL
+            + "    \"id\" : \"id\"," + EOL + "    \"external_gateway_info\" : {" + EOL
+            + "      \"network_id\" : \"networkid\"" + EOL + "    }," + EOL + "    \"tenant_id\" : \"tenantid\"" + EOL
+            + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -78,32 +62,32 @@ public class RouterForCreateTest {
     public void testMethods() throws Exception {
         RouterForCreate routerforcreate = objectMapper.readValue(JSON_FULL, RouterForCreate.class);
         routerforcreate.toString();
-        
+
         List<HostRoute> routes = routerforcreate.getRoutes();
         Assert.assertNotNull(routes);
         Assert.assertEquals(2, routes.size());
         routerforcreate.setRoutes(routes);
-        
+
         String admin_state_up = routerforcreate.getAdminStateUp();
         Assert.assertNotNull(admin_state_up);
         routerforcreate.setAdminStateUp(admin_state_up);
-        
+
         String name = routerforcreate.getName();
         Assert.assertNotNull(name);
         routerforcreate.setName(name);
-        
+
         String tenantId = routerforcreate.getTenantId();
         Assert.assertNotNull(tenantId);
         routerforcreate.setTenantId(tenantId);
-        
+
         GatewayInfo externalGatewayInfo = routerforcreate.getExternalGatewayInfo();
         Assert.assertNotNull(externalGatewayInfo);
         routerforcreate.setExternalGatewayInfo(externalGatewayInfo);
-        
+
         String id = routerforcreate.getId();
         Assert.assertNotNull(id);
         routerforcreate.setId(id);
-        
+
         String status = routerforcreate.getStatus();
         Assert.assertNotNull(status);
         routerforcreate.setStatus(status);

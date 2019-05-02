@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,27 +34,16 @@ public class UpdateStackParamTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"template\" : \"template\"," + EOL
-        + "  \"parameters\" : {" + EOL
-        + "    \"parameters-k1\" : \"parameters-v1\"," + EOL
-        + "    \"parameters-k2\" : \"parameters-v2\"" + EOL
-        + "  }," + EOL
-        + "  \"environment\" : \"environment\"," + EOL
-        + "  \"files\" : {" + EOL
-        + "    \"files-k1\" : \"files-v1\"," + EOL
-        + "    \"files-k2\" : \"files-v2\"" + EOL
-        + "  }," + EOL
-        + "  \"template_url\" : \"templateurl\"," + EOL
-        + "  \"timeout_mins\" : 79," + EOL
-        + "  \"disable_rollback\" : true" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"template\" : \"template\"," + EOL + "  \"parameters\" : {"
+            + EOL + "    \"parameters-k1\" : \"parameters-v1\"," + EOL + "    \"parameters-k2\" : \"parameters-v2\""
+            + EOL + "  }," + EOL + "  \"environment\" : \"environment\"," + EOL + "  \"files\" : {" + EOL
+            + "    \"files-k1\" : \"files-v1\"," + EOL + "    \"files-k2\" : \"files-v2\"" + EOL + "  }," + EOL
+            + "  \"template_url\" : \"templateurl\"," + EOL + "  \"timeout_mins\" : 79," + EOL
+            + "  \"disable_rollback\" : true" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -72,33 +59,33 @@ public class UpdateStackParamTest {
     public void testMethods() throws Exception {
         UpdateStackParam updatestackparam = objectMapper.readValue(JSON_FULL, UpdateStackParam.class);
         updatestackparam.toString();
-        
+
         String template = updatestackparam.getTemplate();
         Assert.assertNotNull(template);
         updatestackparam.setTemplate(template);
-        
+
         String environment = updatestackparam.getEnvironment();
         Assert.assertNotNull(environment);
         updatestackparam.setEnvironment(environment);
-        
+
         int timeoutMinutes = updatestackparam.getTimeoutMinutes();
         Assert.assertNotNull(timeoutMinutes);
         updatestackparam.setTimeoutMinutes(timeoutMinutes);
-        
+
         boolean disableRollback = updatestackparam.getDisableRollback();
         Assert.assertNotNull(disableRollback);
         updatestackparam.setDisableRollback(disableRollback);
-        
-        Map<String,Object> files = updatestackparam.getFiles();
+
+        Map<String, Object> files = updatestackparam.getFiles();
         Assert.assertNotNull(files);
         Assert.assertEquals(2, files.size());
         updatestackparam.setFiles(files);
-        
-        Map<String,Object> parameters = updatestackparam.getParameters();
+
+        Map<String, Object> parameters = updatestackparam.getParameters();
         Assert.assertNotNull(parameters);
         Assert.assertEquals(2, parameters.size());
         updatestackparam.setParameters(parameters);
-        
+
         String templateUrl = updatestackparam.getTemplateUrl();
         Assert.assertNotNull(templateUrl);
         updatestackparam.setTemplateUrl(templateUrl);

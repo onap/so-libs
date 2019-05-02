@@ -19,7 +19,6 @@ package com.woorea.openstack.nova.model;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Extensions implements Iterable<Extension>, Serializable {
@@ -33,13 +32,15 @@ public class Extensions implements Iterable<Extension>, Serializable {
     public List<Extension> getList() {
         return list;
     }
-    
+
     @Override
     public Iterator<Extension> iterator() {
         return list.iterator();
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override

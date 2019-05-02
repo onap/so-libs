@@ -20,9 +20,9 @@ import com.woorea.openstack.base.client.OpenStackClient;
 import com.woorea.openstack.base.client.OpenStackRequest;
 
 public class AccountResource {
-    
+
     private final OpenStackClient CLIENT;
-    
+
     public AccountResource(OpenStackClient client) {
         CLIENT = client;
     }

@@ -21,31 +21,30 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("server")
 public class Server implements Serializable {
-    
+
     public static final class Addresses implements Serializable {
-        
+
         public static final class Address implements Serializable {
-            
+
             @JsonProperty("OS-EXT-IPS-MAC:mac_addr")
             private String macAddr;
 
             private String version;
-            
+
             private String addr;
-            
+
             @JsonProperty("OS-EXT-IPS:type")
             private String type;
 
-                        /**
-                         * @return the macAddr
-                         */
+            /**
+             * @return the macAddr
+             */
             public String getMacAddr() {
                 return macAddr;
             }
@@ -63,7 +62,7 @@ public class Server implements Serializable {
             public String getAddr() {
                 return addr;
             }
-            
+
 
             /**
              * @return the type
@@ -97,7 +96,7 @@ public class Server implements Serializable {
              * @param macAddr the mac addr to set
              */
             public void setMacAddr(String macAddr) {
-                this.macAddr= macAddr;
+                this.macAddr = macAddr;
             }
         }
 
@@ -107,6 +106,7 @@ public class Server implements Serializable {
         public void add(String key, List<Address> value) {
             addresses.put(key, value);
         }
+
         /**
          * @return the ip address List Map
          */
@@ -114,24 +114,26 @@ public class Server implements Serializable {
             return addresses;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see java.lang.Object#toString()
          */
         @Override
         public String toString() {
             return "Addresses List Map [" + addresses + "]";
         }
-        
+
     }
-    
+
     public static final class Fault {
-        
+
         private Integer code;
-        
+
         private String message;
-        
+
         private String details;
-        
+
         private Calendar created;
 
         /**
@@ -162,85 +164,87 @@ public class Server implements Serializable {
             return created;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see java.lang.Object#toString()
          */
         @Override
         public String toString() {
-            return "Fault [code=" + code + ", message=" + message
-                    + ", details=" + details + ", created=" + created + "]";
+            return "Fault [code=" + code + ", message=" + message + ", details=" + details + ", created=" + created
+                    + "]";
         }
-        
-        
+
+
     }
-        
+
 
     private String id;
-    
+
     private String name;
-    
+
     private Addresses addresses;
-    
+
     private List<Link> links;
-    
+
     private Image image;
-    
+
     private Flavor flavor;
-    
+
     private String accessIPv4;
-    
+
     private String accessIPv6;
-    
+
     @JsonProperty("config_drive")
     private String configDrive;
-    
+
     private String status;
-    
+
     private Integer progress;
-    
+
     private Fault fault;
-    
+
     @JsonProperty("tenant_id")
     private String tenantId;
-    
+
     @JsonProperty("user_id")
     private String userId;
-    
+
     @JsonProperty("key_name")
     private String keyName;
-    
+
     private String hostId;
-    
+
     private String updated;
-    
+
     private String created;
-    
+
     private Map<String, String> metadata;
-    
+
     @JsonProperty("security_groups")
     private List<SecurityGroup> securityGroups;
-    
+
     @JsonProperty("OS-EXT-STS:task_state")
     private String taskState;
-    
+
     @JsonProperty("OS-EXT-STS:power_state")
     private String powerState;
-    
+
     @JsonProperty("OS-EXT-STS:vm_state")
     private String vmState;
-    
+
     @JsonProperty("OS-EXT-SRV-ATTR:host")
     private String host;
-    
+
     @JsonProperty("OS-EXT-SRV-ATTR:instance_name")
     private String instanceName;
-    
+
     @JsonProperty("OS-EXT-SRV-ATTR:hypervisor_hostname")
     private String hypervisorHostname;
-    
+
     @JsonProperty("OS-DCF:diskConfig")
     private String diskConfig;
-    
+
     @JsonProperty("OS-EXT-AZ:availability_zone")
     private String availabilityZone;
 
@@ -252,9 +256,9 @@ public class Server implements Serializable {
 
     @JsonProperty("os-extended-volumes:volumes_attached")
     private List<String> osExtendedVolumesAttached;
-    
+
     private String uuid;
-    
+
     private String adminPass;
 
     /**
@@ -305,7 +309,7 @@ public class Server implements Serializable {
     public Flavor getFlavor() {
         return flavor;
     }
-    
+
     /**
      * @param flavor the flavor to set
      */
@@ -502,28 +506,23 @@ public class Server implements Serializable {
         return adminPass;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Server [id=" + id + ", name=" + name + ", addresses="
-                + addresses + ", links=" + links + ", image=" + image
-                + ", flavor=" + flavor + ", accessIPv4=" + accessIPv4
-                + ", accessIPv6=" + accessIPv6 + ", configDrive=" + configDrive
-                + ", status=" + status + ", progress=" + progress + ", fault="
-                + fault + ", tenantId=" + tenantId + ", userId=" + userId
-                + ", keyName=" + keyName + ", hostId=" + hostId + ", updated="
-                + updated + ", created=" + created + ", metadata=" + metadata
-                + ", securityGroups=" + securityGroups + ", taskState="
-                + taskState + ", powerState=" + powerState + ", vmState="
-                + vmState + ", host=" + host + ", instanceName=" + instanceName
-                + ", hypervisorHostname=" + hypervisorHostname
-                + ", diskConfig=" + diskConfig + ", availabilityZone="
-                + availabilityZone + ", launchedAt=" + launchedAt + ", terminatedAt="
-                + ", " + "osExtendedVolumesAttached=" + osExtendedVolumesAttached
-                + ", uuid=" + uuid + ", adminPass="
-                + adminPass + "]";
+        return "Server [id=" + id + ", name=" + name + ", addresses=" + addresses + ", links=" + links + ", image="
+                + image + ", flavor=" + flavor + ", accessIPv4=" + accessIPv4 + ", accessIPv6=" + accessIPv6
+                + ", configDrive=" + configDrive + ", status=" + status + ", progress=" + progress + ", fault=" + fault
+                + ", tenantId=" + tenantId + ", userId=" + userId + ", keyName=" + keyName + ", hostId=" + hostId
+                + ", updated=" + updated + ", created=" + created + ", metadata=" + metadata + ", securityGroups="
+                + securityGroups + ", taskState=" + taskState + ", powerState=" + powerState + ", vmState=" + vmState
+                + ", host=" + host + ", instanceName=" + instanceName + ", hypervisorHostname=" + hypervisorHostname
+                + ", diskConfig=" + diskConfig + ", availabilityZone=" + availabilityZone + ", launchedAt=" + launchedAt
+                + ", terminatedAt=" + ", " + "osExtendedVolumesAttached=" + osExtendedVolumesAttached + ", uuid=" + uuid
+                + ", adminPass=" + adminPass + "]";
     }
 
 }

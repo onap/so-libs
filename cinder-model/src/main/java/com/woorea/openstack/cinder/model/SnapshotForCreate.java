@@ -1,4 +1,5 @@
-/* ============LICENSE_START=======================================================
+/*-
+ * ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,10 +13,10 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.cinder.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -39,8 +40,7 @@ public class SnapshotForCreate implements Serializable {
     }
 
     /**
-     * @param volumeId
-     *            the volumeId to set
+     * @param volumeId the volumeId to set
      */
     public void setVolumeId(String volumeId) {
         this.volumeId = volumeId;
@@ -54,8 +54,7 @@ public class SnapshotForCreate implements Serializable {
     }
 
     /**
-     * @param force
-     *            the force to set
+     * @param force the force to set
      */
     public void setForce(Boolean force) {
         this.force = force;
@@ -69,8 +68,7 @@ public class SnapshotForCreate implements Serializable {
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -84,8 +82,7 @@ public class SnapshotForCreate implements Serializable {
     }
 
     /**
-     * @param description
-     *            the description to set
+     * @param description the description to set
      */
     public void setDescription(String description) {
         this.description = description;
@@ -98,8 +95,8 @@ public class SnapshotForCreate implements Serializable {
      */
     @Override
     public String toString() {
-        return "SnapshotForCreate [volumeId=" + volumeId + ", force=" + force
-                + ", name=" + name + ", description=" + description + "]";
+        return "SnapshotForCreate [volumeId=" + volumeId + ", force=" + force + ", name=" + name + ", description="
+                + description + "]";
     }
 
 }

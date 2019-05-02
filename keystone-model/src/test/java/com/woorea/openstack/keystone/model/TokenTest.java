@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.Calendar;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,23 +34,14 @@ public class TokenTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"id\" : \"id\"," + EOL
-        + "  \"issued_at\" : 1488024000000," + EOL
-        + "  \"expires\" : 1488628800000," + EOL
-        + "  \"tenant\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"description\" : \"description\"," + EOL
-        + "    \"enabled\" : false" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"id\" : \"id\"," + EOL + "  \"issued_at\" : 1488024000000,"
+            + EOL + "  \"expires\" : 1488628800000," + EOL + "  \"tenant\" : {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"name\" : \"name\"," + EOL + "    \"description\" : \"description\"," + EOL
+            + "    \"enabled\" : false" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -68,16 +57,16 @@ public class TokenTest {
     public void testMethods() throws Exception {
         Token token = objectMapper.readValue(JSON_FULL, Token.class);
         token.toString();
-        
+
         Calendar expires = token.getExpires();
         Assert.assertNotNull(expires);
-        
+
         String id = token.getId();
         Assert.assertNotNull(id);
-        
+
         Calendar issued_at = token.getIssued_at();
         Assert.assertNotNull(issued_at);
-        
+
         Tenant tenant = token.getTenant();
         Assert.assertNotNull(tenant);
     }

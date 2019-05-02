@@ -19,7 +19,6 @@ package com.woorea.openstack.heat.model;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -39,8 +38,6 @@ public class Resources implements Iterable<Resource>, Serializable {
 
     @Override
     public String toString() {
-        return "Resources{" +
-                "list=" + list +
-                '}';
+        return "Resources{" + "list=" + list + '}';
     }
 }

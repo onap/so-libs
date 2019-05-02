@@ -18,7 +18,6 @@ package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -125,15 +124,15 @@ public class VolumeForCreate implements Serializable {
         this.metadata = metadata;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "VolumeForCreate [size=" + size + ", availabilityZone="
-                + availabilityZone + ", name=" + name + ", description="
-                + description + ", snapshotId=" + snapshotId + ", metadata="
-                + metadata + "]";
+        return "VolumeForCreate [size=" + size + ", availabilityZone=" + availabilityZone + ", name=" + name
+                + ", description=" + description + ", snapshotId=" + snapshotId + ", metadata=" + metadata + "]";
     }
 
 }

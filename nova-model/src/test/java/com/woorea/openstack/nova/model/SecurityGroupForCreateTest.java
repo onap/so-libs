@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,20 +33,13 @@ public class SecurityGroupForCreateTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"security_group\" : {" + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"description\" : \"description\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"security_group\" : {" + EOL + "    \"name\" : \"name\","
+            + EOL + "    \"description\" : \"description\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -63,11 +55,11 @@ public class SecurityGroupForCreateTest {
     public void testMethods() throws Exception {
         SecurityGroupForCreate securitygroupforcreate = objectMapper.readValue(JSON_FULL, SecurityGroupForCreate.class);
         securitygroupforcreate.toString();
-        
+
         String name = securitygroupforcreate.getName();
         Assert.assertNotNull(name);
         securitygroupforcreate.setName(name);
-        
+
         String description = securitygroupforcreate.getDescription();
         Assert.assertNotNull(description);
         securitygroupforcreate.setDescription(description);

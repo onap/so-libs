@@ -21,7 +21,7 @@ import java.io.Serializable;
 public abstract class Authentication implements Serializable {
 
     private String tenantId;
-    
+
     private String tenantName;
 
     /**
@@ -51,5 +51,5 @@ public abstract class Authentication implements Serializable {
     public void setTenantName(String tenantName) {
         this.tenantName = tenantName;
     }
-    
+
 }

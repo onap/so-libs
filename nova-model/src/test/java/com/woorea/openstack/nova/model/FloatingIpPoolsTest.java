@@ -25,9 +25,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.FloatingIpPools.FloatingIpPool;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -37,19 +35,12 @@ public class FloatingIpPoolsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"floating_ip_pools\" : [ {" + EOL
-        + "    \"name\" : \"name\"" + EOL
-        + "  }, {" + EOL
-        + "    \"name\" : \"name\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"floating_ip_pools\" : [ {" + EOL
+            + "    \"name\" : \"name\"" + EOL + "  }, {" + EOL + "    \"name\" : \"name\"" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -65,13 +56,14 @@ public class FloatingIpPoolsTest {
     public void testMethods() throws Exception {
         FloatingIpPools floatingippools = objectMapper.readValue(JSON_FULL, FloatingIpPools.class);
         floatingippools.toString();
-        
+
         List<FloatingIpPool> list = floatingippools.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") FloatingIpPool x : floatingippools) {
+        for (@SuppressWarnings("unused")
+        FloatingIpPool x : floatingippools) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

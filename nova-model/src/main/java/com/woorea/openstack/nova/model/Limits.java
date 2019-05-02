@@ -19,7 +19,6 @@ package com.woorea.openstack.nova.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -92,9 +91,8 @@ public class Limits implements Serializable {
              */
             @Override
             public String toString() {
-                return "LimitEntry [nextAvailable=" + nextAvailable + ", unit="
-                        + unit + ", verb=" + verb + ", remaining=" + remaining
-                        + ", available=" + available + ", value=" + value + "]";
+                return "LimitEntry [nextAvailable=" + nextAvailable + ", unit=" + unit + ", verb=" + verb
+                        + ", remaining=" + remaining + ", available=" + available + ", value=" + value + "]";
             }
 
         }
@@ -133,8 +131,7 @@ public class Limits implements Serializable {
          */
         @Override
         public String toString() {
-            return "RateLimit [regex=" + regex + ", uri=" + uri + ", limit="
-                    + limit + "]";
+            return "RateLimit [regex=" + regex + ", uri=" + uri + ", limit=" + limit + "]";
         }
 
     }
@@ -242,7 +239,7 @@ public class Limits implements Serializable {
         public Integer getMaxSecurityGroupRules() {
             return maxSecurityGroupRules;
         }
-        
+
         /**
          * @return the maxTotalKeypairs
          */
@@ -284,7 +281,7 @@ public class Limits implements Serializable {
         public Integer getMaxSecurityGroups() {
             return maxSecurityGroups;
         }
-        
+
         /**
          * @return the totalVolumeGigabytesUsed
          */
@@ -369,11 +366,9 @@ public class Limits implements Serializable {
          */
         @Override
         public String toString() {
-            return "AbsoluteLimit [maxServerMeta=" + maxServerMeta
-                    + ", maxPersonality=" + maxPersonality + ", maxImageMeta="
-                    + maxImageMeta + ", maxPersonalitySize="
-                    + maxPersonalitySize + ", maxTotalCores=" + maxTotalCores
-                    + ", maxTotalInstances=" + maxTotalInstances
+            return "AbsoluteLimit [maxServerMeta=" + maxServerMeta + ", maxPersonality=" + maxPersonality
+                    + ", maxImageMeta=" + maxImageMeta + ", maxPersonalitySize=" + maxPersonalitySize
+                    + ", maxTotalCores=" + maxTotalCores + ", maxTotalInstances=" + maxTotalInstances
                     + ", maxTotalRAMSize=" + maxTotalRAMSize + "]";
         }
 

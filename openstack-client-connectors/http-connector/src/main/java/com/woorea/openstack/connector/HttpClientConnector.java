@@ -1,26 +1,19 @@
-/*
- * ONAP-SO
- * ============LICENSE_START==========================================
- * ===================================================================
- * Copyright (c) 2017 AT&T Intellectual Property. All rights reserved.
- * ===================================================================
+/*-
+ * ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *        http://www.apache.org/licenses/LICENSE-2.0
+ *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * ============LICENSE_END============================================
- *
- * ECOMP and OpenECOMP are trademarks
- * and service marks of AT&T Intellectual Property.
- *
+ * ============LICENSE_END=========================================================
  */
+
 
 package com.woorea.openstack.connector;
 
@@ -30,7 +23,6 @@ import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Map.Entry;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpResponseException;
@@ -47,7 +39,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -85,7 +76,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
         WRAPPED_MAPPER.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
     }
 
-    protected static <T> ObjectMapper getObjectMapper (Class<T> type) {
+    protected static <T> ObjectMapper getObjectMapper(Class<T> type) {
         return type.getAnnotation(JsonRootName.class) == null ? DEFAULT_MAPPER : WRAPPED_MAPPER;
     }
 
@@ -105,7 +96,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
 
             uri = uriBuilder.build();
         } catch (URISyntaxException e) {
-            throw new HttpClientException (e);
+            throw new HttpClientException(e);
         }
 
         HttpEntity entity = null;
@@ -114,17 +105,18 @@ public class HttpClientConnector implements OpenStackClientConnector {
 
             try {
                 // Get appropriate mapper, based on existence of a root element in Entity class
-                ObjectMapper mapper = getObjectMapper (request.entity().getEntity().getClass());
+                ObjectMapper mapper = getObjectMapper(request.entity().getEntity().getClass());
 
-                String entityJson = mapper.writeValueAsString (request.entity().getEntity());
+                String entityJson = mapper.writeValueAsString(request.entity().getEntity());
                 entity = new StringEntity(entityJson, ContentType.create(request.entity().getContentType()));
 
-                logger.debug ("Request JSON Body: " + entityJson.replaceAll("\"password\":\"[^\"]*\"", "\"password\":\"***\""));
+                logger.debug("Request JSON Body: "
+                        + entityJson.replaceAll("\"password\":\"[^\"]*\"", "\"password\":\"***\""));
 
             } catch (JsonProcessingException e) {
-                throw new HttpClientException ("Json processing error on request entity", e);
+                throw new HttpClientException("Json processing error on request entity", e);
             } catch (IOException e) {
-                throw new HttpClientException ("Json IO error on request entity", e);
+                throw new HttpClientException("Json IO error on request entity", e);
             }
         }
 
@@ -141,52 +133,46 @@ public class HttpClientConnector implements OpenStackClientConnector {
             httpRequest.addHeader(h.getKey(), sb.toString());
         }
 
-        logger.debug ("Sending HTTP request: " + httpRequest.toString());
+        logger.debug("Sending HTTP request: " + httpRequest.toString());
 
-        // Get the Response.  But don't get the body entity yet, as this response
-        // will be wrapped in an HttpClientResponse.  The HttpClientResponse
+        // Get the Response. But don't get the body entity yet, as this response
+        // will be wrapped in an HttpClientResponse. The HttpClientResponse
         // buffers the body in constructor, so can close the response here.
         HttpClientResponse httpClientResponse = null;
         CloseableHttpResponse httpResponse = null;
 
         // Catch known HttpClient exceptions, and wrap them in OpenStack Client Exceptions
-        // so calling functions can distinguish.  Only RuntimeExceptions are allowed.
+        // so calling functions can distinguish. Only RuntimeExceptions are allowed.
         try {
             httpResponse = httpClient.execute(httpRequest);
 
-            logger.debug ("Response status: " + httpResponse.getStatusLine().getStatusCode());
+            logger.debug("Response status: " + httpResponse.getStatusLine().getStatusCode());
 
-            httpClientResponse = new HttpClientResponse (httpResponse);
+            httpClientResponse = new HttpClientResponse(httpResponse);
 
             int status = httpResponse.getStatusLine().getStatusCode();
-            if (status == HttpStatus.SC_OK || status == HttpStatus.SC_CREATED ||
-                    status == HttpStatus.SC_NO_CONTENT || status == HttpStatus.SC_ACCEPTED)
-            {
+            if (status == HttpStatus.SC_OK || status == HttpStatus.SC_CREATED || status == HttpStatus.SC_NO_CONTENT
+                    || status == HttpStatus.SC_ACCEPTED) {
                 return httpClientResponse;
             }
-        }
-        catch (HttpResponseException e) {
-            // What exactly does this mean?  It does not appear to get thrown for
+        } catch (HttpResponseException e) {
+            // What exactly does this mean? It does not appear to get thrown for
             // non-2XX responses as documented.
-            logger.error ("HttpResponseException: " +e.getMessage());
+            logger.error("HttpResponseException: " + e.getMessage());
             throw new OpenStackResponseException(e.getMessage(), e.getStatusCode());
-        }
-        catch (UnknownHostException e) {
-            logger.error ("Unknown Host: " +e.getMessage());
+        } catch (UnknownHostException e) {
+            logger.error("Unknown Host: " + e.getMessage());
             throw new OpenStackConnectException("Unknown Host: " + e.getMessage());
-        }
-        catch (IOException e) {
-            logger.error ("IOException: " +e.getMessage());
+        } catch (IOException e) {
+            logger.error("IOException: " + e.getMessage());
             // Catch all other IOExceptions and throw as OpenStackConnectException
             throw new OpenStackConnectException(e.getMessage());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             // Catchall for anything else, must throw as a RuntimeException
-            logger.error ("Unexpected client exception: " +e.getMessage());
+            logger.error("Unexpected client exception: " + e.getMessage());
             throw new RuntimeException("Unexpected client exception", e);
-        }
-        finally {
-            // Have the body.  Close the stream
+        } finally {
+            // Have the body. Close the stream
             if (httpResponse != null)
                 try {
                     httpResponse.close();
@@ -197,8 +183,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
 
         // Get here on an error response (4XX-5XX)
         throw new OpenStackResponseException(httpResponse.getStatusLine().getReasonPhrase(),
-                httpResponse.getStatusLine().getStatusCode(),
-                httpClientResponse);
+                httpResponse.getStatusLine().getStatusCode(), httpClientResponse);
     }
 
     private <T> HttpUriRequest getHttpUriRequest(OpenStackRequest<T> request, URI uri, HttpEntity entity) {
@@ -206,7 +191,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
         switch (request.method()) {
             case POST:
                 HttpPost post = new HttpPost(uri);
-                post.setEntity (entity);
+                post.setEntity(entity);
                 httpRequest = post;
                 break;
 
@@ -216,7 +201,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
 
             case PUT:
                 HttpPut put = new HttpPut(uri);
-                put.setEntity (entity);
+                put.setEntity(entity);
                 httpRequest = put;
                 break;
 
@@ -231,7 +216,7 @@ public class HttpClientConnector implements OpenStackClientConnector {
     }
 
     private <T> void setUriBuilderParams(OpenStackRequest<T> request, URIBuilder uriBuilder) {
-        for(Entry<String, List<Object>> entry : request.queryParams().entrySet()) {
+        for (Entry<String, List<Object>> entry : request.queryParams().entrySet()) {
             for (Object o : entry.getValue()) {
                 uriBuilder.setParameter(entry.getKey(), String.valueOf(o));
             }

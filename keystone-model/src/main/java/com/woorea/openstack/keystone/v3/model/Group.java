@@ -23,12 +23,12 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Group {
 
     private String id;
-    
+
     @JsonProperty("domain_id")
     private String domainId;
-    
+
     private String name;
-    
+
     private String description;
 
     public String getId() {
@@ -62,5 +62,5 @@ public class Group {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
 }

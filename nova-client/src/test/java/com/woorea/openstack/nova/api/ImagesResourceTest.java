@@ -85,8 +85,7 @@ public class ImagesResourceTest {
     public class ShowMetadata extends OpenStackRequest<Metadata> {
 
         public ShowMetadata(String id) {
-            super(client, HttpMethod.GET, "/images/" + id + "/metadata", null,
-                Metadata.class);
+            super(client, HttpMethod.GET, "/images/" + id + "/metadata", null, Metadata.class);
         }
     }
 

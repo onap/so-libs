@@ -17,7 +17,6 @@
 package com.woorea.openstack.quantum.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -65,8 +64,7 @@ public class Segment implements Serializable {
      */
     @Override
     public String toString() {
-        return "Segment [ provider:physical_network=" + providerPhysicalNetwork +
-                ", provider:network_type=" + providerNetworkType +
-                ", provider:segmentation_id=" + providerSegmentationId + "]";
+        return "Segment [ provider:physical_network=" + providerPhysicalNetwork + ", provider:network_type="
+                + providerNetworkType + ", provider:segmentation_id=" + providerSegmentationId + "]";
     }
 }

@@ -36,19 +36,19 @@ public class PortsResource {
         return new List();
     }
 
-    public Create create(Port port){
+    public Create create(Port port) {
         return new Create(port);
     }
 
-    public Update update(Port port){
+    public Update update(Port port) {
         return new Update(port);
     }
 
-    public Delete delete(String portId){
+    public Delete delete(String portId) {
         return new Delete(portId);
     }
 
-    public Show show(String portId){
+    public Show show(String portId) {
         return new Show(portId);
     }
 
@@ -61,22 +61,21 @@ public class PortsResource {
 
     public class Query extends OpenStackRequest<Ports> {
 
-        public Query(Port port) {
-        }
+        public Query(Port port) {}
 
     }
 
 
     public class Create extends OpenStackRequest<Port> {
 
-        public Create(Port port){
+        public Create(Port port) {
             super(CLIENT, HttpMethod.POST, "ports", Entity.json(port), Port.class);
         }
     }
 
     public class Update extends OpenStackRequest<Port> {
 
-        public Update(Port port){
+        public Update(Port port) {
             super(CLIENT, HttpMethod.PUT, buildPath("ports/", port.getId()), Entity.json(port), Port.class);
         }
     }
@@ -90,7 +89,7 @@ public class PortsResource {
 
     public class Delete extends OpenStackRequest<Void> {
 
-        public Delete(String id){
+        public Delete(String id) {
             super(CLIENT, HttpMethod.DELETE, buildPath("ports/", id), null, Void.class);
         }
     }

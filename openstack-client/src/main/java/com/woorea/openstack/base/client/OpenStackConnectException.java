@@ -18,9 +18,8 @@
 package com.woorea.openstack.base.client;
 
 /**
- * Custom RuntimeException to report connection errors to Openstack endpoints.
- * Must be a RuntimeException to conform with OpenstackClient interface, which
- * does not declare specific Exceptions.
+ * Custom RuntimeException to report connection errors to Openstack endpoints. Must be a RuntimeException to conform
+ * with OpenstackClient interface, which does not declare specific Exceptions.
  */
 public class OpenStackConnectException extends OpenStackBaseException {
 

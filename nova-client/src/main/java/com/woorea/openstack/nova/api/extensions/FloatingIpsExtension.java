@@ -18,8 +18,6 @@ package com.woorea.openstack.nova.api.extensions;
 
 import java.util.HashMap;
 import java.util.Map;
-
-
 import com.woorea.openstack.base.client.Entity;
 import com.woorea.openstack.base.client.HttpMethod;
 import com.woorea.openstack.base.client.OpenStackClient;
@@ -54,7 +52,8 @@ public class FloatingIpsExtension {
     public class Deallocate extends OpenStackRequest<Void> {
 
         public Deallocate(String id) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuffer("/os-floating-ips/").append(id).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE, new StringBuffer("/os-floating-ips/").append(id).toString(), null,
+                    Void.class);
         }
 
     }
@@ -64,11 +63,11 @@ public class FloatingIpsExtension {
     }
 
     public Allocate allocate(String pool) {
-        Entity<?> entity=null;
-        if(pool!=null) {
+        Entity<?> entity = null;
+        if (pool != null) {
             Map<String, String> body = new HashMap<>();
             body.put("pool", pool);
-            entity=Entity.json(body);
+            entity = Entity.json(body);
         }
         return new Allocate(entity);
     }

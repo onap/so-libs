@@ -71,7 +71,8 @@ public class NetworksExtension {
     public class Show extends OpenStackRequest<Network> {
 
         public Show(String id) {
-            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-networks/").append(id).toString(), null, Network.class);
+            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-networks/").append(id).toString(), null,
+                    Network.class);
         }
 
     }
@@ -79,8 +80,8 @@ public class NetworksExtension {
     public class Disassociate extends OpenStackRequest<Void> {
 
         public Disassociate(String id) {
-            super(CLIENT, HttpMethod.POST, new StringBuilder("/os-networks/").append(id).toString(), Entity.json("{\"action\":\"disassociate\"}"), Void.class);
-            ;
+            super(CLIENT, HttpMethod.POST, new StringBuilder("/os-networks/").append(id).toString(),
+                    Entity.json("{\"action\":\"disassociate\"}"), Void.class);;
         }
 
     }
@@ -88,7 +89,8 @@ public class NetworksExtension {
     public class Delete extends OpenStackRequest<Void> {
 
         public Delete(String id) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-networks/").append(id).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-networks/").append(id).toString(), null,
+                    Void.class);
         }
 
     }

@@ -42,9 +42,8 @@ public class KeystoneTokenProvider {
     public Access getAccessByTenant(String tenantName) {
         Access access = hashTenantAccess.get(tenantName);
         if (access == null) {
-            access = keystone.tokens().authenticate(new UsernamePassword(username, password))
-                .withTenantName(tenantName)
-                .execute();
+            access = keystone.tokens().authenticate(new UsernamePassword(username, password)).withTenantName(tenantName)
+                    .execute();
             hashTenantAccess.put(tenantName, access);
         }
         return access;
@@ -59,8 +58,7 @@ public class KeystoneTokenProvider {
         return new OpenStackTokenProvider() {
             @Override
             public String getToken() {
-                return keystoneTokenProvider.getAccessByTenant(tenantName)
-                    .getToken().getId();
+                return keystoneTokenProvider.getAccessByTenant(tenantName).getToken().getId();
             }
 
             @Override

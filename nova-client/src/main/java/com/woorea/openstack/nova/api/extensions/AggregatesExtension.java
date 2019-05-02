@@ -39,13 +39,11 @@ public class AggregatesExtension {
         return new ShowAggregate(id);
     }
 
-    public UpdateAggregateMetadata updateAggregateMetadata(String id,
-                                                           String name, String availabilityZone) {
+    public UpdateAggregateMetadata updateAggregateMetadata(String id, String name, String availabilityZone) {
         return new UpdateAggregateMetadata(id, name, availabilityZone);
     }
 
-    public CreateAggregate createAggregate(String aggregateName,
-                                           String availabilityZoneName) {
+    public CreateAggregate createAggregate(String aggregateName, String availabilityZoneName) {
         return new CreateAggregate(aggregateName, availabilityZoneName);
     }
 
@@ -61,17 +59,14 @@ public class AggregatesExtension {
         return new RemoveHost(hostId, aggregateId);
     }
 
-    public SetMetadata setMetadata(String aggregateId,
-                                   String key, String value) {
+    public SetMetadata setMetadata(String aggregateId, String key, String value) {
         return new SetMetadata(aggregateId, key, value);
     }
 
     public class List extends OpenStackRequest<HostAggregates> {
 
         public List() {
-            super(CLIENT, HttpMethod.GET, "/os-aggregates",
-                    null,
-                    HostAggregates.class);
+            super(CLIENT, HttpMethod.GET, "/os-aggregates", null, HostAggregates.class);
         }
 
     }
@@ -79,27 +74,17 @@ public class AggregatesExtension {
     public class ShowAggregate extends OpenStackRequest<HostAggregate> {
 
         public ShowAggregate(String id) {
-            super(CLIENT, HttpMethod.GET,
-                    new StringBuffer("/os-aggregates/").append(id),
-                    null,
-                    HostAggregate.class);
+            super(CLIENT, HttpMethod.GET, new StringBuffer("/os-aggregates/").append(id), null, HostAggregate.class);
         }
 
     }
 
     public class UpdateAggregateMetadata extends OpenStackRequest<HostAggregate> {
-        public UpdateAggregateMetadata(String id,
-                                       String name, String availabilityZone) {
-            super(CLIENT, HttpMethod.PUT,
-                    new StringBuffer("/os-aggregates/").append(id),
-                    availabilityZone == null ?
-                            Entity.json("{\"aggregate\": {\"name\": \"" + name + "\" }}")
-                            :
-                            Entity.json("{\"aggregate\": {\"name\": \"" +
-                                    name +
-                                    "\", \"availability_zone\": \"" +
-                                    availabilityZone +
-                                    "\" }}"),
+        public UpdateAggregateMetadata(String id, String name, String availabilityZone) {
+            super(CLIENT, HttpMethod.PUT, new StringBuffer("/os-aggregates/").append(id),
+                    availabilityZone == null ? Entity.json("{\"aggregate\": {\"name\": \"" + name + "\" }}")
+                            : Entity.json("{\"aggregate\": {\"name\": \"" + name + "\", \"availability_zone\": \""
+                                    + availabilityZone + "\" }}"),
                     HostAggregate.class);
         }
 
@@ -108,18 +93,11 @@ public class AggregatesExtension {
     public class CreateAggregate extends OpenStackRequest<HostAggregate> {
 
         public CreateAggregate(String name, String availabilityZone) {
-            super(CLIENT, HttpMethod.POST,
-                    new StringBuffer("/os-aggregates"),
-                    availabilityZone == null ?
-                            Entity.json("{\"aggregate\": {\"name\": \"" +
-                                    name +
-                                    "\", \"availability_zone\": null }}")
-                            :
-                            Entity.json("{\"aggregate\": {\"name\": \"" +
-                                    name +
-                                    "\", \"availability_zone\": \"" +
-                                    availabilityZone +
-                                    "\" }}"),
+            super(CLIENT, HttpMethod.POST, new StringBuffer("/os-aggregates"),
+                    availabilityZone == null
+                            ? Entity.json("{\"aggregate\": {\"name\": \"" + name + "\", \"availability_zone\": null }}")
+                            : Entity.json("{\"aggregate\": {\"name\": \"" + name + "\", \"availability_zone\": \""
+                                    + availabilityZone + "\" }}"),
                     HostAggregate.class);
         }
 
@@ -128,22 +106,15 @@ public class AggregatesExtension {
     public class DeleteAggregate extends OpenStackRequest<Void> {
 
         public DeleteAggregate(String id) {
-            super(CLIENT, HttpMethod.DELETE,
-                    new StringBuffer("/os-aggregates/").append(id),
-                    null,
-                    null);
+            super(CLIENT, HttpMethod.DELETE, new StringBuffer("/os-aggregates/").append(id), null, null);
         }
     }
 
     public class AddHost extends OpenStackRequest<HostAggregate> {
 
         public AddHost(String aggregateId, String hostId) {
-            super(CLIENT, HttpMethod.POST,
-                    new StringBuffer("/os-aggregates/")
-                            .append(aggregateId).append("/action"),
-                    Entity.json("{\"add_host\": {\"host\": \"" +
-                            hostId + "\" }}"),
-                    HostAggregate.class);
+            super(CLIENT, HttpMethod.POST, new StringBuffer("/os-aggregates/").append(aggregateId).append("/action"),
+                    Entity.json("{\"add_host\": {\"host\": \"" + hostId + "\" }}"), HostAggregate.class);
         }
 
     }
@@ -151,12 +122,8 @@ public class AggregatesExtension {
     public class RemoveHost extends OpenStackRequest<HostAggregate> {
 
         public RemoveHost(String hostId, String aggregateId) {
-            super(CLIENT, HttpMethod.POST,
-                    new StringBuffer("/os-aggregates/")
-                            .append(aggregateId).append("/action"),
-                    Entity.json("{\"remove_host\": {\"host\": \"" +
-                            hostId + "\" }}"),
-                    HostAggregate.class);
+            super(CLIENT, HttpMethod.POST, new StringBuffer("/os-aggregates/").append(aggregateId).append("/action"),
+                    Entity.json("{\"remove_host\": {\"host\": \"" + hostId + "\" }}"), HostAggregate.class);
         }
 
     }
@@ -164,11 +131,8 @@ public class AggregatesExtension {
     public class SetMetadata extends OpenStackRequest<HostAggregate> {
 
         public SetMetadata(String aggregateId, String key, String value) {
-            super(CLIENT, HttpMethod.POST,
-                    new StringBuffer("/os-aggregates/")
-                            .append(aggregateId).append("/action"),
-                    Entity.json("{\"set_metadata\": {\"metadata\": { \"" +
-                            key + "\": \"" + value + "\" }}}"),
+            super(CLIENT, HttpMethod.POST, new StringBuffer("/os-aggregates/").append(aggregateId).append("/action"),
+                    Entity.json("{\"set_metadata\": {\"metadata\": { \"" + key + "\": \"" + value + "\" }}}"),
                     HostAggregate.class);
         }
     }

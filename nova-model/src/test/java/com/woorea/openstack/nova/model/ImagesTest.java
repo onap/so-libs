@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,85 +34,35 @@ public class ImagesTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"images\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"status\" : \"status\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"progress\" : 3," + EOL
-        + "    \"minRam\" : 62," + EOL
-        + "    \"minDisk\" : 69," + EOL
-        + "    \"created\" : 1485172800000," + EOL
-        + "    \"updated\" : 1486468800000," + EOL
-        + "    \"metadata\" : {" + EOL
-        + "      \"metadata-k1\" : \"metadata-v1\"," + EOL
-        + "      \"metadata-k2\" : \"metadata-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"server\" : {" + EOL
-        + "      \"id\" : \"id\"," + EOL
-        + "      \"links\" : [ {" + EOL
-        + "        \"rel\" : \"rel\"," + EOL
-        + "        \"href\" : \"href\"," + EOL
-        + "        \"type\" : \"type\"" + EOL
-        + "      }, {" + EOL
-        + "        \"rel\" : \"rel\"," + EOL
-        + "        \"href\" : \"href\"," + EOL
-        + "        \"type\" : \"type\"" + EOL
-        + "      } ]" + EOL
-        + "    }," + EOL
-        + "    \"links\" : [ {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    }, {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    } ]," + EOL
-        + "    \"OS-EXT-IMG-SIZE:size\" : 43" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"status\" : \"status\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"progress\" : 3," + EOL
-        + "    \"minRam\" : 62," + EOL
-        + "    \"minDisk\" : 69," + EOL
-        + "    \"created\" : 1485172800000," + EOL
-        + "    \"updated\" : 1486468800000," + EOL
-        + "    \"metadata\" : {" + EOL
-        + "      \"metadata-k1\" : \"metadata-v1\"," + EOL
-        + "      \"metadata-k2\" : \"metadata-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"server\" : {" + EOL
-        + "      \"id\" : \"id\"," + EOL
-        + "      \"links\" : [ {" + EOL
-        + "        \"rel\" : \"rel\"," + EOL
-        + "        \"href\" : \"href\"," + EOL
-        + "        \"type\" : \"type\"" + EOL
-        + "      }, {" + EOL
-        + "        \"rel\" : \"rel\"," + EOL
-        + "        \"href\" : \"href\"," + EOL
-        + "        \"type\" : \"type\"" + EOL
-        + "      } ]" + EOL
-        + "    }," + EOL
-        + "    \"links\" : [ {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    }, {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    } ]," + EOL
-        + "    \"OS-EXT-IMG-SIZE:size\" : 43" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"images\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"status\" : \"status\"," + EOL + "    \"name\" : \"name\"," + EOL + "    \"progress\" : 3," + EOL
+            + "    \"minRam\" : 62," + EOL + "    \"minDisk\" : 69," + EOL + "    \"created\" : 1485172800000," + EOL
+            + "    \"updated\" : 1486468800000," + EOL + "    \"metadata\" : {" + EOL
+            + "      \"metadata-k1\" : \"metadata-v1\"," + EOL + "      \"metadata-k2\" : \"metadata-v2\"" + EOL
+            + "    }," + EOL + "    \"server\" : {" + EOL + "      \"id\" : \"id\"," + EOL + "      \"links\" : [ {"
+            + EOL + "        \"rel\" : \"rel\"," + EOL + "        \"href\" : \"href\"," + EOL
+            + "        \"type\" : \"type\"" + EOL + "      }, {" + EOL + "        \"rel\" : \"rel\"," + EOL
+            + "        \"href\" : \"href\"," + EOL + "        \"type\" : \"type\"" + EOL + "      } ]" + EOL + "    },"
+            + EOL + "    \"links\" : [ {" + EOL + "      \"rel\" : \"rel\"," + EOL + "      \"href\" : \"href\"," + EOL
+            + "      \"type\" : \"type\"" + EOL + "    }, {" + EOL + "      \"rel\" : \"rel\"," + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"type\" : \"type\"" + EOL + "    } ]," + EOL
+            + "    \"OS-EXT-IMG-SIZE:size\" : 43" + EOL + "  }, {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"status\" : \"status\"," + EOL + "    \"name\" : \"name\"," + EOL + "    \"progress\" : 3," + EOL
+            + "    \"minRam\" : 62," + EOL + "    \"minDisk\" : 69," + EOL + "    \"created\" : 1485172800000," + EOL
+            + "    \"updated\" : 1486468800000," + EOL + "    \"metadata\" : {" + EOL
+            + "      \"metadata-k1\" : \"metadata-v1\"," + EOL + "      \"metadata-k2\" : \"metadata-v2\"" + EOL
+            + "    }," + EOL + "    \"server\" : {" + EOL + "      \"id\" : \"id\"," + EOL + "      \"links\" : [ {"
+            + EOL + "        \"rel\" : \"rel\"," + EOL + "        \"href\" : \"href\"," + EOL
+            + "        \"type\" : \"type\"" + EOL + "      }, {" + EOL + "        \"rel\" : \"rel\"," + EOL
+            + "        \"href\" : \"href\"," + EOL + "        \"type\" : \"type\"" + EOL + "      } ]" + EOL + "    },"
+            + EOL + "    \"links\" : [ {" + EOL + "      \"rel\" : \"rel\"," + EOL + "      \"href\" : \"href\"," + EOL
+            + "      \"type\" : \"type\"" + EOL + "    }, {" + EOL + "      \"rel\" : \"rel\"," + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"type\" : \"type\"" + EOL + "    } ]," + EOL
+            + "    \"OS-EXT-IMG-SIZE:size\" : 43" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -130,13 +78,14 @@ public class ImagesTest {
     public void testMethods() throws Exception {
         Images images = objectMapper.readValue(JSON_FULL, Images.class);
         images.toString();
-        
+
         List<Image> list = images.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Image x : images) {
+        for (@SuppressWarnings("unused")
+        Image x : images) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

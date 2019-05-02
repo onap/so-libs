@@ -19,10 +19,9 @@ package com.woorea.openstack.ceilometer;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.woorea.openstack.base.client.OpenStackRequest;
 
-public abstract class QueriableCeilometerCommand<T,R> extends OpenStackRequest<R> {
+public abstract class QueriableCeilometerCommand<T, R> extends OpenStackRequest<R> {
 
     protected List<String> fields = new ArrayList<>();
 

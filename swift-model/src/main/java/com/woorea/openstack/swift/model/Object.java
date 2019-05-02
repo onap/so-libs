@@ -18,22 +18,21 @@ package com.woorea.openstack.swift.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Object implements Serializable {
-    
+
     private String subdir;
-    
+
     private String name;
-    
+
     private String hash;
-    
+
     private int bytes;
-    
+
     @JsonProperty("content_type")
     private String contentType;
-    
+
     @JsonProperty("last_modified")
     private Calendar lastModified;
 
@@ -120,5 +119,5 @@ public class Object implements Serializable {
     public void setLastModified(Calendar lastModified) {
         this.lastModified = lastModified;
     }
-    
+
 }

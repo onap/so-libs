@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,28 +34,16 @@ public class CreateStackParamTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"template\" : \"template\"," + EOL
-        + "  \"parameters\" : {" + EOL
-        + "    \"parameters-k1\" : \"parameters-v1\"," + EOL
-        + "    \"parameters-k2\" : \"parameters-v2\"" + EOL
-        + "  }," + EOL
-        + "  \"environment\" : \"environment\"," + EOL
-        + "  \"files\" : {" + EOL
-        + "    \"files-k1\" : \"files-v1\"," + EOL
-        + "    \"files-k2\" : \"files-v2\"" + EOL
-        + "  }," + EOL
-        + "  \"stack_name\" : \"stackname\"," + EOL
-        + "  \"template_url\" : \"templateurl\"," + EOL
-        + "  \"timeout_mins\" : 79," + EOL
-        + "  \"disable_rollback\" : true" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"template\" : \"template\"," + EOL + "  \"parameters\" : {"
+            + EOL + "    \"parameters-k1\" : \"parameters-v1\"," + EOL + "    \"parameters-k2\" : \"parameters-v2\""
+            + EOL + "  }," + EOL + "  \"environment\" : \"environment\"," + EOL + "  \"files\" : {" + EOL
+            + "    \"files-k1\" : \"files-v1\"," + EOL + "    \"files-k2\" : \"files-v2\"" + EOL + "  }," + EOL
+            + "  \"stack_name\" : \"stackname\"," + EOL + "  \"template_url\" : \"templateurl\"," + EOL
+            + "  \"timeout_mins\" : 79," + EOL + "  \"disable_rollback\" : true" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -73,37 +59,37 @@ public class CreateStackParamTest {
     public void testMethods() throws Exception {
         CreateStackParam createstackparam = objectMapper.readValue(JSON_FULL, CreateStackParam.class);
         createstackparam.toString();
-        
+
         String template = createstackparam.getTemplate();
         Assert.assertNotNull(template);
         createstackparam.setTemplate(template);
-        
+
         String environment = createstackparam.getEnvironment();
         Assert.assertNotNull(environment);
         createstackparam.setEnvironment(environment);
-        
+
         int timeoutMinutes = createstackparam.getTimeoutMinutes();
         Assert.assertNotNull(timeoutMinutes);
         createstackparam.setTimeoutMinutes(timeoutMinutes);
-        
+
         boolean disableRollback = createstackparam.getDisableRollback();
         Assert.assertNotNull(disableRollback);
         createstackparam.setDisableRollback(disableRollback);
-        
-        Map<String,Object> files = createstackparam.getFiles();
+
+        Map<String, Object> files = createstackparam.getFiles();
         Assert.assertNotNull(files);
         Assert.assertEquals(2, files.size());
         createstackparam.setFiles(files);
-        
+
         String stackName = createstackparam.getStackName();
         Assert.assertNotNull(stackName);
         createstackparam.setStackName(stackName);
-        
-        Map<String,Object> parameters = createstackparam.getParameters();
+
+        Map<String, Object> parameters = createstackparam.getParameters();
         Assert.assertNotNull(parameters);
         Assert.assertEquals(2, parameters.size());
         createstackparam.setParameters(parameters);
-        
+
         String templateUrl = createstackparam.getTemplateUrl();
         Assert.assertNotNull(templateUrl);
         createstackparam.setTemplateUrl(templateUrl);

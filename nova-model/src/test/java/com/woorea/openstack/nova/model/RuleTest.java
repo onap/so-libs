@@ -27,7 +27,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.SecurityGroup.Rule;
 import com.woorea.openstack.nova.model.SecurityGroup.Rule.Group;
 import com.woorea.openstack.nova.model.SecurityGroup.Rule.IpRange;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -37,31 +36,17 @@ public class RuleTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"security_group_rule\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"group\" : {" + EOL
-        + "      \"name\" : \"name\"," + EOL
-        + "      \"tenant_id\" : \"tenantid\"" + EOL
-        + "    }," + EOL
-        + "    \"parent_group_id\" : \"parentgroupid\"," + EOL
-        + "    \"from_port\" : 7," + EOL
-        + "    \"to_port\" : 98," + EOL
-        + "    \"ip_protocol\" : \"ipprotocol\"," + EOL
-        + "    \"ip_range\" : {" + EOL
-        + "      \"cidr\" : \"cidr\"" + EOL
-        + "    }" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"security_group_rule\" : {" + EOL + "    \"id\" : \"id\","
+            + EOL + "    \"name\" : \"name\"," + EOL + "    \"group\" : {" + EOL + "      \"name\" : \"name\"," + EOL
+            + "      \"tenant_id\" : \"tenantid\"" + EOL + "    }," + EOL
+            + "    \"parent_group_id\" : \"parentgroupid\"," + EOL + "    \"from_port\" : 7," + EOL
+            + "    \"to_port\" : 98," + EOL + "    \"ip_protocol\" : \"ipprotocol\"," + EOL + "    \"ip_range\" : {"
+            + EOL + "      \"cidr\" : \"cidr\"" + EOL + "    }" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -77,28 +62,28 @@ public class RuleTest {
     public void testMethods() throws Exception {
         Rule rule = objectMapper.readValue(JSON_FULL, Rule.class);
         rule.toString();
-        
+
         String parentGroupId = rule.getParentGroupId();
         Assert.assertNotNull(parentGroupId);
-        
+
         String ipProtocol = rule.getIpProtocol();
         Assert.assertNotNull(ipProtocol);
-        
+
         IpRange ipRange = rule.getIpRange();
         Assert.assertNotNull(ipRange);
-        
+
         Integer fromPort = rule.getFromPort();
         Assert.assertNotNull(fromPort);
-        
+
         String name = rule.getName();
         Assert.assertNotNull(name);
-        
+
         String id = rule.getId();
         Assert.assertNotNull(id);
-        
+
         Integer toPort = rule.getToPort();
         Assert.assertNotNull(toPort);
-        
+
         Group group = rule.getGroup();
         Assert.assertNotNull(group);
     }

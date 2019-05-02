@@ -65,7 +65,8 @@ public class KeyPairsExtension {
 
 
         public Delete(String name) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-keypairs/").append(name).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-keypairs/").append(name).toString(), null,
+                    Void.class);
         }
 
     }

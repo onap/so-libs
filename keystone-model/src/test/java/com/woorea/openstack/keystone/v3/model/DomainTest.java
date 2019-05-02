@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Token.Domain;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -35,16 +34,12 @@ public class DomainTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"id\" : \"id\"," + EOL
-        + "  \"name\" : \"name\"" + EOL
-        + "}";
-    
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"id\" : \"id\"," + EOL + "  \"name\" : \"name\"" + EOL + "}";
+
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -60,11 +55,11 @@ public class DomainTest {
     public void testMethods() throws Exception {
         Domain domain = objectMapper.readValue(JSON_FULL, Domain.class);
         domain.toString();
-        
+
         String name = domain.getName();
         Assert.assertNotNull(name);
         domain.setName(name);
-        
+
         String id = domain.getId();
         Assert.assertNotNull(id);
         domain.setId(id);

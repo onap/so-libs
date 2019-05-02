@@ -17,38 +17,36 @@
 package com.woorea.openstack.keystone.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("tenant")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Tenant implements Serializable {
 
     private String id;
-    
+
     private String name;
-    
+
     private String description;
-    
+
     private Boolean enabled;
-    
+
     public Tenant(String name, String description, Boolean enabled) {
         this.name = name;
         this.description = description;
         this.enabled = enabled;
     }
-    
+
     public Tenant(String name, String description) {
         this(name, description, Boolean.TRUE);
     }
-    
+
     public Tenant(String name) {
         this(name, null);
     }
-    
-    public Tenant() {
-    }
+
+    public Tenant() {}
 
     /**
      * @return the id
@@ -106,13 +104,14 @@ public class Tenant implements Serializable {
         this.enabled = enabled;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Tenant [id=" + id + ", name=" + name + ", description="
-                + description + ", enabled=" + enabled + "]";
+        return "Tenant [id=" + id + ", name=" + name + ", description=" + description + ", enabled=" + enabled + "]";
     }
-    
+
 }

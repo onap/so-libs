@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,69 +34,35 @@ public class PortsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"ports\" : [ {" + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"binding:host_id\" : \"hostid\"," + EOL
-        + "    \"binding:vif_type\" : \"viftype\"," + EOL
-        + "    \"binding:vnic_type\" : \"vnictype\"," + EOL
-        + "    \"binding:vif_details\" : {" + EOL
-        + "      \"vifdetails-k1\" : \"vifdetails-v1\"," + EOL
-        + "      \"vifdetails-k2\" : \"vifdetails-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"binding:profile\" : {" + EOL
-        + "      \"profile-k1\" : \"profile-v1\"," + EOL
-        + "      \"profile-k2\" : \"profile-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"admin_state_up\" : false," + EOL
-        + "    \"device_id\" : \"deviceid\"," + EOL
-        + "    \"device_owner\" : \"deviceowner\"," + EOL
-        + "    \"fixed_ips\" : [ {" + EOL
-        + "      \"ip_address\" : \"address\"," + EOL
-        + "      \"subnet_id\" : \"subnetid\"" + EOL
-        + "    }, {" + EOL
-        + "      \"ip_address\" : \"address\"," + EOL
-        + "      \"subnet_id\" : \"subnetid\"" + EOL
-        + "    } ]," + EOL
-        + "    \"mac_address\" : \"macaddress\"," + EOL
-        + "    \"network_id\" : \"networkid\"," + EOL
-        + "    \"tenant_id\" : \"tenantid\"," + EOL
-        + "    \"security_groups\" : [ \"securitygroups-v1\", \"securitygroups-v2\" ]" + EOL
-        + "  }, {" + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"binding:host_id\" : \"hostid\"," + EOL
-        + "    \"binding:vif_type\" : \"viftype\"," + EOL
-        + "    \"binding:vnic_type\" : \"vnictype\"," + EOL
-        + "    \"binding:vif_details\" : {" + EOL
-        + "      \"vifdetails-k1\" : \"vifdetails-v1\"," + EOL
-        + "      \"vifdetails-k2\" : \"vifdetails-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"binding:profile\" : {" + EOL
-        + "      \"profile-k1\" : \"profile-v1\"," + EOL
-        + "      \"profile-k2\" : \"profile-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"admin_state_up\" : false," + EOL
-        + "    \"device_id\" : \"deviceid\"," + EOL
-        + "    \"device_owner\" : \"deviceowner\"," + EOL
-        + "    \"fixed_ips\" : [ {" + EOL
-        + "      \"ip_address\" : \"address\"," + EOL
-        + "      \"subnet_id\" : \"subnetid\"" + EOL
-        + "    }, {" + EOL
-        + "      \"ip_address\" : \"address\"," + EOL
-        + "      \"subnet_id\" : \"subnetid\"" + EOL
-        + "    } ]," + EOL
-        + "    \"mac_address\" : \"macaddress\"," + EOL
-        + "    \"network_id\" : \"networkid\"," + EOL
-        + "    \"tenant_id\" : \"tenantid\"," + EOL
-        + "    \"security_groups\" : [ \"securitygroups-v1\", \"securitygroups-v2\" ]" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"ports\" : [ {" + EOL + "    \"name\" : \"name\"," + EOL
+            + "    \"binding:host_id\" : \"hostid\"," + EOL + "    \"binding:vif_type\" : \"viftype\"," + EOL
+            + "    \"binding:vnic_type\" : \"vnictype\"," + EOL + "    \"binding:vif_details\" : {" + EOL
+            + "      \"vifdetails-k1\" : \"vifdetails-v1\"," + EOL + "      \"vifdetails-k2\" : \"vifdetails-v2\"" + EOL
+            + "    }," + EOL + "    \"binding:profile\" : {" + EOL + "      \"profile-k1\" : \"profile-v1\"," + EOL
+            + "      \"profile-k2\" : \"profile-v2\"" + EOL + "    }," + EOL + "    \"admin_state_up\" : false," + EOL
+            + "    \"device_id\" : \"deviceid\"," + EOL + "    \"device_owner\" : \"deviceowner\"," + EOL
+            + "    \"fixed_ips\" : [ {" + EOL + "      \"ip_address\" : \"address\"," + EOL
+            + "      \"subnet_id\" : \"subnetid\"" + EOL + "    }, {" + EOL + "      \"ip_address\" : \"address\","
+            + EOL + "      \"subnet_id\" : \"subnetid\"" + EOL + "    } ]," + EOL
+            + "    \"mac_address\" : \"macaddress\"," + EOL + "    \"network_id\" : \"networkid\"," + EOL
+            + "    \"tenant_id\" : \"tenantid\"," + EOL
+            + "    \"security_groups\" : [ \"securitygroups-v1\", \"securitygroups-v2\" ]" + EOL + "  }, {" + EOL
+            + "    \"name\" : \"name\"," + EOL + "    \"binding:host_id\" : \"hostid\"," + EOL
+            + "    \"binding:vif_type\" : \"viftype\"," + EOL + "    \"binding:vnic_type\" : \"vnictype\"," + EOL
+            + "    \"binding:vif_details\" : {" + EOL + "      \"vifdetails-k1\" : \"vifdetails-v1\"," + EOL
+            + "      \"vifdetails-k2\" : \"vifdetails-v2\"" + EOL + "    }," + EOL + "    \"binding:profile\" : {" + EOL
+            + "      \"profile-k1\" : \"profile-v1\"," + EOL + "      \"profile-k2\" : \"profile-v2\"" + EOL + "    },"
+            + EOL + "    \"admin_state_up\" : false," + EOL + "    \"device_id\" : \"deviceid\"," + EOL
+            + "    \"device_owner\" : \"deviceowner\"," + EOL + "    \"fixed_ips\" : [ {" + EOL
+            + "      \"ip_address\" : \"address\"," + EOL + "      \"subnet_id\" : \"subnetid\"" + EOL + "    }, {"
+            + EOL + "      \"ip_address\" : \"address\"," + EOL + "      \"subnet_id\" : \"subnetid\"" + EOL
+            + "    } ]," + EOL + "    \"mac_address\" : \"macaddress\"," + EOL + "    \"network_id\" : \"networkid\","
+            + EOL + "    \"tenant_id\" : \"tenantid\"," + EOL
+            + "    \"security_groups\" : [ \"securitygroups-v1\", \"securitygroups-v2\" ]" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -114,14 +78,15 @@ public class PortsTest {
     public void testMethods() throws Exception {
         Ports ports = objectMapper.readValue(JSON_FULL, Ports.class);
         ports.toString();
-        
+
         List<Port> list = ports.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
         ports.setList(list);
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Port x : ports) {
+        for (@SuppressWarnings("unused")
+        Port x : ports) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

@@ -17,7 +17,6 @@
 package com.woorea.openstack.keystone.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -25,18 +24,18 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Endpoint implements Serializable {
 
     private String id;
-    
+
     @JsonProperty("service_id")
     private String serviceId;
-    
+
     private String region;
-    
+
     @JsonProperty("publicurl")
     private String publicURL;
-    
+
     @JsonProperty("internalurl")
     private String internalURL;
-    
+
     @JsonProperty("adminurl")
     private String adminURL;
 
@@ -124,14 +123,15 @@ public class Endpoint implements Serializable {
         this.adminURL = adminURL;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Endpoint [id=" + id + ", serviceId=" + serviceId + ", region="
-                + region + ", publicURL=" + publicURL + ", internalURL="
-                + internalURL + ", adminURL=" + adminURL + "]";
+        return "Endpoint [id=" + id + ", serviceId=" + serviceId + ", region=" + region + ", publicURL=" + publicURL
+                + ", internalURL=" + internalURL + ", adminURL=" + adminURL + "]";
     }
-    
+
 }

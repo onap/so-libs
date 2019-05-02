@@ -16,7 +16,6 @@
 package com.woorea.openstack.heat.model;
 
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UpdateStackParam {
@@ -37,7 +36,7 @@ public class UpdateStackParam {
 
     @JsonProperty("disable_rollback")
     private boolean disableRollback = true;
-    
+
     @JsonProperty("files")
     private Map<String, Object> files;
 
@@ -85,11 +84,12 @@ public class UpdateStackParam {
 
     public String getEnvironment() {
         return environment;
-    }    
+    }
 
     public void setFiles(Map<String, Object> files) {
         this.files = files;
     }
+
     public Map<String, Object> getFiles() {
         return this.files;
     }
@@ -113,14 +113,8 @@ public class UpdateStackParam {
 
     @Override
     public String toString() {
-        return "UpdateStackParam{" +
-                " templateUrl='" + templateUrl + '\'' +
-                ", template='" + template + '\'' +
-                ", parameters=" + parameters +
-                ", timeoutMinutes=" + timeoutMinutes +
-                ", environment='" + environment + '\'' +
-                ", disableRollback='" + disableRollback + '\'' +
-                ", files=" + files +
-                '}';
+        return "UpdateStackParam{" + " templateUrl='" + templateUrl + '\'' + ", template='" + template + '\''
+                + ", parameters=" + parameters + ", timeoutMinutes=" + timeoutMinutes + ", environment='" + environment
+                + '\'' + ", disableRollback='" + disableRollback + '\'' + ", files=" + files + '}';
     }
 }

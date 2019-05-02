@@ -19,13 +19,21 @@ package com.woorea.openstack.glance.model;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Images implements Iterable<Image>, Serializable {
 
     @JsonProperty("images")
     private List<Image> list;
+
+    @JsonProperty("next")
+    private String next;
+
+    @JsonProperty("first")
+    private String first;
+
+    @JsonProperty("schema")
+    private String schema;
 
     /**
      * @return the list
@@ -34,9 +42,33 @@ public class Images implements Iterable<Image>, Serializable {
         return list;
     }
 
+    public String getNext() {
+        return next;
+    }
+
+    public void setNext(String next) {
+        this.next = next;
+    }
+
+    public String getFirst() {
+        return first;
+    }
+
+    public void setFirst(String first) {
+        this.first = first;
+    }
+
+    public String getSchema() {
+        return schema;
+    }
+
+    public void setSchema(String schema) {
+        this.schema = schema;
+    }
+
     @Override
     public Iterator<Image> iterator() {
         return list.iterator();
     }
-    
+
 }

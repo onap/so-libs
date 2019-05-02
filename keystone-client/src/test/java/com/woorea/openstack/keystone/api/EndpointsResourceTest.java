@@ -21,7 +21,6 @@ package com.woorea.openstack.keystone.api;
 
 import com.woorea.openstack.keystone.model.Endpoint;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class EndpointsResourceTest {

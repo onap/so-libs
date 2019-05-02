@@ -22,68 +22,67 @@ import com.woorea.openstack.base.client.OpenStackRequest;
 import com.woorea.openstack.swift.model.Container;
 
 public class ContainersResource {
-    
+
     private final OpenStackClient CLIENT;
-    
+
     public ContainersResource(OpenStackClient client) {
         CLIENT = client;
     }
-    
+
     public List list() {
         return new List();
     }
-    
+
     public Create create(String name) {
         return new Create(name);
     }
-    
+
     public Show show(String name) {
         return new Show(name);
     }
-    
+
     public Delete delete(String name) {
         return new Delete(name);
     }
-    
+
     public ContainerResource container(String name) {
         return new ContainerResource(CLIENT, name);
     }
-    
+
     public class List extends OpenStackRequest<java.util.List<Container>> {
 
-        public List() {
-        }
+        public List() {}
 
     }
 
 
     public class Create extends OpenStackRequest<Container> {
-        
+
         public Create(String containerName) {
 
         }
 
     }
-    
+
     public class Show extends OpenStackRequest<Container> {
 
         private String containerName;
-        
+
         public Show(String containerName) {
 
         }
 
     }
-    
+
     public class Delete extends OpenStackRequest<Void> {
 
         private String containerName;
-        
+
         public Delete(String containerName) {
             this.containerName = containerName;
 
         }
 
     }
-    
+
 }

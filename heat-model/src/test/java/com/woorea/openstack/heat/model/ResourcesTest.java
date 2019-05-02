@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,47 +34,27 @@ public class ResourcesTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"resources\" : [ {" + EOL
-        + "    \"links\" : [ {" + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"rel\" : \"rel\"" + EOL
-        + "    }, {" + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"rel\" : \"rel\"" + EOL
-        + "    } ]," + EOL
-        + "    \"resource_name\" : \"name\"," + EOL
-        + "    \"resource_status\" : \"status\"," + EOL
-        + "    \"physical_resource_id\" : \"physicalresourceid\"," + EOL
-        + "    \"logical_resource_id\" : \"logicalresourceid\"," + EOL
-        + "    \"required_by\" : [ \"requiredby-v1\", \"requiredby-v2\" ]," + EOL
-        + "    \"updated_time\" : 1488110400000," + EOL
-        + "    \"resource_type\" : \"type\"," + EOL
-        + "    \"resource_status_reason\" : \"statusreason\"" + EOL
-        + "  }, {" + EOL
-        + "    \"links\" : [ {" + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"rel\" : \"rel\"" + EOL
-        + "    }, {" + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"rel\" : \"rel\"" + EOL
-        + "    } ]," + EOL
-        + "    \"resource_name\" : \"name\"," + EOL
-        + "    \"resource_status\" : \"status\"," + EOL
-        + "    \"physical_resource_id\" : \"physicalresourceid\"," + EOL
-        + "    \"logical_resource_id\" : \"logicalresourceid\"," + EOL
-        + "    \"required_by\" : [ \"requiredby-v1\", \"requiredby-v2\" ]," + EOL
-        + "    \"updated_time\" : 1488110400000," + EOL
-        + "    \"resource_type\" : \"type\"," + EOL
-        + "    \"resource_status_reason\" : \"statusreason\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"resources\" : [ {" + EOL + "    \"links\" : [ {" + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"rel\" : \"rel\"" + EOL + "    }, {" + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"rel\" : \"rel\"" + EOL + "    } ]," + EOL
+            + "    \"resource_name\" : \"name\"," + EOL + "    \"resource_status\" : \"status\"," + EOL
+            + "    \"physical_resource_id\" : \"physicalresourceid\"," + EOL
+            + "    \"logical_resource_id\" : \"logicalresourceid\"," + EOL
+            + "    \"required_by\" : [ \"requiredby-v1\", \"requiredby-v2\" ]," + EOL
+            + "    \"updated_time\" : 1488110400000," + EOL + "    \"resource_type\" : \"type\"," + EOL
+            + "    \"resource_status_reason\" : \"statusreason\"" + EOL + "  }, {" + EOL + "    \"links\" : [ {" + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"rel\" : \"rel\"" + EOL + "    }, {" + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"rel\" : \"rel\"" + EOL + "    } ]," + EOL
+            + "    \"resource_name\" : \"name\"," + EOL + "    \"resource_status\" : \"status\"," + EOL
+            + "    \"physical_resource_id\" : \"physicalresourceid\"," + EOL
+            + "    \"logical_resource_id\" : \"logicalresourceid\"," + EOL
+            + "    \"required_by\" : [ \"requiredby-v1\", \"requiredby-v2\" ]," + EOL
+            + "    \"updated_time\" : 1488110400000," + EOL + "    \"resource_type\" : \"type\"," + EOL
+            + "    \"resource_status_reason\" : \"statusreason\"" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -92,13 +70,14 @@ public class ResourcesTest {
     public void testMethods() throws Exception {
         Resources resources = objectMapper.readValue(JSON_FULL, Resources.class);
         resources.toString();
-        
+
         List<Resource> list = resources.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Resource x : resources) {
+        for (@SuppressWarnings("unused")
+        Resource x : resources) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

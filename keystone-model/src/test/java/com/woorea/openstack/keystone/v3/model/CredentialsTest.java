@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,33 +34,17 @@ public class CredentialsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"credentials\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"projectId\" : \"projectid\"," + EOL
-        + "    \"type\" : \"type\"," + EOL
-        + "    \"userId\" : \"userid\"," + EOL
-        + "    \"blob\" : {" + EOL
-        + "      \"blob-k1\" : \"blob-v1\"," + EOL
-        + "      \"blob-k2\" : \"blob-v2\"" + EOL
-        + "    }" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"projectId\" : \"projectid\"," + EOL
-        + "    \"type\" : \"type\"," + EOL
-        + "    \"userId\" : \"userid\"," + EOL
-        + "    \"blob\" : {" + EOL
-        + "      \"blob-k1\" : \"blob-v1\"," + EOL
-        + "      \"blob-k2\" : \"blob-v2\"" + EOL
-        + "    }" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"credentials\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"projectId\" : \"projectid\"," + EOL + "    \"type\" : \"type\"," + EOL
+            + "    \"userId\" : \"userid\"," + EOL + "    \"blob\" : {" + EOL + "      \"blob-k1\" : \"blob-v1\"," + EOL
+            + "      \"blob-k2\" : \"blob-v2\"" + EOL + "    }" + EOL + "  }, {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"projectId\" : \"projectid\"," + EOL + "    \"type\" : \"type\"," + EOL
+            + "    \"userId\" : \"userid\"," + EOL + "    \"blob\" : {" + EOL + "      \"blob-k1\" : \"blob-v1\"," + EOL
+            + "      \"blob-k2\" : \"blob-v2\"" + EOL + "    }" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -78,13 +60,14 @@ public class CredentialsTest {
     public void testMethods() throws Exception {
         Credentials credentials = objectMapper.readValue(JSON_FULL, Credentials.class);
         credentials.toString();
-        
+
         List<Credential> list = credentials.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Credential x : credentials) {
+        for (@SuppressWarnings("unused")
+        Credential x : credentials) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

@@ -19,7 +19,6 @@ package com.woorea.openstack.quantum.model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -47,8 +46,7 @@ public class Port implements Serializable {
         }
 
         /**
-         * @param address
-         *            the address to set
+         * @param address the address to set
          */
         public void setAddress(String address) {
             this.address = address;
@@ -62,8 +60,7 @@ public class Port implements Serializable {
         }
 
         /**
-         * @param subnetId
-         *            the subnetId to set
+         * @param subnetId the subnetId to set
          */
         public void setSubnetId(String subnetId) {
             this.subnetId = subnetId;
@@ -151,11 +148,8 @@ public class Port implements Serializable {
 
         @Override
         public String toString() {
-            return "Binding [hostId=" + hostId
-                    + ", vifType=" + vifType +
-                    ", vnicType=" + vnicType +
-                    ", vifDetails=" + vifDetails +
-                    ", profile=" + profile + "]";
+            return "Binding [hostId=" + hostId + ", vifType=" + vifType + ", vnicType=" + vnicType + ", vifDetails="
+                    + vifDetails + ", profile=" + profile + "]";
         }
     }
 
@@ -190,7 +184,7 @@ public class Port implements Serializable {
     private List<String> securityGroups;
 
     @JsonUnwrapped
-    private   Binding binding;
+    private Binding binding;
 
     /**
      * @return the adminStateUp
@@ -200,8 +194,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param adminStateUp
-     *            the adminStateUp to set
+     * @param adminStateUp the adminStateUp to set
      */
     public void setAdminStateUp(Boolean adminStateUp) {
         this.adminStateUp = adminStateUp;
@@ -215,8 +208,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param deviceId
-     *            the deviceId to set
+     * @param deviceId the deviceId to set
      */
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
@@ -230,8 +222,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param deviceOwner
-     *            the deviceOwner to set
+     * @param deviceOwner the deviceOwner to set
      */
     public void setDeviceOwner(String deviceOwner) {
         this.deviceOwner = deviceOwner;
@@ -245,8 +236,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param list
-     *            the list to set
+     * @param list the list to set
      */
     public void setList(List<Ip> list) {
         this.list = list;
@@ -261,8 +251,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     @JsonProperty
     public void setId(String id) {
@@ -277,8 +266,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param macAddress
-     *            the macAddress to set
+     * @param macAddress the macAddress to set
      */
     public void setMacAddress(String macAddress) {
         this.macAddress = macAddress;
@@ -292,8 +280,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -307,8 +294,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param networkId
-     *            the networkId to set
+     * @param networkId the networkId to set
      */
     public void setNetworkId(String networkId) {
         this.networkId = networkId;
@@ -323,8 +309,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param status
-     *            the status to set
+     * @param status the status to set
      */
     @JsonProperty
     public void setStatus(String status) {
@@ -339,8 +324,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param tenantId
-     *            the tenantId to set
+     * @param tenantId the tenantId to set
      */
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
@@ -354,8 +338,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param securityGroups
-     *            IDs of security groups to associate to the port
+     * @param securityGroups IDs of security groups to associate to the port
      */
     public void setSecurityGroups(List<String> securityGroups) {
         this.securityGroups = securityGroups;
@@ -369,8 +352,7 @@ public class Port implements Serializable {
     }
 
     /**
-     * @param binding
-     *            The port bindings by which the port is bind to network on host
+     * @param binding The port bindings by which the port is bind to network on host
      */
     public void setBinding(Binding binding) {
         this.binding = binding;
@@ -378,12 +360,9 @@ public class Port implements Serializable {
 
     @Override
     public String toString() {
-        return "Port [id=" + id + ", name=" + name + ", mac_address="
-                + macAddress + ", admin_state_up=" + adminStateUp + ", device_id=" + deviceId
-                + ", device_owner=" + deviceOwner + ", fixed_ips=" + list
-                + ", network_id=" + networkId + ", status=" + status
-                + ", tenant_id=" + tenantId
-                + ", securityGroups=" + securityGroups
+        return "Port [id=" + id + ", name=" + name + ", mac_address=" + macAddress + ", admin_state_up=" + adminStateUp
+                + ", device_id=" + deviceId + ", device_owner=" + deviceOwner + ", fixed_ips=" + list + ", network_id="
+                + networkId + ", status=" + status + ", tenant_id=" + tenantId + ", securityGroups=" + securityGroups
                 + ", binding=" + binding + "]";
     }
 }

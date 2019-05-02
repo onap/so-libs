@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,73 +34,38 @@ public class NetworksTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"networks\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"bridge\" : \"bridge\"," + EOL
-        + "    \"deleted\" : false," + EOL
-        + "    \"vlan\" : \"vlan\"," + EOL
-        + "    \"broadcast\" : \"broadcast\"," + EOL
-        + "    \"netmask\" : \"netmask\"," + EOL
-        + "    \"injected\" : true," + EOL
-        + "    \"host\" : \"host\"," + EOL
-        + "    \"cidr\" : \"cidr\"," + EOL
-        + "    \"gateway\" : \"gateway\"," + EOL
-        + "    \"dns1\" : \"dns1\"," + EOL
-        + "    \"dns2\" : \"dns2\"," + EOL
-        + "    \"label\" : \"label\"," + EOL
-        + "    \"priority\" : \"priority\"," + EOL
-        + "    \"vpn_public_address\" : \"vpnpublicaddress\"," + EOL
-        + "    \"vpn_private_address\" : \"vpnprivateaddress\"," + EOL
-        + "    \"vpn_public_port\" : \"vpnpublicport\"," + EOL
-        + "    \"dhcp_start\" : \"dhcpstart\"," + EOL
-        + "    \"bridge_interface\" : \"bridgeinterface\"," + EOL
-        + "    \"updated_at\" : \"updatedat\"," + EOL
-        + "    \"multi_host\" : false," + EOL
-        + "    \"created_at\" : \"createdat\"," + EOL
-        + "    \"deleted_at\" : \"deletedat\"," + EOL
-        + "    \"cidr_v6\" : \"cidrv6\"," + EOL
-        + "    \"gateway_v6\" : \"gatewayv6\"," + EOL
-        + "    \"netmask_v6\" : \"netmaskv6\"," + EOL
-        + "    \"project_id\" : \"projectid\"," + EOL
-        + "    \"rxtx_base\" : \"rxtxbase\"" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"bridge\" : \"bridge\"," + EOL
-        + "    \"deleted\" : false," + EOL
-        + "    \"vlan\" : \"vlan\"," + EOL
-        + "    \"broadcast\" : \"broadcast\"," + EOL
-        + "    \"netmask\" : \"netmask\"," + EOL
-        + "    \"injected\" : true," + EOL
-        + "    \"host\" : \"host\"," + EOL
-        + "    \"cidr\" : \"cidr\"," + EOL
-        + "    \"gateway\" : \"gateway\"," + EOL
-        + "    \"dns1\" : \"dns1\"," + EOL
-        + "    \"dns2\" : \"dns2\"," + EOL
-        + "    \"label\" : \"label\"," + EOL
-        + "    \"priority\" : \"priority\"," + EOL
-        + "    \"vpn_public_address\" : \"vpnpublicaddress\"," + EOL
-        + "    \"vpn_private_address\" : \"vpnprivateaddress\"," + EOL
-        + "    \"vpn_public_port\" : \"vpnpublicport\"," + EOL
-        + "    \"dhcp_start\" : \"dhcpstart\"," + EOL
-        + "    \"bridge_interface\" : \"bridgeinterface\"," + EOL
-        + "    \"updated_at\" : \"updatedat\"," + EOL
-        + "    \"multi_host\" : false," + EOL
-        + "    \"created_at\" : \"createdat\"," + EOL
-        + "    \"deleted_at\" : \"deletedat\"," + EOL
-        + "    \"cidr_v6\" : \"cidrv6\"," + EOL
-        + "    \"gateway_v6\" : \"gatewayv6\"," + EOL
-        + "    \"netmask_v6\" : \"netmaskv6\"," + EOL
-        + "    \"project_id\" : \"projectid\"," + EOL
-        + "    \"rxtx_base\" : \"rxtxbase\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"networks\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"bridge\" : \"bridge\"," + EOL + "    \"deleted\" : false," + EOL + "    \"vlan\" : \"vlan\"," + EOL
+            + "    \"broadcast\" : \"broadcast\"," + EOL + "    \"netmask\" : \"netmask\"," + EOL
+            + "    \"injected\" : true," + EOL + "    \"host\" : \"host\"," + EOL + "    \"cidr\" : \"cidr\"," + EOL
+            + "    \"gateway\" : \"gateway\"," + EOL + "    \"dns1\" : \"dns1\"," + EOL + "    \"dns2\" : \"dns2\","
+            + EOL + "    \"label\" : \"label\"," + EOL + "    \"priority\" : \"priority\"," + EOL
+            + "    \"vpn_public_address\" : \"vpnpublicaddress\"," + EOL
+            + "    \"vpn_private_address\" : \"vpnprivateaddress\"," + EOL
+            + "    \"vpn_public_port\" : \"vpnpublicport\"," + EOL + "    \"dhcp_start\" : \"dhcpstart\"," + EOL
+            + "    \"bridge_interface\" : \"bridgeinterface\"," + EOL + "    \"updated_at\" : \"updatedat\"," + EOL
+            + "    \"multi_host\" : false," + EOL + "    \"created_at\" : \"createdat\"," + EOL
+            + "    \"deleted_at\" : \"deletedat\"," + EOL + "    \"cidr_v6\" : \"cidrv6\"," + EOL
+            + "    \"gateway_v6\" : \"gatewayv6\"," + EOL + "    \"netmask_v6\" : \"netmaskv6\"," + EOL
+            + "    \"project_id\" : \"projectid\"," + EOL + "    \"rxtx_base\" : \"rxtxbase\"" + EOL + "  }, {" + EOL
+            + "    \"id\" : \"id\"," + EOL + "    \"bridge\" : \"bridge\"," + EOL + "    \"deleted\" : false," + EOL
+            + "    \"vlan\" : \"vlan\"," + EOL + "    \"broadcast\" : \"broadcast\"," + EOL
+            + "    \"netmask\" : \"netmask\"," + EOL + "    \"injected\" : true," + EOL + "    \"host\" : \"host\","
+            + EOL + "    \"cidr\" : \"cidr\"," + EOL + "    \"gateway\" : \"gateway\"," + EOL
+            + "    \"dns1\" : \"dns1\"," + EOL + "    \"dns2\" : \"dns2\"," + EOL + "    \"label\" : \"label\"," + EOL
+            + "    \"priority\" : \"priority\"," + EOL + "    \"vpn_public_address\" : \"vpnpublicaddress\"," + EOL
+            + "    \"vpn_private_address\" : \"vpnprivateaddress\"," + EOL
+            + "    \"vpn_public_port\" : \"vpnpublicport\"," + EOL + "    \"dhcp_start\" : \"dhcpstart\"," + EOL
+            + "    \"bridge_interface\" : \"bridgeinterface\"," + EOL + "    \"updated_at\" : \"updatedat\"," + EOL
+            + "    \"multi_host\" : false," + EOL + "    \"created_at\" : \"createdat\"," + EOL
+            + "    \"deleted_at\" : \"deletedat\"," + EOL + "    \"cidr_v6\" : \"cidrv6\"," + EOL
+            + "    \"gateway_v6\" : \"gatewayv6\"," + EOL + "    \"netmask_v6\" : \"netmaskv6\"," + EOL
+            + "    \"project_id\" : \"projectid\"," + EOL + "    \"rxtx_base\" : \"rxtxbase\"" + EOL + "  } ]" + EOL
+            + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -118,13 +81,14 @@ public class NetworksTest {
     public void testMethods() throws Exception {
         Networks networks = objectMapper.readValue(JSON_FULL, Networks.class);
         networks.toString();
-        
+
         List<Network> list = networks.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Network x : networks) {
+        for (@SuppressWarnings("unused")
+        Network x : networks) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

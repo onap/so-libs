@@ -1,4 +1,5 @@
-/* ============LICENSE_START=======================================================
+/*-
+ * ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,6 +13,7 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.cinder;
 
 import com.woorea.openstack.base.client.Entity;
@@ -82,8 +84,7 @@ public class VolumesExtension {
     public class List extends OpenStackRequest<Volumes> {
 
         public List(boolean detail) {
-            super(CLIENT, HttpMethod.GET, detail ? "/volumes/detail"
-                    : "/volumes", null, Volumes.class);
+            super(CLIENT, HttpMethod.GET, detail ? "/volumes/detail" : "/volumes", null, Volumes.class);
         }
 
     }
@@ -91,8 +92,7 @@ public class VolumesExtension {
     public class Create extends OpenStackRequest<Volume> {
 
         public Create(VolumeForCreate volume) {
-            super(CLIENT, HttpMethod.POST, "/volumes", Entity.json(volume),
-                    Volume.class);
+            super(CLIENT, HttpMethod.POST, "/volumes", Entity.json(volume), Volume.class);
         }
 
     }
@@ -102,8 +102,8 @@ public class VolumesExtension {
     public class UploadToImage extends OpenStackRequest<Void> {
 
         public UploadToImage(VolumeForImageCreate volumeForImageCreate) {
-            super(CLIENT, HttpMethod.POST, new StringBuilder("/volumes/")
-                    .append(volumeForImageCreate.getVolumeId() + "/action").toString(),
+            super(CLIENT, HttpMethod.POST,
+                    new StringBuilder("/volumes/").append(volumeForImageCreate.getVolumeId() + "/action").toString(),
                     Entity.json(volumeForImageCreate), Void.class);
         }
 
@@ -112,8 +112,7 @@ public class VolumesExtension {
     public class Show extends OpenStackRequest<Volume> {
 
         public Show(String id) {
-            super(CLIENT, HttpMethod.GET, new StringBuilder("/volumes/")
-                    .append(id).toString(), null, Volume.class);
+            super(CLIENT, HttpMethod.GET, new StringBuilder("/volumes/").append(id).toString(), null, Volume.class);
         }
 
     }
@@ -121,9 +120,8 @@ public class VolumesExtension {
     public class ShowMetadata extends OpenStackRequest<Metadata> {
 
         public ShowMetadata(String id) {
-            super(CLIENT, HttpMethod.GET, new StringBuilder("/volumes/")
-                    .append(id).append("/metadata").toString(), null,
-                    Metadata.class);
+            super(CLIENT, HttpMethod.GET, new StringBuilder("/volumes/").append(id).append("/metadata").toString(),
+                    null, Metadata.class);
         }
 
     }
@@ -131,8 +129,7 @@ public class VolumesExtension {
     public class Delete extends OpenStackRequest<Void> {
 
         public Delete(String id) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/volumes/")
-                    .append(id).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/volumes/").append(id).toString(), null, Void.class);
         }
 
     }
@@ -140,8 +137,8 @@ public class VolumesExtension {
     public class Update extends OpenStackRequest<Void> {
 
         public Update(String id, VolumeForUpdate volume) {
-            super(CLIENT, HttpMethod.PUT, new StringBuilder("/volumes/").append(id).toString(),
-                    Entity.json(volume), Void.class);
+            super(CLIENT, HttpMethod.PUT, new StringBuilder("/volumes/").append(id).toString(), Entity.json(volume),
+                    Void.class);
         }
 
     }
@@ -158,8 +155,7 @@ public class VolumesExtension {
     public class InitializeConnection extends OpenStackRequest<ConnectionInfo> {
 
         public InitializeConnection(String id, ConnectionForInitialize connectionForInitialize) {
-            super(CLIENT, HttpMethod.POST, new StringBuilder("/volumes/")
-                    .append(id).append("/action").toString(),
+            super(CLIENT, HttpMethod.POST, new StringBuilder("/volumes/").append(id).append("/action").toString(),
                     Entity.json(connectionForInitialize), ConnectionInfo.class);
         }
 
@@ -168,8 +164,7 @@ public class VolumesExtension {
     public class TerminateConnection extends OpenStackRequest<Void> {
 
         public TerminateConnection(String id, ConnectionForTerminate connectionForTerminate) {
-            super(CLIENT, HttpMethod.POST, new StringBuilder("/volumes/")
-                            .append(id).append("/action").toString(),
+            super(CLIENT, HttpMethod.POST, new StringBuilder("/volumes/").append(id).append("/action").toString(),
                     Entity.json(connectionForTerminate), Void.class);
         }
 

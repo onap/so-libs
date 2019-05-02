@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -261,7 +259,9 @@ public class ServersTest {
         sb.append("    \"OS-EXT-AZ:availability_zone\" : \"availabilityzone\"," + EOL);
         sb.append("    \"OS-SRV-USG:launched_at\" : \"launchedat\"," + EOL);
         sb.append("    \"OS-SRV-USG:terminated_at\" : \"terminatedat\"," + EOL);
-        sb.append("    \"os-extended-volumes:volumes_attached\" : [ \"osextendedvolumesattached-v1\", \"osextendedvolumesattached-v2\" ]" + EOL);
+        sb.append(
+                "    \"os-extended-volumes:volumes_attached\" : [ \"osextendedvolumesattached-v1\", \"osextendedvolumesattached-v2\" ]"
+                        + EOL);
         sb.append("  }, {" + EOL);
         sb.append("    \"id\" : \"id\"," + EOL);
         sb.append("    \"name\" : \"name\"," + EOL);
@@ -480,17 +480,17 @@ public class ServersTest {
         sb.append("    \"OS-EXT-AZ:availability_zone\" : \"availabilityzone\"," + EOL);
         sb.append("    \"OS-SRV-USG:launched_at\" : \"launchedat\"," + EOL);
         sb.append("    \"OS-SRV-USG:terminated_at\" : \"terminatedat\"," + EOL);
-        sb.append("    \"os-extended-volumes:volumes_attached\" : [ \"osextendedvolumesattached-v1\", \"osextendedvolumesattached-v2\" ]" + EOL);
+        sb.append(
+                "    \"os-extended-volumes:volumes_attached\" : [ \"osextendedvolumesattached-v1\", \"osextendedvolumesattached-v2\" ]"
+                        + EOL);
         sb.append("  } ]" + EOL);
         sb.append("}");
         JSON_FULL = sb.toString();
     }
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -506,13 +506,14 @@ public class ServersTest {
     public void testMethods() throws Exception {
         Servers servers = objectMapper.readValue(JSON_FULL, Servers.class);
         servers.toString();
-        
+
         List<Server> list = servers.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Server x : servers) {
+        for (@SuppressWarnings("unused")
+        Server x : servers) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

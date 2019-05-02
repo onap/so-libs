@@ -21,9 +21,7 @@
 package com.woorea.openstack.nova.model;
 
 import org.junit.Test;
-
 import java.util.Collections;
-
 import static org.junit.Assert.*;
 
 public class MetadataTest {

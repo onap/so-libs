@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,28 +33,18 @@ public class ImageFromVolumeTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"os-volume_upload_image\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"updates_at\" : \"updates_at\"," + EOL
-        + "    \"status\" : \"status\"," + EOL
-        + "    \"display_description\" : \"display_description\"," + EOL
-        + "    \"size\" : \"size\"," + EOL
-        + "    \"volume_type\" : \"volume_type\"," + EOL
-        + "    \"image_id\" : \"image_id\"," + EOL
-        + "    \"container_format\" : \"container_format\"," + EOL
-        + "    \"disk_format\" : \"disk_format\"," + EOL
-        + "    \"image_name\" : \"image_name\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"os-volume_upload_image\" : {" + EOL
+            + "    \"id\" : \"id\"," + EOL + "    \"updates_at\" : \"updates_at\"," + EOL
+            + "    \"status\" : \"status\"," + EOL + "    \"display_description\" : \"display_description\"," + EOL
+            + "    \"size\" : \"size\"," + EOL + "    \"volume_type\" : \"volume_type\"," + EOL
+            + "    \"image_id\" : \"image_id\"," + EOL + "    \"container_format\" : \"container_format\"," + EOL
+            + "    \"disk_format\" : \"disk_format\"," + EOL + "    \"image_name\" : \"image_name\"" + EOL + "  }" + EOL
+            + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -71,43 +60,43 @@ public class ImageFromVolumeTest {
     public void testMethods() throws Exception {
         ImageFromVolume imagefromvolume = objectMapper.readValue(JSON_FULL, ImageFromVolume.class);
         imagefromvolume.toString();
-        
+
         String image_name = imagefromvolume.getImage_name();
         Assert.assertNotNull(image_name);
         imagefromvolume.setImage_name(image_name);
-        
+
         String display_description = imagefromvolume.getDisplay_description();
         Assert.assertNotNull(display_description);
         imagefromvolume.setDisplay_description(display_description);
-        
+
         String updates_at = imagefromvolume.getUpdates_at();
         Assert.assertNotNull(updates_at);
         imagefromvolume.setUpdates_at(updates_at);
-        
+
         String volume_type = imagefromvolume.getVolume_type();
         Assert.assertNotNull(volume_type);
         imagefromvolume.setVolume_type(volume_type);
-        
+
         String size = imagefromvolume.getSize();
         Assert.assertNotNull(size);
         imagefromvolume.setSize(size);
-        
+
         String disk_format = imagefromvolume.getDisk_format();
         Assert.assertNotNull(disk_format);
         imagefromvolume.setDisk_format(disk_format);
-        
+
         String id = imagefromvolume.getId();
         Assert.assertNotNull(id);
         imagefromvolume.setId(id);
-        
+
         String image_id = imagefromvolume.getImage_id();
         Assert.assertNotNull(image_id);
         imagefromvolume.setImage_id(image_id);
-        
+
         String container_format = imagefromvolume.getContainer_format();
         Assert.assertNotNull(container_format);
         imagefromvolume.setContainer_format(container_format);
-        
+
         String status = imagefromvolume.getStatus();
         Assert.assertNotNull(status);
         imagefromvolume.setStatus(status);

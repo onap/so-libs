@@ -17,16 +17,15 @@
 package com.woorea.openstack.swift.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Container implements Serializable {
-    
+
     private String name;
-    
+
     @JsonProperty("count")
     private Integer objectCount;
-    
+
     @JsonProperty("bytes")
     private Long bytesUsed;
 
@@ -72,15 +71,16 @@ public class Container implements Serializable {
         this.bytesUsed = bytesUsed;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Container [name=" + name + ", objectCount=" + objectCount
-                + ", bytesUsed=" + bytesUsed + "]";
+        return "Container [name=" + name + ", objectCount=" + objectCount + ", bytesUsed=" + bytesUsed + "]";
     }
 
-    
-    
+
+
 }

@@ -23,13 +23,13 @@ import com.woorea.openstack.base.client.OpenStackRequest;
 import com.woorea.openstack.nova.model.Certificate;
 
 public class CredentialsExtension {
-    
+
     private final OpenStackClient CLIENT;
-    
+
     public CredentialsExtension(OpenStackClient client) {
         CLIENT = client;
     }
-    
+
     public Create createCertificate(String id) {
         return new Create(id);
     }
@@ -41,7 +41,8 @@ public class CredentialsExtension {
     public class Create extends OpenStackRequest<Certificate> {
 
         public Create(String id) {
-            super(CLIENT, HttpMethod.GET, new StringBuffer("/os-certificates").append(id).toString(), null, Certificate.class);
+            super(CLIENT, HttpMethod.GET, new StringBuffer("/os-certificates").append(id).toString(), null,
+                    Certificate.class);
         }
 
     }
@@ -54,6 +55,6 @@ public class CredentialsExtension {
 
     }
 
-    
+
 
 }

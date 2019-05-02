@@ -25,22 +25,22 @@ import com.woorea.openstack.heat.model.Events;
  * v1/{tenant_id}/stacks/{stack_name}/{stack_id}/events
  */
 public class StackEvents {
-	private final OpenStackClient client;
+    private final OpenStackClient client;
 
-	public StackEvents(OpenStackClient client) {
-		this.client = client;
-	}
+    public StackEvents(OpenStackClient client) {
+        this.client = client;
+    }
 
-	public ListEvents listEvents(String name, String id) {
-		return new ListEvents(name, id);
-	}
+    public ListEvents listEvents(String name, String id) {
+        return new ListEvents(name, id);
+    }
 
-	/**
-	 * v1/​{tenant_id}​/stacks/​{stack_name}​/resources
-	 */
-	public class ListEvents extends OpenStackRequest<Events> {
-		public ListEvents(String name, String id) {
-			super(client, HttpMethod.GET, "/stacks/" + name + "/" + id + "/events", null, Events.class);
-		}
-	}
+    /**
+     * v1/​{tenant_id}​/stacks/​{stack_name}​/resources
+     */
+    public class ListEvents extends OpenStackRequest<Events> {
+        public ListEvents(String name, String id) {
+            super(client, HttpMethod.GET, "/stacks/" + name + "/" + id + "/events", null, Events.class);
+        }
+    }
 }

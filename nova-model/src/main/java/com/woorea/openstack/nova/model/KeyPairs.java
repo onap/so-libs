@@ -20,16 +20,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class KeyPairs implements Iterable<KeyPair>, Serializable {
-    
+
     public static final class KeyPairWrapper implements Serializable {
-        
+
         @JsonProperty
         private KeyPair keypair;
-        
+
     }
 
     @JsonProperty("keypairs")
@@ -40,18 +39,20 @@ public class KeyPairs implements Iterable<KeyPair>, Serializable {
      */
     public List<KeyPair> getList() {
         List<KeyPair> keyPairList = new ArrayList<>();
-        for(KeyPairWrapper wrapper : this.list) {
+        for (KeyPairWrapper wrapper : this.list) {
             keyPairList.add(wrapper.keypair);
         }
         return keyPairList;
     }
-    
+
     @Override
     public Iterator<KeyPair> iterator() {
         return getList().iterator();
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override

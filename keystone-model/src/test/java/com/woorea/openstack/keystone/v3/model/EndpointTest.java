@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Token.Service.Endpoint;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -35,20 +34,13 @@ public class EndpointTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"id\" : \"id\"," + EOL
-        + "  \"url\" : \"url\"," + EOL
-        + "  \"region\" : \"region\"," + EOL
-        + "  \"enabled\" : false," + EOL
-        + "  \"interface\" : \"interface\"," + EOL
-        + "  \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"id\" : \"id\"," + EOL + "  \"url\" : \"url\"," + EOL
+            + "  \"region\" : \"region\"," + EOL + "  \"enabled\" : false," + EOL + "  \"interface\" : \"interface\","
+            + EOL + "  \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -64,27 +56,27 @@ public class EndpointTest {
     public void testMethods() throws Exception {
         Endpoint endpoint = objectMapper.readValue(JSON_FULL, Endpoint.class);
         endpoint.toString();
-        
+
         String legacyEndpointId = endpoint.getLegacyEndpointId();
         Assert.assertNotNull(legacyEndpointId);
         endpoint.setLegacyEndpointId(legacyEndpointId);
-        
+
         String id = endpoint.getId();
         Assert.assertNotNull(id);
         endpoint.setId(id);
-        
+
         String region = endpoint.getRegion();
         Assert.assertNotNull(region);
         endpoint.setRegion(region);
-        
+
         String interfaceProperty = endpoint.getInterface();
         Assert.assertNotNull(interfaceProperty);
         endpoint.setInterface(interfaceProperty);
-        
+
         String url = endpoint.getUrl();
         Assert.assertNotNull(url);
         endpoint.setUrl(url);
-        
+
         Boolean enabled = endpoint.getEnabled();
         Assert.assertNotNull(enabled);
         endpoint.setEnabled(enabled);

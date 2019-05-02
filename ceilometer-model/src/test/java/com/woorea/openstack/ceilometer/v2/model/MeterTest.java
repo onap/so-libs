@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,20 +33,13 @@ public class MeterTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"name\" : \"name\"," + EOL
-        + "  \"type\" : \"type\"," + EOL
-        + "  \"unit\" : \"unit\"," + EOL
-        + "  \"user_id\" : \"user\"," + EOL
-        + "  \"resource_id\" : \"resource\"," + EOL
-        + "  \"project_id\" : \"project\"" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"name\" : \"name\"," + EOL + "  \"type\" : \"type\"," + EOL
+            + "  \"unit\" : \"unit\"," + EOL + "  \"user_id\" : \"user\"," + EOL + "  \"resource_id\" : \"resource\","
+            + EOL + "  \"project_id\" : \"project\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -63,22 +55,22 @@ public class MeterTest {
     public void testMethods() throws Exception {
         Meter meter = objectMapper.readValue(JSON_FULL, Meter.class);
         meter.toString();
-        
+
         String unit = meter.getUnit();
         Assert.assertNotNull(unit);
-        
+
         String resource = meter.getResource();
         Assert.assertNotNull(resource);
-        
+
         String name = meter.getName();
         Assert.assertNotNull(name);
-        
+
         String project = meter.getProject();
         Assert.assertNotNull(project);
-        
+
         String type = meter.getType();
         Assert.assertNotNull(type);
-        
+
         String user = meter.getUser();
         Assert.assertNotNull(user);
     }

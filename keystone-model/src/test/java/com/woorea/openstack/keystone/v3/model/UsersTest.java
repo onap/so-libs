@@ -25,9 +25,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.model.User;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -37,31 +35,17 @@ public class UsersTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"users\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"username\" : \"username\"," + EOL
-        + "    \"password\" : \"password\"," + EOL
-        + "    \"tenantId\" : \"tenantid\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"email\" : \"email\"," + EOL
-        + "    \"enabled\" : false" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"username\" : \"username\"," + EOL
-        + "    \"password\" : \"password\"," + EOL
-        + "    \"tenantId\" : \"tenantid\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"email\" : \"email\"," + EOL
-        + "    \"enabled\" : false" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"users\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"username\" : \"username\"," + EOL + "    \"password\" : \"password\"," + EOL
+            + "    \"tenantId\" : \"tenantid\"," + EOL + "    \"name\" : \"name\"," + EOL + "    \"email\" : \"email\","
+            + EOL + "    \"enabled\" : false" + EOL + "  }, {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"username\" : \"username\"," + EOL + "    \"password\" : \"password\"," + EOL
+            + "    \"tenantId\" : \"tenantid\"," + EOL + "    \"name\" : \"name\"," + EOL + "    \"email\" : \"email\","
+            + EOL + "    \"enabled\" : false" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -77,13 +61,14 @@ public class UsersTest {
     public void testMethods() throws Exception {
         Users users = objectMapper.readValue(JSON_FULL, Users.class);
         users.toString();
-        
+
         List<User> list = users.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") User x : users) {
+        for (@SuppressWarnings("unused")
+        User x : users) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

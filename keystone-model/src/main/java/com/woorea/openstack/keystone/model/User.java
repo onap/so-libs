@@ -21,26 +21,25 @@ package com.woorea.openstack.keystone.model;
  */
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("user")
 public class User implements Serializable {
 
     private String id;
-    
+
     private String username;
-    
-//    @JsonProperty("OS-KSADM:password")
-//    @JsonProperty("OS_KSADM_password")
+
+    // @JsonProperty("OS-KSADM:password")
+    // @JsonProperty("OS_KSADM_password")
     private String password;
-    
+
     private String tenantId;
-    
+
     private String name;
-    
+
     private String email;
-    
+
     private Boolean enabled;
 
     /**
@@ -141,14 +140,15 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "User [id=" + id + ", username=" + username + ", password="
-                + password + ", tenantId=" + tenantId + ", name=" + name
-                + ", email=" + email + ", enabled=" + enabled + "]";
+        return "User [id=" + id + ", username=" + username + ", password=" + password + ", tenantId=" + tenantId
+                + ", name=" + name + ", email=" + email + ", enabled=" + enabled + "]";
     }
-    
+
 }

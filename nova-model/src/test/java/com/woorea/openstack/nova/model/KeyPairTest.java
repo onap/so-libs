@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,23 +33,15 @@ public class KeyPairTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"keypair\" : {" + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"fingerprint\" : \"fingerprint\"," + EOL
-        + "    \"user_id\" : \"userid\"," + EOL
-        + "    \"public_key\" : \"publickey\"," + EOL
-        + "    \"private_key\" : \"privatekey\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"keypair\" : {" + EOL + "    \"name\" : \"name\"," + EOL
+            + "    \"fingerprint\" : \"fingerprint\"," + EOL + "    \"user_id\" : \"userid\"," + EOL
+            + "    \"public_key\" : \"publickey\"," + EOL + "    \"private_key\" : \"privatekey\"" + EOL + "  }" + EOL
+            + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -66,21 +57,21 @@ public class KeyPairTest {
     public void testMethods() throws Exception {
         KeyPair keypair = objectMapper.readValue(JSON_FULL, KeyPair.class);
         keypair.toString();
-        
+
         String privateKey = keypair.getPrivateKey();
         Assert.assertNotNull(privateKey);
-        
+
         String name = keypair.getName();
         Assert.assertNotNull(name);
         keypair.setName(name);
-        
+
         String fingerprint = keypair.getFingerprint();
         Assert.assertNotNull(fingerprint);
-        
+
         String publicKey = keypair.getPublicKey();
         Assert.assertNotNull(publicKey);
         keypair.setPublicKey(publicKey);
-        
+
         String userId = keypair.getUserId();
         Assert.assertNotNull(userId);
     }

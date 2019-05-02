@@ -27,9 +27,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Authentication.Identity;
 import com.woorea.openstack.keystone.v3.model.Authentication.Identity.Password;
 import com.woorea.openstack.keystone.v3.model.Authentication.Identity.Token;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -39,29 +37,16 @@ public class IdentityTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"methods\" : [ \"methods-v1\", \"methods-v2\" ]," + EOL
-        + "  \"password\" : {" + EOL
-        + "    \"user\" : {" + EOL
-        + "      \"domain\" : {" + EOL
-        + "        \"id\" : \"id\"," + EOL
-        + "        \"name\" : \"name\"" + EOL
-        + "      }," + EOL
-        + "      \"id\" : \"id\"," + EOL
-        + "      \"name\" : \"name\"," + EOL
-        + "      \"password\" : \"password\"" + EOL
-        + "    }" + EOL
-        + "  }," + EOL
-        + "  \"token\" : {" + EOL
-        + "    \"id\" : \"id\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"methods\" : [ \"methods-v1\", \"methods-v2\" ]," + EOL + "  \"password\" : {" + EOL
+                    + "    \"user\" : {" + EOL + "      \"domain\" : {" + EOL + "        \"id\" : \"id\"," + EOL
+                    + "        \"name\" : \"name\"" + EOL + "      }," + EOL + "      \"id\" : \"id\"," + EOL
+                    + "      \"name\" : \"name\"," + EOL + "      \"password\" : \"password\"" + EOL + "    }" + EOL
+                    + "  }," + EOL + "  \"token\" : {" + EOL + "    \"id\" : \"id\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -77,16 +62,16 @@ public class IdentityTest {
     public void testMethods() throws Exception {
         Identity identity = objectMapper.readValue(JSON_FULL, Identity.class);
         identity.toString();
-        
+
         Password password = identity.getPassword();
         Assert.assertNotNull(password);
         identity.setPassword(password);
-        
+
         List<String> methods = identity.getMethods();
         Assert.assertNotNull(methods);
         Assert.assertEquals(2, methods.size());
         identity.setMethods(methods);
-        
+
         Token token = identity.getToken();
         Assert.assertNotNull(token);
         identity.setToken(token);

@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,51 +34,34 @@ public class NetworksTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"networks\" : [ {" + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"shared\" : \"shared\"," + EOL
-        + "    \"segments\" : [ {" + EOL
-        + "      \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
-        + "      \"provider:network_type\" : \"providernetworktype\"," + EOL
-        + "      \"provider:segmentation_id\" : 92" + EOL
-        + "    }, {" + EOL
-        + "      \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
-        + "      \"provider:network_type\" : \"providernetworktype\"," + EOL
-        + "      \"provider:segmentation_id\" : 92" + EOL
-        + "    } ]," + EOL
-        + "    \"admin_state_up\" : false," + EOL
-        + "    \"tenant_id\" : \"tenantid\"," + EOL
-        + "    \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
-        + "    \"provider:network_type\" : \"providernetworktype\"," + EOL
-        + "    \"provider:segmentation_id\" : 92," + EOL
-        + "    \"router:external\" : \"routerexternal\"" + EOL
-        + "  }, {" + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"shared\" : \"shared\"," + EOL
-        + "    \"segments\" : [ {" + EOL
-        + "      \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
-        + "      \"provider:network_type\" : \"providernetworktype\"," + EOL
-        + "      \"provider:segmentation_id\" : 92" + EOL
-        + "    }, {" + EOL
-        + "      \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
-        + "      \"provider:network_type\" : \"providernetworktype\"," + EOL
-        + "      \"provider:segmentation_id\" : 92" + EOL
-        + "    } ]," + EOL
-        + "    \"admin_state_up\" : false," + EOL
-        + "    \"tenant_id\" : \"tenantid\"," + EOL
-        + "    \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
-        + "    \"provider:network_type\" : \"providernetworktype\"," + EOL
-        + "    \"provider:segmentation_id\" : 92," + EOL
-        + "    \"router:external\" : \"routerexternal\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"networks\" : [ {" + EOL + "    \"name\" : \"name\"," + EOL
+            + "    \"shared\" : true," + EOL + "    \"segments\" : [ {" + EOL
+            + "      \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
+            + "      \"provider:network_type\" : \"providernetworktype\"," + EOL
+            + "      \"provider:segmentation_id\" : 92" + EOL + "    }, {" + EOL
+            + "      \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
+            + "      \"provider:network_type\" : \"providernetworktype\"," + EOL
+            + "      \"provider:segmentation_id\" : 92" + EOL + "    } ]," + EOL + "    \"admin_state_up\" : false,"
+            + EOL + "    \"tenant_id\" : \"tenantid\"," + EOL
+            + "    \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
+            + "    \"provider:network_type\" : \"providernetworktype\"," + EOL
+            + "    \"provider:segmentation_id\" : 92," + EOL + "    \"router:external\" : true " + EOL + "  }, {" + EOL
+            + "    \"name\" : \"name\"," + EOL + "    \"shared\" : true," + EOL + "    \"segments\" : [ {" + EOL
+            + "      \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
+            + "      \"provider:network_type\" : \"providernetworktype\"," + EOL
+            + "      \"provider:segmentation_id\" : 92" + EOL + "    }, {" + EOL
+            + "      \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
+            + "      \"provider:network_type\" : \"providernetworktype\"," + EOL
+            + "      \"provider:segmentation_id\" : 92" + EOL + "    } ]," + EOL + "    \"admin_state_up\" : false,"
+            + EOL + "    \"tenant_id\" : \"tenantid\"," + EOL
+            + "    \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
+            + "    \"provider:network_type\" : \"providernetworktype\"," + EOL
+            + "    \"provider:segmentation_id\" : 92," + EOL + "    \"router:external\" : true" + EOL + "  } ]" + EOL
+            + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -96,14 +77,15 @@ public class NetworksTest {
     public void testMethods() throws Exception {
         Networks networks = objectMapper.readValue(JSON_FULL, Networks.class);
         networks.toString();
-        
+
         List<Network> list = networks.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
         networks.setList(list);
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Network x : networks) {
+        for (@SuppressWarnings("unused")
+        Network x : networks) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

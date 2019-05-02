@@ -23,21 +23,21 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class User {
 
     private String id;
-    
+
     @JsonProperty("domain_id")
     private String domainId;
-    
+
     @JsonProperty("default_project_id")
     private String defaultProjectId;
-    
+
     private String name;
-    
+
     private String password;
-    
+
     private String email;
-    
+
     private String description;
-    
+
     private Boolean enabled;
 
     public String getId() {
@@ -103,5 +103,5 @@ public class User {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-    
+
 }

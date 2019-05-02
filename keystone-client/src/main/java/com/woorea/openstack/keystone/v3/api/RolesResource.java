@@ -27,9 +27,10 @@ public class RolesResource extends GenericResource<Role, Roles> {
     public RolesResource(OpenStackClient client) {
         super(client, "/roles", Role.class, Roles.class);
     }
-    
+
     public OpenStackRequest<Users> users(String domainId, String userId) {
-        return CLIENT.get(new StringBuilder(path).append("/").append(domainId).append("/users/").append(userId).append("/roles").toString(), Users.class);
+        return CLIENT.get(new StringBuilder(path).append("/").append(domainId).append("/users/").append(userId)
+                .append("/roles").toString(), Users.class);
     }
 
 }

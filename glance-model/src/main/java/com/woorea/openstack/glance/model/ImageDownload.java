@@ -19,9 +19,9 @@ package com.woorea.openstack.glance.model;
 import java.io.InputStream;
 
 public class ImageDownload {
-    
+
     private Image image;
-    
+
     private InputStream inputStream;
 
     /**

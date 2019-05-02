@@ -19,9 +19,9 @@ package com.woorea.openstack.nova.model;
 import java.io.Serializable;
 
 public final class PersonalityFile implements Serializable {
-    
+
     private String path;
-    
+
     private String contents;
 
     /**
@@ -51,5 +51,5 @@ public final class PersonalityFile implements Serializable {
     public void setContents(String contents) {
         this.contents = contents;
     }
-    
+
 }

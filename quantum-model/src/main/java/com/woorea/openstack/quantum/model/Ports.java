@@ -19,7 +19,6 @@ package com.woorea.openstack.quantum.model;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @SuppressWarnings("serial")
@@ -36,8 +35,7 @@ public class Ports implements Iterable<Port>, Serializable {
     }
 
     /**
-     * @param list
-     *            the list to set
+     * @param list the list to set
      */
     public void setList(List<Port> list) {
         this.list = list;

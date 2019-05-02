@@ -21,11 +21,11 @@ import com.woorea.openstack.keystone.model.Authentication;
 
 @JsonRootName("auth")
 public class AccessKey extends Authentication {
-    
+
     public static final class ApiAccessKeyCredentials {
-        
+
         private String accessKey;
-        
+
         private String secretKey;
 
         /**
@@ -55,15 +55,15 @@ public class AccessKey extends Authentication {
         public void setSecretKey(String secretKey) {
             this.secretKey = secretKey;
         }
-        
+
     }
-    
+
     private ApiAccessKeyCredentials apiAccessKeyCredentials = new ApiAccessKeyCredentials();
-    
+
     public AccessKey() {
-        
+
     }
-    
+
     public AccessKey(String accessKey, String secretKey) {
         apiAccessKeyCredentials.setAccessKey(accessKey);
         apiAccessKeyCredentials.setSecretKey(secretKey);
@@ -79,9 +79,8 @@ public class AccessKey extends Authentication {
     /**
      * @param apiAccessKeyCredentials the apiAccessKeyCredentials to set
      */
-    public void setApiAccessKeyCredentials(
-            ApiAccessKeyCredentials apiAccessKeyCredentials) {
+    public void setApiAccessKeyCredentials(ApiAccessKeyCredentials apiAccessKeyCredentials) {
         this.apiAccessKeyCredentials = apiAccessKeyCredentials;
     }
-    
+
 }

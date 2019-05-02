@@ -1,4 +1,5 @@
-/* ============LICENSE_START=======================================================
+/*-
+ * ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,6 +13,7 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.cinder;
 
 import com.woorea.openstack.base.client.Entity;
@@ -95,8 +97,8 @@ public class SnapshotsExtension {
     public class Update extends OpenStackRequest<Void> {
 
         public Update(String id, SnapshotForUpdate snapshot) {
-            super(CLIENT, HttpMethod.PUT, new StringBuilder("/snapshots/").append(id).toString(),
-                    Entity.json(snapshot), Void.class);
+            super(CLIENT, HttpMethod.PUT, new StringBuilder("/snapshots/").append(id).toString(), Entity.json(snapshot),
+                    Void.class);
         }
 
     }
@@ -104,11 +106,8 @@ public class SnapshotsExtension {
     public class ShowMetadata extends OpenStackRequest<Metadata> {
 
         public ShowMetadata(String id) {
-            super(CLIENT,
-                    HttpMethod.GET,
-                    new StringBuilder("/snapshots/").append(id).append("/metadata").toString(),
-                    null,
-                    Metadata.class);
+            super(CLIENT, HttpMethod.GET, new StringBuilder("/snapshots/").append(id).append("/metadata").toString(),
+                    null, Metadata.class);
         }
 
     }
@@ -116,9 +115,9 @@ public class SnapshotsExtension {
     public class UpdateMetadata extends OpenStackRequest<Void> {
 
         public UpdateMetadata(String snapshotId, Metadata metadata) {
-            super(CLIENT, HttpMethod.PUT, new StringBuilder("/snapshots/").append(snapshotId)
-                    .append("/metadata")
-                    .toString(), Entity.json(metadata), Void.class);
+            super(CLIENT, HttpMethod.PUT,
+                    new StringBuilder("/snapshots/").append(snapshotId).append("/metadata").toString(),
+                    Entity.json(metadata), Void.class);
         }
 
     }

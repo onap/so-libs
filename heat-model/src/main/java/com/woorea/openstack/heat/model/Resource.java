@@ -18,7 +18,6 @@ package com.woorea.openstack.heat.model;
 
 import java.util.Date;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Resource {
@@ -43,6 +42,9 @@ public class Resource {
     @JsonProperty("updated_time")
     private Date updatedTime;
 
+    @JsonProperty("creation_time")
+    private Date creationTime;
+
     @JsonProperty("resource_type")
     private String type;
 
@@ -51,6 +53,14 @@ public class Resource {
 
     public String getStatusReason() {
         return statusReason;
+    }
+
+    public Date getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(Date creationTime) {
+        this.creationTime = creationTime;
     }
 
     public void setStatusReason(String statusReason) {
@@ -123,16 +133,9 @@ public class Resource {
 
     @Override
     public String toString() {
-        return "Resource{" +
-                "name='" + name + '\'' +
-                ", links=" + links +
-                ", status='" + status + '\'' +
-                ", physicalResourceId='" + physicalResourceId + '\'' +
-                ", logicalResourceId='" + logicalResourceId + '\'' +
-                ", requiredBy=" + requiredBy +
-                ", updatedTime=" + updatedTime +
-                ", type='" + type + '\'' +
-                ", statusReason='" + statusReason + '\'' +
-                '}';
+        return "Resource{" + "name='" + name + '\'' + ", links=" + links + ", status='" + status + '\''
+                + ", physicalResourceId='" + physicalResourceId + '\'' + ", logicalResourceId='" + logicalResourceId
+                + '\'' + ", requiredBy=" + requiredBy + ", updatedTime=" + updatedTime + ", type='" + type + '\''
+                + ", statusReason='" + statusReason + '\'' + '}';
     }
 }

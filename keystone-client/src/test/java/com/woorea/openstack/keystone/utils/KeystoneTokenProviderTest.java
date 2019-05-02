@@ -20,14 +20,11 @@
 package com.woorea.openstack.keystone.utils;
 
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class KeystoneTokenProviderTest {
 
-    KeystoneTokenProvider keystoneTokenProvider = new KeystoneTokenProvider("endpoint",
-            "username",
-            "password");
+    KeystoneTokenProvider keystoneTokenProvider = new KeystoneTokenProvider("endpoint", "username", "password");
 
     @Test(expected = NullPointerException.class)
     public void getAccessByTenant() throws Exception {

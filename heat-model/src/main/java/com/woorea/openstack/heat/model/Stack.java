@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -41,6 +40,7 @@ public class Stack {
 
     @JsonProperty("links")
     private List<Link> links;
+
 
     @JsonProperty("stack_status_reason")
     private String stackStatusReason;
@@ -59,10 +59,76 @@ public class Stack {
 
     @JsonProperty("id")
     private String id;
-    
+
+    @JsonProperty("template_description")
+    private String templateDescription;
+
+    @JsonProperty("stack_owner")
+    private String stackOwner;
+
+    @JsonProperty("disable_rollback")
+    private boolean disableRollback;
+
+    @JsonProperty("stack_user_project_id")
+    private String userProjectId;
+
+    @JsonProperty("timeout_mins")
+    private int timeouteMinutes;
+
+    public String getTemplateDescription() {
+        return templateDescription;
+    }
+
+    public void setTemplateDescription(String templateDescription) {
+        this.templateDescription = templateDescription;
+    }
+
+    public String getStackOwner() {
+        return stackOwner;
+    }
+
+    public void setStackOwner(String stackOwner) {
+        this.stackOwner = stackOwner;
+    }
+
+    public boolean isDisableRollback() {
+        return disableRollback;
+    }
+
+    public void setDisableRollback(boolean disableRollback) {
+        this.disableRollback = disableRollback;
+    }
+
+    public String getUserProjectId() {
+        return userProjectId;
+    }
+
+    public void setUserProjectId(String userProjectId) {
+        this.userProjectId = userProjectId;
+    }
+
+    public int getTimeouteMinutes() {
+        return timeouteMinutes;
+    }
+
+    public void setTimeouteMinutes(int timeouteMinutes) {
+        this.timeouteMinutes = timeouteMinutes;
+    }
+
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
+
+    @JsonProperty("project")
+    private String project;
+
     @JsonProperty("files")
     private Map<String, Object> files = null;
-    
+
     // ObjectMapper instance to parse Json stack outputs
     @JsonIgnore
     private static ObjectMapper mapper = new ObjectMapper();
@@ -131,10 +197,11 @@ public class Stack {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public Map<String, Object> getFiles() {
         return this.files;
     }
+
     public void setFiles(Map<String, Object> files) {
         this.files = files;
     }
@@ -142,31 +209,23 @@ public class Stack {
 
     @Override
     public String toString() {
-        return "Stack{" +
-                "description='" + description + '\'' +
-                ", links=" + links +
-                ", stackStatusReason='" + stackStatusReason + '\'' +
-                ", stackName='" + stackName + '\'' +
-                ", updatedTime=" + updatedTime +
-                ", creationTime=" + creationTime +
-                ", stackStatus='" + stackStatus + '\'' +
-                ", id='" + id + '\'' +
-                ", outputs='" + outputs + '\'' +
-                ", parameters='" + parameters + '\'' +
-                ", files='" + files + '\'' +
-                '}';
+        return "Stack{" + "description='" + description + '\'' + ", links=" + links + ", stackStatusReason='"
+                + stackStatusReason + '\'' + ", stackName='" + stackName + '\'' + ", updatedTime=" + updatedTime
+                + ", creationTime=" + creationTime + ", stackStatus='" + stackStatus + '\'' + ", id='" + id + '\''
+                + ", outputs='" + outputs + '\'' + ", parameters='" + parameters + '\'' + ", files='" + files + '\''
+                + '}';
     }
-    
-    @JsonIgnoreProperties(ignoreUnknown=true)
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Output {
         @JsonProperty("output_value")
         private Object outputValue;
-        
+
         private String description;
-        
+
         @JsonProperty("output_key")
         private String outputKey;
-        
+
         public Object getOutputValue() {
             return outputValue;
         }
@@ -179,23 +238,24 @@ public class Stack {
             return outputKey;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see java.lang.Object#toString()
          */
         @Override
         public String toString() {
-            return "Output [key=" + outputKey + ", value="
-                    + outputValue + "]";
+            return "Output [key=" + outputKey + ", value=" + outputValue + "]";
         }
     }
-    
+
     private List<Output> outputs;
 
     public List<Output> getOutputs() {
         return outputs;
     }
-    
-    private Object _findOutputValue (String key) {
+
+    private Object _findOutputValue(String key) {
         for (Output o : outputs) {
             if (o.getOutputKey().equals(key)) {
                 return o.getOutputValue();
@@ -203,57 +263,49 @@ public class Stack {
         }
         return null;
     }
-    
+
     /*
-     * Return a stack output as a String.
-     * Generally speaking, most outputs will be Strings.
+     * Return a stack output as a String. Generally speaking, most outputs will be Strings.
      */
-    public String getOutputValue (String key)
-    {
+    public String getOutputValue(String key) {
         Object value = _findOutputValue(key);
         if (value != null)
             return value.toString();
         else
             return null;
     }
-    
+
     /*
-     * Return a stack output as a Json-mapped Object of the provided type.
-     * This is useful for json-object stack outputs.
+     * Return a stack output as a Json-mapped Object of the provided type. This is useful for json-object stack outputs.
      */
-    public <T> T getOutputValue (String key, Class<T> type)
-    {
+    public <T> T getOutputValue(String key, Class<T> type) {
         try {
             String s = mapper.writeValueAsString(_findOutputValue(key));
             return mapper.readValue(s, type);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             return null;
         }
     }
-    
+
     @JsonProperty("parameters")
-    private Map<String,Object> parameters = new HashMap<>();
-    
-    public void setParameters (Map<String,Object> params)
-    {
+    private Map<String, Object> parameters = new HashMap<>();
+
+    public void setParameters(Map<String, Object> params) {
         // Need to "fix" comma-delimited-list parameters for pre-Juno Heat
         // (see https://bugs.launchpad.net/heat/+bug/1367393)
         parameters = params;
-        
-        for (Entry<String,Object> param : parameters.entrySet())
-        {
+
+        for (Entry<String, Object> param : parameters.entrySet()) {
             // CDL params are returned as a string with format:
             // "[u'<value1>',u'<value2>',...]"
             String value = param.getValue().toString();
-            if (value.startsWith("[") && value.endsWith("]"))
-            {
-                param.setValue(value.substring(1,value.length()-1).replaceAll("u'([^\']+)'","$1"));
+            if (value.startsWith("[") && value.endsWith("]")) {
+                param.setValue(value.substring(1, value.length() - 1).replaceAll("u'([^\']+)'", "$1"));
             }
         }
     }
-    
-    public Map<String,Object> getParameters() {
+
+    public Map<String, Object> getParameters() {
         return parameters;
     }
 }

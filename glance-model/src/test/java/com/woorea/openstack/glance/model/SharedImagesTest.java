@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,17 +34,13 @@ public class SharedImagesTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"shared_images\" : [ { }, { } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"shared_images\" : [ { }, { } ]" + EOL + "}";
 
     // FAIL_ON_EMPTY_BEANS set to false to conform to legacy behavior
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -62,13 +56,14 @@ public class SharedImagesTest {
     public void testMethods() throws Exception {
         SharedImages sharedimages = objectMapper.readValue(JSON_FULL, SharedImages.class);
         sharedimages.toString();
-        
+
         List<SharedImage> list = sharedimages.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") SharedImage x : sharedimages) {
+        for (@SuppressWarnings("unused")
+        SharedImage x : sharedimages) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

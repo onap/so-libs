@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
  */
 
 // There is no Root element for the Explanation return
-//@JsonRootName("error")
+// @JsonRootName("error")
 public class Explanation {
     @JsonProperty("explanation")
     private String explanation;
@@ -34,7 +34,7 @@ public class Explanation {
 
     @JsonProperty("title")
     private String title;
-    
+
     @JsonRootName("error")
     public static class Error {
         @JsonProperty("message")
@@ -49,45 +49,43 @@ public class Explanation {
         public String getMessage() {
             return message;
         }
-        
+
         public String getTraceback() {
             return traceback;
         }
-        
+
         public String getType() {
             return type;
         }
     }
- 
+
     private Error error;
-    
+
     public String getExplanation() {
         return explanation;
     }
-    
+
     public int getCode() {
         return code;
     }
-    
+
     public String getTitle() {
         return title;
     }
-    
+
     public Error getError() {
         return error;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Explanation [ " +
-                "code='" + code +
-                "', title='" + title +
-                "', explanation='" + explanation +
-                "', Error [type='" + error.type +
-                "', message='" + error.message + "' ] ]";
+        return "Explanation [ " + "code='" + code + "', title='" + title + "', explanation='" + explanation
+                + "', Error [type='" + error.type + "', message='" + error.message + "' ] ]";
     }
 
 }

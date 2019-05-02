@@ -19,7 +19,6 @@ package com.woorea.openstack.keystone.model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -28,16 +27,16 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Access implements Serializable {
 
     public static final class Service {
-        
-        @JsonIgnoreProperties(ignoreUnknown=true)
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
         public static final class Endpoint {
-            
+
             private String region;
-            
+
             private String publicURL;
-            
+
             private String internalURL;
-            
+
             private String adminURL;
 
             /**
@@ -68,24 +67,25 @@ public class Access implements Serializable {
                 return adminURL;
             }
 
-            /* (non-Javadoc)
+            /*
+             * (non-Javadoc)
+             * 
              * @see java.lang.Object#toString()
              */
             @Override
             public String toString() {
-                return "Endpoint [region=" + region + ", publicURL="
-                        + publicURL + ", internalURL=" + internalURL
+                return "Endpoint [region=" + region + ", publicURL=" + publicURL + ", internalURL=" + internalURL
                         + ", adminURL=" + adminURL + "]";
             }
-            
+
         }
-        
+
         private String type;
-        
+
         private String name;
-        
+
         private List<Endpoint> endpoints;
-        
+
         @JsonProperty("endpoints_links")
         private List<Link> endpointsLinks;
 
@@ -117,25 +117,27 @@ public class Access implements Serializable {
             return endpointsLinks;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see java.lang.Object#toString()
          */
         @Override
         public String toString() {
-            return "Service [type=" + type + ", name=" + name + ", endpoints="
-                    + endpoints + ", endpointsLinks=" + endpointsLinks + "]";
+            return "Service [type=" + type + ", name=" + name + ", endpoints=" + endpoints + ", endpointsLinks="
+                    + endpointsLinks + "]";
         }
-        
+
     }
-    
-    @JsonIgnoreProperties(ignoreUnknown=true)
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class User {
-        
-        @JsonIgnoreProperties(ignoreUnknown=true)
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
         public static final class Role {
-            
+
             private String id;
-            
+
             private String name;
 
             /**
@@ -152,24 +154,26 @@ public class Access implements Serializable {
                 return name;
             }
 
-            /* (non-Javadoc)
+            /*
+             * (non-Javadoc)
+             * 
              * @see java.lang.Object#toString()
              */
             @Override
             public String toString() {
                 return "Role [id=" + id + ", name=" + name + "]";
             }
-            
+
         }
-        
+
         private String id;
-        
+
         private String name;
-        
+
         private String username;
-        
+
         private List<Role> roles;
-        
+
         @JsonProperty("roles_links")
         private List<Link> rolesLinks;
 
@@ -208,24 +212,25 @@ public class Access implements Serializable {
             return rolesLinks;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see java.lang.Object#toString()
          */
         @Override
         public String toString() {
-            return "User [id=" + id + ", name=" + name + ", username="
-                    + username + ", roles=" + roles + ", rolesLinks="
+            return "User [id=" + id + ", name=" + name + ", username=" + username + ", roles=" + roles + ", rolesLinks="
                     + rolesLinks + "]";
         }
-        
+
     }
-    
+
     private Token token;
-    
+
     private List<Service> serviceCatalog;
-    
+
     private User user;
-    
+
     private Map<String, Object> metadata;
 
     /**
@@ -256,13 +261,15 @@ public class Access implements Serializable {
         return metadata;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Access [token=" + token + ", serviceCatalog=" + serviceCatalog
-                + ", user=" + user + ", metadata=" + metadata + "]";
+        return "Access [token=" + token + ", serviceCatalog=" + serviceCatalog + ", user=" + user + ", metadata="
+                + metadata + "]";
     }
-    
+
 }

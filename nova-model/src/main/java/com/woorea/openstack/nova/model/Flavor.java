@@ -18,42 +18,47 @@ package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("flavor")
 public class Flavor implements Serializable {
 
+    @JsonProperty("id")
     private String id;
-    
+
+    @JsonProperty("name")
     private String name;
-    
+
+    @JsonProperty("vcpus")
     private Integer vcpus;
-    
+
+    @JsonProperty("ram")
     private Integer ram;
-    
+
+    @JsonProperty("disk")
     private Integer disk;
-    
+
     @JsonProperty("OS-FLV-EXT-DATA:ephemeral")
     private Integer ephemeral;
-    
+
+    @JsonProperty("swap")
     private String swap;
-    
+
     @JsonProperty("rxtx_factor")
     private Float rxtxFactor;
-    
+
     @JsonProperty("OS-FLV-DISABLED:disabled")
     private Boolean disabled;
-    
+
     @JsonProperty("rxtx_quota")
     private Integer rxtxQuota;
-    
+
     @JsonProperty("rxtx_cap")
     private Integer rxtxCap;
-    
+
     private List<Link> links;
-    
+
     @JsonProperty("os-flavor-access:is_public")
     private Boolean isPublic;
 
@@ -210,7 +215,7 @@ public class Flavor implements Serializable {
     public void setDisabled(Boolean disabled) {
         this.disabled = disabled;
     }
-    
+
     /**
      * @return the isPublic
      */
@@ -239,17 +244,17 @@ public class Flavor implements Serializable {
         this.links = links;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Flavor [id=" + id + ", name=" + name + ", vcpus=" + vcpus
-                + ", ram=" + ram + ", disk=" + disk + ", ephemeral="
-                + ephemeral + ", swap=" + swap + ", rxtxFactor=" + rxtxFactor
-                + ", disabled=" + disabled + ", rxtxQuota=" + rxtxQuota
-                + ", rxtxCap=" + rxtxCap + ", links=" + links + ", isPublic="
+        return "Flavor [id=" + id + ", name=" + name + ", vcpus=" + vcpus + ", ram=" + ram + ", disk=" + disk
+                + ", ephemeral=" + ephemeral + ", swap=" + swap + ", rxtxFactor=" + rxtxFactor + ", disabled="
+                + disabled + ", rxtxQuota=" + rxtxQuota + ", rxtxCap=" + rxtxCap + ", links=" + links + ", isPublic="
                 + isPublic + "]";
     }
-    
+
 }

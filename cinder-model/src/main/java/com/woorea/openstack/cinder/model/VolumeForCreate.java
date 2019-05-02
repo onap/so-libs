@@ -1,4 +1,5 @@
-/* ============LICENSE_START=======================================================
+/*-
+ * ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,11 +13,11 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.cinder.model;
 
 import java.io.Serializable;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -59,8 +60,7 @@ public class VolumeForCreate implements Serializable {
     }
 
     /**
-     * @param size
-     *            the size to set
+     * @param size the size to set
      */
     public void setSize(Integer size) {
         this.size = size;
@@ -74,8 +74,7 @@ public class VolumeForCreate implements Serializable {
     }
 
     /**
-     * @param availabilityZone
-     *            the availabilityZone to set
+     * @param availabilityZone the availabilityZone to set
      */
     public void setAvailabilityZone(String availabilityZone) {
         this.availabilityZone = availabilityZone;
@@ -89,8 +88,7 @@ public class VolumeForCreate implements Serializable {
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -104,8 +102,7 @@ public class VolumeForCreate implements Serializable {
     }
 
     /**
-     * @param description
-     *            the description to set
+     * @param description the description to set
      */
     public void setDescription(String description) {
         this.description = description;
@@ -119,8 +116,7 @@ public class VolumeForCreate implements Serializable {
     }
 
     /**
-     * @param snapshotId
-     *            the snapshotId to set
+     * @param snapshotId the snapshotId to set
      */
     public void setSnapshotId(String snapshotId) {
         this.snapshotId = snapshotId;
@@ -134,8 +130,7 @@ public class VolumeForCreate implements Serializable {
     }
 
     /**
-     * @param sourceVolid
-     *            to set
+     * @param sourceVolid to set
      */
     public void setSourceVolid(String sourceVolid) {
         this.sourceVolid = sourceVolid;
@@ -149,8 +144,7 @@ public class VolumeForCreate implements Serializable {
     }
 
     /**
-     * @param imageRef
-     *            to set
+     * @param imageRef to set
      */
     public void setImageRef(String imageRef) {
         this.imageRef = imageRef;
@@ -164,8 +158,7 @@ public class VolumeForCreate implements Serializable {
     }
 
     /**
-     * @param volumeType
-     *            to set
+     * @param volumeType to set
      */
     public void setVolumeType(String volumeType) {
         this.volumeType = volumeType;
@@ -181,8 +174,7 @@ public class VolumeForCreate implements Serializable {
     /**
      * Enables or disables the bootable attribute. You can boot an instance from a bootable volume.
      *
-     * @param bootable
-     *            flag
+     * @param bootable flag
      */
     public void setBootable(Boolean bootable) {
         this.bootable = bootable;
@@ -196,8 +188,7 @@ public class VolumeForCreate implements Serializable {
     }
 
     /**
-     * @param metadata
-     *            the metadata to set
+     * @param metadata the metadata to set
      */
     public void setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
@@ -210,16 +201,10 @@ public class VolumeForCreate implements Serializable {
      */
     @Override
     public String toString() {
-        return "VolumeForCreate [size=" + size +
-                ", availabilityZone=" + availabilityZone +
-                ", name=" + name +
-                ", description=" + description +
-                ", snapshotId=" + snapshotId +
-                ", source_volid=" + sourceVolid +
-                ", imageRef=" + imageRef +
-                ", volume_type=" + volumeType +
-                ", bootable=" + bootable +
-                ", metadata=" + metadata + "]";
+        return "VolumeForCreate [size=" + size + ", availabilityZone=" + availabilityZone + ", name=" + name
+                + ", description=" + description + ", snapshotId=" + snapshotId + ", source_volid=" + sourceVolid
+                + ", imageRef=" + imageRef + ", volume_type=" + volumeType + ", bootable=" + bootable + ", metadata="
+                + metadata + "]";
     }
 
 }

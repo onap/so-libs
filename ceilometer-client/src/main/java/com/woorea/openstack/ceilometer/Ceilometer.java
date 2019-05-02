@@ -23,28 +23,28 @@ import com.woorea.openstack.ceilometer.v2.api.MetersResource;
 import com.woorea.openstack.ceilometer.v2.api.ResourcesResource;
 
 public class Ceilometer extends OpenStackClient {
-    
+
     private final MetersResource meters;
-    
+
     private final ResourcesResource resources;
-    
+
     public Ceilometer(String endpoint, OpenStackClientConnector connector) {
         super(endpoint, connector);
         meters = new MetersResource(this);
         resources = new ResourcesResource(this);
     }
-    
+
     public Ceilometer(String endpoint) {
         this(endpoint, null);
-        
+
     }
-    
+
     public ResourcesResource resources() {
         return resources;
     }
-    
+
     public MetersResource meters() {
         return meters;
     }
-    
+
 }

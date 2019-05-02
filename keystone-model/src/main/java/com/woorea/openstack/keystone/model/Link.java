@@ -21,9 +21,9 @@ import java.io.Serializable;
 public class Link implements Serializable {
 
     private String rel;
-    
+
     private String href;
-    
+
     private String type;
 
     /**
@@ -47,12 +47,14 @@ public class Link implements Serializable {
         return type;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "Link [rel=" + rel + ", href=" + href + ", type=" + type + "]";
     }
-    
+
 }

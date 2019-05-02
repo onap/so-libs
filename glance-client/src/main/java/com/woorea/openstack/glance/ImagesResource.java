@@ -112,7 +112,7 @@ public class ImagesResource {
 
         public Update(String id, Image image) {
             super(client, HttpMethod.PUT, new StringBuilder(IMAGES).append(id).toString(), Entity.json(image),
-                Image.class);
+                    Image.class);
         }
     }
 
@@ -140,7 +140,7 @@ public class ImagesResource {
 
         public Upload(String id, ImageUpload imageUpload) {
             super(client, HttpMethod.PUT, new StringBuilder(IMAGES).append(id).toString(),
-                Entity.stream(imageUpload.getInputStream()), Image.class);
+                    Entity.stream(imageUpload.getInputStream()), Image.class);
         }
 
         public Upload(ImageUpload imageUpload) {
@@ -150,7 +150,7 @@ public class ImagesResource {
                 header(entry.getKey(), entry.getValue());
             }
 
-            //file,s3,swift
+            // file,s3,swift
             header("x-image-meta-store", imageUpload.getStore());
         }
     }
@@ -158,8 +158,7 @@ public class ImagesResource {
     public class Download extends OpenStackRequest<ImageDownload> {
 
         public Download(String id) {
-            super(client, HttpMethod.GET, new StringBuilder(IMAGES).append(id).toString(), null,
-                ImageDownload.class);
+            super(client, HttpMethod.GET, new StringBuilder(IMAGES).append(id).toString(), null, ImageDownload.class);
             header("Accept", "application/octet-stream");
         }
 
@@ -178,7 +177,7 @@ public class ImagesResource {
 
         public ListMembers(String id) {
             super(client, HttpMethod.GET, new StringBuilder(IMAGES).append(id).append(MEMBERS).toString(), null,
-                ImageMembers.class);
+                    ImageMembers.class);
         }
     }
 
@@ -186,7 +185,7 @@ public class ImagesResource {
 
         public ReplaceMembers(String id, Collection<ImageMember> members) {
             super(client, HttpMethod.PUT, new StringBuilder(IMAGES).append(id).append(MEMBERS).toString(),
-                Entity.json(new Memberships(members)), Void.class);
+                    Entity.json(new Memberships(members)), Void.class);
         }
     }
 
@@ -194,8 +193,8 @@ public class ImagesResource {
 
         public AddMember(String id, String tenantId) {
             super(client, HttpMethod.PUT,
-                new StringBuilder(IMAGES).append(id).append(MEMBERS).append(tenantId).toString(), null,
-                ImageMember.class);
+                    new StringBuilder(IMAGES).append(id).append(MEMBERS).append(tenantId).toString(), null,
+                    ImageMember.class);
         }
     }
 
@@ -203,8 +202,8 @@ public class ImagesResource {
 
         public RemoveMember(String id, String tenantId) {
             super(client, HttpMethod.DELETE,
-                new StringBuilder(IMAGES).append(id).append("/members/").append(tenantId).toString(), null,
-                Void.class);
+                    new StringBuilder(IMAGES).append(id).append("/members/").append(tenantId).toString(), null,
+                    Void.class);
         }
     }
 

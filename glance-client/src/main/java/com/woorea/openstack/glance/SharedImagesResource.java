@@ -38,8 +38,8 @@ public class SharedImagesResource {
 
         public List(String tenantId, boolean detail) {
             super(client, HttpMethod.GET,
-                new StringBuffer(detail ? "/shared-images/detail" : "/shared-images/").append(tenantId).toString(),
-                null, SharedImages.class);
+                    new StringBuffer(detail ? "/shared-images/detail" : "/shared-images/").append(tenantId).toString(),
+                    null, SharedImages.class);
         }
     }
 }

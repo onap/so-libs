@@ -25,10 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.ServerAction.Rebuild;
-
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -38,35 +36,19 @@ public class RebuildTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"rebuild\" : {" + EOL
-        + "    \"imageRef\" : \"imageref\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"adminPass\" : \"adminpass\"," + EOL
-        + "    \"accessIPv4\" : \"accessipv4\"," + EOL
-        + "    \"accessIPv6\" : \"accessipv6\"," + EOL
-        + "    \"metadata\" : {" + EOL
-        + "      \"metadata-k1\" : \"metadata-v1\"," + EOL
-        + "      \"metadata-k2\" : \"metadata-v2\"" + EOL
-        + "    }," + EOL
-        + "    \"personality\" : [ {" + EOL
-        + "      \"path\" : \"path\"," + EOL
-        + "      \"contents\" : \"contents\"" + EOL
-        + "    }, {" + EOL
-        + "      \"path\" : \"path\"," + EOL
-        + "      \"contents\" : \"contents\"" + EOL
-        + "    } ]," + EOL
-        + "    \"OS-DCF:diskConfig\" : \"diskconfig\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"rebuild\" : {" + EOL + "    \"imageRef\" : \"imageref\","
+            + EOL + "    \"name\" : \"name\"," + EOL + "    \"adminPass\" : \"adminpass\"," + EOL
+            + "    \"accessIPv4\" : \"accessipv4\"," + EOL + "    \"accessIPv6\" : \"accessipv6\"," + EOL
+            + "    \"metadata\" : {" + EOL + "      \"metadata-k1\" : \"metadata-v1\"," + EOL
+            + "      \"metadata-k2\" : \"metadata-v2\"" + EOL + "    }," + EOL + "    \"personality\" : [ {" + EOL
+            + "      \"path\" : \"path\"," + EOL + "      \"contents\" : \"contents\"" + EOL + "    }, {" + EOL
+            + "      \"path\" : \"path\"," + EOL + "      \"contents\" : \"contents\"" + EOL + "    } ]," + EOL
+            + "    \"OS-DCF:diskConfig\" : \"diskconfig\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -82,37 +64,37 @@ public class RebuildTest {
     public void testMethods() throws Exception {
         Rebuild rebuild = objectMapper.readValue(JSON_FULL, Rebuild.class);
         rebuild.toString();
-        
-        Map<String,String> metadata = rebuild.getMetadata();
+
+        Map<String, String> metadata = rebuild.getMetadata();
         Assert.assertNotNull(metadata);
         Assert.assertEquals(2, metadata.size());
         rebuild.setMetadata(metadata);
-        
+
         List<PersonalityFile> personality = rebuild.getPersonality();
         Assert.assertNotNull(personality);
         Assert.assertEquals(2, personality.size());
         rebuild.setPersonality(personality);
-        
+
         String name = rebuild.getName();
         Assert.assertNotNull(name);
         rebuild.setName(name);
-        
+
         String adminPass = rebuild.getAdminPass();
         Assert.assertNotNull(adminPass);
         rebuild.setAdminPass(adminPass);
-        
+
         String imageRef = rebuild.getImageRef();
         Assert.assertNotNull(imageRef);
         rebuild.setImageRef(imageRef);
-        
+
         String accessIPv6 = rebuild.getAccessIPv6();
         Assert.assertNotNull(accessIPv6);
         rebuild.setAccessIPv6(accessIPv6);
-        
+
         String diskConfig = rebuild.getDiskConfig();
         Assert.assertNotNull(diskConfig);
         rebuild.setDiskConfig(diskConfig);
-        
+
         String accessIPv4 = rebuild.getAccessIPv4();
         Assert.assertNotNull(accessIPv4);
         rebuild.setAccessIPv4(accessIPv4);

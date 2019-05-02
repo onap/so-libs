@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
  * Please use {@link Subnet} directly.
+ * 
  * @Deprecated
  */
 @SuppressWarnings("serial")
@@ -39,8 +40,7 @@ public class SubnetForCreate extends Subnet {
     }
 
     /**
-     * @param ipVersion
-     *            the ipVersion to set
+     * @param ipVersion the ipVersion to set
      * @deprecated
      */
     @Deprecated

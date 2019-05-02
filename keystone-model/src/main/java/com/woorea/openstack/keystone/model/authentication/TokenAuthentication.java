@@ -21,9 +21,9 @@ import com.woorea.openstack.keystone.model.Authentication;
 
 @JsonRootName("auth")
 public class TokenAuthentication extends Authentication {
-    
+
     public static final class Token {
-        
+
         private String id;
 
         /**
@@ -39,11 +39,11 @@ public class TokenAuthentication extends Authentication {
         public void setId(String id) {
             this.id = id;
         }
-        
+
     }
-    
+
     private Token token = new Token();
-    
+
     public TokenAuthentication(String token) {
         this.token.id = token;
     }
@@ -61,5 +61,5 @@ public class TokenAuthentication extends Authentication {
     public void setToken(Token token) {
         this.token = token;
     }
-    
+
 }

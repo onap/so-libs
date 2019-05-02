@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,31 +34,19 @@ public class CloudpipesTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"cloudpipes\" : [ {" + EOL
-        + "    \"projectId\" : \"projectid\"," + EOL
-        + "    \"internalIp\" : \"internalip\"," + EOL
-        + "    \"publicIp\" : \"publicip\"," + EOL
-        + "    \"publicPort\" : \"publicport\"," + EOL
-        + "    \"state\" : \"state\"," + EOL
-        + "    \"instanceId\" : \"instanceid\"," + EOL
-        + "    \"createdAt\" : 1486296000000" + EOL
-        + "  }, {" + EOL
-        + "    \"projectId\" : \"projectid\"," + EOL
-        + "    \"internalIp\" : \"internalip\"," + EOL
-        + "    \"publicIp\" : \"publicip\"," + EOL
-        + "    \"publicPort\" : \"publicport\"," + EOL
-        + "    \"state\" : \"state\"," + EOL
-        + "    \"instanceId\" : \"instanceid\"," + EOL
-        + "    \"createdAt\" : 1486296000000" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"cloudpipes\" : [ {" + EOL
+            + "    \"projectId\" : \"projectid\"," + EOL + "    \"internalIp\" : \"internalip\"," + EOL
+            + "    \"publicIp\" : \"publicip\"," + EOL + "    \"publicPort\" : \"publicport\"," + EOL
+            + "    \"state\" : \"state\"," + EOL + "    \"instanceId\" : \"instanceid\"," + EOL
+            + "    \"createdAt\" : 1486296000000" + EOL + "  }, {" + EOL + "    \"projectId\" : \"projectid\"," + EOL
+            + "    \"internalIp\" : \"internalip\"," + EOL + "    \"publicIp\" : \"publicip\"," + EOL
+            + "    \"publicPort\" : \"publicport\"," + EOL + "    \"state\" : \"state\"," + EOL
+            + "    \"instanceId\" : \"instanceid\"," + EOL + "    \"createdAt\" : 1486296000000" + EOL + "  } ]" + EOL
+            + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -76,7 +62,7 @@ public class CloudpipesTest {
     public void testMethods() throws Exception {
         Cloudpipes cloudpipes = objectMapper.readValue(JSON_FULL, Cloudpipes.class);
         cloudpipes.toString();
-        
+
         List<Cloudpipe> list = cloudpipes.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());

@@ -22,22 +22,22 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("flavor")
 public class FlavorForCreate implements Serializable {
-    
+
     private String id;
-    
+
     private String name;
-    
+
     private String vcpus;
-    
+
     private Integer ram;
-    
+
     private String disk;
-    
+
     @JsonProperty("OS-FLV-EXT-DATA:ephemeral")
     private Integer ephemeral;
-    
+
     private String swap;
-    
+
     @JsonProperty("rxtx_factor")
     private Float rxtxFactor;
 
@@ -152,5 +152,5 @@ public class FlavorForCreate implements Serializable {
     public void setRxtxFactor(Float rxtxFactor) {
         this.rxtxFactor = rxtxFactor;
     }
-    
+
 }

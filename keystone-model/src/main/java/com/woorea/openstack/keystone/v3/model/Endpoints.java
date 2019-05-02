@@ -19,10 +19,9 @@ package com.woorea.openstack.keystone.v3.model;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Endpoints implements Iterable<Endpoint>,  Serializable {
+public class Endpoints implements Iterable<Endpoint>, Serializable {
 
     @JsonProperty("endpoints")
     private List<Endpoint> list;
@@ -33,8 +32,10 @@ public class Endpoints implements Iterable<Endpoint>,  Serializable {
     public List<Endpoint> getList() {
         return list;
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
@@ -46,5 +47,5 @@ public class Endpoints implements Iterable<Endpoint>,  Serializable {
     public Iterator<Endpoint> iterator() {
         return list.iterator();
     }
-    
+
 }

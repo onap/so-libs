@@ -17,18 +17,17 @@
 package com.woorea.openstack.keystone.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("OS-KSADM:service")
 public class Service implements Serializable {
 
     private String id;
-    
+
     private String type;
-    
+
     private String name;
-    
+
     private String description;
 
     /**
@@ -80,13 +79,14 @@ public class Service implements Serializable {
         this.description = description;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Service [id=" + id + ", type=" + type + ", name=" + name
-                + ", description=" + description + "]";
+        return "Service [id=" + id + ", type=" + type + ", name=" + name + ", description=" + description + "]";
     }
-    
+
 }

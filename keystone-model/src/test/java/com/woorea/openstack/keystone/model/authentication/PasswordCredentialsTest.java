@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.model.authentication.UsernamePassword.PasswordCredentials;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -35,16 +34,12 @@ public class PasswordCredentialsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"username\" : \"username\"," + EOL
-        + "  \"password\" : \"password\"" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"username\" : \"username\"," + EOL + "  \"password\" : \"password\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -60,11 +55,11 @@ public class PasswordCredentialsTest {
     public void testMethods() throws Exception {
         PasswordCredentials passwordcredentials = objectMapper.readValue(JSON_FULL, PasswordCredentials.class);
         passwordcredentials.toString();
-        
+
         String password = passwordcredentials.getPassword();
         Assert.assertNotNull(password);
         passwordcredentials.setPassword(password);
-        
+
         String username = passwordcredentials.getUsername();
         Assert.assertNotNull(username);
         passwordcredentials.setUsername(username);

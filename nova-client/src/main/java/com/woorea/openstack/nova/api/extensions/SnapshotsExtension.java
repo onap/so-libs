@@ -77,7 +77,8 @@ public class SnapshotsExtension {
     public class Show extends OpenStackRequest<Snapshot> {
 
         public Show(String id) {
-            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-snapshots/").append(id).toString(), null, Snapshot.class);
+            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-snapshots/").append(id).toString(), null,
+                    Snapshot.class);
         }
 
     }
@@ -85,7 +86,8 @@ public class SnapshotsExtension {
     public class ShowMetadata extends OpenStackRequest<Metadata> {
 
         public ShowMetadata(String id) {
-            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-snapshots/").append(id).append("/metadata").toString(), null, Metadata.class);
+            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-snapshots/").append(id).append("/metadata").toString(),
+                    null, Metadata.class);
         }
 
     }
@@ -93,7 +95,8 @@ public class SnapshotsExtension {
     public class Delete extends OpenStackRequest<Void> {
 
         public Delete(String id) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-snapshots/").append(id).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-snapshots/").append(id).toString(), null,
+                    Void.class);
         }
 
     }

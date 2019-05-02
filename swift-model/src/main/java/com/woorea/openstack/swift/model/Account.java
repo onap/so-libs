@@ -21,9 +21,9 @@ import java.io.Serializable;
 public class Account implements Serializable {
 
     private Integer containerCount;
-    
+
     private Integer objectCount;
-    
+
     private Integer bytesUsed;
 
     /**
@@ -68,13 +68,15 @@ public class Account implements Serializable {
         this.bytesUsed = bytesUsed;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Account [containerCount=" + containerCount + ", objectCount="
-                + objectCount + ", bytesUsed=" + bytesUsed + "]";
+        return "Account [containerCount=" + containerCount + ", objectCount=" + objectCount + ", bytesUsed=" + bytesUsed
+                + "]";
     }
-    
+
 }

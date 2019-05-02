@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,28 +34,18 @@ public class SampleTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"source\" : \"source\"," + EOL
-        + "  \"timestamp\" : \"timestamp\"," + EOL
-        + "  \"counter_type\" : \"countertype\"," + EOL
-        + "  \"counter_name\" : \"countername\"," + EOL
-        + "  \"counter_unit\" : \"counterunit\"," + EOL
-        + "  \"counter_volume\" : \"countervolume\"," + EOL
-        + "  \"project_id\" : \"project\"," + EOL
-        + "  \"user_id\" : \"user\"," + EOL
-        + "  \"resource_id\" : \"resource\"," + EOL
-        + "  \"message_id\" : \"message\"," + EOL
-        + "  \"resource_metadata\" : {" + EOL
-        + "    \"metadata-k1\" : \"metadata-v1\"," + EOL
-        + "    \"metadata-k2\" : \"metadata-v2\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"source\" : \"source\"," + EOL + "  \"timestamp\" : \"timestamp\"," + EOL
+                    + "  \"counter_type\" : \"countertype\"," + EOL + "  \"counter_name\" : \"countername\"," + EOL
+                    + "  \"counter_unit\" : \"counterunit\"," + EOL + "  \"counter_volume\" : \"countervolume\"," + EOL
+                    + "  \"project_id\" : \"project\"," + EOL + "  \"user_id\" : \"user\"," + EOL
+                    + "  \"resource_id\" : \"resource\"," + EOL + "  \"message_id\" : \"message\"," + EOL
+                    + "  \"resource_metadata\" : {" + EOL + "    \"metadata-k1\" : \"metadata-v1\"," + EOL
+                    + "    \"metadata-k2\" : \"metadata-v2\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -73,38 +61,38 @@ public class SampleTest {
     public void testMethods() throws Exception {
         Sample sample = objectMapper.readValue(JSON_FULL, Sample.class);
         sample.toString();
-        
+
         String counterName = sample.getCounterName();
         Assert.assertNotNull(counterName);
-        
-        Map<String,Object> metadata = sample.getMetadata();
+
+        Map<String, Object> metadata = sample.getMetadata();
         Assert.assertNotNull(metadata);
         Assert.assertEquals(2, metadata.size());
-        
+
         String resource = sample.getResource();
         Assert.assertNotNull(resource);
-        
+
         String counterVolume = sample.getCounterVolume();
         Assert.assertNotNull(counterVolume);
-        
+
         String project = sample.getProject();
         Assert.assertNotNull(project);
-        
+
         String counterUnit = sample.getCounterUnit();
         Assert.assertNotNull(counterUnit);
-        
+
         String source = sample.getSource();
         Assert.assertNotNull(source);
-        
+
         String counterType = sample.getCounterType();
         Assert.assertNotNull(counterType);
-        
+
         String message = sample.getMessage();
         Assert.assertNotNull(message);
-        
+
         String user = sample.getUser();
         Assert.assertNotNull(user);
-        
+
         String timestamp = sample.getTimestamp();
         Assert.assertNotNull(timestamp);
     }

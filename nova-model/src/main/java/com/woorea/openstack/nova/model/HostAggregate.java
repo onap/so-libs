@@ -19,39 +19,40 @@ package com.woorea.openstack.nova.model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("aggregate")
 public class HostAggregate implements Serializable {
-    
-    private String id;
 
+    @JsonProperty("id")
+    private Integer id;
+
+    @JsonProperty("name")
     private String name;
-    
+
     @JsonProperty("availability_zone")
     private String availabilityZone;
-    
+
     @JsonProperty("created_at")
     private String createdAt;
-    
+
     @JsonProperty("updated_at")
     private String updatedAt;
-    
+
     @JsonProperty("deleted_at")
     private String deletedAt;
-    
+
     private Boolean deleted;
-    
+
     private List<String> hosts;
-    
+
     private Map<String, String> metadata;
 
     /**
      * @return the id
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -111,16 +112,16 @@ public class HostAggregate implements Serializable {
         return metadata;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "HostAggregate [id=" + id + ", name=" + name
-                + ", availabilityZone=" + availabilityZone + ", createdAt="
-                + createdAt + ", updatedAt=" + updatedAt + ", deletedAt="
-                + deletedAt + ", deleted=" + deleted + ", hosts=" + hosts
-                + ", metadata=" + metadata + "]";
+        return "HostAggregate [id=" + id + ", name=" + name + ", availabilityZone=" + availabilityZone + ", createdAt="
+                + createdAt + ", updatedAt=" + updatedAt + ", deletedAt=" + deletedAt + ", deleted=" + deleted
+                + ", hosts=" + hosts + ", metadata=" + metadata + "]";
     }
-    
+
 }

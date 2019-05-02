@@ -25,9 +25,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Limits.RateLimit.LimitEntry;
-
 import java.util.Calendar;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -37,20 +35,13 @@ public class LimitEntryTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"unit\" : \"unit\"," + EOL
-        + "  \"verb\" : \"verb\"," + EOL
-        + "  \"remaining\" : 72," + EOL
-        + "  \"available\" : 47," + EOL
-        + "  \"value\" : 59," + EOL
-        + "  \"next-available\" : 1489320000000" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"unit\" : \"unit\"," + EOL + "  \"verb\" : \"verb\"," + EOL
+            + "  \"remaining\" : 72," + EOL + "  \"available\" : 47," + EOL + "  \"value\" : 59," + EOL
+            + "  \"next-available\" : 1489320000000" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -66,22 +57,22 @@ public class LimitEntryTest {
     public void testMethods() throws Exception {
         LimitEntry limitentry = objectMapper.readValue(JSON_FULL, LimitEntry.class);
         limitentry.toString();
-        
+
         String unit = limitentry.getUnit();
         Assert.assertNotNull(unit);
-        
+
         String verb = limitentry.getVerb();
         Assert.assertNotNull(verb);
-        
+
         Integer available = limitentry.getAvailable();
         Assert.assertNotNull(available);
-        
+
         Calendar nextAvailable = limitentry.getNextAvailable();
         Assert.assertNotNull(nextAvailable);
-        
+
         Integer value = limitentry.getValue();
         Assert.assertNotNull(value);
-        
+
         Integer remaining = limitentry.getRemaining();
         Assert.assertNotNull(remaining);
     }

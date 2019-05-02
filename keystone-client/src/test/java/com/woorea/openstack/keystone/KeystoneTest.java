@@ -21,9 +21,7 @@ package com.woorea.openstack.keystone;
 
 import com.woorea.openstack.base.client.OpenStackClientConnector;
 import org.junit.Test;
-
 import javax.swing.table.TableStringConverter;
-
 import static org.junit.Assert.*;
 
 public class KeystoneTest {

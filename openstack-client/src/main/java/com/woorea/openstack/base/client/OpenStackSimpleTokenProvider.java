@@ -30,7 +30,6 @@ public class OpenStackSimpleTokenProvider implements OpenStackTokenProvider {
     }
 
     @Override
-    public void expireToken() {
-    }
+    public void expireToken() {}
 
 }

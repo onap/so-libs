@@ -43,11 +43,9 @@ public class OpenStackClientTest {
     }
 
     private OpenStackClientConnector mockClientConnector() {
-        return OpenStackClientMockUtils.getInstance()
-                .mockRequestResponse(Entity.class, Entity.json(SUCCESS))
+        return OpenStackClientMockUtils.getInstance().mockRequestResponse(Entity.class, Entity.json(SUCCESS))
                 .mockRequestThrow(notAuthorizedRequest, "Not Authorized", OpenStackResponseStatus.NOT_AUTHORIZED)
-                .mockRequestThrow(conflictRequest, "Conflict", OpenStackResponseStatus.CONFLICT)
-                .getConnector();
+                .mockRequestThrow(conflictRequest, "Conflict", OpenStackResponseStatus.CONFLICT).getConnector();
 
     }
 

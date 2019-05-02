@@ -19,7 +19,6 @@ package com.woorea.openstack.quantum.api.query;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.woorea.openstack.base.client.OpenStackRequest;
 
@@ -27,8 +26,7 @@ public class AbsOpenStackCmd<T> extends OpenStackRequest<T> {
 
     private T query;
 
-    protected AbsOpenStackCmd(T query)
-    {
+    protected AbsOpenStackCmd(T query) {
         this.setQuery(query);
     }
 
@@ -46,8 +44,7 @@ public class AbsOpenStackCmd<T> extends OpenStackRequest<T> {
         return query;
     }
 
-    private String getFieldValue(Field field, T target)
-    {
+    private String getFieldValue(Field field, T target) {
         try {
             field.setAccessible(true);
             Object obj = field.get(target);
@@ -59,8 +56,7 @@ public class AbsOpenStackCmd<T> extends OpenStackRequest<T> {
         }
     }
 
-    private Map<String, String> getObjectParamMap(T target)
-    {
+    private Map<String, String> getObjectParamMap(T target) {
         Map<String, String> resultMap = new HashMap<>();
         if (target == null)
             return resultMap;

@@ -30,11 +30,13 @@ public class DomainUserRolesResource extends GenericResource<Role, Roles> {
     }
 
     public OpenStackRequest<Void> add(String roleId) {
-        return new OpenStackRequest<>(CLIENT, HttpMethod.PUT, new StringBuilder(path).append("/").append(roleId).toString(), Entity.json(""), Void.class);
+        return new OpenStackRequest<>(CLIENT, HttpMethod.PUT,
+                new StringBuilder(path).append("/").append(roleId).toString(), Entity.json(""), Void.class);
     }
-    
+
     public OpenStackRequest<Void> remove(String roleId) {
-        return new OpenStackRequest<>(CLIENT, HttpMethod.DELETE, new StringBuilder(path).append("/").append(roleId).toString(), null, Void.class);
+        return new OpenStackRequest<>(CLIENT, HttpMethod.DELETE,
+                new StringBuilder(path).append("/").append(roleId).toString(), null, Void.class);
     }
 
 }

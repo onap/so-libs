@@ -26,10 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Server.Addresses;
 import com.woorea.openstack.nova.model.Server.Addresses.Address;
-
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -39,38 +37,20 @@ public class AddressesTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"addresses\" : {" + EOL
-        + "    \"addresses-k1\" : [ {" + EOL
-        + "      \"version\" : \"version\"," + EOL
-        + "      \"addr\" : \"addr\"," + EOL
-        + "      \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
-        + "      \"OS-EXT-IPS:type\" : \"type\"" + EOL
-        + "    }, {" + EOL
-        + "      \"version\" : \"version\"," + EOL
-        + "      \"addr\" : \"addr\"," + EOL
-        + "      \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
-        + "      \"OS-EXT-IPS:type\" : \"type\"" + EOL
-        + "    } ]," + EOL
-        + "    \"addresses-k2\" : [ {" + EOL
-        + "      \"version\" : \"version\"," + EOL
-        + "      \"addr\" : \"addr\"," + EOL
-        + "      \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
-        + "      \"OS-EXT-IPS:type\" : \"type\"" + EOL
-        + "    }, {" + EOL
-        + "      \"version\" : \"version\"," + EOL
-        + "      \"addr\" : \"addr\"," + EOL
-        + "      \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
-        + "      \"OS-EXT-IPS:type\" : \"type\"" + EOL
-        + "    } ]" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"addresses\" : {" + EOL + "    \"addresses-k1\" : [ {" + EOL
+            + "      \"version\" : \"version\"," + EOL + "      \"addr\" : \"addr\"," + EOL
+            + "      \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL + "      \"OS-EXT-IPS:type\" : \"type\"" + EOL
+            + "    }, {" + EOL + "      \"version\" : \"version\"," + EOL + "      \"addr\" : \"addr\"," + EOL
+            + "      \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL + "      \"OS-EXT-IPS:type\" : \"type\"" + EOL
+            + "    } ]," + EOL + "    \"addresses-k2\" : [ {" + EOL + "      \"version\" : \"version\"," + EOL
+            + "      \"addr\" : \"addr\"," + EOL + "      \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
+            + "      \"OS-EXT-IPS:type\" : \"type\"" + EOL + "    }, {" + EOL + "      \"version\" : \"version\"," + EOL
+            + "      \"addr\" : \"addr\"," + EOL + "      \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
+            + "      \"OS-EXT-IPS:type\" : \"type\"" + EOL + "    } ]" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -86,8 +66,8 @@ public class AddressesTest {
     public void testMethods() throws Exception {
         Addresses addresses = objectMapper.readValue(JSON_FULL, Addresses.class);
         addresses.toString();
-        
-        Map<String,List<Address>> addressesProperty = addresses.getAddresses();
+
+        Map<String, List<Address>> addressesProperty = addresses.getAddresses();
         Assert.assertNotNull(addressesProperty);
         Assert.assertEquals(2, addressesProperty.size());
     }

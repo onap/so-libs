@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.SimpleTenantUsage.ServerUsage;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -35,26 +34,16 @@ public class ServerUsageTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"uptime\" : 78," + EOL
-        + "  \"state\" : \"state\"," + EOL
-        + "  \"hours\" : 64.0," + EOL
-        + "  \"vcpus\" : 79," + EOL
-        + "  \"flavor\" : \"flavor\"," + EOL
-        + "  \"name\" : \"name\"," + EOL
-        + "  \"instance_id\" : \"instanceid\"," + EOL
-        + "  \"started_at\" : \"startedat\"," + EOL
-        + "  \"ended_at\" : \"endedat\"," + EOL
-        + "  \"memory_mb\" : 90," + EOL
-        + "  \"tenant_id\" : \"tenantid\"," + EOL
-        + "  \"local_gb\" : 11" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"uptime\" : 78," + EOL + "  \"state\" : \"state\"," + EOL + "  \"hours\" : 64.0," + EOL
+                    + "  \"vcpus\" : 79," + EOL + "  \"flavor\" : \"flavor\"," + EOL + "  \"name\" : \"name\"," + EOL
+                    + "  \"instance_id\" : \"instanceid\"," + EOL + "  \"started_at\" : \"startedat\"," + EOL
+                    + "  \"ended_at\" : \"endedat\"," + EOL + "  \"memory_mb\" : 90," + EOL
+                    + "  \"tenant_id\" : \"tenantid\"," + EOL + "  \"local_gb\" : 11" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -70,40 +59,40 @@ public class ServerUsageTest {
     public void testMethods() throws Exception {
         ServerUsage serverusage = objectMapper.readValue(JSON_FULL, ServerUsage.class);
         serverusage.toString();
-        
+
         String flavor = serverusage.getFlavor();
         Assert.assertNotNull(flavor);
-        
+
         Integer memoryMb = serverusage.getMemoryMb();
         Assert.assertNotNull(memoryMb);
-        
+
         Double hours = serverusage.getHours();
         Assert.assertNotNull(hours);
-        
+
         String instanceId = serverusage.getInstanceId();
         Assert.assertNotNull(instanceId);
-        
+
         Integer localDiskSize = serverusage.getLocalDiskSize();
         Assert.assertNotNull(localDiskSize);
-        
+
         String endedAt = serverusage.getEndedAt();
         Assert.assertNotNull(endedAt);
-        
+
         String name = serverusage.getName();
         Assert.assertNotNull(name);
-        
+
         String tenantId = serverusage.getTenantId();
         Assert.assertNotNull(tenantId);
-        
+
         String startedAt = serverusage.getStartedAt();
         Assert.assertNotNull(startedAt);
-        
+
         String state = serverusage.getState();
         Assert.assertNotNull(state);
-        
+
         Integer vcpus = serverusage.getVcpus();
         Assert.assertNotNull(vcpus);
-        
+
         Integer uptime = serverusage.getUptime();
         Assert.assertNotNull(uptime);
     }

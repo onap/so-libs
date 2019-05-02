@@ -17,7 +17,6 @@
 package com.woorea.openstack.quantum.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.io.Serializable;
 
 public class GatewayInfo implements Serializable {
@@ -33,7 +32,8 @@ public class GatewayInfo implements Serializable {
         this.networkId = id;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "[networkId=" + networkId + "]";
     }
 }

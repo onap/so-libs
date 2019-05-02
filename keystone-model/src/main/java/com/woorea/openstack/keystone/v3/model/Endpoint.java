@@ -23,12 +23,12 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Endpoint {
 
     private String id;
-    
+
     @JsonProperty("interface")
     private String iface;
-    
+
     private String name;
-    
+
     @JsonProperty("service_id")
     private String serviceId;
 
@@ -63,5 +63,5 @@ public class Endpoint {
     public void setServiceId(String serviceId) {
         this.serviceId = serviceId;
     }
-    
+
 }

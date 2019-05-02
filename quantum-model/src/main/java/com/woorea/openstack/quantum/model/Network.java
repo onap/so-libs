@@ -21,19 +21,18 @@ package com.woorea.openstack.quantum.model;
  */
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
- * Network Extension supporting both Provider networks and Multi-Provider networks.
- * The attributes for both of these network extensions are included.
- * It is the responsibility of users to populate only one or the other.  It is
- * also critical that the Mapper is set for serialization inclusion.NON_NULL, or
- * both would be sent to Openstack which would cause an error.
+ * Network Extension supporting both Provider networks and Multi-Provider networks. The attributes for both of these
+ * network extensions are included. It is the responsibility of users to populate only one or the other. It is also
+ * critical that the Mapper is set for serialization inclusion.NON_NULL, or both would be sent to Openstack which would
+ * cause an error.
  * 
  */
 @SuppressWarnings("serial")
@@ -41,14 +40,26 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Network implements Serializable {
 
+    @JsonProperty("status")
     private String status;
 
+    @JsonProperty("subnets")
     private List<String> subnets;
 
+    @JsonProperty("availability_zones")
+    private List<String> availabilityZones;
+
+    @JsonProperty("availability_zone_hints")
+    private List<String> availabilityZoneHints;
+
+    @JsonProperty("name")
     private String name;
 
     @JsonProperty("admin_state_up")
     private Boolean adminStateUp;
+
+    @JsonProperty("project_id")
+    private String projectId;
 
     @JsonProperty("tenant_id")
     private String tenantId;
@@ -63,25 +74,57 @@ public class Network implements Serializable {
     private Integer providerSegmentationId;
 
     @JsonProperty("router:external")
-    private String routerExternal;
+    private Boolean routerExternal;
+
+    @JsonProperty("ipv6_address_scope")
+    private String ipv6AddressScope;
+
+    @JsonProperty("ipv4_address_scope")
+    private String ipv4AddressScope;
+
+    @JsonProperty("revision_number")
+    private Integer revisionNumber;
+
+    @JsonProperty("port_security_enabled")
+    private Boolean portSecurityEnabled;
+
+    @JsonProperty("mtu")
+    private Integer mtu;
 
     private String id;
 
-    private String shared;
-    
+    @JsonProperty("shared")
+    private Boolean shared;
+
+    @JsonProperty("updated_at")
+    private Date updatedAt;
+
+    @JsonProperty("created_at")
+    private Date createdAt;
+
+    @JsonProperty("description")
+    private String description;
+
+
+
+    @JsonProperty("is_default")
+    private Boolean isDefault;
+
     private List<Segment> segments;
+
+    @JsonProperty("tags")
+    private List<String> tags;
 
     /**
      * @return the status
      */
-    
+
     public String getStatus() {
         return status;
     }
 
     /**
-     * @param status
-     *            the status to set
+     * @param status the status to set
      */
     @JsonProperty
     public void setStatus(String status) {
@@ -91,14 +134,13 @@ public class Network implements Serializable {
     /**
      * @return the subnets
      */
-    
+
     public List<String> getSubnets() {
         return subnets;
     }
 
     /**
-     * @param subnets
-     *            the subnets to set
+     * @param subnets the subnets to set
      */
     @JsonProperty
     public void setSubnets(List<String> subnets) {
@@ -113,8 +155,7 @@ public class Network implements Serializable {
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -125,18 +166,17 @@ public class Network implements Serializable {
      * @deprecated
      */
     @Deprecated
-    
+
     public String getProviderPhyNet() {
         return getProviderPhysicalNetwork();
     }
 
     /**
-     * @param providerPhyNet
-     *            the providerPhyNet to set
+     * @param providerPhyNet the providerPhyNet to set
      * @deprecated
      */
     @Deprecated
-    
+
     public void setProviderPhyNet(String providerPhyNet) {
         setProviderPhysicalNetwork(providerPhyNet);
     }
@@ -144,7 +184,7 @@ public class Network implements Serializable {
     /**
      * @return the adminStateUp
      */
-    
+
     public boolean isAdminStateUp() {
         return adminStateUp;
     }
@@ -154,8 +194,7 @@ public class Network implements Serializable {
     }
 
     /**
-     * @param adminStateUp
-     *            the adminStateUp to set
+     * @param adminStateUp the adminStateUp to set
      */
     public void setAdminStateUp(Boolean adminStateUp) {
         this.adminStateUp = adminStateUp;
@@ -169,8 +208,7 @@ public class Network implements Serializable {
     }
 
     /**
-     * @param tenantId
-     *            the tenantId to set
+     * @param tenantId the tenantId to set
      */
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
@@ -181,18 +219,17 @@ public class Network implements Serializable {
      * @deprecated
      */
     @Deprecated
-    
+
     public String getNetType() {
         return getProviderNetworkType();
     }
 
     /**
-     * @param netType
-     *            the netType to set
+     * @param netType the netType to set
      * @deprecated
      */
     @Deprecated
-    
+
     public void setNetType(String netType) {
         setProviderNetworkType(netType);
     }
@@ -200,29 +237,27 @@ public class Network implements Serializable {
     /**
      * @return the routerExternal
      */
-    public String getRouterExternal() {
+    public Boolean getRouterExternal() {
         return routerExternal;
     }
 
     /**
-     * @param routerExternal
-     *            the routerExternal to set
+     * @param routerExternal the routerExternal to set
      */
-    public void setRouterExternal(String routerExternal) {
+    public void setRouterExternal(Boolean routerExternal) {
         this.routerExternal = routerExternal;
     }
 
     /**
      * @return the id
      */
-    
+
     public String getId() {
         return id;
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     @JsonProperty
     public void setId(String id) {
@@ -232,15 +267,14 @@ public class Network implements Serializable {
     /**
      * @return the shared
      */
-    public String getShared() {
+    public Boolean getShared() {
         return shared;
     }
 
     /**
-     * @param shared
-     *            the shared to set
+     * @param shared the shared to set
      */
-    public void setShared(String shared) {
+    public void setShared(Boolean shared) {
         this.shared = shared;
     }
 
@@ -249,18 +283,17 @@ public class Network implements Serializable {
      * @deprecated
      */
     @Deprecated
-    
+
     public String getProviderSegID() {
         return getProviderSegmentationId() == null ? null : Integer.toString(getProviderSegmentationId());
     }
 
     /**
-     * @param providerSegID
-     *            the providerSegID to set
+     * @param providerSegID the providerSegID to set
      * @deprecated
      */
     @Deprecated
-    
+
     public void setProviderSegID(String providerSegID) {
         setProviderSegmentationId(providerSegID == null ? null : Integer.parseInt(providerSegID));
     }
@@ -300,10 +333,12 @@ public class Network implements Serializable {
     /**
      * Function to detect and return the network type
      */
-    public enum NetworkType { BASIC, PROVIDER, MULTI_PROVIDER };
-    
-    
-    public NetworkType getNetworkType () {
+    public enum NetworkType {
+        BASIC, PROVIDER, MULTI_PROVIDER
+    };
+
+
+    public NetworkType getNetworkType() {
         if (segments != null)
             return NetworkType.MULTI_PROVIDER;
         else if (providerNetworkType != null)
@@ -319,19 +354,18 @@ public class Network implements Serializable {
      */
     @Override
     public String toString() {
-        StringBuilder buf = new StringBuilder("Network [id=" + id + ", name=" + name + ", subnets="
-                + subnets + ", status=" + status + ", admin_state_up=" + adminStateUp + ", tenant_id=" +
-                tenantId + ", shared=" + shared + ", router:external=" + routerExternal);
+        StringBuilder buf = new StringBuilder("Network [id=" + id + ", name=" + name + ", subnets=" + subnets
+                + ", status=" + status + ", admin_state_up=" + adminStateUp + ", tenant_id=" + tenantId + ", shared="
+                + shared + ", router:external=" + routerExternal);
         if (getNetworkType() == NetworkType.PROVIDER)
-            buf.append (", provider:physical_network=" + providerPhysicalNetwork +
-                ", provider:network_type=" + providerNetworkType  +
-                ", provider:segmentation_id=" + providerSegmentationId);
+            buf.append(", provider:physical_network=" + providerPhysicalNetwork + ", provider:network_type="
+                    + providerNetworkType + ", provider:segmentation_id=" + providerSegmentationId);
         if (getNetworkType() == NetworkType.MULTI_PROVIDER) {
-            buf.append (", segments: ");
+            buf.append(", segments: ");
             for (Segment s : segments)
-                buf.append (s.toString()).append(" ");
+                buf.append(s.toString()).append(" ");
         }
-        buf.append ("]");
+        buf.append("]");
         return buf.toString();
     }
 }

@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,25 +34,14 @@ public class ProjectsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"projects\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"enabled\" : false," + EOL
-        + "    \"domain_id\" : \"domainid\"" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"enabled\" : false," + EOL
-        + "    \"domain_id\" : \"domainid\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"projects\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"name\" : \"name\"," + EOL + "    \"enabled\" : false," + EOL + "    \"domain_id\" : \"domainid\""
+            + EOL + "  }, {" + EOL + "    \"id\" : \"id\"," + EOL + "    \"name\" : \"name\"," + EOL
+            + "    \"enabled\" : false," + EOL + "    \"domain_id\" : \"domainid\"" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -70,13 +57,14 @@ public class ProjectsTest {
     public void testMethods() throws Exception {
         Projects projects = objectMapper.readValue(JSON_FULL, Projects.class);
         projects.toString();
-        
+
         List<Project> list = projects.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Project x : projects) {
+        for (@SuppressWarnings("unused")
+        Project x : projects) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

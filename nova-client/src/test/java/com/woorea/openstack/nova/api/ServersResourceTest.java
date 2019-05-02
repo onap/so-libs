@@ -27,7 +27,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-
 import java.util.Collections;
 
 public class ServersResourceTest {
@@ -93,7 +92,8 @@ public class ServersResourceTest {
         final Metadata expectedServer = Mockito.mock(Metadata.class);
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Metadata.class, expectedServer);
         Metadata metadata = Mockito.mock(Metadata.class);
-        final ServersResource.CreateOrUpdateMetadata metadataCreateUpdate = serversResource.createOrUpdateMetadata(SERVER_KEY, metadata);
+        final ServersResource.CreateOrUpdateMetadata metadataCreateUpdate =
+                serversResource.createOrUpdateMetadata(SERVER_KEY, metadata);
         final Metadata actualServer = metadataCreateUpdate.execute();
         Assert.assertEquals(expectedServer, actualServer);
     }
@@ -103,14 +103,16 @@ public class ServersResourceTest {
         final Metadata expectedServer = Mockito.mock(Metadata.class);
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Metadata.class, expectedServer);
         Metadata metadata = Mockito.mock(Metadata.class);
-        final ServersResource.ReplaceMetadata metadataCreateUpdate = serversResource.replaceMetadata(SERVER_KEY, metadata);
+        final ServersResource.ReplaceMetadata metadataCreateUpdate =
+                serversResource.replaceMetadata(SERVER_KEY, metadata);
         final Metadata actualServer = metadataCreateUpdate.execute();
         Assert.assertEquals(expectedServer, actualServer);
     }
 
     @Test
     public void deleteMetadata() {
-        final ServersResource.DeleteMetadata metadataCreateUpdate = serversResource.deleteMetadata(SERVER_NAME, SERVER_KEY);
+        final ServersResource.DeleteMetadata metadataCreateUpdate =
+                serversResource.deleteMetadata(SERVER_NAME, SERVER_KEY);
         metadataCreateUpdate.execute();
     }
 
@@ -124,7 +126,8 @@ public class ServersResourceTest {
     public void update() {
         final Server expectedServer = Mockito.mock(Server.class);
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
-        final ServersResource.UpdateServer metadataCreateUpdate = serversResource.update(SERVER_NAME, SERVER_KEY, I_PV_4, "");
+        final ServersResource.UpdateServer metadataCreateUpdate =
+                serversResource.update(SERVER_NAME, SERVER_KEY, I_PV_4, "");
         final Server actualServer = metadataCreateUpdate.execute();
         Assert.assertEquals(expectedServer, actualServer);
     }
@@ -133,7 +136,8 @@ public class ServersResourceTest {
     public void changePassword() {
         final Server expectedServer = Mockito.mock(Server.class);
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
-        final ServersResource.ChangePasswordAction metadataCreateUpdate = serversResource.changePassword(SERVER_NAME, SERVER_NAME);
+        final ServersResource.ChangePasswordAction metadataCreateUpdate =
+                serversResource.changePassword(SERVER_NAME, SERVER_NAME);
         final Server actualServer = metadataCreateUpdate.execute();
         Assert.assertEquals(expectedServer, actualServer);
     }
@@ -158,7 +162,8 @@ public class ServersResourceTest {
     public void resize() {
         final Server expectedServer = Mockito.mock(Server.class);
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
-        final ServersResource.ResizeAction metadataCreateUpdate = serversResource.resize(SERVER_NAME, SERVER_FLAVOR, DISK_CONFIG);
+        final ServersResource.ResizeAction metadataCreateUpdate =
+                serversResource.resize(SERVER_NAME, SERVER_FLAVOR, DISK_CONFIG);
         final Server actualServer = metadataCreateUpdate.execute();
         Assert.assertEquals(expectedServer, actualServer);
     }
@@ -183,7 +188,8 @@ public class ServersResourceTest {
 
     @Test
     public void createImage() {
-        final ServersResource.CreateImageAction metadataCreateUpdate = serversResource.createImage(SERVER_NAME, SERVER_KEY, Collections.<String, String>emptyMap());
+        final ServersResource.CreateImageAction metadataCreateUpdate =
+                serversResource.createImage(SERVER_NAME, SERVER_KEY, Collections.<String, String>emptyMap());
         metadataCreateUpdate.execute();
     }
 
@@ -203,7 +209,8 @@ public class ServersResourceTest {
     public void getVncConsole() {
         final ServerAction.VncConsole console = new ServerAction.VncConsole();
         OpenStackClientMockUtils.getInstance().mockRequestResponse(ServerAction.VncConsole.class, console);
-        final ServersResource.GetVncConsoleServer metadataCreateUpdate = serversResource.getVncConsole(SERVER_NAME, CONSOLE_TYPE);
+        final ServersResource.GetVncConsoleServer metadataCreateUpdate =
+                serversResource.getVncConsole(SERVER_NAME, CONSOLE_TYPE);
         final ServerAction.VncConsole actualConsole = metadataCreateUpdate.execute();
         Assert.assertEquals(console, actualConsole);
     }
@@ -212,7 +219,8 @@ public class ServersResourceTest {
     public void getConsoleOutput() {
         final ServerAction.ConsoleOutput console = new ServerAction.ConsoleOutput();
         OpenStackClientMockUtils.getInstance().mockRequestResponse(ServerAction.ConsoleOutput.class, console);
-        final ServersResource.GetConsoleOutputServer metadataCreateUpdate = serversResource.getConsoleOutput(SERVER_NAME, Integer.MAX_VALUE);
+        final ServersResource.GetConsoleOutputServer metadataCreateUpdate =
+                serversResource.getConsoleOutput(SERVER_NAME, Integer.MAX_VALUE);
         final ServerAction.ConsoleOutput actualConsole = metadataCreateUpdate.execute();
         Assert.assertEquals(console, actualConsole);
     }
@@ -256,14 +264,16 @@ public class ServersResourceTest {
     @Test
     public void createBackup() {
         ServerAction.CreateBackup backup = new ServerAction.CreateBackup();
-        final ServersResource.CreateBackupServer metadataCreateUpdate = serversResource.createBackup(SERVER_NAME, backup);
+        final ServersResource.CreateBackupServer metadataCreateUpdate =
+                serversResource.createBackup(SERVER_NAME, backup);
         metadataCreateUpdate.execute();
     }
 
     @Test
     public void rescue() {
         final ServerAction.CreateBackup console = new ServerAction.CreateBackup();
-        final ServersResource.CreateBackupServer metadataCreateUpdate = serversResource.createBackup(SERVER_NAME, console);
+        final ServersResource.CreateBackupServer metadataCreateUpdate =
+                serversResource.createBackup(SERVER_NAME, console);
         metadataCreateUpdate.execute();
     }
 
@@ -275,25 +285,29 @@ public class ServersResourceTest {
 
     @Test
     public void associateFloatingIp() {
-        final ServersResource.AssociateFloatingIp metadataCreateUpdate = serversResource.associateFloatingIp(SERVER_NAME, I_PV_4);
+        final ServersResource.AssociateFloatingIp metadataCreateUpdate =
+                serversResource.associateFloatingIp(SERVER_NAME, I_PV_4);
         metadataCreateUpdate.execute();
     }
 
     @Test
     public void disassociateFloatingIp() {
-        final ServersResource.DisassociateFloatingIp metadataCreateUpdate = serversResource.disassociateFloatingIp(SERVER_NAME, I_PV_4);
+        final ServersResource.DisassociateFloatingIp metadataCreateUpdate =
+                serversResource.disassociateFloatingIp(SERVER_NAME, I_PV_4);
         metadataCreateUpdate.execute();
     }
 
     @Test
     public void attachVolume() {
-        final ServersResource.AttachVolume metadataCreateUpdate = serversResource.attachVolume(SERVER_NAME, "volume_id", "device");
+        final ServersResource.AttachVolume metadataCreateUpdate =
+                serversResource.attachVolume(SERVER_NAME, "volume_id", "device");
         metadataCreateUpdate.execute();
     }
 
     @Test
     public void detachVolume() {
-        final ServersResource.DetachVolume metadataCreateUpdate = serversResource.detachVolume(SERVER_NAME, "volume_id");
+        final ServersResource.DetachVolume metadataCreateUpdate =
+                serversResource.detachVolume(SERVER_NAME, "volume_id");
         metadataCreateUpdate.execute();
     }
 
@@ -301,7 +315,8 @@ public class ServersResourceTest {
     public void listVolumeAttachments() {
         final VolumeAttachments volumeAttachments = new VolumeAttachments();
         OpenStackClientMockUtils.getInstance().mockRequestResponse(VolumeAttachments.class, volumeAttachments);
-        final ServersResource.ListVolumeAttachments metadataCreateUpdate = serversResource.listVolumeAttachments(SERVER_NAME);
+        final ServersResource.ListVolumeAttachments metadataCreateUpdate =
+                serversResource.listVolumeAttachments(SERVER_NAME);
         final VolumeAttachments actualVolumeAttachments = metadataCreateUpdate.execute();
         Assert.assertEquals(volumeAttachments, actualVolumeAttachments);
     }
@@ -310,7 +325,8 @@ public class ServersResourceTest {
     public void showVolumeAttachment() {
         final VolumeAttachment volumeAttachment = new VolumeAttachment();
         OpenStackClientMockUtils.getInstance().mockRequestResponse(VolumeAttachment.class, volumeAttachment);
-        final ServersResource.ShowVolumeAttachment metadataCreateUpdate = serversResource.showVolumeAttachment(SERVER_NAME, "volume_id");
+        final ServersResource.ShowVolumeAttachment metadataCreateUpdate =
+                serversResource.showVolumeAttachment(SERVER_NAME, "volume_id");
         final VolumeAttachment actualVolumeAttachment = metadataCreateUpdate.execute();
         Assert.assertEquals(volumeAttachment, actualVolumeAttachment);
     }

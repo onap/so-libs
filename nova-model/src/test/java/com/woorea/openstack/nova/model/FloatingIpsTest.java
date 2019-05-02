@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,27 +34,15 @@ public class FloatingIpsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"floating_ips\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"pool\" : \"pool\"," + EOL
-        + "    \"ip\" : \"ip\"," + EOL
-        + "    \"fixed_ip\" : \"fixedip\"," + EOL
-        + "    \"instance_id\" : \"instanceid\"" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"pool\" : \"pool\"," + EOL
-        + "    \"ip\" : \"ip\"," + EOL
-        + "    \"fixed_ip\" : \"fixedip\"," + EOL
-        + "    \"instance_id\" : \"instanceid\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"floating_ips\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"pool\" : \"pool\"," + EOL + "    \"ip\" : \"ip\"," + EOL + "    \"fixed_ip\" : \"fixedip\"," + EOL
+            + "    \"instance_id\" : \"instanceid\"" + EOL + "  }, {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"pool\" : \"pool\"," + EOL + "    \"ip\" : \"ip\"," + EOL + "    \"fixed_ip\" : \"fixedip\"," + EOL
+            + "    \"instance_id\" : \"instanceid\"" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -72,13 +58,14 @@ public class FloatingIpsTest {
     public void testMethods() throws Exception {
         FloatingIps floatingips = objectMapper.readValue(JSON_FULL, FloatingIps.class);
         floatingips.toString();
-        
+
         List<FloatingIp> list = floatingips.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") FloatingIp x : floatingips) {
+        for (@SuppressWarnings("unused")
+        FloatingIp x : floatingips) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

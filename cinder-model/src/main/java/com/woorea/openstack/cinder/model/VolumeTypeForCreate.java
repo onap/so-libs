@@ -1,4 +1,5 @@
-/* ============LICENSE_START=======================================================
+/*-
+ * ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,11 +13,11 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.cinder.model;
 
 import java.io.Serializable;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -36,8 +37,7 @@ public class VolumeTypeForCreate implements Serializable {
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -51,8 +51,7 @@ public class VolumeTypeForCreate implements Serializable {
     }
 
     /**
-     * @param extraSpecs
-     *            the extra_specs to set
+     * @param extraSpecs the extra_specs to set
      */
     public void setExtraSpecs(Map<String, String> extraSpecs) {
         this.extraSpecs = extraSpecs;

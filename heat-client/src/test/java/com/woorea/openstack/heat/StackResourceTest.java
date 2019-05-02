@@ -27,6 +27,7 @@ import org.junit.Test;
 public class StackResourceTest {
 
     StackResource stackResource = new StackResource(new OpenStackClient("os"));
+
     @Test
     public void create() throws Exception {
         stackResource.create(new CreateStackParam());

@@ -22,7 +22,6 @@ package com.woorea.openstack.keystone.v3.api;
 import com.woorea.openstack.keystone.v3.model.User;
 import com.woorea.openstack.keystone.v3.model.Users;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class GenericResourceTest {

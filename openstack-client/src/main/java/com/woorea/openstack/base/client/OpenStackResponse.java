@@ -32,7 +32,7 @@ public interface OpenStackResponse {
     public InputStream getInputStream();
 
     public String header(String name);
-    
+
     public Map<String, String> headers();
-    
+
 }

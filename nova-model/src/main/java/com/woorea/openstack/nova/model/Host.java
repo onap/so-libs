@@ -18,24 +18,23 @@ package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Host implements Serializable {
-    
+
     public static final class ResourceWrapper implements Serializable {
-        
+
         public static final class Resource implements Serializable {
-            
+
             private String project;
-            
+
             @JsonProperty("memory_mb")
             private Integer memoryMb;
-            
+
             private String host;
-            
+
             private Integer cpu;
-            
+
             @JsonProperty("disk_gb")
             private Integer diskGb;
 
@@ -74,18 +73,19 @@ public class Host implements Serializable {
                 return diskGb;
             }
 
-            /* (non-Javadoc)
+            /*
+             * (non-Javadoc)
+             * 
              * @see java.lang.Object#toString()
              */
             @Override
             public String toString() {
-                return "Resource [project=" + project + ", memoryMb="
-                        + memoryMb + ", host=" + host + ", cpu=" + cpu
+                return "Resource [project=" + project + ", memoryMb=" + memoryMb + ", host=" + host + ", cpu=" + cpu
                         + ", diskGb=" + diskGb + "]";
             }
-            
+
         }
-        
+
         private Resource resource;
 
         /**
@@ -95,14 +95,16 @@ public class Host implements Serializable {
             return resource;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see java.lang.Object#toString()
          */
         @Override
         public String toString() {
             return "ResourceWrapper [resource=" + resource + "]";
         }
-        
+
     }
 
     private List<ResourceWrapper> host;
@@ -114,12 +116,14 @@ public class Host implements Serializable {
         return host;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return "Host [host=" + host + "]";
     }
-    
+
 }

@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,26 +34,15 @@ public class CredentialTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"credential\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"projectId\" : \"projectid\"," + EOL
-        + "    \"type\" : \"type\"," + EOL
-        + "    \"userId\" : \"userid\"," + EOL
-        + "    \"blob\" : {" + EOL
-        + "      \"blob-k1\" : \"blob-v1\"," + EOL
-        + "      \"blob-k2\" : \"blob-v2\"" + EOL
-        + "    }" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"credential\" : {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"projectId\" : \"projectid\"," + EOL + "    \"type\" : \"type\"," + EOL
+            + "    \"userId\" : \"userid\"," + EOL + "    \"blob\" : {" + EOL + "      \"blob-k1\" : \"blob-v1\"," + EOL
+            + "      \"blob-k2\" : \"blob-v2\"" + EOL + "    }" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -71,24 +58,24 @@ public class CredentialTest {
     public void testMethods() throws Exception {
         Credential credential = objectMapper.readValue(JSON_FULL, Credential.class);
         credential.toString();
-        
-        Map<String,String> blob = credential.getBlob();
+
+        Map<String, String> blob = credential.getBlob();
         Assert.assertNotNull(blob);
         Assert.assertEquals(2, blob.size());
         credential.setBlob(blob);
-        
+
         String id = credential.getId();
         Assert.assertNotNull(id);
         credential.setId(id);
-        
+
         String type = credential.getType();
         Assert.assertNotNull(type);
         credential.setType(type);
-        
+
         String userId = credential.getUserId();
         Assert.assertNotNull(userId);
         credential.setUserId(userId);
-        
+
         String projectId = credential.getProjectId();
         Assert.assertNotNull(projectId);
         credential.setProjectId(projectId);

@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,16 +33,12 @@ public class HostRouteTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"destination\" : \"destination\"," + EOL
-        + "  \"nexthop\" : \"nexthop\"" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"destination\" : \"destination\"," + EOL + "  \"nexthop\" : \"nexthop\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -59,11 +54,11 @@ public class HostRouteTest {
     public void testMethods() throws Exception {
         HostRoute hostroute = objectMapper.readValue(JSON_FULL, HostRoute.class);
         hostroute.toString();
-        
+
         String destination = hostroute.getDestination();
         Assert.assertNotNull(destination);
         hostroute.setDestination(destination);
-        
+
         String nexthop = hostroute.getNexthop();
         Assert.assertNotNull(nexthop);
         hostroute.setNexthop(nexthop);

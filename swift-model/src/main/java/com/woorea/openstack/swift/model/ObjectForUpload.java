@@ -22,11 +22,11 @@ import java.util.Map;
 
 
 public class ObjectForUpload {
-    
+
     private String container;
-    
+
     private String name;
-    
+
     private Map<String, java.lang.Object> properties;
 
     private InputStream inputStream;
@@ -63,7 +63,7 @@ public class ObjectForUpload {
      * @return the properties
      */
     public Map<String, java.lang.Object> getProperties() {
-        if(properties == null) {
+        if (properties == null) {
             properties = new HashMap<>();
         }
         return properties;
@@ -83,6 +83,6 @@ public class ObjectForUpload {
         this.inputStream = inputStream;
     }
 
-    
+
 
 }

@@ -21,11 +21,11 @@ import com.woorea.openstack.keystone.model.Authentication;
 
 @JsonRootName("auth")
 public class UsernamePassword extends Authentication {
-    
+
     public static final class PasswordCredentials {
-        
+
         private String username;
-        
+
         private String password;
 
         /**
@@ -55,15 +55,15 @@ public class UsernamePassword extends Authentication {
         public void setPassword(String password) {
             this.password = password;
         }
-        
+
     }
-    
+
     private PasswordCredentials passwordCredentials = new PasswordCredentials();
-    
+
     public UsernamePassword() {
-        
+
     }
-    
+
     public UsernamePassword(String username, String password) {
         passwordCredentials.setUsername(username);
         passwordCredentials.setPassword(password);
@@ -82,5 +82,5 @@ public class UsernamePassword extends Authentication {
     public void setPasswordCredentials(PasswordCredentials passwordCredentials) {
         this.passwordCredentials = passwordCredentials;
     }
-    
+
 }

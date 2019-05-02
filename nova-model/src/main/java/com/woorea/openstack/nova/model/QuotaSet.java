@@ -23,32 +23,32 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class QuotaSet {
 
     private String id;
-    
+
     @JsonProperty("metadata_items")
     private Integer metadataItems;
-    
+
     @JsonProperty("injected_file_content_bytes")
     private Integer injectedFileContentBytes;
-    
+
     @JsonProperty("injected_files")
     private Integer injectedFiles;
-    
+
     private Integer gigabytes;
-    
+
     private Integer ram;
-    
+
     @JsonProperty("floating_ips")
     private Integer floatingIps;
-    
+
     private Integer instances;
-    
+
     private Integer volumes;
-    
+
     private Integer cores;
-    
+
     @JsonProperty("security_groups")
     private Integer securityGroups;
-    
+
     @JsonProperty("security_group_rules")
     private Integer securityGroupRules;
 
@@ -58,12 +58,45 @@ public class QuotaSet {
     @JsonProperty("key_pairs")
     private Integer keyPairs;
 
+    @JsonProperty("fixed_ips")
+    private Integer fixedIps;
+
+    @JsonProperty("server_group_members")
+    private Integer serverGroupMembers;
+
+    @JsonProperty("server_groups")
+    private Integer serverGroups;
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Integer getFixedIps() {
+        return fixedIps;
+    }
+
+    public void setFixedIps(Integer fixedIps) {
+        this.fixedIps = fixedIps;
+    }
+
+    public Integer getServerGroupMembers() {
+        return serverGroupMembers;
+    }
+
+    public void setServerGroupMembers(Integer serverGroupMembers) {
+        this.serverGroupMembers = serverGroupMembers;
+    }
+
+    public Integer getServerGroups() {
+        return serverGroups;
+    }
+
+    public void setServerGroups(Integer serverGroups) {
+        this.serverGroups = serverGroups;
     }
 
     public Integer getMetadataItems() {

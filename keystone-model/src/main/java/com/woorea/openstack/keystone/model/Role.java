@@ -17,18 +17,17 @@
 package com.woorea.openstack.keystone.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("role")
 public class Role implements Serializable {
 
     private String id;
-    
+
     private String name;
-    
+
     private String description;
-    
+
     private String enabled;
 
     /**

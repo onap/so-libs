@@ -17,8 +17,8 @@
 package com.woorea.openstack.quantum.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -31,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Subnet implements Serializable {
 
+    @JsonProperty("name")
     private String name;
 
     @JsonProperty("enable_dhcp")
@@ -42,6 +43,9 @@ public class Subnet implements Serializable {
     @JsonProperty("tenant_id")
     private String tenantId;
 
+    @JsonProperty("project_id")
+    private String projectId;
+
     @JsonProperty("dns_nameservers")
     private List<String> dnsNames;
 
@@ -51,19 +55,35 @@ public class Subnet implements Serializable {
     @JsonProperty("host_routes")
     private List<String> hostRoutes;
 
+    @JsonProperty("service_types")
+    private List<String> serviceTypes;
+
     @JsonProperty("ip_version")
     private IpVersion ipversion;
+
+    @JsonProperty("ipv6_address_mode")
+    private String ipv6AddressMode;
+
+    @JsonProperty("ipv6_ra_mode")
+    private String ipv6RAMode;
 
     @JsonProperty("gateway_ip")
     private String gw;
 
+    @JsonProperty("cidr")
     private String cidr;
 
+    @JsonProperty("created_at")
+    private Date createdAt;
+
+    @JsonProperty("updated_at")
+    private Date updatedAt;
+
+    @JsonProperty("id")
     private String id;
 
     public enum IpVersion implements Serializable {
-        IPV4(4),
-        IPV6(6);
+        IPV4(4), IPV6(6);
         private int code;
 
         IpVersion(int code) {
@@ -99,8 +119,7 @@ public class Subnet implements Serializable {
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -109,7 +128,6 @@ public class Subnet implements Serializable {
     /**
      * @return the enableDHCP
      */
-    @JsonIgnore
     public boolean isEnableDHCP() {
         return enableDHCP;
     }
@@ -119,8 +137,7 @@ public class Subnet implements Serializable {
     }
 
     /**
-     * @param enableDHCP
-     *            the enableDHCP to set
+     * @param enableDHCP the enableDHCP to set
      */
     public void setEnableDHCP(Boolean enableDHCP) {
         this.enableDHCP = enableDHCP;
@@ -134,8 +151,7 @@ public class Subnet implements Serializable {
     }
 
     /**
-     * @param networkId
-     *            the networkId to set
+     * @param networkId the networkId to set
      */
     public void setNetworkId(String networkId) {
         this.networkId = networkId;
@@ -149,8 +165,7 @@ public class Subnet implements Serializable {
     }
 
     /**
-     * @param tenantId
-     *            the tenantId to set
+     * @param tenantId the tenantId to set
      */
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
@@ -164,8 +179,7 @@ public class Subnet implements Serializable {
     }
 
     /**
-     * @param dnsNames
-     *            the dnsNames to set
+     * @param dnsNames the dnsNames to set
      */
     public void setDnsNames(List<String> dnsNames) {
         this.dnsNames = dnsNames;
@@ -179,8 +193,7 @@ public class Subnet implements Serializable {
     }
 
     /**
-     * @param list
-     *            the list to set
+     * @param list the list to set
      */
     public void setList(List<Pool> list) {
         this.list = list;
@@ -194,8 +207,7 @@ public class Subnet implements Serializable {
     }
 
     /**
-     * @param hostRoutes
-     *            the hostRoutes to set
+     * @param hostRoutes the hostRoutes to set
      */
     public void setHostRoutes(List<String> hostRoutes) {
         this.hostRoutes = hostRoutes;
@@ -209,8 +221,7 @@ public class Subnet implements Serializable {
     }
 
     /**
-     * @param ipversion
-     *            the ipversion to set
+     * @param ipversion the ipversion to set
      */
     public void setIpversion(IpVersion ipversion) {
         this.ipversion = ipversion;
@@ -224,8 +235,7 @@ public class Subnet implements Serializable {
     }
 
     /**
-     * @param gw
-     *            the gw to set
+     * @param gw the gw to set
      */
     public void setGw(String gw) {
         this.gw = gw;
@@ -239,8 +249,7 @@ public class Subnet implements Serializable {
     }
 
     /**
-     * @param cidr
-     *            the cidr to set
+     * @param cidr the cidr to set
      */
     public void setCidr(String cidr) {
         this.cidr = cidr;
@@ -249,14 +258,12 @@ public class Subnet implements Serializable {
     /**
      * @return the id
      */
-    @JsonIgnore
     public String getId() {
         return id;
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     @JsonProperty
     public void setId(String id) {
@@ -270,11 +277,9 @@ public class Subnet implements Serializable {
      */
     @Override
     public String toString() {
-        return "Subnet [id=" + id + ", name=" + name + ", network_id="
-                + networkId + ", tenant_id=" + tenantId + ", allocation_pools=" + list
-                + ", gateway_ip=" + gw + ", ip_version=" + ipversion
-                + ", cidr=" + cidr + ", enable_dhcp=" + enableDHCP + ", dns_nameservers="
-                + dnsNames + ", host_routes=" + hostRoutes + "]";
+        return "Subnet [id=" + id + ", name=" + name + ", network_id=" + networkId + ", tenant_id=" + tenantId
+                + ", allocation_pools=" + list + ", gateway_ip=" + gw + ", ip_version=" + ipversion + ", cidr=" + cidr
+                + ", enable_dhcp=" + enableDHCP + ", dns_nameservers=" + dnsNames + ", host_routes=" + hostRoutes + "]";
     }
 
 }

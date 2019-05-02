@@ -19,8 +19,8 @@ package com.woorea.openstack.glance.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -29,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Image implements Serializable {
 
+    @JsonProperty("id")
     private String id;
 
     private String uri;
@@ -46,6 +47,7 @@ public class Image implements Serializable {
     @JsonProperty("virtual_size")
     private Long virtualSize;
 
+    @JsonProperty("checksum")
     private String checksum;
 
     @JsonProperty("created_at")
@@ -68,6 +70,7 @@ public class Image implements Serializable {
     @JsonProperty("min_disk")
     private Integer minDisk;
 
+    @JsonProperty("owner")
     private String owner;
 
     @JsonProperty("deleted")
@@ -76,7 +79,173 @@ public class Image implements Serializable {
     @JsonProperty("protected")
     private boolean isProtected;
 
+    @JsonProperty("visibility")
+    private String visibility;
+
+    @JsonProperty("file")
+    private String file;
+
+    @JsonProperty("schema")
+    private String schema;
+
+    @JsonProperty("self")
+    private String self;
+
+    @JsonProperty("hw_cdrom_bus")
+    private String hwCDROMBus;
+
+    @JsonProperty("hw_disk_bus")
+    private String hwDiskBus;
+
+    @JsonProperty("hw_vif_mode")
+    private String hwVIFMode;
+
+    @JsonProperty("post_processing_networking")
+    private String postProcessingNetworking;
+
+    @JsonProperty("post_processing_tools")
+    private String postProccesingTools;
+
+    @JsonProperty("bypass_meta_validation")
+    private String bypassMetaValidation;
+
+    @JsonProperty("application_name")
+    private String applicationName;
+
+    @JsonProperty("application_type")
+    private String applicationType;
+
+    @JsonProperty("application_version")
+    private String applicationVersion;
+
+    @JsonProperty("application_vendor")
+    private String applicationVendor;
+
+    @JsonProperty("hw_scsi_model")
+    private String hwSCSIModel;
+
+    @JsonProperty("description")
+    private String description;
+
+    @JsonProperty("meta")
+    private String meta;
+
+    @JsonProperty("tags")
+    private List<String> tags;
+
     private Map<String, Object> properties;
+
+    public String getHwCDROMBus() {
+        return hwCDROMBus;
+    }
+
+    public void setHwCDROMBus(String hwCDROMBus) {
+        this.hwCDROMBus = hwCDROMBus;
+    }
+
+    public String getHwDiskBus() {
+        return hwDiskBus;
+    }
+
+    public void setHwDiskBus(String hwDiskBus) {
+        this.hwDiskBus = hwDiskBus;
+    }
+
+    public String getHwVIFMode() {
+        return hwVIFMode;
+    }
+
+    public void setHwVIFMode(String hwVIFMode) {
+        this.hwVIFMode = hwVIFMode;
+    }
+
+    public String getPostProcessingNetworking() {
+        return postProcessingNetworking;
+    }
+
+    public void setPostProcessingNetworking(String postProcessingNetworking) {
+        this.postProcessingNetworking = postProcessingNetworking;
+    }
+
+    public String getPostProccesingTools() {
+        return postProccesingTools;
+    }
+
+    public void setPostProccesingTools(String postProccesingTools) {
+        this.postProccesingTools = postProccesingTools;
+    }
+
+    public String getBypassMetaValidation() {
+        return bypassMetaValidation;
+    }
+
+    public void setBypassMetaValidation(String bypassMetaValidation) {
+        this.bypassMetaValidation = bypassMetaValidation;
+    }
+
+    public String getApplicationName() {
+        return applicationName;
+    }
+
+    public void setApplicationName(String applicationName) {
+        this.applicationName = applicationName;
+    }
+
+    public String getApplicationVersion() {
+        return applicationVersion;
+    }
+
+    public void setApplicationVersion(String applicationVersion) {
+        this.applicationVersion = applicationVersion;
+    }
+
+    public String getApplicationVendor() {
+        return applicationVendor;
+    }
+
+    public void setApplicationVendor(String applicationVendor) {
+        this.applicationVendor = applicationVendor;
+    }
+
+    public String getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(String visibility) {
+        this.visibility = visibility;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    public String getSchema() {
+        return schema;
+    }
+
+    public void setSchema(String schema) {
+        this.schema = schema;
+    }
+
+    public String getSelf() {
+        return self;
+    }
+
+    public void setSelf(String self) {
+        this.self = self;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
 
     /**
      * @return the id
@@ -340,16 +509,17 @@ public class Image implements Serializable {
         return properties;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
         return String.format("Image [id=%s, uri=%s, name=%s, diskFormat=%s containerFormat=%s, size=%d, checksum=%s,"
                 + " createdAt=%s, updatedAt=%s, deletedAt=%s, status=%s, isPublic=%s, minRam=%d, minDisk=%d, owner=%s,"
-                + " isDeleted=%s, isProtected=%s, properties=%s]",
-            id, uri, name, diskFormat, containerFormat, size, checksum,
-            createdAt, updatedAt, deletedAt, status, isPublic, minRam, minDisk, owner,
-            isDeleted, isProtected, properties);
+                + " isDeleted=%s, isProtected=%s, properties=%s]", id, uri, name, diskFormat, containerFormat, size,
+                checksum, createdAt, updatedAt, deletedAt, status, isPublic, minRam, minDisk, owner, isDeleted,
+                isProtected, properties);
     }
 }

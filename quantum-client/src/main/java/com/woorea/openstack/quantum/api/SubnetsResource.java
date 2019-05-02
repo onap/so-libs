@@ -44,11 +44,11 @@ public class SubnetsResource {
         return new Update(net);
     }
 
-    public Delete delete(String netId){
+    public Delete delete(String netId) {
         return new Delete(netId);
     }
 
-    public Show show(String netId){
+    public Show show(String netId) {
         return new Show(netId);
     }
 
@@ -61,8 +61,7 @@ public class SubnetsResource {
 
     public class Query extends OpenStackRequest<Subnets> {
 
-        public Query(Subnet subnet) {
-        }
+        public Query(Subnet subnet) {}
     }
 
 
@@ -89,7 +88,7 @@ public class SubnetsResource {
 
     public class Delete extends OpenStackRequest<Void> {
 
-        public Delete(String id){
+        public Delete(String id) {
             super(CLIENT, HttpMethod.DELETE, buildPath("subnets/", id), null, Void.class);
         }
     }

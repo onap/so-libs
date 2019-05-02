@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.heat.model.Stack.Output;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -35,17 +34,12 @@ public class OutputTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"description\" : \"description\"," + EOL
-        + "  \"output_value\" : \"outputvalue\"," + EOL
-        + "  \"output_key\" : \"outputkey\"" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"description\" : \"description\"," + EOL
+            + "  \"output_value\" : \"outputvalue\"," + EOL + "  \"output_key\" : \"outputkey\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -61,13 +55,13 @@ public class OutputTest {
     public void testMethods() throws Exception {
         Output output = objectMapper.readValue(JSON_FULL, Output.class);
         output.toString();
-        
+
         String outputKey = output.getOutputKey();
         Assert.assertNotNull(outputKey);
-        
+
         Object outputValue = output.getOutputValue();
         Assert.assertNotNull(outputValue);
-        
+
         String description = output.getDescription();
         Assert.assertNotNull(description);
     }

@@ -43,9 +43,6 @@ public class Link {
 
     @Override
     public String toString() {
-        return "Link{" +
-                "href='" + href + '\'' +
-                ", rel='" + rel + '\'' +
-                '}';
+        return "Link{" + "href='" + href + '\'' + ", rel='" + rel + '\'' + '}';
     }
 }

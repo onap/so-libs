@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.Calendar;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,20 +34,13 @@ public class ObjectTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"subdir\" : \"subdir\"," + EOL
-        + "  \"name\" : \"name\"," + EOL
-        + "  \"hash\" : \"hash\"," + EOL
-        + "  \"bytes\" : 82," + EOL
-        + "  \"content_type\" : \"contenttype\"," + EOL
-        + "  \"last_modified\" : 1488715200000" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"subdir\" : \"subdir\"," + EOL + "  \"name\" : \"name\","
+            + EOL + "  \"hash\" : \"hash\"," + EOL + "  \"bytes\" : 82," + EOL + "  \"content_type\" : \"contenttype\","
+            + EOL + "  \"last_modified\" : 1488715200000" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -63,29 +54,30 @@ public class ObjectTest {
 
     @Test
     public void testMethods() throws Exception {
-        com.woorea.openstack.swift.model.Object object = objectMapper.readValue(JSON_FULL, com.woorea.openstack.swift.model.Object.class);
+        com.woorea.openstack.swift.model.Object object =
+                objectMapper.readValue(JSON_FULL, com.woorea.openstack.swift.model.Object.class);
         object.toString();
-        
+
         String subdir = object.getSubdir();
         Assert.assertNotNull(subdir);
         object.setSubdir(subdir);
-        
+
         Calendar lastModified = object.getLastModified();
         Assert.assertNotNull(lastModified);
         object.setLastModified(lastModified);
-        
+
         int bytes = object.getBytes();
         Assert.assertNotNull(bytes);
         object.setBytes(bytes);
-        
+
         String name = object.getName();
         Assert.assertNotNull(name);
         object.setName(name);
-        
+
         String hash = object.getHash();
         Assert.assertNotNull(hash);
         object.setHash(hash);
-        
+
         String contentType = object.getContentType();
         Assert.assertNotNull(contentType);
         object.setContentType(contentType);

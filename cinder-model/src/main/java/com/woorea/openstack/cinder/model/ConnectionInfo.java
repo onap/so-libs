@@ -1,4 +1,5 @@
-/* ============LICENSE_START=======================================================
+/*-
+ * ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,11 +13,11 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.cinder.model;
 
 import java.io.Serializable;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -36,8 +37,7 @@ public class ConnectionInfo implements Serializable {
     }
 
     /**
-     * @param driverVolumeType
-     *            the driverVolumeType to set
+     * @param driverVolumeType the driverVolumeType to set
      */
     public void setDriverVolumeType(String driverVolumeType) {
         this.driverVolumeType = driverVolumeType;
@@ -51,8 +51,7 @@ public class ConnectionInfo implements Serializable {
     }
 
     /**
-     * @param data
-     *            the data to set
+     * @param data the data to set
      */
     public void setData(Map<String, Object> data) {
         this.data = data;
@@ -65,8 +64,7 @@ public class ConnectionInfo implements Serializable {
      */
     @Override
     public String toString() {
-        return "ConnectionInfo [driverVolumeType=" + driverVolumeType + "," +
-                " data=" + data + "]";
+        return "ConnectionInfo [driverVolumeType=" + driverVolumeType + "," + " data=" + data + "]";
     }
 
 }

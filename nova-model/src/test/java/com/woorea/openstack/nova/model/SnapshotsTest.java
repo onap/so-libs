@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,31 +34,17 @@ public class SnapshotsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"snapshots\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"status\" : \"status\"," + EOL
-        + "    \"volumeId\" : \"volumeid\"," + EOL
-        + "    \"size\" : 61," + EOL
-        + "    \"createdAt\" : \"createdat\"," + EOL
-        + "    \"displayName\" : \"name\"," + EOL
-        + "    \"displayDescription\" : \"description\"" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"status\" : \"status\"," + EOL
-        + "    \"volumeId\" : \"volumeid\"," + EOL
-        + "    \"size\" : 61," + EOL
-        + "    \"createdAt\" : \"createdat\"," + EOL
-        + "    \"displayName\" : \"name\"," + EOL
-        + "    \"displayDescription\" : \"description\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"snapshots\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"status\" : \"status\"," + EOL + "    \"volumeId\" : \"volumeid\"," + EOL + "    \"size\" : 61,"
+            + EOL + "    \"createdAt\" : \"createdat\"," + EOL + "    \"displayName\" : \"name\"," + EOL
+            + "    \"displayDescription\" : \"description\"" + EOL + "  }, {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"status\" : \"status\"," + EOL + "    \"volumeId\" : \"volumeid\"," + EOL + "    \"size\" : 61,"
+            + EOL + "    \"createdAt\" : \"createdat\"," + EOL + "    \"displayName\" : \"name\"," + EOL
+            + "    \"displayDescription\" : \"description\"" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -76,13 +60,14 @@ public class SnapshotsTest {
     public void testMethods() throws Exception {
         Snapshots snapshots = objectMapper.readValue(JSON_FULL, Snapshots.class);
         snapshots.toString();
-        
+
         List<Snapshot> list = snapshots.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Snapshot x : snapshots) {
+        for (@SuppressWarnings("unused")
+        Snapshot x : snapshots) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

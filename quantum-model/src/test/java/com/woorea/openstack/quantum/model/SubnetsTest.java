@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,49 +34,25 @@ public class SubnetsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"subnets\" : [ {" + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"cidr\" : \"cidr\"," + EOL
-        + "    \"enable_dhcp\" : true," + EOL
-        + "    \"network_id\" : \"networkid\"," + EOL
-        + "    \"tenant_id\" : \"tenantid\"," + EOL
-        + "    \"dns_nameservers\" : [ \"dnsnames-v1\", \"dnsnames-v2\" ]," + EOL
-        + "    \"allocation_pools\" : [ {" + EOL
-        + "      \"start\" : \"start\"," + EOL
-        + "      \"end\" : \"end\"" + EOL
-        + "    }, {" + EOL
-        + "      \"start\" : \"start\"," + EOL
-        + "      \"end\" : \"end\"" + EOL
-        + "    } ]," + EOL
-        + "    \"host_routes\" : [ \"hostroutes-v1\", \"hostroutes-v2\" ]," + EOL
-        + "    \"ip_version\" : 4," + EOL
-        + "    \"gateway_ip\" : \"gw\"" + EOL
-        + "  }, {" + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"cidr\" : \"cidr\"," + EOL
-        + "    \"enable_dhcp\" : true," + EOL
-        + "    \"network_id\" : \"networkid\"," + EOL
-        + "    \"tenant_id\" : \"tenantid\"," + EOL
-        + "    \"dns_nameservers\" : [ \"dnsnames-v1\", \"dnsnames-v2\" ]," + EOL
-        + "    \"allocation_pools\" : [ {" + EOL
-        + "      \"start\" : \"start\"," + EOL
-        + "      \"end\" : \"end\"" + EOL
-        + "    }, {" + EOL
-        + "      \"start\" : \"start\"," + EOL
-        + "      \"end\" : \"end\"" + EOL
-        + "    } ]," + EOL
-        + "    \"host_routes\" : [ \"hostroutes-v1\", \"hostroutes-v2\" ]," + EOL
-        + "    \"ip_version\" : 4," + EOL
-        + "    \"gateway_ip\" : \"gw\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"subnets\" : [ {" + EOL + "    \"name\" : \"name\"," + EOL
+            + "    \"cidr\" : \"cidr\"," + EOL + "    \"enable_dhcp\" : true," + EOL
+            + "    \"network_id\" : \"networkid\"," + EOL + "    \"tenant_id\" : \"tenantid\"," + EOL
+            + "    \"dns_nameservers\" : [ \"dnsnames-v1\", \"dnsnames-v2\" ]," + EOL + "    \"allocation_pools\" : [ {"
+            + EOL + "      \"start\" : \"start\"," + EOL + "      \"end\" : \"end\"" + EOL + "    }, {" + EOL
+            + "      \"start\" : \"start\"," + EOL + "      \"end\" : \"end\"" + EOL + "    } ]," + EOL
+            + "    \"host_routes\" : [ \"hostroutes-v1\", \"hostroutes-v2\" ]," + EOL + "    \"ip_version\" : 4," + EOL
+            + "    \"gateway_ip\" : \"gw\"" + EOL + "  }, {" + EOL + "    \"name\" : \"name\"," + EOL
+            + "    \"cidr\" : \"cidr\"," + EOL + "    \"enable_dhcp\" : true," + EOL
+            + "    \"network_id\" : \"networkid\"," + EOL + "    \"tenant_id\" : \"tenantid\"," + EOL
+            + "    \"dns_nameservers\" : [ \"dnsnames-v1\", \"dnsnames-v2\" ]," + EOL + "    \"allocation_pools\" : [ {"
+            + EOL + "      \"start\" : \"start\"," + EOL + "      \"end\" : \"end\"" + EOL + "    }, {" + EOL
+            + "      \"start\" : \"start\"," + EOL + "      \"end\" : \"end\"" + EOL + "    } ]," + EOL
+            + "    \"host_routes\" : [ \"hostroutes-v1\", \"hostroutes-v2\" ]," + EOL + "    \"ip_version\" : 4," + EOL
+            + "    \"gateway_ip\" : \"gw\"" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -94,14 +68,15 @@ public class SubnetsTest {
     public void testMethods() throws Exception {
         Subnets subnets = objectMapper.readValue(JSON_FULL, Subnets.class);
         subnets.toString();
-        
+
         List<Subnet> list = subnets.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
         subnets.setList(list);
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Subnet x : subnets) {
+        for (@SuppressWarnings("unused")
+        Subnet x : subnets) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

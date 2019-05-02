@@ -39,7 +39,7 @@ public final class Token {
      * @return the issued_at
      */
     public Calendar getIssued_at() {
-      return issued_at;
+        return issued_at;
     }
 
     /**
@@ -56,13 +56,14 @@ public final class Token {
         return tenant;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Token [id=" + id + ", Issued_at=" + issued_at + ", expires=" + expires + ", tenant="
-          + tenant + "]";
+        return "Token [id=" + id + ", Issued_at=" + issued_at + ", expires=" + expires + ", tenant=" + tenant + "]";
     }
 
 }

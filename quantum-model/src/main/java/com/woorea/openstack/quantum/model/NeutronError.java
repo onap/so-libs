@@ -17,18 +17,17 @@
 package com.woorea.openstack.quantum.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("NeutronError")
 public class NeutronError implements Serializable {
 
     private String type;
-    
+
     private String message;
 
     private String detail;
-    
+
     /**
      * @return the code
      */
@@ -50,13 +49,14 @@ public class NeutronError implements Serializable {
         return detail;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "NeutronError [type=" + type + ", title=" + detail + ", message="
-                + message + "]";
+        return "NeutronError [type=" + type + ", title=" + detail + ", message=" + message + "]";
     }
-    
+
 }

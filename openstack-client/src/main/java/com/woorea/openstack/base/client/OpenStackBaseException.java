@@ -18,17 +18,16 @@
 package com.woorea.openstack.base.client;
 
 /**
- * A common abstract parent of all Openstack Exception types, allowing
- * calling classes the choice to catch all error exceptions together.
+ * A common abstract parent of all Openstack Exception types, allowing calling classes the choice to catch all error
+ * exceptions together.
  */
-public abstract class OpenStackBaseException extends RuntimeException
-{
+public abstract class OpenStackBaseException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     /*
      * Implement only the basic constructors
      */
-    public OpenStackBaseException () {}
+    public OpenStackBaseException() {}
 
     public OpenStackBaseException(String message) {
         super(message);

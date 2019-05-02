@@ -47,7 +47,8 @@ public class SecurityGroupsExtension {
         private SecurityGroupForCreate securityGroupForCreate;
 
         public Create(SecurityGroupForCreate securityGroupForCreate) {
-            super(CLIENT, HttpMethod.POST, "/os-security-groups", Entity.json(securityGroupForCreate), SecurityGroup.class);
+            super(CLIENT, HttpMethod.POST, "/os-security-groups", Entity.json(securityGroupForCreate),
+                    SecurityGroup.class);
             this.securityGroupForCreate = securityGroupForCreate;
         }
 
@@ -61,10 +62,13 @@ public class SecurityGroupsExtension {
          */
         @Deprecated
         public Show(Integer id) {
-            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-security-groups/").append(id).toString(), null, SecurityGroup.class);
+            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-security-groups/").append(id).toString(), null,
+                    SecurityGroup.class);
         }
+
         public Show(String id) {
-            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-security-groups/").append(id).toString(), null, SecurityGroup.class);
+            super(CLIENT, HttpMethod.GET, new StringBuilder("/os-security-groups/").append(id).toString(), null,
+                    SecurityGroup.class);
         }
 
     }
@@ -78,10 +82,13 @@ public class SecurityGroupsExtension {
          */
         @Deprecated
         public Delete(Integer id) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-security-groups/").append(String.valueOf(id)).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE,
+                    new StringBuilder("/os-security-groups/").append(String.valueOf(id)).toString(), null, Void.class);
         }
+
         public Delete(String id) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-security-groups/").append(id).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-security-groups/").append(id).toString(), null,
+                    Void.class);
         }
 
     }
@@ -91,7 +98,8 @@ public class SecurityGroupsExtension {
         private SecurityGroupRuleForCreate securityGroupRuleForCreate;
 
         public CreateRule(SecurityGroupRuleForCreate securityGroupRuleForCreate) {
-            super(CLIENT, HttpMethod.POST, "/os-security-group-rules", Entity.json(securityGroupRuleForCreate), SecurityGroup.Rule.class);
+            super(CLIENT, HttpMethod.POST, "/os-security-group-rules", Entity.json(securityGroupRuleForCreate),
+                    SecurityGroup.Rule.class);
             this.securityGroupRuleForCreate = securityGroupRuleForCreate;
         }
     }
@@ -105,11 +113,15 @@ public class SecurityGroupsExtension {
          */
         @Deprecated
         public DeleteRule(Integer id) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-security-group-rules/").append(String.valueOf(id)).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE,
+                    new StringBuilder("/os-security-group-rules/").append(String.valueOf(id)).toString(), null,
+                    Void.class);
         }
 
         public DeleteRule(String id) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuilder("/os-security-group-rules/").append(String.valueOf(id)).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE,
+                    new StringBuilder("/os-security-group-rules/").append(String.valueOf(id)).toString(), null,
+                    Void.class);
         }
     }
 
@@ -117,8 +129,7 @@ public class SecurityGroupsExtension {
         return new List();
     }
 
-    public Create createSecurityGroup(String name,
-                                      String description) {
+    public Create createSecurityGroup(String name, String description) {
         return new Create(new SecurityGroupForCreate(name, description));
     }
 
@@ -133,6 +144,7 @@ public class SecurityGroupsExtension {
     public Show showSecurityGroup(String id) {
         return new Show(id);
     }
+
     public Delete deleteSecurityGroup(Integer id) {
         return new Delete(String.valueOf(id));
     }
@@ -152,13 +164,13 @@ public class SecurityGroupsExtension {
      * @deprecated Use {@link #createSecurityGroupRule(String, String, Integer, Integer, String)}
      */
     @Deprecated
-    public CreateRule createSecurityGroupRule(
-            Integer parentSecurityGroupId, String ipProtocol, Integer fromPort,
+    public CreateRule createSecurityGroupRule(Integer parentSecurityGroupId, String ipProtocol, Integer fromPort,
             Integer toPort, String cidr) {
-        SecurityGroupRuleForCreate securityGroupRuleForCreate = new SecurityGroupRuleForCreate(
-                parentSecurityGroupId, ipProtocol, fromPort, toPort, cidr);
+        SecurityGroupRuleForCreate securityGroupRuleForCreate =
+                new SecurityGroupRuleForCreate(parentSecurityGroupId, ipProtocol, fromPort, toPort, cidr);
         return new CreateRule(securityGroupRuleForCreate);
     }
+
     /**
      *
      * @param parentSecurityGroupId
@@ -170,34 +182,31 @@ public class SecurityGroupsExtension {
      * @deprecated Use {@link #createSecurityGroupRule(String, String, String, Integer, Integer)}
      */
     @Deprecated
-    public CreateRule createSecurityGroupRule(
-            Integer parentSecurityGroupId, String ipProtocol, Integer fromPort,
+    public CreateRule createSecurityGroupRule(Integer parentSecurityGroupId, String ipProtocol, Integer fromPort,
             Integer toPort, Integer sourceGroupId) {
-        SecurityGroupRuleForCreate securityGroupRuleForCreate = new SecurityGroupRuleForCreate(
-                parentSecurityGroupId, ipProtocol, fromPort, toPort,
-                sourceGroupId);
+        SecurityGroupRuleForCreate securityGroupRuleForCreate =
+                new SecurityGroupRuleForCreate(parentSecurityGroupId, ipProtocol, fromPort, toPort, sourceGroupId);
         return new CreateRule(securityGroupRuleForCreate);
     }
 
-    public CreateRule createSecurityGroupRule(
-            String parentSecurityGroupId, String ipProtocol, Integer fromPort,
+    public CreateRule createSecurityGroupRule(String parentSecurityGroupId, String ipProtocol, Integer fromPort,
             Integer toPort, String cidr) {
-        SecurityGroupRuleForCreate securityGroupRuleForCreate = new SecurityGroupRuleForCreate(
-                parentSecurityGroupId, ipProtocol, fromPort, toPort, cidr);
+        SecurityGroupRuleForCreate securityGroupRuleForCreate =
+                new SecurityGroupRuleForCreate(parentSecurityGroupId, ipProtocol, fromPort, toPort, cidr);
         return new CreateRule(securityGroupRuleForCreate);
     }
 
-    public CreateRule createSecurityGroupRule(
-            String parentSecurityGroupId,String sourceGroupId,String ipProtocol, Integer fromPort,
-            Integer toPort) {
-        SecurityGroupRuleForCreate securityGroupRuleForCreate = new SecurityGroupRuleForCreate(
-                parentSecurityGroupId, sourceGroupId,ipProtocol, fromPort, toPort
-        );
+    public CreateRule createSecurityGroupRule(String parentSecurityGroupId, String sourceGroupId, String ipProtocol,
+            Integer fromPort, Integer toPort) {
+        SecurityGroupRuleForCreate securityGroupRuleForCreate =
+                new SecurityGroupRuleForCreate(parentSecurityGroupId, sourceGroupId, ipProtocol, fromPort, toPort);
         return new CreateRule(securityGroupRuleForCreate);
     }
+
     public DeleteRule deleteSecurityGroupRule(String id) {
         return new DeleteRule(id);
     }
+
     public DeleteRule deleteSecurityGroupRule(Integer id) {
         return new DeleteRule(String.valueOf(id));
     }

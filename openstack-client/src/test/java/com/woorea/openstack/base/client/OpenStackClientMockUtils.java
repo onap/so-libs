@@ -63,9 +63,9 @@ public class OpenStackClientMockUtils {
         return this;
     }
 
-    public <T extends OpenStackRequest> OpenStackClientMockUtils mockRequestThrow(T request, String message, int status) {
-        Mockito.when(connector.request(Mockito.eq(request)))
-                .thenThrow(new OpenStackResponseException(message, status));
+    public <T extends OpenStackRequest> OpenStackClientMockUtils mockRequestThrow(T request, String message,
+            int status) {
+        Mockito.when(connector.request(Mockito.eq(request))).thenThrow(new OpenStackResponseException(message, status));
 
         return this;
     }

@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,25 +33,15 @@ public class SnapshotTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"snapshot\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"status\" : \"status\"," + EOL
-        + "    \"volumeId\" : \"volumeid\"," + EOL
-        + "    \"size\" : 61," + EOL
-        + "    \"createdAt\" : \"createdat\"," + EOL
-        + "    \"displayName\" : \"name\"," + EOL
-        + "    \"displayDescription\" : \"description\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"snapshot\" : {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"status\" : \"status\"," + EOL + "    \"volumeId\" : \"volumeid\"," + EOL + "    \"size\" : 61,"
+            + EOL + "    \"createdAt\" : \"createdat\"," + EOL + "    \"displayName\" : \"name\"," + EOL
+            + "    \"displayDescription\" : \"description\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -68,25 +57,25 @@ public class SnapshotTest {
     public void testMethods() throws Exception {
         Snapshot snapshot = objectMapper.readValue(JSON_FULL, Snapshot.class);
         snapshot.toString();
-        
+
         String createdAt = snapshot.getCreatedAt();
         Assert.assertNotNull(createdAt);
-        
+
         Integer size = snapshot.getSize();
         Assert.assertNotNull(size);
-        
+
         String name = snapshot.getName();
         Assert.assertNotNull(name);
-        
+
         String volumeId = snapshot.getVolumeId();
         Assert.assertNotNull(volumeId);
-        
+
         String description = snapshot.getDescription();
         Assert.assertNotNull(description);
-        
+
         String id = snapshot.getId();
         Assert.assertNotNull(id);
-        
+
         String status = snapshot.getStatus();
         Assert.assertNotNull(status);
     }

@@ -21,10 +21,8 @@ package com.woorea.openstack.keystone.utils;
 
 import com.woorea.openstack.keystone.model.Access.Service;
 import org.junit.Test;
-
 import java.util.Arrays;
 import java.util.List;
-
 import static org.junit.Assert.*;
 
 public class KeystoneUtilsTest {

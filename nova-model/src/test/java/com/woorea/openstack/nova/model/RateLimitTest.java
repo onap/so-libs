@@ -26,9 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Limits.RateLimit;
 import com.woorea.openstack.nova.model.Limits.RateLimit.LimitEntry;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -38,31 +36,16 @@ public class RateLimitTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"regex\" : \"regex\"," + EOL
-        + "  \"uri\" : \"uri\"," + EOL
-        + "  \"limit\" : [ {" + EOL
-        + "    \"unit\" : \"unit\"," + EOL
-        + "    \"verb\" : \"verb\"," + EOL
-        + "    \"remaining\" : 72," + EOL
-        + "    \"available\" : 47," + EOL
-        + "    \"value\" : 59," + EOL
-        + "    \"next-available\" : 1489320000000" + EOL
-        + "  }, {" + EOL
-        + "    \"unit\" : \"unit\"," + EOL
-        + "    \"verb\" : \"verb\"," + EOL
-        + "    \"remaining\" : 72," + EOL
-        + "    \"available\" : 47," + EOL
-        + "    \"value\" : 59," + EOL
-        + "    \"next-available\" : 1489320000000" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"regex\" : \"regex\"," + EOL + "  \"uri\" : \"uri\"," + EOL
+            + "  \"limit\" : [ {" + EOL + "    \"unit\" : \"unit\"," + EOL + "    \"verb\" : \"verb\"," + EOL
+            + "    \"remaining\" : 72," + EOL + "    \"available\" : 47," + EOL + "    \"value\" : 59," + EOL
+            + "    \"next-available\" : 1489320000000" + EOL + "  }, {" + EOL + "    \"unit\" : \"unit\"," + EOL
+            + "    \"verb\" : \"verb\"," + EOL + "    \"remaining\" : 72," + EOL + "    \"available\" : 47," + EOL
+            + "    \"value\" : 59," + EOL + "    \"next-available\" : 1489320000000" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -78,14 +61,14 @@ public class RateLimitTest {
     public void testMethods() throws Exception {
         RateLimit ratelimit = objectMapper.readValue(JSON_FULL, RateLimit.class);
         ratelimit.toString();
-        
+
         String regex = ratelimit.getRegex();
         Assert.assertNotNull(regex);
-        
+
         List<LimitEntry> limit = ratelimit.getLimit();
         Assert.assertNotNull(limit);
         Assert.assertEquals(2, limit.size());
-        
+
         String uri = ratelimit.getUri();
         Assert.assertNotNull(uri);
     }

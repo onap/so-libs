@@ -17,22 +17,21 @@
 package com.woorea.openstack.ceilometer.v2.model;
 
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Resource {
-    
+
     @JsonProperty("resource_id")
     private String resource;
-    
+
     private String timestamp;
-    
+
     @JsonProperty("project_id")
     private String project;
-    
+
     @JsonProperty("user_id")
     private String user;
-    
+
     private Map<String, Object> metadata;
 
     public String getResource() {
@@ -57,9 +56,8 @@ public class Resource {
 
     @Override
     public String toString() {
-        return "Resource [resource=" + resource + ", timestamp=" + timestamp
-                + ", project=" + project + ", user=" + user + ", metadata="
-                + metadata + "]";
+        return "Resource [resource=" + resource + ", timestamp=" + timestamp + ", project=" + project + ", user=" + user
+                + ", metadata=" + metadata + "]";
     }
-    
+
 }

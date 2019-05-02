@@ -20,63 +20,62 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("image")
 public class Image implements Serializable {
-    
+
     public static final class Server implements Serializable {
-        
+
         private String id;
-        
+
         private List<Link> links;
-        
+
         /**
          * @return the id
          */
         public String getId() {
             return id;
         }
-        
+
         /**
          * @return the links
          */
         public List<Link> getLinks() {
             return links;
         }
-        
+
         @Override
         public String toString() {
             return "Server [id=" + id + ", links=" + links + "]";
         }
-        
+
     }
 
     private String id;
-    
+
     private String status;
-    
+
     private String name;
-    
+
     private Integer progress;
-    
+
     private Integer minRam;
-    
+
     private Integer minDisk;
-    
+
     private Calendar created;
-    
+
     private Calendar updated;
-    
+
     @JsonProperty("OS-EXT-IMG-SIZE:size")
     private Long size;
-    
+
     private Map<String, String> metadata;
-    
+
     private Server server;
-        
+
     private List<Link> links;
 
     /**
@@ -211,7 +210,7 @@ public class Image implements Serializable {
     public void setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
     }
-    
+
     /**
      * @return the server
      */
@@ -233,16 +232,17 @@ public class Image implements Serializable {
         this.links = links;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "Image [id=" + id + ", status=" + status + ", name=" + name
-                + ", progress=" + progress + ", minRam=" + minRam
-                + ", minDisk=" + minDisk + ", created=" + (created != null ? created.getTime() : null)
+        return "Image [id=" + id + ", status=" + status + ", name=" + name + ", progress=" + progress + ", minRam="
+                + minRam + ", minDisk=" + minDisk + ", created=" + (created != null ? created.getTime() : null)
                 + ", updated=" + (updated != null ? updated.getTime() : null) + ", size=" + size + ", metadata="
-                + metadata + ", server="+server+", links=" + links + "]";
+                + metadata + ", server=" + server + ", links=" + links + "]";
     }
-    
+
 }

@@ -26,9 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Token.Service;
 import com.woorea.openstack.keystone.v3.model.Token.Service.Endpoint;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -38,31 +36,18 @@ public class ServiceTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"id\" : \"id\"," + EOL
-        + "  \"type\" : \"type\"," + EOL
-        + "  \"endpoints\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"url\" : \"url\"," + EOL
-        + "    \"region\" : \"region\"," + EOL
-        + "    \"enabled\" : false," + EOL
-        + "    \"interface\" : \"interface\"," + EOL
-        + "    \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"url\" : \"url\"," + EOL
-        + "    \"region\" : \"region\"," + EOL
-        + "    \"enabled\" : false," + EOL
-        + "    \"interface\" : \"interface\"," + EOL
-        + "    \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"id\" : \"id\"," + EOL + "  \"type\" : \"type\"," + EOL + "  \"endpoints\" : [ {" + EOL
+                    + "    \"id\" : \"id\"," + EOL + "    \"url\" : \"url\"," + EOL + "    \"region\" : \"region\","
+                    + EOL + "    \"enabled\" : false," + EOL + "    \"interface\" : \"interface\"," + EOL
+                    + "    \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL + "  }, {" + EOL
+                    + "    \"id\" : \"id\"," + EOL + "    \"url\" : \"url\"," + EOL + "    \"region\" : \"region\","
+                    + EOL + "    \"enabled\" : false," + EOL + "    \"interface\" : \"interface\"," + EOL
+                    + "    \"legacy_endpoint_id\" : \"legacyendpointid\"" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -78,16 +63,16 @@ public class ServiceTest {
     public void testMethods() throws Exception {
         Service service = objectMapper.readValue(JSON_FULL, Service.class);
         service.toString();
-        
+
         List<Endpoint> endpoints = service.getEndpoints();
         Assert.assertNotNull(endpoints);
         Assert.assertEquals(2, endpoints.size());
         service.setEndpoints(endpoints);
-        
+
         String id = service.getId();
         Assert.assertNotNull(id);
         service.setId(id);
-        
+
         String type = service.getType();
         Assert.assertNotNull(type);
         service.setType(type);

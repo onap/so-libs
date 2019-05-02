@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Host.ResourceWrapper.Resource;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -35,19 +34,12 @@ public class ResourceTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"project\" : \"project\"," + EOL
-        + "  \"host\" : \"host\"," + EOL
-        + "  \"cpu\" : 46," + EOL
-        + "  \"memory_mb\" : 90," + EOL
-        + "  \"disk_gb\" : 46" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"project\" : \"project\"," + EOL + "  \"host\" : \"host\","
+            + EOL + "  \"cpu\" : 46," + EOL + "  \"memory_mb\" : 90," + EOL + "  \"disk_gb\" : 46" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -63,19 +55,19 @@ public class ResourceTest {
     public void testMethods() throws Exception {
         Resource resource = objectMapper.readValue(JSON_FULL, Resource.class);
         resource.toString();
-        
+
         Integer memoryMb = resource.getMemoryMb();
         Assert.assertNotNull(memoryMb);
-        
+
         String host = resource.getHost();
         Assert.assertNotNull(host);
-        
+
         String project = resource.getProject();
         Assert.assertNotNull(project);
-        
+
         Integer cpu = resource.getCpu();
         Assert.assertNotNull(cpu);
-        
+
         Integer diskGb = resource.getDiskGb();
         Assert.assertNotNull(diskGb);
     }

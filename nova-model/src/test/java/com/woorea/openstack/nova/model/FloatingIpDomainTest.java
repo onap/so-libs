@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,22 +33,15 @@ public class FloatingIpDomainTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"floating-ip-pool\" : {" + EOL
-        + "    \"domain\" : \"domain\"," + EOL
-        + "    \"scope\" : \"scope\"," + EOL
-        + "    \"project\" : \"project\"," + EOL
-        + "    \"availabilityZone\" : \"availabilityzone\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"floating-ip-pool\" : {" + EOL + "    \"domain\" : \"domain\"," + EOL
+                    + "    \"scope\" : \"scope\"," + EOL + "    \"project\" : \"project\"," + EOL
+                    + "    \"availabilityZone\" : \"availabilityzone\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -65,16 +57,16 @@ public class FloatingIpDomainTest {
     public void testMethods() throws Exception {
         FloatingIpDomain floatingipdomain = objectMapper.readValue(JSON_FULL, FloatingIpDomain.class);
         floatingipdomain.toString();
-        
+
         String domain = floatingipdomain.getDomain();
         Assert.assertNotNull(domain);
-        
+
         String scope = floatingipdomain.getScope();
         Assert.assertNotNull(scope);
-        
+
         String project = floatingipdomain.getProject();
         Assert.assertNotNull(project);
-        
+
         String availabilityZone = floatingipdomain.getAvailabilityZone();
         Assert.assertNotNull(availabilityZone);
     }

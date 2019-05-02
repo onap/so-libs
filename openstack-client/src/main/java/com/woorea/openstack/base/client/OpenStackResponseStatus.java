@@ -18,7 +18,7 @@ package com.woorea.openstack.base.client;
 
 public class OpenStackResponseStatus {
 
-    private OpenStackResponseStatus(){
+    private OpenStackResponseStatus() {
 
     }
 

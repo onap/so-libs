@@ -17,7 +17,6 @@
 package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -25,11 +24,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class FloatingIpDomain implements Serializable {
 
     private String domain;
-    
+
     private String scope;
-    
+
     private String project;
-    
+
     @JsonProperty("availabilityZone")
     private String availabilityZone;
 
@@ -61,14 +60,15 @@ public class FloatingIpDomain implements Serializable {
         return availabilityZone;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "FloatingIpDomain [domain=" + domain + ", scope=" + scope
-                + ", project=" + project + ", availabilityZone="
-                + availabilityZone + "]";
+        return "FloatingIpDomain [domain=" + domain + ", scope=" + scope + ", project=" + project
+                + ", availabilityZone=" + availabilityZone + "]";
     }
-    
+
 }

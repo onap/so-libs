@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,22 +33,14 @@ public class SnapshotForCreateTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"snapshot\" : {" + EOL
-        + "    \"force\" : false," + EOL
-        + "    \"volume_id\" : \"volumeid\"," + EOL
-        + "    \"display_name\" : \"name\"," + EOL
-        + "    \"display_description\" : \"description\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"snapshot\" : {" + EOL + "    \"force\" : false," + EOL
+            + "    \"volume_id\" : \"volumeid\"," + EOL + "    \"display_name\" : \"name\"," + EOL
+            + "    \"display_description\" : \"description\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -65,19 +56,19 @@ public class SnapshotForCreateTest {
     public void testMethods() throws Exception {
         SnapshotForCreate snapshotforcreate = objectMapper.readValue(JSON_FULL, SnapshotForCreate.class);
         snapshotforcreate.toString();
-        
+
         String name = snapshotforcreate.getName();
         Assert.assertNotNull(name);
         snapshotforcreate.setName(name);
-        
+
         String volumeId = snapshotforcreate.getVolumeId();
         Assert.assertNotNull(volumeId);
         snapshotforcreate.setVolumeId(volumeId);
-        
+
         String description = snapshotforcreate.getDescription();
         Assert.assertNotNull(description);
         snapshotforcreate.setDescription(description);
-        
+
         Boolean force = snapshotforcreate.getForce();
         Assert.assertNotNull(force);
         snapshotforcreate.setForce(force);

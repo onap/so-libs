@@ -1,4 +1,5 @@
-/* ============LICENSE_START=======================================================
+/*-
+ * ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,14 +13,16 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
+
 package com.woorea.openstack.cinder.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
-
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("volume")
 public class Volume implements Serializable {
@@ -28,8 +31,10 @@ public class Volume implements Serializable {
 
     private String status;
 
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("description")
     private String description;
 
     @JsonProperty("availability_zone")
@@ -38,23 +43,115 @@ public class Volume implements Serializable {
     @JsonProperty("volume_type")
     private String volumeType;
 
+    @JsonProperty("bootable")
+    private String bootable;
+
+    @JsonProperty("os-vol-host-attr:host")
+    private String osVolhostAttribute;
+
+    @JsonProperty("os-vol-tenant-attr:tenant_id")
+    private String tenantId;
+
     @JsonProperty("snapshot_id")
     private String snapshotId;
 
     @JsonProperty("source_volid")
     private String sourceVolid;
 
-    @JsonProperty("bootable")
-    private Boolean bootable;
+    private List<Link> links;
 
     private List<Map<String, Object>> attachments;
 
     private Map<String, String> metadata;
 
     @JsonProperty("created_at")
-    private String createdAt;
+    private Date createdAt;
 
     private Integer size;
+
+    public String getBootable() {
+        return bootable;
+    }
+
+    public void setBootable(String bootable) {
+        this.bootable = bootable;
+    }
+
+    public String getOsVolhostAttribute() {
+        return osVolhostAttribute;
+    }
+
+    public void setOsVolhostAttribute(String osVolhostAttribute) {
+        this.osVolhostAttribute = osVolhostAttribute;
+    }
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public String getSourceVolid() {
+        return sourceVolid;
+    }
+
+    public void setSourceVolid(String sourceVolid) {
+        this.sourceVolid = sourceVolid;
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAvailabilityZone(String availabilityZone) {
+        this.availabilityZone = availabilityZone;
+    }
+
+    public void setVolumeType(String volumeType) {
+        this.volumeType = volumeType;
+    }
+
+    public void setSnapshotId(String snapshotId) {
+        this.snapshotId = snapshotId;
+    }
+
+    public void setAttachments(List<Map<String, Object>> attachments) {
+        this.attachments = attachments;
+    }
+
+    public void setMetadata(Map<String, String> metadata) {
+        this.metadata = metadata;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
+    }
 
     /**
      * @return the id
@@ -106,36 +203,6 @@ public class Volume implements Serializable {
     }
 
     /**
-     * @return the ID of an existing volume (specify in order to create a volume from an existing volume)
-     */
-    public String getSourceVolid() {
-        return sourceVolid;
-    }
-
-    /**
-     * @param sourceVolid
-     *            to set
-     */
-    public void setSourceVolid(String sourceVolid) {
-        this.sourceVolid = sourceVolid;
-    }
-
-    /**
-     * @param volumeType
-     *            to set
-     */
-    public void setVolumeType(String volumeType) {
-        this.volumeType = volumeType;
-    }
-
-    /**
-     * @return the bootable flag to set
-     */
-    public Boolean getBootable() {
-        return bootable;
-    }
-
-    /**
      * @return the attachments
      */
     public List<Map<String, Object>> getAttachments() {
@@ -152,7 +219,7 @@ public class Volume implements Serializable {
     /**
      * @return the createdAt
      */
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
@@ -163,18 +230,6 @@ public class Volume implements Serializable {
         return size;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "Volume [id=" + id + ", status=" + status +
-                ", name=" + name + ", description=" + description +
-                ", availabilityZone=" + availabilityZone + ", volumeType=" + volumeType +
-                ", snapshotId=" + snapshotId + ", attachments=" + attachments +
-                ", metadata=" + metadata + ", createdAt=" + createdAt + ", size=" + size + "]";
-    }
+
 
 }

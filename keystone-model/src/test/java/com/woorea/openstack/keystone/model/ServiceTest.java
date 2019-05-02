@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,22 +33,14 @@ public class ServiceTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"OS-KSADM:service\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"type\" : \"type\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"description\" : \"description\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"OS-KSADM:service\" : {" + EOL + "    \"id\" : \"id\","
+            + EOL + "    \"type\" : \"type\"," + EOL + "    \"name\" : \"name\"," + EOL
+            + "    \"description\" : \"description\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -65,18 +56,18 @@ public class ServiceTest {
     public void testMethods() throws Exception {
         Service service = objectMapper.readValue(JSON_FULL, Service.class);
         service.toString();
-        
+
         String name = service.getName();
         Assert.assertNotNull(name);
         service.setName(name);
-        
+
         String description = service.getDescription();
         Assert.assertNotNull(description);
         service.setDescription(description);
-        
+
         String id = service.getId();
         Assert.assertNotNull(id);
-        
+
         String type = service.getType();
         Assert.assertNotNull(type);
         service.setType(type);

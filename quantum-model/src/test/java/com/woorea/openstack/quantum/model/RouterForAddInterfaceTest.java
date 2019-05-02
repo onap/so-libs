@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,16 +33,12 @@ public class RouterForAddInterfaceTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"routerId\" : \"routerid\"," + EOL
-        + "  \"subnet_id\" : \"subnetid\"" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"routerId\" : \"routerid\"," + EOL + "  \"subnet_id\" : \"subnetid\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -59,11 +54,11 @@ public class RouterForAddInterfaceTest {
     public void testMethods() throws Exception {
         RouterForAddInterface routerforaddinterface = objectMapper.readValue(JSON_FULL, RouterForAddInterface.class);
         routerforaddinterface.toString();
-        
+
         String subnetId = routerforaddinterface.getSubnetId();
         Assert.assertNotNull(subnetId);
         routerforaddinterface.setSubnetId(subnetId);
-        
+
         String routerId = routerforaddinterface.getRouterId();
         Assert.assertNotNull(routerId);
         routerforaddinterface.setRouterId(routerId);

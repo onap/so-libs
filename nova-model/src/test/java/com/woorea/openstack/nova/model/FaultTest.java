@@ -25,9 +25,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Server.Fault;
-
 import java.util.Calendar;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -37,18 +35,12 @@ public class FaultTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"code\" : 29," + EOL
-        + "  \"message\" : \"message\"," + EOL
-        + "  \"details\" : \"details\"," + EOL
-        + "  \"created\" : 1485172800000" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"code\" : 29," + EOL + "  \"message\" : \"message\"," + EOL
+            + "  \"details\" : \"details\"," + EOL + "  \"created\" : 1485172800000" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -64,16 +56,16 @@ public class FaultTest {
     public void testMethods() throws Exception {
         Fault fault = objectMapper.readValue(JSON_FULL, Fault.class);
         fault.toString();
-        
+
         Integer code = fault.getCode();
         Assert.assertNotNull(code);
-        
+
         Calendar created = fault.getCreated();
         Assert.assertNotNull(created);
-        
+
         String details = fault.getDetails();
         Assert.assertNotNull(details);
-        
+
         String message = fault.getMessage();
         Assert.assertNotNull(message);
     }

@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.KeyPairs.KeyPairWrapper;
-
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
@@ -34,21 +33,14 @@ public class KeyPairWrapperTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"keypair\" : {" + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"fingerprint\" : \"fingerprint\"," + EOL
-        + "    \"user_id\" : \"userid\"," + EOL
-        + "    \"public_key\" : \"publickey\"," + EOL
-        + "    \"private_key\" : \"privatekey\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"keypair\" : {" + EOL + "    \"name\" : \"name\"," + EOL
+            + "    \"fingerprint\" : \"fingerprint\"," + EOL + "    \"user_id\" : \"userid\"," + EOL
+            + "    \"public_key\" : \"publickey\"," + EOL + "    \"private_key\" : \"privatekey\"" + EOL + "  }" + EOL
+            + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {

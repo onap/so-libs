@@ -17,7 +17,6 @@
 package com.woorea.openstack.quantum.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RouterInterface implements Serializable {

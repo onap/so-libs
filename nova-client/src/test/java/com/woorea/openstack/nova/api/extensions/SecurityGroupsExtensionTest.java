@@ -72,20 +72,12 @@ public class SecurityGroupsExtensionTest {
 
     @Test
     public void createSecurityGroupRule2() throws Exception {
-        securityGroupsExtension.createSecurityGroupRule(12,
-                "test",
-                1,
-                1,
-                "test");
+        securityGroupsExtension.createSecurityGroupRule(12, "test", 1, 1, "test");
     }
 
     @Test
     public void createSecurityGroupRule3() throws Exception {
-        securityGroupsExtension.createSecurityGroupRule(1,
-                "test",
-                1,
-                1,
-                1);
+        securityGroupsExtension.createSecurityGroupRule(1, "test", 1, 1, 1);
     }
 
     @Test

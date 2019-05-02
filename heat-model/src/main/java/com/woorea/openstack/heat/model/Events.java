@@ -20,25 +20,24 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 
 public class Events implements Iterable<Event>, Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3598543745379474704L;
-	
-	@JsonProperty("events")
-	private List<Event> events = new ArrayList<>();
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 3598543745379474704L;
+
+    @JsonProperty("events")
+    private List<Event> events = new ArrayList<>();
 
     public List<Event> getEvents() {
         return events;
     }
-	
+
     @Override
     public Iterator<Event> iterator() {
         return events.iterator();

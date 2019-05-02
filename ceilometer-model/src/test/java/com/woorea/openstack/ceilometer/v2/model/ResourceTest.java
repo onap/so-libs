@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,22 +34,14 @@ public class ResourceTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"timestamp\" : \"timestamp\"," + EOL
-        + "  \"metadata\" : {" + EOL
-        + "    \"metadata-k1\" : \"metadata-v1\"," + EOL
-        + "    \"metadata-k2\" : \"metadata-v2\"" + EOL
-        + "  }," + EOL
-        + "  \"resource_id\" : \"resource\"," + EOL
-        + "  \"project_id\" : \"project\"," + EOL
-        + "  \"user_id\" : \"user\"" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"timestamp\" : \"timestamp\"," + EOL + "  \"metadata\" : {"
+            + EOL + "    \"metadata-k1\" : \"metadata-v1\"," + EOL + "    \"metadata-k2\" : \"metadata-v2\"" + EOL
+            + "  }," + EOL + "  \"resource_id\" : \"resource\"," + EOL + "  \"project_id\" : \"project\"," + EOL
+            + "  \"user_id\" : \"user\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -67,20 +57,20 @@ public class ResourceTest {
     public void testMethods() throws Exception {
         Resource resource = objectMapper.readValue(JSON_FULL, Resource.class);
         resource.toString();
-        
-        Map<String,Object> metadata = resource.getMetadata();
+
+        Map<String, Object> metadata = resource.getMetadata();
         Assert.assertNotNull(metadata);
         Assert.assertEquals(2, metadata.size());
-        
+
         String resourceProperty = resource.getResource();
         Assert.assertNotNull(resourceProperty);
-        
+
         String project = resource.getProject();
         Assert.assertNotNull(project);
-        
+
         String user = resource.getUser();
         Assert.assertNotNull(user);
-        
+
         String timestamp = resource.getTimestamp();
         Assert.assertNotNull(timestamp);
     }

@@ -19,10 +19,9 @@ package com.woorea.openstack.keystone.v3.model;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Policies implements Iterable<Policy>,  Serializable {
+public class Policies implements Iterable<Policy>, Serializable {
 
     @JsonProperty("policies")
     private List<Policy> list;
@@ -33,8 +32,10 @@ public class Policies implements Iterable<Policy>,  Serializable {
     public List<Policy> getList() {
         return list;
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
@@ -46,5 +47,5 @@ public class Policies implements Iterable<Policy>,  Serializable {
     public Iterator<Policy> iterator() {
         return list.iterator();
     }
-    
+
 }

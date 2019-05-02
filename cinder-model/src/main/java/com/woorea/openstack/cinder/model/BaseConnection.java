@@ -1,4 +1,5 @@
-/* ============LICENSE_START=======================================================
+/*-
+ * ============LICENSE_START=======================================================
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,12 +13,12 @@
  * limitations under the License.
  * ============LICENSE_END=========================================================
  */
+
 package com.woorea.openstack.cinder.model;
 
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public abstract class BaseConnection implements Serializable {
@@ -32,8 +33,7 @@ public abstract class BaseConnection implements Serializable {
     }
 
     /**
-     * @param connector
-     *            the connector to set
+     * @param connector the connector to set
      */
     public void setConnector(Map<String, Object> connector) {
         this.connector = connector;

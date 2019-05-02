@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,101 +34,42 @@ public class SecurityGroupsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"security_groups\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"description\" : \"description\"," + EOL
-        + "    \"rules\" : [ {" + EOL
-        + "      \"id\" : \"id\"," + EOL
-        + "      \"name\" : \"name\"," + EOL
-        + "      \"group\" : {" + EOL
-        + "        \"name\" : \"name\"," + EOL
-        + "        \"tenant_id\" : \"tenantid\"" + EOL
-        + "      }," + EOL
-        + "      \"parent_group_id\" : \"parentgroupid\"," + EOL
-        + "      \"from_port\" : 7," + EOL
-        + "      \"to_port\" : 98," + EOL
-        + "      \"ip_protocol\" : \"ipprotocol\"," + EOL
-        + "      \"ip_range\" : {" + EOL
-        + "        \"cidr\" : \"cidr\"" + EOL
-        + "      }" + EOL
-        + "    }, {" + EOL
-        + "      \"id\" : \"id\"," + EOL
-        + "      \"name\" : \"name\"," + EOL
-        + "      \"group\" : {" + EOL
-        + "        \"name\" : \"name\"," + EOL
-        + "        \"tenant_id\" : \"tenantid\"" + EOL
-        + "      }," + EOL
-        + "      \"parent_group_id\" : \"parentgroupid\"," + EOL
-        + "      \"from_port\" : 7," + EOL
-        + "      \"to_port\" : 98," + EOL
-        + "      \"ip_protocol\" : \"ipprotocol\"," + EOL
-        + "      \"ip_range\" : {" + EOL
-        + "        \"cidr\" : \"cidr\"" + EOL
-        + "      }" + EOL
-        + "    } ]," + EOL
-        + "    \"links\" : [ {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    }, {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    } ]," + EOL
-        + "    \"tenant_id\" : \"tenantid\"" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"description\" : \"description\"," + EOL
-        + "    \"rules\" : [ {" + EOL
-        + "      \"id\" : \"id\"," + EOL
-        + "      \"name\" : \"name\"," + EOL
-        + "      \"group\" : {" + EOL
-        + "        \"name\" : \"name\"," + EOL
-        + "        \"tenant_id\" : \"tenantid\"" + EOL
-        + "      }," + EOL
-        + "      \"parent_group_id\" : \"parentgroupid\"," + EOL
-        + "      \"from_port\" : 7," + EOL
-        + "      \"to_port\" : 98," + EOL
-        + "      \"ip_protocol\" : \"ipprotocol\"," + EOL
-        + "      \"ip_range\" : {" + EOL
-        + "        \"cidr\" : \"cidr\"" + EOL
-        + "      }" + EOL
-        + "    }, {" + EOL
-        + "      \"id\" : \"id\"," + EOL
-        + "      \"name\" : \"name\"," + EOL
-        + "      \"group\" : {" + EOL
-        + "        \"name\" : \"name\"," + EOL
-        + "        \"tenant_id\" : \"tenantid\"" + EOL
-        + "      }," + EOL
-        + "      \"parent_group_id\" : \"parentgroupid\"," + EOL
-        + "      \"from_port\" : 7," + EOL
-        + "      \"to_port\" : 98," + EOL
-        + "      \"ip_protocol\" : \"ipprotocol\"," + EOL
-        + "      \"ip_range\" : {" + EOL
-        + "        \"cidr\" : \"cidr\"" + EOL
-        + "      }" + EOL
-        + "    } ]," + EOL
-        + "    \"links\" : [ {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    }, {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    } ]," + EOL
-        + "    \"tenant_id\" : \"tenantid\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"security_groups\" : [ {" + EOL + "    \"id\" : \"id\","
+            + EOL + "    \"name\" : \"name\"," + EOL + "    \"description\" : \"description\"," + EOL
+            + "    \"rules\" : [ {" + EOL + "      \"id\" : \"id\"," + EOL + "      \"name\" : \"name\"," + EOL
+            + "      \"group\" : {" + EOL + "        \"name\" : \"name\"," + EOL
+            + "        \"tenant_id\" : \"tenantid\"" + EOL + "      }," + EOL
+            + "      \"parent_group_id\" : \"parentgroupid\"," + EOL + "      \"from_port\" : 7," + EOL
+            + "      \"to_port\" : 98," + EOL + "      \"ip_protocol\" : \"ipprotocol\"," + EOL
+            + "      \"ip_range\" : {" + EOL + "        \"cidr\" : \"cidr\"" + EOL + "      }" + EOL + "    }, {" + EOL
+            + "      \"id\" : \"id\"," + EOL + "      \"name\" : \"name\"," + EOL + "      \"group\" : {" + EOL
+            + "        \"name\" : \"name\"," + EOL + "        \"tenant_id\" : \"tenantid\"" + EOL + "      }," + EOL
+            + "      \"parent_group_id\" : \"parentgroupid\"," + EOL + "      \"from_port\" : 7," + EOL
+            + "      \"to_port\" : 98," + EOL + "      \"ip_protocol\" : \"ipprotocol\"," + EOL
+            + "      \"ip_range\" : {" + EOL + "        \"cidr\" : \"cidr\"" + EOL + "      }" + EOL + "    } ]," + EOL
+            + "    \"links\" : [ {" + EOL + "      \"rel\" : \"rel\"," + EOL + "      \"href\" : \"href\"," + EOL
+            + "      \"type\" : \"type\"" + EOL + "    }, {" + EOL + "      \"rel\" : \"rel\"," + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"type\" : \"type\"" + EOL + "    } ]," + EOL
+            + "    \"tenant_id\" : \"tenantid\"" + EOL + "  }, {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"name\" : \"name\"," + EOL + "    \"description\" : \"description\"," + EOL + "    \"rules\" : [ {"
+            + EOL + "      \"id\" : \"id\"," + EOL + "      \"name\" : \"name\"," + EOL + "      \"group\" : {" + EOL
+            + "        \"name\" : \"name\"," + EOL + "        \"tenant_id\" : \"tenantid\"" + EOL + "      }," + EOL
+            + "      \"parent_group_id\" : \"parentgroupid\"," + EOL + "      \"from_port\" : 7," + EOL
+            + "      \"to_port\" : 98," + EOL + "      \"ip_protocol\" : \"ipprotocol\"," + EOL
+            + "      \"ip_range\" : {" + EOL + "        \"cidr\" : \"cidr\"" + EOL + "      }" + EOL + "    }, {" + EOL
+            + "      \"id\" : \"id\"," + EOL + "      \"name\" : \"name\"," + EOL + "      \"group\" : {" + EOL
+            + "        \"name\" : \"name\"," + EOL + "        \"tenant_id\" : \"tenantid\"" + EOL + "      }," + EOL
+            + "      \"parent_group_id\" : \"parentgroupid\"," + EOL + "      \"from_port\" : 7," + EOL
+            + "      \"to_port\" : 98," + EOL + "      \"ip_protocol\" : \"ipprotocol\"," + EOL
+            + "      \"ip_range\" : {" + EOL + "        \"cidr\" : \"cidr\"" + EOL + "      }" + EOL + "    } ]," + EOL
+            + "    \"links\" : [ {" + EOL + "      \"rel\" : \"rel\"," + EOL + "      \"href\" : \"href\"," + EOL
+            + "      \"type\" : \"type\"" + EOL + "    }, {" + EOL + "      \"rel\" : \"rel\"," + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"type\" : \"type\"" + EOL + "    } ]," + EOL
+            + "    \"tenant_id\" : \"tenantid\"" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -146,13 +85,14 @@ public class SecurityGroupsTest {
     public void testMethods() throws Exception {
         SecurityGroups securitygroups = objectMapper.readValue(JSON_FULL, SecurityGroups.class);
         securitygroups.toString();
-        
+
         List<SecurityGroup> list = securitygroups.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") SecurityGroup x : securitygroups) {
+        for (@SuppressWarnings("unused")
+        SecurityGroup x : securitygroups) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

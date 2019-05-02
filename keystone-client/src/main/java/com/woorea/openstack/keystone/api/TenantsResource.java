@@ -130,8 +130,7 @@ public class TenantsResource {
         private Tenant tenant;
 
         public Update(String id, Tenant tenant) {
-            super(client, HttpMethod.PUT, getTenantsString(id).toString(), Entity.json(tenant),
-                Tenant.class);
+            super(client, HttpMethod.PUT, getTenantsString(id).toString(), Entity.json(tenant), Tenant.class);
             this.tenant = tenant;
         }
     }
@@ -146,16 +145,14 @@ public class TenantsResource {
     public class ListUsers extends OpenStackRequest<Users> {
 
         public ListUsers(String tenantId) {
-            super(client, HttpMethod.GET,getTenantsString(tenantId).append("/users").toString(),
-                null, Users.class);
+            super(client, HttpMethod.GET, getTenantsString(tenantId).append("/users").toString(), null, Users.class);
         }
     }
 
     public class AddUser extends OpenStackRequest<Void> {
 
         public AddUser(String tenantId, String userId, String roleId) {
-            super(client, HttpMethod.PUT,
-                getTenantsString(tenantId).append(USERS).append(userId)
+            super(client, HttpMethod.PUT, getTenantsString(tenantId).append(USERS).append(userId)
                     .append("/roles/OS-KSADM/").append(roleId).toString(), null, Void.class);
         }
     }
@@ -163,8 +160,7 @@ public class TenantsResource {
     public class RemoveUser extends OpenStackRequest<Void> {
 
         public RemoveUser(String tenantId, String userId, String roleId) {
-            super(client, HttpMethod.DELETE,
-                getTenantsString(tenantId).append(USERS).append(userId)
+            super(client, HttpMethod.DELETE, getTenantsString(tenantId).append(USERS).append(userId)
                     .append("/roles/OS-KSADM/").append(roleId).toString(), null, Void.class);
         }
     }
@@ -173,15 +169,14 @@ public class TenantsResource {
 
         public ListUserRoles(String tenantId, String userId) {
             super(client, HttpMethod.GET,
-                getTenantsString(tenantId).append(USERS).append(userId).append("/roles")
-                    .toString(), null, Roles.class);
+                    getTenantsString(tenantId).append(USERS).append(userId).append("/roles").toString(), null,
+                    Roles.class);
         }
     }
 
     /**
-     * The following APIs support Tenant-level metadata.  This is a feature supported
-     * by the DCP/LCP (i.e. AIC cloud), but not native Openstack.  The full API as
-     * documented by AIC is implemented below.
+     * The following APIs support Tenant-level metadata. This is a feature supported by the DCP/LCP (i.e. AIC cloud),
+     * but not native Openstack. The full API as documented by AIC is implemented below.
      */
     public class ShowMetadata extends OpenStackRequest<Metadata> {
 
@@ -194,7 +189,7 @@ public class TenantsResource {
 
         public CreateOrUpdateMetadata(String tenantId, Metadata metadata) {
             super(client, HttpMethod.POST, getTenantsString(tenantId).append(METADATA), Entity.json(metadata),
-                Metadata.class);
+                    Metadata.class);
         }
     }
 
@@ -202,32 +197,31 @@ public class TenantsResource {
 
         public ReplaceMetadata(String tenantId, Metadata metadata) {
             super(client, HttpMethod.PUT, getTenantsString(tenantId).append(METADATA), Entity.json(metadata),
-                Metadata.class);
+                    Metadata.class);
         }
     }
 
     public class ShowMetadataItem extends OpenStackRequest<Metadata> {
 
         public ShowMetadataItem(String tenantId, String key) {
-            super(client, HttpMethod.GET,
-                getTenantsString(tenantId).append(METADATA).append(key), null, Metadata.class);
+            super(client, HttpMethod.GET, getTenantsString(tenantId).append(METADATA).append(key), null,
+                    Metadata.class);
         }
     }
 
     public class CreateOrUpdateMetadataItem extends OpenStackRequest<Metadata> {
 
         public CreateOrUpdateMetadataItem(String tenantId, String key, Metadata metadata) {
-            super(client, HttpMethod.POST,
-                getTenantsString(tenantId).append(METADATA).append(key), Entity.json(metadata),
-                Metadata.class);
+            super(client, HttpMethod.POST, getTenantsString(tenantId).append(METADATA).append(key),
+                    Entity.json(metadata), Metadata.class);
         }
     }
 
     public class DeleteMetadataItem extends OpenStackRequest<Void> {
 
         public DeleteMetadataItem(String tenantId, String key) {
-            super(client, HttpMethod.DELETE,
-                getTenantsString(tenantId).append("/metadata/").append(key), null, Void.class);
+            super(client, HttpMethod.DELETE, getTenantsString(tenantId).append("/metadata/").append(key), null,
+                    Void.class);
         }
     }
 

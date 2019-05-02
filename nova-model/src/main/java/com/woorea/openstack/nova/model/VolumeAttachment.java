@@ -17,7 +17,6 @@
 package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("volumeAttachment")
@@ -63,13 +62,15 @@ public class VolumeAttachment implements Serializable {
         this.device = device;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "VolumeAttachment [id=" + id + ", volumeId=" + volumeId
-                + ", serverId=" + serverId + ", device=" + device + "]";
+        return "VolumeAttachment [id=" + id + ", volumeId=" + volumeId + ", serverId=" + serverId + ", device=" + device
+                + "]";
     }
 
 }

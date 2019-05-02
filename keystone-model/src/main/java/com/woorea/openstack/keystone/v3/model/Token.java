@@ -19,30 +19,29 @@ package com.woorea.openstack.keystone.v3.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("token")
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Token implements Serializable {
-    
+
     private String id;
-    
+
     @JsonProperty("expires_at")
     private Calendar expiresAt;
-    
+
     @JsonProperty("issued_at")
     private Calendar issuedAt;
-    
+
     private List<String> methods;
-    
-    @JsonIgnoreProperties(ignoreUnknown=true)
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Domain {
-        
+
         private String id;
-        
+
         private String name;
 
         public String getId() {
@@ -60,18 +59,18 @@ public class Token implements Serializable {
         public void setName(String name) {
             this.name = name;
         }
-        
+
     }
-    
+
     private Domain domain;
-    
-    @JsonIgnoreProperties(ignoreUnknown=true)
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Project {
-        
+
         private Domain domain;
-        
+
         private String id;
-        
+
         private String name;
 
         public Domain getDomain() {
@@ -97,19 +96,19 @@ public class Token implements Serializable {
         public void setName(String name) {
             this.name = name;
         }
-        
+
     }
-    
+
     private Project project;
-    
-    @JsonIgnoreProperties(ignoreUnknown=true)
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class User {
-        
-        @JsonIgnoreProperties(ignoreUnknown=true)
+
+        @JsonIgnoreProperties(ignoreUnknown = true)
         private static final class Domain {
-            
+
             private String id;
-            
+
             private String name;
 
             public String getId() {
@@ -127,11 +126,11 @@ public class Token implements Serializable {
             public void setName(String name) {
                 this.name = name;
             }
-            
+
         }
-        
+
         private String id;
-        
+
         private String name;
 
         public String getId() {
@@ -149,37 +148,37 @@ public class Token implements Serializable {
         public void setName(String name) {
             this.name = name;
         }
-        
+
     }
-    
+
     private User user;
-    
-    @JsonIgnoreProperties(ignoreUnknown=true)
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class Role {
-        
+
         private String id;
-        
+
         private String name;
-        
+
     }
-    
+
     private List<Role> roles;
-    
+
     public static final class Service {
-        
+
         public static final class Endpoint {
-            
+
             private String id;
-            
+
             private String url;
-            
+
             private String region;
-            
+
             private Boolean enabled;
-            
+
             @JsonProperty("legacy_endpoint_id")
             private String legacyEndpointId;
-            
+
             @JsonProperty("interface")
             private String iface;
 
@@ -230,13 +229,13 @@ public class Token implements Serializable {
             public void setInterface(String iface) {
                 this.iface = iface;
             }
-            
+
         }
-        
+
         private String id;
-        
+
         private String type;
-        
+
         private List<Endpoint> endpoints;
 
         public String getId() {
@@ -262,9 +261,9 @@ public class Token implements Serializable {
         public void setEndpoints(List<Endpoint> endpoints) {
             this.endpoints = endpoints;
         }
-        
+
     }
-    
+
     private List<Service> catalog;
 
 
@@ -374,13 +373,12 @@ public class Token implements Serializable {
         this.catalog = catalog;
     }
 
-    
+
     @Override
     public String toString() {
-        return "Token [id=" + id + ", expiresAt=" + expiresAt + ", issuedAt="
-                + issuedAt + ", methods=" + methods + ", domain=" + domain
-                + ", project=" + project + ", user=" + user + ", roles="
-                + roles + ", catalog=" + catalog + "]";
+        return "Token [id=" + id + ", expiresAt=" + expiresAt + ", issuedAt=" + issuedAt + ", methods=" + methods
+                + ", domain=" + domain + ", project=" + project + ", user=" + user + ", roles=" + roles + ", catalog="
+                + catalog + "]";
     }
 
 }

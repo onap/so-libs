@@ -25,9 +25,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.model.Service;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -37,25 +35,15 @@ public class ServicesTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"services\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"type\" : \"type\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"description\" : \"description\"" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"type\" : \"type\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"description\" : \"description\"" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"services\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL + "    \"type\" : \"type\"," + EOL
+                    + "    \"name\" : \"name\"," + EOL + "    \"description\" : \"description\"" + EOL + "  }, {" + EOL
+                    + "    \"id\" : \"id\"," + EOL + "    \"type\" : \"type\"," + EOL + "    \"name\" : \"name\"," + EOL
+                    + "    \"description\" : \"description\"" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -71,13 +59,14 @@ public class ServicesTest {
     public void testMethods() throws Exception {
         Services services = objectMapper.readValue(JSON_FULL, Services.class);
         services.toString();
-        
+
         List<Service> list = services.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Service x : services) {
+        for (@SuppressWarnings("unused")
+        Service x : services) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

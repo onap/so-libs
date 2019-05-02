@@ -17,18 +17,17 @@
 package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("snapshot")
 public class SnapshotForCreate implements Serializable {
-    
+
     @JsonProperty("volume_id")
     private String volumeId;
-    
+
     private Boolean force;
-    
+
     @JsonProperty("display_name")
     private String name;
 
@@ -91,13 +90,15 @@ public class SnapshotForCreate implements Serializable {
         this.description = description;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "SnapshotForCreate [volumeId=" + volumeId + ", force=" + force
-                + ", name=" + name + ", description=" + description + "]";
+        return "SnapshotForCreate [volumeId=" + volumeId + ", force=" + force + ", name=" + name + ", description="
+                + description + "]";
     }
 
 }

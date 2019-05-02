@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Server.Addresses.Address;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -35,18 +34,13 @@ public class AddressTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"version\" : \"version\"," + EOL
-        + "  \"addr\" : \"addr\"," + EOL
-        + "  \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
-        + "  \"OS-EXT-IPS:type\" : \"type\"" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"version\" : \"version\"," + EOL + "  \"addr\" : \"addr\","
+            + EOL + "  \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL + "  \"OS-EXT-IPS:type\" : \"type\"" + EOL
+            + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -62,19 +56,19 @@ public class AddressTest {
     public void testMethods() throws Exception {
         Address address = objectMapper.readValue(JSON_FULL, Address.class);
         address.toString();
-        
+
         String type = address.getType();
         Assert.assertNotNull(type);
         address.setType(type);
-        
+
         String addr = address.getAddr();
         Assert.assertNotNull(addr);
         address.setAddr(addr);
-        
+
         String version = address.getVersion();
         Assert.assertNotNull(version);
         address.setVersion(version);
-        
+
         String macAddr = address.getMacAddr();
         Assert.assertNotNull(macAddr);
         address.setMacAddr(macAddr);

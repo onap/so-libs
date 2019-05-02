@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Hosts.Host;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -35,17 +34,12 @@ public class HostTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"zone\" : \"zone\"," + EOL
-        + "  \"service\" : \"service\"," + EOL
-        + "  \"host_name\" : \"hostname\"" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"zone\" : \"zone\"," + EOL + "  \"service\" : \"service\","
+            + EOL + "  \"host_name\" : \"hostname\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -61,14 +55,14 @@ public class HostTest {
     public void testMethods() throws Exception {
         Host host = objectMapper.readValue(JSON_FULL, Host.class);
         host.toString();
-        
+
         String hostName = host.getHostName();
         Assert.assertNotNull(hostName);
-        
+
         String zone = host.getZone();
         Assert.assertNotNull(zone);
         host.setZone(zone);
-        
+
         String service = host.getService();
         Assert.assertNotNull(service);
     }

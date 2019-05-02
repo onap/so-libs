@@ -21,7 +21,6 @@ package com.woorea.openstack.heat.model;
  */
 
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateStackParam {
@@ -131,23 +130,9 @@ public class CreateStackParam {
 
     @Override
     public String toString() {
-        return String.format("CreateStackParam{"
-                + "stackName='%s',"
-                + " templateUrl='%s',"
-                + " template='%s',"
-                + " parameters=%s,"
-                + " timeoutMinutes=%d,"
-                + " environment='%s',"
-                + " disableRollback='%s',"
-                + " files=%s"
-                + "}",
-            stackName,
-            templateUrl,
-            template,
-            parameters,
-            timeoutMinutes,
-            environment,
-            disableRollback,
-            files);
+        return String.format(
+                "CreateStackParam{" + "stackName='%s'," + " templateUrl='%s'," + " template='%s'," + " parameters=%s,"
+                        + " timeoutMinutes=%d," + " environment='%s'," + " disableRollback='%s'," + " files=%s" + "}",
+                stackName, templateUrl, template, parameters, timeoutMinutes, environment, disableRollback, files);
     }
 }

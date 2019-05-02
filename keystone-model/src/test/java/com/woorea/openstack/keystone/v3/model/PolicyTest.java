@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.Map;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,26 +34,15 @@ public class PolicyTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"policy\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"projectId\" : \"projectid\"," + EOL
-        + "    \"type\" : \"type\"," + EOL
-        + "    \"userId\" : \"userid\"," + EOL
-        + "    \"blob\" : {" + EOL
-        + "      \"blob-k1\" : \"blob-v1\"," + EOL
-        + "      \"blob-k2\" : \"blob-v2\"" + EOL
-        + "    }" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"policy\" : {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"projectId\" : \"projectid\"," + EOL + "    \"type\" : \"type\"," + EOL
+            + "    \"userId\" : \"userid\"," + EOL + "    \"blob\" : {" + EOL + "      \"blob-k1\" : \"blob-v1\"," + EOL
+            + "      \"blob-k2\" : \"blob-v2\"" + EOL + "    }" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -71,24 +58,24 @@ public class PolicyTest {
     public void testMethods() throws Exception {
         Policy policy = objectMapper.readValue(JSON_FULL, Policy.class);
         policy.toString();
-        
-        Map<String,String> blob = policy.getBlob();
+
+        Map<String, String> blob = policy.getBlob();
         Assert.assertNotNull(blob);
         Assert.assertEquals(2, blob.size());
         policy.setBlob(blob);
-        
+
         String id = policy.getId();
         Assert.assertNotNull(id);
         policy.setId(id);
-        
+
         String type = policy.getType();
         Assert.assertNotNull(type);
         policy.setType(type);
-        
+
         String userId = policy.getUserId();
         Assert.assertNotNull(userId);
         policy.setUserId(userId);
-        
+
         String projectId = policy.getProjectId();
         Assert.assertNotNull(projectId);
         policy.setProjectId(projectId);

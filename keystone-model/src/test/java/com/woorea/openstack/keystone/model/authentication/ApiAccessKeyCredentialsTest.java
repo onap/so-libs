@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.model.authentication.AccessKey.ApiAccessKeyCredentials;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -35,22 +34,19 @@ public class ApiAccessKeyCredentialsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"accessKey\" : \"accesskey\"," + EOL
-        + "  \"secretKey\" : \"secretkey\"" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"accessKey\" : \"accesskey\"," + EOL + "  \"secretKey\" : \"secretkey\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
         System.out.println("CLASS: " + ApiAccessKeyCredentials.class.getName());
         System.out.println("TEST JSON: " + JSON_FULL);
-        ApiAccessKeyCredentials apiaccesskeycredentials = objectMapper.readValue(JSON_FULL, ApiAccessKeyCredentials.class);
+        ApiAccessKeyCredentials apiaccesskeycredentials =
+                objectMapper.readValue(JSON_FULL, ApiAccessKeyCredentials.class);
         String json = objectMapper.writeValueAsString(apiaccesskeycredentials);
         System.out.println("RE-SERIALIZED OBJECT: " + json);
         JSONAssert.assertEquals(JSON_FULL, json, JSONCompareMode.LENIENT);
@@ -58,13 +54,14 @@ public class ApiAccessKeyCredentialsTest {
 
     @Test
     public void testMethods() throws Exception {
-        ApiAccessKeyCredentials apiaccesskeycredentials = objectMapper.readValue(JSON_FULL, ApiAccessKeyCredentials.class);
+        ApiAccessKeyCredentials apiaccesskeycredentials =
+                objectMapper.readValue(JSON_FULL, ApiAccessKeyCredentials.class);
         apiaccesskeycredentials.toString();
-        
+
         String secretKey = apiaccesskeycredentials.getSecretKey();
         Assert.assertNotNull(secretKey);
         apiaccesskeycredentials.setSecretKey(secretKey);
-        
+
         String accessKey = apiaccesskeycredentials.getAccessKey();
         Assert.assertNotNull(accessKey);
         apiaccesskeycredentials.setAccessKey(accessKey);

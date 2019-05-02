@@ -19,13 +19,23 @@ package com.woorea.openstack.quantum.model;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Networks implements Iterable<Network>, Serializable{
-    
+public class Networks implements Iterable<Network>, Serializable {
+
     @JsonProperty("networks")
     private List<Network> list;
+
+    @JsonProperty("networks_links")
+    private List<Link> links;
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
 
     /**
      * @return the list
@@ -51,5 +61,5 @@ public class Networks implements Iterable<Network>, Serializable{
     public Iterator<Network> iterator() {
         return list.iterator();
     }
-    
+
 }

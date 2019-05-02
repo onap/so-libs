@@ -19,29 +19,28 @@ package com.woorea.openstack.nova.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("tenant_usage")
 public class SimpleTenantUsage implements Serializable {
-    
+
     @JsonProperty("total_memory_mb_usage")
     private BigDecimal totalMemoryMbUsage;
-    
+
     @JsonProperty("total_vcpus_usage")
     private BigDecimal totalVcpusUsage;
-    
+
     @JsonProperty("total_local_gb_usage")
     private BigDecimal totalLocalGbUsage;
 
     private String start;
-    
+
     private String stop;
-    
+
     @JsonProperty("tenant_id")
     private String tenantId;
-    
+
     @JsonProperty("total_hours")
     private String totalHours;
 
@@ -154,16 +153,16 @@ public class SimpleTenantUsage implements Serializable {
         this.serverUsages = serverUsages;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "SimpleTenantUsage [totalMemoryMbUsage=" + totalMemoryMbUsage
-                + ", totalVcpusUsage=" + totalVcpusUsage
-                + ", totalLocalGbUsage=" + totalLocalGbUsage + ", start="
-                + start + ", stop=" + stop + ", tenantId=" + tenantId
-                + ", totalHours=" + totalHours + "]";
+        return "SimpleTenantUsage [totalMemoryMbUsage=" + totalMemoryMbUsage + ", totalVcpusUsage=" + totalVcpusUsage
+                + ", totalLocalGbUsage=" + totalLocalGbUsage + ", start=" + start + ", stop=" + stop + ", tenantId="
+                + tenantId + ", totalHours=" + totalHours + "]";
     }
 
     public static final class ServerUsage implements Serializable {
@@ -174,7 +173,7 @@ public class SimpleTenantUsage implements Serializable {
 
         @JsonProperty("started_at")
         private String startedAt;
-    
+
         @JsonProperty("ended_at")
         private String endedAt;
 

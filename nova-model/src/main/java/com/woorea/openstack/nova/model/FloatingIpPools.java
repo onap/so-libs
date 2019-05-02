@@ -19,12 +19,11 @@ package com.woorea.openstack.nova.model;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.woorea.openstack.nova.model.FloatingIpPools.FloatingIpPool;
 
 public class FloatingIpPools implements Iterable<FloatingIpPool>, Serializable {
-    
+
     public static class FloatingIpPool implements Serializable {
 
         private String name;
@@ -36,14 +35,16 @@ public class FloatingIpPools implements Iterable<FloatingIpPool>, Serializable {
             return name;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see java.lang.Object#toString()
          */
         @Override
         public String toString() {
             return "FloatingIpPool [name=" + name + "]";
         }
-        
+
     }
 
     @JsonProperty("floating_ip_pools")
@@ -55,13 +56,15 @@ public class FloatingIpPools implements Iterable<FloatingIpPool>, Serializable {
     public List<FloatingIpPool> getList() {
         return list;
     }
-    
+
     @Override
     public Iterator<FloatingIpPool> iterator() {
         return list.iterator();
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override

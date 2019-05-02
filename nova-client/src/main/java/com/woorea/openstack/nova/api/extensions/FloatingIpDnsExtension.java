@@ -65,7 +65,8 @@ public class FloatingIpDnsExtension {
 
 
         public CreateDomain(FloatingIpDomain floatingIpDomain) {
-            super(CLIENT, HttpMethod.POST, "/os-floating-ip-dns", Entity.json(floatingIpDomain), FloatingIpDomain.class);
+            super(CLIENT, HttpMethod.POST, "/os-floating-ip-dns", Entity.json(floatingIpDomain),
+                    FloatingIpDomain.class);
 
         }
 
@@ -74,7 +75,8 @@ public class FloatingIpDnsExtension {
     public class ShowDomain extends OpenStackRequest<FloatingIpDomain> {
 
         public ShowDomain(String id) {
-            super(CLIENT, HttpMethod.GET, new StringBuffer("/os-floating-ip-dns/").append(id).toString(), null, FloatingIpDomain.class);
+            super(CLIENT, HttpMethod.GET, new StringBuffer("/os-floating-ip-dns/").append(id).toString(), null,
+                    FloatingIpDomain.class);
         }
 
     }
@@ -95,7 +97,8 @@ public class FloatingIpDnsExtension {
     public class DeleteDomain extends OpenStackRequest<Void> {
 
         public DeleteDomain(String id) {
-            super(CLIENT, HttpMethod.DELETE, new StringBuffer("/os-floating-ip-dns/").append(id).toString(), null, Void.class);
+            super(CLIENT, HttpMethod.DELETE, new StringBuffer("/os-floating-ip-dns/").append(id).toString(), null,
+                    Void.class);
         }
 
     }

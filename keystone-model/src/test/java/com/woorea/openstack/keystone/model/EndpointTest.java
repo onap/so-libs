@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,24 +33,15 @@ public class EndpointTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"endpoint\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"region\" : \"region\"," + EOL
-        + "    \"service_id\" : \"serviceid\"," + EOL
-        + "    \"publicurl\" : \"publicurl\"," + EOL
-        + "    \"internalurl\" : \"internalurl\"," + EOL
-        + "    \"adminurl\" : \"adminurl\"" + EOL
-        + "  }" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"endpoint\" : {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"region\" : \"region\"," + EOL + "    \"service_id\" : \"serviceid\"," + EOL
+            + "    \"publicurl\" : \"publicurl\"," + EOL + "    \"internalurl\" : \"internalurl\"," + EOL
+            + "    \"adminurl\" : \"adminurl\"" + EOL + "  }" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(SerializationFeature.WRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
+            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -67,27 +57,27 @@ public class EndpointTest {
     public void testMethods() throws Exception {
         Endpoint endpoint = objectMapper.readValue(JSON_FULL, Endpoint.class);
         endpoint.toString();
-        
+
         String publicURL = endpoint.getPublicURL();
         Assert.assertNotNull(publicURL);
         endpoint.setPublicURL(publicURL);
-        
+
         String internalURL = endpoint.getInternalURL();
         Assert.assertNotNull(internalURL);
         endpoint.setInternalURL(internalURL);
-        
+
         String id = endpoint.getId();
         Assert.assertNotNull(id);
         endpoint.setId(id);
-        
+
         String region = endpoint.getRegion();
         Assert.assertNotNull(region);
         endpoint.setRegion(region);
-        
+
         String serviceId = endpoint.getServiceId();
         Assert.assertNotNull(serviceId);
         endpoint.setServiceId(serviceId);
-        
+
         String adminURL = endpoint.getAdminURL();
         Assert.assertNotNull(adminURL);
         endpoint.setAdminURL(adminURL);

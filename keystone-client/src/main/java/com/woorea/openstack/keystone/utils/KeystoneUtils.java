@@ -21,8 +21,7 @@ import java.util.List;
 
 public class KeystoneUtils {
 
-    private KeystoneUtils() {
-    }
+    private KeystoneUtils() {}
 
     public static String findEndpointURL(List<Service> serviceCatalog, String type, String region, String facing) {
         for (Service service : serviceCatalog) {

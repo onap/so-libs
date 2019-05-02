@@ -22,18 +22,18 @@ public class Meter {
 
     @JsonProperty("user_id")
     private String user;
-    
-    
+
+
     private String name;
-    
+
     @JsonProperty("resource_id")
     private String resource;
-    
+
     @JsonProperty("project_id")
     private String project;
-    
+
     private String type;
-    
+
     private String unit;
 
     public String getUser() {
@@ -62,9 +62,8 @@ public class Meter {
 
     @Override
     public String toString() {
-        return "Meter [user=" + user + ", name=" + name + ", resource="
-                + resource + ", project=" + project + ", type=" + type
-                + ", unit=" + unit + "]";
+        return "Meter [user=" + user + ", name=" + name + ", resource=" + resource + ", project=" + project + ", type="
+                + type + ", unit=" + unit + "]";
     }
 
 }

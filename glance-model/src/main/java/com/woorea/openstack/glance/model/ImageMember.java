@@ -17,19 +17,18 @@
 package com.woorea.openstack.glance.model;
 
 import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ImageMember implements Serializable {
 
     @JsonProperty("can_share")
     private boolean canShare;
-    
+
     @JsonProperty("member_id")
     private String memberId;
 
     public ImageMember() {
-        
+
     }
 
     public ImageMember(boolean canShare, String memberId) {

@@ -23,7 +23,6 @@ import com.woorea.openstack.base.client.OpenStackClientConnector;
 import com.woorea.openstack.base.client.OpenStackRequest;
 import com.woorea.openstack.base.client.OpenStackResponse;
 import org.junit.Test;
-
 import static org.junit.Assert.*;
 
 public class KeystoneTest {

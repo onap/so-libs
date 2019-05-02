@@ -24,10 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.Date;
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -37,29 +35,18 @@ public class ResourceTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"links\" : [ {" + EOL
-        + "    \"href\" : \"href\"," + EOL
-        + "    \"rel\" : \"rel\"" + EOL
-        + "  }, {" + EOL
-        + "    \"href\" : \"href\"," + EOL
-        + "    \"rel\" : \"rel\"" + EOL
-        + "  } ]," + EOL
-        + "  \"resource_name\" : \"name\"," + EOL
-        + "  \"resource_status\" : \"status\"," + EOL
-        + "  \"physical_resource_id\" : \"physicalresourceid\"," + EOL
-        + "  \"logical_resource_id\" : \"logicalresourceid\"," + EOL
-        + "  \"required_by\" : [ \"requiredby-v1\", \"requiredby-v2\" ]," + EOL
-        + "  \"updated_time\" : 1488110400000," + EOL
-        + "  \"resource_type\" : \"type\"," + EOL
-        + "  \"resource_status_reason\" : \"statusreason\"" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"links\" : [ {" + EOL + "    \"href\" : \"href\"," + EOL
+            + "    \"rel\" : \"rel\"" + EOL + "  }, {" + EOL + "    \"href\" : \"href\"," + EOL
+            + "    \"rel\" : \"rel\"" + EOL + "  } ]," + EOL + "  \"resource_name\" : \"name\"," + EOL
+            + "  \"resource_status\" : \"status\"," + EOL + "  \"physical_resource_id\" : \"physicalresourceid\"," + EOL
+            + "  \"logical_resource_id\" : \"logicalresourceid\"," + EOL
+            + "  \"required_by\" : [ \"requiredby-v1\", \"requiredby-v2\" ]," + EOL
+            + "  \"updated_time\" : 1488110400000," + EOL + "  \"resource_type\" : \"type\"," + EOL
+            + "  \"resource_status_reason\" : \"statusreason\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -75,41 +62,41 @@ public class ResourceTest {
     public void testMethods() throws Exception {
         Resource resource = objectMapper.readValue(JSON_FULL, Resource.class);
         resource.toString();
-        
+
         Date updatedTime = resource.getUpdatedTime();
         Assert.assertNotNull(updatedTime);
         resource.setUpdatedTime(updatedTime);
-        
+
         String physicalResourceId = resource.getPhysicalResourceId();
         Assert.assertNotNull(physicalResourceId);
         resource.setPhysicalResourceId(physicalResourceId);
-        
+
         List<String> requiredBy = resource.getRequiredBy();
         Assert.assertNotNull(requiredBy);
         Assert.assertEquals(2, requiredBy.size());
         resource.setRequiredBy(requiredBy);
-        
+
         String statusReason = resource.getStatusReason();
         Assert.assertNotNull(statusReason);
         resource.setStatusReason(statusReason);
-        
+
         String name = resource.getName();
         Assert.assertNotNull(name);
         resource.setName(name);
-        
+
         List<Link> links = resource.getLinks();
         Assert.assertNotNull(links);
         Assert.assertEquals(2, links.size());
         resource.setLinks(links);
-        
+
         String logicalResourceId = resource.getLogicalResourceId();
         Assert.assertNotNull(logicalResourceId);
         resource.setLogicalResourceId(logicalResourceId);
-        
+
         String type = resource.getType();
         Assert.assertNotNull(type);
         resource.setType(type);
-        
+
         String status = resource.getStatus();
         Assert.assertNotNull(status);
         resource.setStatus(status);

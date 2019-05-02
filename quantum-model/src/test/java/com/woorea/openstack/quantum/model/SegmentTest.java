@@ -24,7 +24,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -34,17 +33,13 @@ public class SegmentTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"provider:physical_network\" : \"providerphysicalnetwork\"," + EOL
-        + "  \"provider:network_type\" : \"providernetworktype\"," + EOL
-        + "  \"provider:segmentation_id\" : 92" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"provider:physical_network\" : \"providerphysicalnetwork\","
+            + EOL + "  \"provider:network_type\" : \"providernetworktype\"," + EOL
+            + "  \"provider:segmentation_id\" : 92" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -60,15 +55,15 @@ public class SegmentTest {
     public void testMethods() throws Exception {
         Segment segment = objectMapper.readValue(JSON_FULL, Segment.class);
         segment.toString();
-        
+
         String providerNetworkType = segment.getProviderNetworkType();
         Assert.assertNotNull(providerNetworkType);
         segment.setProviderNetworkType(providerNetworkType);
-        
+
         Integer providerSegmentationId = segment.getProviderSegmentationId();
         Assert.assertNotNull(providerSegmentationId);
         segment.setProviderSegmentationId(providerSegmentationId);
-        
+
         String providerPhysicalNetwork = segment.getProviderPhysicalNetwork();
         Assert.assertNotNull(providerPhysicalNetwork);
         segment.setProviderPhysicalNetwork(providerPhysicalNetwork);

@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,61 +34,28 @@ public class FlavorsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"flavors\" : [ {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"vcpus\" : 79," + EOL
-        + "    \"ram\" : 38," + EOL
-        + "    \"disk\" : 45," + EOL
-        + "    \"swap\" : \"swap\"," + EOL
-        + "    \"links\" : [ {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    }, {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    } ]," + EOL
-        + "    \"public\" : false," + EOL
-        + "    \"OS-FLV-EXT-DATA:ephemeral\" : 65," + EOL
-        + "    \"rxtx_factor\" : 11.0," + EOL
-        + "    \"OS-FLV-DISABLED:disabled\" : true," + EOL
-        + "    \"rxtx_quota\" : 42," + EOL
-        + "    \"rxtx_cap\" : 96," + EOL
-        + "    \"os-flavor-access:is_public\" : false" + EOL
-        + "  }, {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"name\" : \"name\"," + EOL
-        + "    \"vcpus\" : 79," + EOL
-        + "    \"ram\" : 38," + EOL
-        + "    \"disk\" : 45," + EOL
-        + "    \"swap\" : \"swap\"," + EOL
-        + "    \"links\" : [ {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    }, {" + EOL
-        + "      \"rel\" : \"rel\"," + EOL
-        + "      \"href\" : \"href\"," + EOL
-        + "      \"type\" : \"type\"" + EOL
-        + "    } ]," + EOL
-        + "    \"public\" : false," + EOL
-        + "    \"OS-FLV-EXT-DATA:ephemeral\" : 65," + EOL
-        + "    \"rxtx_factor\" : 11.0," + EOL
-        + "    \"OS-FLV-DISABLED:disabled\" : true," + EOL
-        + "    \"rxtx_quota\" : 42," + EOL
-        + "    \"rxtx_cap\" : 96," + EOL
-        + "    \"os-flavor-access:is_public\" : false" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"flavors\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL
+            + "    \"name\" : \"name\"," + EOL + "    \"vcpus\" : 79," + EOL + "    \"ram\" : 38," + EOL
+            + "    \"disk\" : 45," + EOL + "    \"swap\" : \"swap\"," + EOL + "    \"links\" : [ {" + EOL
+            + "      \"rel\" : \"rel\"," + EOL + "      \"href\" : \"href\"," + EOL + "      \"type\" : \"type\"" + EOL
+            + "    }, {" + EOL + "      \"rel\" : \"rel\"," + EOL + "      \"href\" : \"href\"," + EOL
+            + "      \"type\" : \"type\"" + EOL + "    } ]," + EOL + "    \"public\" : false," + EOL
+            + "    \"OS-FLV-EXT-DATA:ephemeral\" : 65," + EOL + "    \"rxtx_factor\" : 11.0," + EOL
+            + "    \"OS-FLV-DISABLED:disabled\" : true," + EOL + "    \"rxtx_quota\" : 42," + EOL
+            + "    \"rxtx_cap\" : 96," + EOL + "    \"os-flavor-access:is_public\" : false" + EOL + "  }, {" + EOL
+            + "    \"id\" : \"id\"," + EOL + "    \"name\" : \"name\"," + EOL + "    \"vcpus\" : 79," + EOL
+            + "    \"ram\" : 38," + EOL + "    \"disk\" : 45," + EOL + "    \"swap\" : \"swap\"," + EOL
+            + "    \"links\" : [ {" + EOL + "      \"rel\" : \"rel\"," + EOL + "      \"href\" : \"href\"," + EOL
+            + "      \"type\" : \"type\"" + EOL + "    }, {" + EOL + "      \"rel\" : \"rel\"," + EOL
+            + "      \"href\" : \"href\"," + EOL + "      \"type\" : \"type\"" + EOL + "    } ]," + EOL
+            + "    \"public\" : false," + EOL + "    \"OS-FLV-EXT-DATA:ephemeral\" : 65," + EOL
+            + "    \"rxtx_factor\" : 11.0," + EOL + "    \"OS-FLV-DISABLED:disabled\" : true," + EOL
+            + "    \"rxtx_quota\" : 42," + EOL + "    \"rxtx_cap\" : 96," + EOL
+            + "    \"os-flavor-access:is_public\" : false" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -106,13 +71,14 @@ public class FlavorsTest {
     public void testMethods() throws Exception {
         Flavors flavors = objectMapper.readValue(JSON_FULL, Flavors.class);
         flavors.toString();
-        
+
         List<Flavor> list = flavors.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
-        
+
         int cnt = 0;
-        for (@SuppressWarnings("unused") Flavor x : flavors) {
+        for (@SuppressWarnings("unused")
+        Flavor x : flavors) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

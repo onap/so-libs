@@ -24,9 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -37,34 +35,20 @@ public class KeyPairsTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"keypairs\" : [ {" + EOL
-        + "    \"keypair\" : {" + EOL
-        + "      \"name\" : \"name\"," + EOL
-        + "      \"fingerprint\" : \"fingerprint\"," + EOL
-        + "      \"user_id\" : \"userid\"," + EOL
-        + "      \"public_key\" : \"publickey\"," + EOL
-        + "      \"private_key\" : \"privatekey\"" + EOL
-        + "    }" + EOL
-        + "  }, {" + EOL
-        + "    \"keypair\" : { " + EOL
-        + "      \"name\" : \"name\"," + EOL
-        + "      \"fingerprint\" : \"fingerprint\"," + EOL
-        + "      \"user_id\" : \"userid\"," + EOL
-        + "      \"public_key\" : \"publickey\"," + EOL
-        + "      \"private_key\" : \"privatekey\"" + EOL
-        + "    }" + EOL
-        + "  } ]" + EOL
-        + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"keypairs\" : [ {" + EOL + "    \"keypair\" : {" + EOL
+            + "      \"name\" : \"name\"," + EOL + "      \"fingerprint\" : \"fingerprint\"," + EOL
+            + "      \"user_id\" : \"userid\"," + EOL + "      \"public_key\" : \"publickey\"," + EOL
+            + "      \"private_key\" : \"privatekey\"" + EOL + "    }" + EOL + "  }, {" + EOL + "    \"keypair\" : { "
+            + EOL + "      \"name\" : \"name\"," + EOL + "      \"fingerprint\" : \"fingerprint\"," + EOL
+            + "      \"user_id\" : \"userid\"," + EOL + "      \"public_key\" : \"publickey\"," + EOL
+            + "      \"private_key\" : \"privatekey\"" + EOL + "    }" + EOL + "  } ]" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     // This is test is ignored because The KeyPairs class does not
-    // serialize into JSON correctly.  It is probably not an operational
+    // serialize into JSON correctly. It is probably not an operational
     // issue because KeyPairs is only used to represent the response to
     // the GET os-keypairs request.
     @Ignore
@@ -87,7 +71,8 @@ public class KeyPairsTest {
         Assert.assertNotNull(list);
 
         int cnt = 0;
-        for (@SuppressWarnings("unused") KeyPair x : keypairs) {
+        for (@SuppressWarnings("unused")
+        KeyPair x : keypairs) {
             ++cnt;
         }
         Assert.assertEquals(2, cnt);

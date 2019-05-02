@@ -22,11 +22,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Service {
 
     private String id;
-    
+
     private String type;
-    
+
     private String name;
-    
+
     private String description;
 
     public String getId() {
@@ -60,5 +60,5 @@ public class Service {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
 }

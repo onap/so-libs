@@ -18,16 +18,15 @@ package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("security_group")
 public class SecurityGroup implements Serializable {
-    
+
     @JsonRootName("security_group_rule")
     public static final class Rule implements Serializable {
-    
+
         public static final class Group implements Serializable {
 
             private String name;
@@ -38,7 +37,7 @@ public class SecurityGroup implements Serializable {
             public String getName() {
                 return name;
             }
-            
+
             public String getTenantId() {
                 return tenantId;
             }
@@ -142,30 +141,31 @@ public class SecurityGroup implements Serializable {
             return group;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see java.lang.Object#toString()
          */
         @Override
         public String toString() {
-            return "Rule [id=" + id + ", name=" + name + ", parentGroupId="
-                    + parentGroupId + ", fromPort=" + fromPort + ", toPort="
-                    + toPort + ", ipProtocol=" + ipProtocol + ", ipRange="
-                    + ipRange + ", group=" + group + "]";
+            return "Rule [id=" + id + ", name=" + name + ", parentGroupId=" + parentGroupId + ", fromPort=" + fromPort
+                    + ", toPort=" + toPort + ", ipProtocol=" + ipProtocol + ", ipRange=" + ipRange + ", group=" + group
+                    + "]";
         }
-        
+
     }
 
     private String id;
-    
+
     private String name;
-    
+
     private String description;
-    
+
     @JsonProperty("tenant_id")
     private String tenantId;
-    
+
     private List<Rule> rules;
-    
+
     private List<Link> links;
 
     /**
@@ -210,14 +210,15 @@ public class SecurityGroup implements Serializable {
         return links;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
     public String toString() {
-        return "SecurityGroup [id=" + id + ", name=" + name + ", description="
-                + description + ", tenantId=" + tenantId + ", rules=" + rules
-                + ", links=" + links + "]";
+        return "SecurityGroup [id=" + id + ", name=" + name + ", description=" + description + ", tenantId=" + tenantId
+                + ", rules=" + rules + ", links=" + links + "]";
     }
-    
+
 }

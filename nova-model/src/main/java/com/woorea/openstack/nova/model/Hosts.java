@@ -19,18 +19,17 @@ package com.woorea.openstack.nova.model;
 import java.io.Serializable;
 import java.util.Iterator;
 import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Hosts implements Iterable<Hosts.Host>, Serializable {
-    
+
     public static final class Host {
-        
+
         private String zone;
-        
+
         @JsonProperty("host_name")
         private String hostName;
-        
+
         private String service;
 
         /**
@@ -46,7 +45,7 @@ public class Hosts implements Iterable<Hosts.Host>, Serializable {
         public String getService() {
             return service;
         }
-        
+
         public String getZone() {
             return zone;
         }
@@ -55,14 +54,16 @@ public class Hosts implements Iterable<Hosts.Host>, Serializable {
             this.zone = zone;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
+         * 
          * @see java.lang.Object#toString()
          */
         @Override
         public String toString() {
             return "Host [hostName=" + hostName + ", service=" + service + "]";
         }
-        
+
     }
 
     @JsonProperty("hosts")
@@ -74,13 +75,15 @@ public class Hosts implements Iterable<Hosts.Host>, Serializable {
     public List<Host> getList() {
         return list;
     }
-    
+
     @Override
     public Iterator<Hosts.Host> iterator() {
         return list.iterator();
     }
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see java.lang.Object#toString()
      */
     @Override
@@ -88,6 +91,6 @@ public class Hosts implements Iterable<Hosts.Host>, Serializable {
         return "Hosts [list=" + list + "]";
     }
 
-    
-    
+
+
 }

@@ -22,11 +22,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Domain {
 
     private String id;
-    
+
     private String name;
-    
+
     private String description;
-    
+
     private Boolean enabled;
 
     public String getId() {
@@ -52,7 +52,7 @@ public class Domain {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public Boolean getEnabled() {
         return enabled;
     }
@@ -60,5 +60,5 @@ public class Domain {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
-    
+
 }

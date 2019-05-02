@@ -21,15 +21,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 public interface ServerAction extends Serializable {
-    
+
     @JsonRootName("changePassword")
     public static final class ChangePassword implements ServerAction {
-        
+
         private String adminPass;
 
         public ChangePassword() {
@@ -53,12 +52,12 @@ public interface ServerAction extends Serializable {
         public void setAdminPass(String adminPass) {
             this.adminPass = adminPass;
         }
-    
+
     }
-    
+
     @JsonRootName("reboot")
     public static final class Reboot implements ServerAction {
-        
+
         private String type;
 
         /**
@@ -74,26 +73,26 @@ public interface ServerAction extends Serializable {
         public void setType(String type) {
             this.type = type;
         }
-        
+
     }
-    
+
     @JsonRootName("rebuild")
     public static final class Rebuild implements ServerAction {
-        
+
         private String imageRef;
-        
+
         private String name;
-        
+
         private String adminPass;
-        
+
         private String accessIPv4;
-        
+
         private String accessIPv6;
-        
+
         private Map<String, String> metadata = new HashMap<>();
-        
+
         private List<PersonalityFile> personality = new ArrayList<>();
-        
+
         @JsonProperty("OS-DCF:diskConfig")
         private String diskConfig;
 
@@ -208,14 +207,14 @@ public interface ServerAction extends Serializable {
         public void setDiskConfig(String diskConfig) {
             this.diskConfig = diskConfig;
         }
-        
+
     }
-    
+
     @JsonRootName("resize")
     public static final class Resize implements ServerAction {
-        
+
         private String flavorRef;
-        
+
         @JsonProperty("OS-DCF:diskConfig")
         private String diskConfig;
 
@@ -246,24 +245,24 @@ public interface ServerAction extends Serializable {
         public void setDiskConfig(String diskConfig) {
             this.diskConfig = diskConfig;
         }
-        
+
     }
-    
+
     @JsonRootName("confirmResize")
     public static final class ConfirmResize implements ServerAction {
-        
+
     }
-    
+
     @JsonRootName("revertResize")
     public static final class RevertResize implements ServerAction {
-        
+
     }
-    
+
     @JsonRootName("createImage")
     public static final class CreateImage implements ServerAction {
-        
+
         private String name;
-        
+
         private Map<String, String> metadata;
 
         /**
@@ -293,18 +292,18 @@ public interface ServerAction extends Serializable {
         public void setMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
         }
-        
+
     }
-    
+
     @JsonRootName("rescue")
     public static final class Rescue implements ServerAction {
-        
+
         private String adminPass;
 
         public Rescue() {
-            
+
         }
-        
+
         public Rescue(String adminPass) {
             this.adminPass = adminPass;
         }
@@ -322,11 +321,11 @@ public interface ServerAction extends Serializable {
         public void setAdminPass(String adminPass) {
             this.adminPass = adminPass;
         }
-        
+
     }
-    
+
     public static final class RescueResponse implements ServerAction {
-        
+
         private String adminPass;
 
         /**
@@ -335,51 +334,51 @@ public interface ServerAction extends Serializable {
         public String getAdminPass() {
             return adminPass;
         }
-        
+
     }
 
     @JsonRootName("unrescue")
     public static final class Unrescue implements ServerAction {
-        
+
     }
-    
+
     @JsonRootName("unpause")
     public static final class Unpause implements ServerAction {
-        
+
     }
 
     @JsonRootName("pause")
     public static final class Pause implements ServerAction {
-        
+
     }
-    
+
     @JsonRootName("suspend")
     public static final class Suspend implements ServerAction {
-        
+
     }
 
     @JsonRootName("resume")
     public static final class Resume implements ServerAction {
-        
+
     }
-    
+
     @JsonRootName("lock")
     public static final class Lock implements ServerAction {
-        
+
     }
 
     @JsonRootName("unlock")
     public static final class Unlock implements ServerAction {
-        
+
     }
-    
+
     @JsonRootName("os-getConsoleOutput")
     public static final class GetConsoleOutput implements ServerAction {
-        
+
         private Integer length;
-        
+
         public GetConsoleOutput() {
-            
+
         }
 
         public GetConsoleOutput(Integer length) {
@@ -399,11 +398,11 @@ public interface ServerAction extends Serializable {
         public void setLength(Integer length) {
             this.length = length;
         }
-        
+
     }
-    
+
     public static final class ConsoleOutput implements ServerAction {
-        
+
         private String output;
 
         /**
@@ -412,18 +411,18 @@ public interface ServerAction extends Serializable {
         public String getOutput() {
             return output;
         }
-        
+
     }
-    
+
     @JsonRootName("os-getVNCConsole")
     public static final class GetVncConsole implements ServerAction {
-        
+
         private String type;
 
         public GetVncConsole() {
             super();
         }
-        
+
 
         public GetVncConsole(String type) {
             super();
@@ -443,14 +442,14 @@ public interface ServerAction extends Serializable {
         public void setType(String type) {
             this.type = type;
         }
-        
+
     }
-    
+
     @JsonRootName("console")
     public static final class VncConsole implements ServerAction {
-        
+
         private String type;
-        
+
         private String url;
 
         /**
@@ -466,32 +465,32 @@ public interface ServerAction extends Serializable {
         public String getUrl() {
             return url;
         }
-        
+
     }
-    
+
     @JsonRootName("os-start")
     public static final class Start implements ServerAction {
-        
+
     }
 
     @JsonRootName("os-stop")
     public static final class Stop implements ServerAction {
-        
+
     }
-    
+
     @JsonRootName("forceDelete")
     public static final class ForceDelete implements ServerAction {
-        
+
     }
 
     @JsonRootName("restore")
     public static final class Restore implements ServerAction {
-        
+
     }
-    
+
     @JsonRootName("addFloatingIp")
     public static final class AssociateFloatingIp implements ServerAction {
-    
+
         private String address;
 
         public AssociateFloatingIp() {
@@ -516,14 +515,14 @@ public interface ServerAction extends Serializable {
         public void setAddress(String address) {
             this.address = address;
         }
-        
+
     }
-    
+
     @JsonRootName("removeFloatingIp")
     public static final class DisassociateFloatingIp implements ServerAction {
-        
+
         private String address;
-        
+
         public DisassociateFloatingIp() {
             super();
         }
@@ -546,12 +545,12 @@ public interface ServerAction extends Serializable {
         public void setAddress(String address) {
             this.address = address;
         }
-        
+
     }
-    
+
     @JsonRootName("createBackup")
     public static final class CreateBackup implements ServerAction {
-        
+
         private String name;
 
         @JsonProperty("backup_type")
@@ -616,7 +615,7 @@ public interface ServerAction extends Serializable {
         public void setMetadata(Map<String, String> metadata) {
             this.metadata = metadata;
         }
-        
+
     }
-    
+
 }

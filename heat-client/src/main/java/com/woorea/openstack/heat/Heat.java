@@ -47,7 +47,7 @@ public class Heat extends OpenStackClient {
     public ResourcesResource getResources() {
         return resources;
     }
-    
+
     public StackEvents getEvents() {
         return events;
     }

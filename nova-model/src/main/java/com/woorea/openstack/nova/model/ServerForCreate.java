@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -32,8 +31,7 @@ public class ServerForCreate implements Serializable {
 
         private String name;
 
-        public SecurityGroup() {
-        }
+        public SecurityGroup() {}
 
         public SecurityGroup(String name) {
             this.name = name;
@@ -47,8 +45,7 @@ public class ServerForCreate implements Serializable {
         }
 
         /**
-         * @param name
-         *          the name to set
+         * @param name the name to set
          */
         public void setName(String name) {
             this.name = name;
@@ -104,8 +101,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param name
-     *          the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
@@ -119,8 +115,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param adminPass
-     *          the adminPass to set
+     * @param adminPass the adminPass to set
      */
     public void setAdminPass(String adminPass) {
         this.adminPass = adminPass;
@@ -134,8 +129,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param imageRef
-     *          the imageRef to set
+     * @param imageRef the imageRef to set
      */
     public void setImageRef(String imageRef) {
         this.imageRef = imageRef;
@@ -149,8 +143,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param flavorRef
-     *          the flavorRef to set
+     * @param flavorRef the flavorRef to set
      */
     public void setFlavorRef(String flavorRef) {
         this.flavorRef = flavorRef;
@@ -164,8 +157,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param accessIPv4
-     *          the accessIPv4 to set
+     * @param accessIPv4 the accessIPv4 to set
      */
     public void setAccessIPv4(String accessIPv4) {
         this.accessIPv4 = accessIPv4;
@@ -179,8 +171,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param accessIPv6
-     *          the accessIPv6 to set
+     * @param accessIPv6 the accessIPv6 to set
      */
     public void setAccessIPv6(String accessIPv6) {
         this.accessIPv6 = accessIPv6;
@@ -194,8 +185,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param min
-     *          the min to set
+     * @param min the min to set
      */
     public void setMin(Integer min) {
         this.min = min;
@@ -209,8 +199,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param max
-     *          the max to set
+     * @param max the max to set
      */
     public void setMax(Integer max) {
         this.max = max;
@@ -224,8 +213,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param diskConfig
-     *          the diskConfig to set
+     * @param diskConfig the diskConfig to set
      */
     public void setDiskConfig(String diskConfig) {
         this.diskConfig = diskConfig;
@@ -239,8 +227,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param keyName
-     *          the keyName to set
+     * @param keyName the keyName to set
      */
     public void setKeyName(String keyName) {
         this.keyName = keyName;
@@ -254,8 +241,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param personality
-     *          the personality to set
+     * @param personality the personality to set
      */
     public void setPersonality(List<PersonalityFile> personality) {
         this.personality = personality;
@@ -269,8 +255,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param metadata
-     *          the metadata to set
+     * @param metadata the metadata to set
      */
     public void setMetadata(Map<String, String> metadata) {
         this.metadata = metadata;
@@ -294,8 +279,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param userData
-     *          the userData to set
+     * @param userData the userData to set
      */
     public void setUserData(String userData) {
         this.userData = userData;
@@ -309,8 +293,7 @@ public class ServerForCreate implements Serializable {
     }
 
     /**
-     * @param availabilityZone
-     *          the availabilityZone to set
+     * @param availabilityZone the availabilityZone to set
      */
     public void setAvailabilityZone(String availabilityZone) {
         this.availabilityZone = availabilityZone;

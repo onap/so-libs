@@ -23,7 +23,7 @@ import java.io.InputStream;
 public class ObjectDownload {
 
     private Object object;
-    
+
     private InputStream inputStream;
 
     /**

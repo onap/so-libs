@@ -26,7 +26,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Token.Domain;
 import com.woorea.openstack.keystone.v3.model.Token.Project;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -36,20 +35,13 @@ public class ProjectTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL
-        + "  \"domain\" : {" + EOL
-        + "    \"id\" : \"id\"," + EOL
-        + "    \"name\" : \"name\"" + EOL
-        + "  }," + EOL
-        + "  \"id\" : \"id\"," + EOL
-        + "  \"name\" : \"name\"" + EOL
-        + "}";
+    private static final String JSON_FULL =
+            "{" + EOL + "  \"domain\" : {" + EOL + "    \"id\" : \"id\"," + EOL + "    \"name\" : \"name\"" + EOL
+                    + "  }," + EOL + "  \"id\" : \"id\"," + EOL + "  \"name\" : \"name\"" + EOL + "}";
 
-    private ObjectMapper objectMapper = new ObjectMapper()
-        .setSerializationInclusion(Include.NON_NULL)
-        .enable(SerializationFeature.INDENT_OUTPUT)
-        .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
+    private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
     public void testSerialization() throws Exception {
@@ -65,15 +57,15 @@ public class ProjectTest {
     public void testMethods() throws Exception {
         Project project = objectMapper.readValue(JSON_FULL, Project.class);
         project.toString();
-        
+
         Domain domain = project.getDomain();
         Assert.assertNotNull(domain);
         project.setDomain(domain);
-        
+
         String name = project.getName();
         Assert.assertNotNull(name);
         project.setName(name);
-        
+
         String id = project.getId();
         Assert.assertNotNull(id);
         project.setId(id);
