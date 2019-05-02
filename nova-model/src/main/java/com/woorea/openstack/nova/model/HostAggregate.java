@@ -26,8 +26,10 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 @JsonRootName("aggregate")
 public class HostAggregate implements Serializable {
     
-    private String id;
+	@JsonProperty("id")
+    private Integer id;
 
+	@JsonProperty("name")
     private String name;
     
     @JsonProperty("availability_zone")
@@ -51,7 +53,7 @@ public class HostAggregate implements Serializable {
     /**
      * @return the id
      */
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

@@ -14,31 +14,38 @@
  * ============LICENSE_END=========================================================
  */
 
-package com.woorea.openstack.heat.model;
-
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.List;
+package com.woorea.openstack.cinder.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Stacks implements Iterable<Stack>, Serializable {
-    @JsonProperty("stacks")
-    private List<Stack> list;
-    
-    @JsonProperty("links")
-    private List<Link> links;
-    
-    public List<Link> getLinks() {
-        return links;
+public class Link {
+    @JsonProperty("href")
+    private String href;
+
+    @JsonProperty("rel")
+    private String rel;
+
+    public String getHref() {
+        return href;
     }
 
-    public void setLinks(List<Link> links) {
-        this.links = links;
+    public void setHref(String href) {
+        this.href = href;
+    }
+
+    public String getRel() {
+        return rel;
+    }
+
+    public void setRel(String rel) {
+        this.rel = rel;
     }
 
     @Override
-    public Iterator<Stack> iterator() {
-        return list.iterator();
+    public String toString() {
+        return "Link{" +
+                "href='" + href + '\'' +
+                ", rel='" + rel + '\'' +
+                '}';
     }
 }

@@ -42,6 +42,9 @@ public class Resource {
 
     @JsonProperty("updated_time")
     private Date updatedTime;
+    
+    @JsonProperty("creation_time")
+    private Date creationTime;
 
     @JsonProperty("resource_type")
     private String type;
@@ -53,7 +56,15 @@ public class Resource {
         return statusReason;
     }
 
-    public void setStatusReason(String statusReason) {
+    public Date getCreationTime() {
+		return creationTime;
+	}
+
+	public void setCreationTime(Date creationTime) {
+		this.creationTime = creationTime;
+	}
+
+	public void setStatusReason(String statusReason) {
         this.statusReason = statusReason;
     }
 

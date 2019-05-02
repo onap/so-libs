@@ -97,7 +97,7 @@ public class HostAggregateTest {
         String name = hostaggregate.getName();
         Assert.assertNotNull(name);
         
-        String id = hostaggregate.getId();
+        Integer id = hostaggregate.getId();
         Assert.assertNotNull(id);
         
         String availabilityZone = hostaggregate.getAvailabilityZone();
