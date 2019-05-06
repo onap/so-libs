@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e0e534c_22f0181d",
+        "filename": "glance-model/src/main/java/com/woorea/openstack/glance/model/Image.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 2085
+      },
+      "writtenOn": "2019-05-06T17:32:18Z",
+      "side": 1,
+      "message": "tab indentation",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 20
+      },
+      "revId": "cf24dbb80ea6089f1d84da6814a83e493a7c84ba",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "95d44935_3963feab",
+        "filename": "glance-model/src/main/java/com/woorea/openstack/glance/model/Image.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 2085
+      },
+      "writtenOn": "2019-05-06T17:32:18Z",
+      "side": 1,
+      "message": "tab indentation",
+      "range": {
+        "startLine": 140,
+        "startChar": 0,
+        "endLine": 140,
+        "endChar": 20
+      },
+      "revId": "cf24dbb80ea6089f1d84da6814a83e493a7c84ba",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb293ce0_207e91ea",
+        "filename": "heat-model/src/main/java/com/woorea/openstack/heat/model/Resource.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 2085
+      },
+      "writtenOn": "2019-05-06T17:32:18Z",
+      "side": 1,
+      "message": "tab indentation",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 4
+      },
+      "revId": "cf24dbb80ea6089f1d84da6814a83e493a7c84ba",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "16c562dc_6c11b378",
+        "filename": "heat-model/src/main/java/com/woorea/openstack/heat/model/Stack.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 2085
+      },
+      "writtenOn": "2019-05-06T17:32:18Z",
+      "side": 1,
+      "message": "tab indentation",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 2
+      },
+      "revId": "cf24dbb80ea6089f1d84da6814a83e493a7c84ba",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcf33920_28bb15ec",
+        "filename": "nova-model/src/main/java/com/woorea/openstack/nova/model/Flavor.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 2085
+      },
+      "writtenOn": "2019-05-06T17:32:18Z",
+      "side": 1,
+      "message": "tab indentation",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 1
+      },
+      "revId": "cf24dbb80ea6089f1d84da6814a83e493a7c84ba",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a908b9f0_63c8cffb",
+        "filename": "nova-model/src/main/java/com/woorea/openstack/nova/model/HostAggregate.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 2085
+      },
+      "writtenOn": "2019-05-06T17:32:18Z",
+      "side": 1,
+      "message": "tab indentation",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 4
+      },
+      "revId": "cf24dbb80ea6089f1d84da6814a83e493a7c84ba",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1841eb1b_c6659a55",
+        "filename": "nova-model/src/main/java/com/woorea/openstack/nova/model/QuotaSet.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 2085
+      },
+      "writtenOn": "2019-05-06T17:32:18Z",
+      "side": 1,
+      "message": "tab indentation",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 2
+      },
+      "revId": "cf24dbb80ea6089f1d84da6814a83e493a7c84ba",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": false
+    }
+  ]
+}
