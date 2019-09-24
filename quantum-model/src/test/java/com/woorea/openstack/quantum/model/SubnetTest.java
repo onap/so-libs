@@ -41,7 +41,9 @@ public class SubnetTest {
             + "    \"dns_nameservers\" : [ \"dnsnames-v1\", \"dnsnames-v2\" ]," + EOL + "    \"allocation_pools\" : [ {"
             + EOL + "      \"start\" : \"start\"," + EOL + "      \"end\" : \"end\"" + EOL + "    }, {" + EOL
             + "      \"start\" : \"start\"," + EOL + "      \"end\" : \"end\"" + EOL + "    } ]," + EOL
-            + "    \"host_routes\" : [ \"hostroutes-v1\", \"hostroutes-v2\" ]," + EOL + "    \"ip_version\" : 4," + EOL
+            + "    \"host_routes\" : [ {" + EOL + "      \"destination\" : \"destination\"," + EOL
+            + "      \"nexthop\" : \"nexthop\"" + EOL + "    }, {" + EOL + "      \"destination\" : \"destination\","
+            + EOL + "      \"nexthop\" : \"nexthop\"" + EOL + "    } ]," + EOL + "    \"ip_version\" : 4," + EOL
             + "    \"gateway_ip\" : \"gw\"" + EOL + "  }" + EOL + "}";
 
     private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
@@ -73,7 +75,7 @@ public class SubnetTest {
         Assert.assertEquals(2, dnsNames.size());
         subnet.setDnsNames(dnsNames);
 
-        List<String> hostRoutes = subnet.getHostRoutes();
+        List<Routes> hostRoutes = subnet.getHostRoutes();
         Assert.assertNotNull(hostRoutes);
         Assert.assertEquals(2, hostRoutes.size());
         subnet.setHostRoutes(hostRoutes);

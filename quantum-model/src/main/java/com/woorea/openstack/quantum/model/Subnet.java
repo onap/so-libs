@@ -53,7 +53,7 @@ public class Subnet implements Serializable {
     private List<Pool> list;
 
     @JsonProperty("host_routes")
-    private List<String> hostRoutes;
+    private List<Routes> hostRoutes;
 
     @JsonProperty("service_types")
     private List<String> serviceTypes;
@@ -202,14 +202,14 @@ public class Subnet implements Serializable {
     /**
      * @return the hostRoutes
      */
-    public List<String> getHostRoutes() {
+    public List<Routes> getHostRoutes() {
         return hostRoutes;
     }
 
     /**
      * @param hostRoutes the hostRoutes to set
      */
-    public void setHostRoutes(List<String> hostRoutes) {
+    public void setHostRoutes(List<Routes> hostRoutes) {
         this.hostRoutes = hostRoutes;
     }
 
