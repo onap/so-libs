@@ -24,6 +24,8 @@
     <siteNexusPath>/content/sites/site/org/onap/so/libs/${project.version}</siteNexusPath>
     <format.skipValidate>false</format.skipValidate>
     <format.skipExecute>true</format.skipExecute>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    <jacoco.version>0.8.5</jacoco.version>
   </properties>
   <distributionManagement>
     <repository>
@@ -379,6 +381,29 @@
             <version>2.9.8</version>
           </dependency>
         </dependencies>
+       </plugin>
+       <plugin>
+	<groupId>org.jacoco</groupId>
+	<artifactId>jacoco-maven-plugin</artifactId>
+	<version>${jacoco.version}</version>
+	<executions>
+	  <execution>
+	     <id>prepare-agent</id>
+             <goals>
+	       <goal>prepare-agent</goal>
+	     </goals>
+	  </execution>
+	  <execution>
+	     <id>report</id>
+	     <goals>
+	        <goal>report</goal>
+	     </goals>
+	     <configuration>
+		<dataFile>${project.build.directory}/code-coverage/jacoco.exec</dataFile>
+		<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+	     </configuration>
+	   </execution>
+	</executions>
       </plugin>
     </plugins>
   </build>
