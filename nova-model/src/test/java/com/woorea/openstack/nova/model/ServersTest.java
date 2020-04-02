@@ -260,7 +260,7 @@ public class ServersTest {
         sb.append("    \"OS-SRV-USG:launched_at\" : \"launchedat\"," + EOL);
         sb.append("    \"OS-SRV-USG:terminated_at\" : \"terminatedat\"," + EOL);
         sb.append(
-                "    \"os-extended-volumes:volumes_attached\" : [ \"osextendedvolumesattached-v1\", \"osextendedvolumesattached-v2\" ]"
+                "    \"os-extended-volumes:volumes_attached\" : [  { \"id\":\"osextendedvolumesattached-v1\"},{\"id\": \"osextendedvolumesattached-v2\"} ]"
                         + EOL);
         sb.append("  }, {" + EOL);
         sb.append("    \"id\" : \"id\"," + EOL);
@@ -481,7 +481,7 @@ public class ServersTest {
         sb.append("    \"OS-SRV-USG:launched_at\" : \"launchedat\"," + EOL);
         sb.append("    \"OS-SRV-USG:terminated_at\" : \"terminatedat\"," + EOL);
         sb.append(
-                "    \"os-extended-volumes:volumes_attached\" : [ \"osextendedvolumesattached-v1\", \"osextendedvolumesattached-v2\" ]"
+                "   \"os-extended-volumes:volumes_attached\" : [  { \"id\":\"osextendedvolumesattached-v1\"},{\"id\": \"osextendedvolumesattached-v2\"} ]"
                         + EOL);
         sb.append("  } ]" + EOL);
         sb.append("}");
