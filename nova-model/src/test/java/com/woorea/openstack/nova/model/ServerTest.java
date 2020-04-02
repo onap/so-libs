@@ -128,8 +128,8 @@ public class ServerTest {
             + "    \"OS-EXT-AZ:availability_zone\" : \"availabilityzone\"," + EOL
             + "    \"OS-SRV-USG:launched_at\" : \"launchedat\"," + EOL
             + "    \"OS-SRV-USG:terminated_at\" : \"terminatedat\"," + EOL
-            + "    \"os-extended-volumes:volumes_attached\" : [ \"osextendedvolumesattached-v1\", \"osextendedvolumesattached-v2\" ]"
-            + EOL + "  }" + EOL + "}";
+            + "    \"os-extended-volumes:volumes_attached\" : [  { \"id\":\"osextendedvolumesattached-v1\"},{\"id\": \"osextendedvolumesattached-v2\"} ]"
+            + EOL + "}";
 
     private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
             .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
@@ -221,7 +221,7 @@ public class ServerTest {
         String instanceName = server.getInstanceName();
         Assert.assertNotNull(instanceName);
 
-        List<String> osExtendedVolumesAttached = server.getOsExtendedVolumesAttached();
+        List<IdResourceEntity> osExtendedVolumesAttached = server.getOsExtendedVolumesAttached();
         Assert.assertNotNull(osExtendedVolumesAttached);
         Assert.assertEquals(2, osExtendedVolumesAttached.size());
 
