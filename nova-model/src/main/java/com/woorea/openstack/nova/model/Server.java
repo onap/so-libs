@@ -24,12 +24,12 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.woorea.openstack.nova.model.Server.Addresses.Address;
 
 @JsonRootName("server")
 public class Server implements Serializable {
 
     public static final class Addresses implements Serializable {
-
         public static final class Address implements Serializable {
 
             @JsonProperty("OS-EXT-IPS-MAC:mac_addr")
@@ -99,32 +99,8 @@ public class Server implements Serializable {
                 this.macAddr = macAddr;
             }
         }
-
-        private Map<String, List<Address>> addresses = new HashMap<>();
-
-        @JsonAnySetter
-        public void add(String key, List<Address> value) {
-            addresses.put(key, value);
-        }
-
-        /**
-         * @return the ip address List Map
-         */
-        public Map<String, List<Address>> getAddresses() {
-            return addresses;
-        }
-
-        /*
-         * (non-Javadoc)
-         * 
-         * @see java.lang.Object#toString()
-         */
-        @Override
-        public String toString() {
-            return "Addresses List Map [" + addresses + "]";
-        }
-
     }
+
 
     public static final class Fault {
 
@@ -183,7 +159,7 @@ public class Server implements Serializable {
 
     private String name;
 
-    private Addresses addresses;
+    private Map<String, List<Address>> addresses = new HashMap<>();
 
     private List<Link> links;
 
@@ -278,7 +254,7 @@ public class Server implements Serializable {
     /**
      * @return the addresses
      */
-    public Addresses getAddresses() {
+    public Map<String, List<Address>> getAddresses() {
         return addresses;
     }
 
@@ -315,6 +291,12 @@ public class Server implements Serializable {
      */
     public void setFlavor(Flavor flavor) {
         this.flavor = flavor;
+    }
+
+
+    @JsonAnySetter
+    public void setAddresses(String key, List<Address> value) {
+        addresses.put(key, value);
     }
 
     /**
