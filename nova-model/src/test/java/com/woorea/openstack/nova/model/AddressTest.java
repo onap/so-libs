@@ -34,9 +34,8 @@ public class AddressTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL + "  \"version\" : \"version\"," + EOL + "  \"addr\" : \"addr\","
-            + EOL + "  \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL + "  \"OS-EXT-IPS:type\" : \"type\"" + EOL
-            + "}";
+    private static final String JSON_FULL = "{" + EOL + "  \"version\" : 4," + EOL + "  \"addr\" : \"addr\"," + EOL
+            + "  \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL + "  \"OS-EXT-IPS:type\" : \"type\"" + EOL + "}";
 
     private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
             .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
@@ -65,7 +64,7 @@ public class AddressTest {
         Assert.assertNotNull(addr);
         address.setAddr(addr);
 
-        String version = address.getVersion();
+        int version = address.getVersion();
         Assert.assertNotNull(version);
         address.setVersion(version);
 
