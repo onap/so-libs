@@ -24,6 +24,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.woorea.openstack.nova.model.Server.Addresses.Address;
 
 @JsonRootName("server")
 public class Server implements Serializable {
@@ -100,18 +101,18 @@ public class Server implements Serializable {
             }
         }
 
-        private Map<String, List<Address>> addresses = new HashMap<>();
+        private Map<String, List<Address>> address = new HashMap<>();
 
         @JsonAnySetter
         public void add(String key, List<Address> value) {
-            addresses.put(key, value);
+            address.put(key, value);
         }
 
         /**
          * @return the ip address List Map
          */
-        public Map<String, List<Address>> getAddresses() {
-            return addresses;
+        public Map<String, List<Address>> getAddress() {
+            return address;
         }
 
         /*
@@ -121,7 +122,7 @@ public class Server implements Serializable {
          */
         @Override
         public String toString() {
-            return "Addresses List Map [" + addresses + "]";
+            return "Addresses List Map [" + address + "]";
         }
 
     }
@@ -183,7 +184,7 @@ public class Server implements Serializable {
 
     private String name;
 
-    private Addresses addresses;
+    private Map<String, List<Address>> addresses = new HashMap<>();
 
     private List<Link> links;
 
@@ -278,7 +279,7 @@ public class Server implements Serializable {
     /**
      * @return the addresses
      */
-    public Addresses getAddresses() {
+    public Map<String, List<Address>> getAddresses() {
         return addresses;
     }
 
