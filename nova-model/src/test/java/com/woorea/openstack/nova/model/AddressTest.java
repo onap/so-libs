@@ -34,7 +34,7 @@ public class AddressTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL + "  \"version\" : \"version\"," + EOL + "  \"addr\" : \"addr\","
+    private static final String JSON_FULL = "{" + EOL + "  \"version\" : 4," + EOL + "  \"addr\" : \"addr\","
             + EOL + "  \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL + "  \"OS-EXT-IPS:type\" : \"type\"" + EOL
             + "}";
 
@@ -65,7 +65,7 @@ public class AddressTest {
         Assert.assertNotNull(addr);
         address.setAddr(addr);
 
-        String version = address.getVersion();
+        int version = address.getVersion();
         Assert.assertNotNull(version);
         address.setVersion(version);
 

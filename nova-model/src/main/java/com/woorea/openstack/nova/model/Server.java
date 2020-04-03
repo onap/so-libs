@@ -35,7 +35,7 @@ public class Server implements Serializable {
             @JsonProperty("OS-EXT-IPS-MAC:mac_addr")
             private String macAddr;
 
-            private String version;
+            private int version;
 
             private String addr;
 
@@ -52,7 +52,7 @@ public class Server implements Serializable {
             /**
              * @return the version
              */
-            public String getVersion() {
+            public int getVersion() {
                 return version;
             }
 
@@ -74,7 +74,7 @@ public class Server implements Serializable {
             /**
              * @param version the version to set
              */
-            public void setVersion(String version) {
+            public void setVersion(int version) {
                 this.version = version;
             }
 

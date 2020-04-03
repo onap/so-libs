@@ -39,14 +39,14 @@ public class ServerTest {
 
     private static final String JSON_FULL = "{" + EOL + "  \"server\" : {" + EOL + "    \"id\" : \"id\"," + EOL
             + "    \"name\" : \"name\"," + EOL + "    \"addresses\" : {" + EOL + "        \"addresses-k1\" : [ {" + EOL
-            + "          \"version\" : \"version\"," + EOL + "          \"addr\" : \"addr\"," + EOL
+            + "          \"version\" : 4," + EOL + "          \"addr\" : \"addr\"," + EOL
             + "          \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL + "          \"OS-EXT-IPS:type\" : \"type\""
-            + EOL + "        }, {" + EOL + "          \"version\" : \"version\"," + EOL
+            + EOL + "        }, {" + EOL + "          \"version\" : 4," + EOL
             + "          \"addr\" : \"addr\"," + EOL + "          \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
             + "          \"OS-EXT-IPS:type\" : \"type\"" + EOL + "        } ]," + EOL + "        \"addresses-k2\" : [ {"
-            + EOL + "          \"version\" : \"version\"," + EOL + "          \"addr\" : \"addr\"," + EOL
+            + EOL + "          \"version\" : 4," + EOL + "          \"addr\" : \"addr\"," + EOL
             + "          \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL + "          \"OS-EXT-IPS:type\" : \"type\""
-            + EOL + "        }, {" + EOL + "          \"version\" : \"version\"," + EOL
+            + EOL + "        }, {" + EOL + "          \"version\" : 4," + EOL
             + "          \"addr\" : \"addr\"," + EOL + "          \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
             + "          \"OS-EXT-IPS:type\" : \"type\"" + EOL + "        } ]" + EOL + "    }," + EOL
             + "    \"links\" : [ {" + EOL + "      \"rel\" : \"rel\"," + EOL + "      \"href\" : \"href\"," + EOL
@@ -155,7 +155,7 @@ public class ServerTest {
 
         List<Address> address = addresses.get("addresses-k1");
         Assert.assertEquals(2, address.size());
-        Assert.assertEquals("version", address.get(0).getVersion());
+        Assert.assertEquals(4, address.get(0).getVersion());
 
         Map<String, String> metadata = server.getMetadata();
         Assert.assertNotNull(metadata);
