@@ -20,25 +20,25 @@
 
 package com.woorea.openstack.nova.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.woorea.openstack.nova.model.Server.Addresses;
-import com.woorea.openstack.nova.model.Server.Fault;
 import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.woorea.openstack.nova.model.Server.Addresses.Address;
+import com.woorea.openstack.nova.model.Server.Fault;
 
 public class ServerTest {
 
     private static final String EOL = System.lineSeparator();
 
     private static final String JSON_FULL = "{" + EOL + "  \"server\" : {" + EOL + "    \"id\" : \"id\"," + EOL
-            + "    \"name\" : \"name\"," + EOL + "    \"addresses\" : {" + EOL + "      \"addresses\" : {" + EOL
+            + "    \"name\" : \"name\"," + EOL + "    \"addresses\" : {" + EOL
             + "        \"addresses-k1\" : [ {" + EOL + "          \"version\" : \"version\"," + EOL
             + "          \"addr\" : \"addr\"," + EOL + "          \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
             + "          \"OS-EXT-IPS:type\" : \"type\"" + EOL + "        }, {" + EOL
@@ -49,7 +49,7 @@ public class ServerTest {
             + "          \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL + "          \"OS-EXT-IPS:type\" : \"type\""
             + EOL + "        }, {" + EOL + "          \"version\" : \"version\"," + EOL
             + "          \"addr\" : \"addr\"," + EOL + "          \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL
-            + "          \"OS-EXT-IPS:type\" : \"type\"" + EOL + "        } ]" + EOL + "      }" + EOL + "    }," + EOL
+            + "          \"OS-EXT-IPS:type\" : \"type\"" + EOL + "        } ]" + EOL + "    }," + EOL
             + "    \"links\" : [ {" + EOL + "      \"rel\" : \"rel\"," + EOL + "      \"href\" : \"href\"," + EOL
             + "      \"type\" : \"type\"" + EOL + "    }, {" + EOL + "      \"rel\" : \"rel\"," + EOL
             + "      \"href\" : \"href\"," + EOL + "      \"type\" : \"type\"" + EOL + "    } ]," + EOL
@@ -151,9 +151,13 @@ public class ServerTest {
         Server server = objectMapper.readValue(JSON_FULL, Server.class);
         server.toString();
 
-        Addresses addresses = server.getAddresses();
+        Map<String, List<Address>> addresses = server.getAddresses();
         Assert.assertNotNull(addresses);
 
+        List<Address> address = addresses.get("addresses-k1");
+        Assert.assertEquals(2, address.size());
+        Assert.assertEquals("version", address.get(0).getVersion());
+        
         Map<String, String> metadata = server.getMetadata();
         Assert.assertNotNull(metadata);
         Assert.assertEquals(2, metadata.size());

@@ -20,15 +20,15 @@
 
 package com.woorea.openstack.nova.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class ServersTest {
 
@@ -45,7 +45,6 @@ public class ServersTest {
         sb.append("    \"id\" : \"id\"," + EOL);
         sb.append("    \"name\" : \"name\"," + EOL);
         sb.append("    \"addresses\" : {" + EOL);
-        sb.append("      \"addresses\" : {" + EOL);
         sb.append("        \"addresses-k1\" : [ {" + EOL);
         sb.append("          \"version\" : \"version\"," + EOL);
         sb.append("          \"addr\" : \"addr\"," + EOL);
@@ -68,7 +67,6 @@ public class ServersTest {
         sb.append("          \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL);
         sb.append("          \"OS-EXT-IPS:type\" : \"type\"" + EOL);
         sb.append("        } ]" + EOL);
-        sb.append("      }" + EOL);
         sb.append("    }," + EOL);
         sb.append("    \"links\" : [ {" + EOL);
         sb.append("      \"rel\" : \"rel\"," + EOL);
@@ -266,7 +264,6 @@ public class ServersTest {
         sb.append("    \"id\" : \"id\"," + EOL);
         sb.append("    \"name\" : \"name\"," + EOL);
         sb.append("    \"addresses\" : {" + EOL);
-        sb.append("      \"addresses\" : {" + EOL);
         sb.append("        \"addresses-k1\" : [ {" + EOL);
         sb.append("          \"version\" : \"version\"," + EOL);
         sb.append("          \"addr\" : \"addr\"," + EOL);
@@ -289,7 +286,6 @@ public class ServersTest {
         sb.append("          \"OS-EXT-IPS-MAC:mac_addr\" : \"macaddr\"," + EOL);
         sb.append("          \"OS-EXT-IPS:type\" : \"type\"" + EOL);
         sb.append("        } ]" + EOL);
-        sb.append("      }" + EOL);
         sb.append("    }," + EOL);
         sb.append("    \"links\" : [ {" + EOL);
         sb.append("      \"rel\" : \"rel\"," + EOL);
