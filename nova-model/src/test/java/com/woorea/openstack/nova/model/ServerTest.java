@@ -117,9 +117,8 @@ public class ServerTest {
             + "        \"href\" : \"href\"," + EOL + "        \"type\" : \"type\"" + EOL + "      }, {" + EOL
             + "        \"rel\" : \"rel\"," + EOL + "        \"href\" : \"href\"," + EOL + "        \"type\" : \"type\""
             + EOL + "      } ]," + EOL + "      \"tenant_id\" : \"tenantid\"" + EOL + "    } ]," + EOL
-            + "    \"OS-EXT-STS:task_state\" : \"taskstate\"," + EOL
-            + "    \"OS-EXT-STS:power_state\" : \"powerstate\"," + EOL + "    \"OS-EXT-STS:vm_state\" : \"vmstate\","
-            + EOL + "    \"OS-EXT-SRV-ATTR:host\" : \"host\"," + EOL
+            + "    \"OS-EXT-STS:task_state\" : \"taskstate\"," + EOL + "    \"OS-EXT-STS:power_state\" : 1," + EOL
+            + "    \"OS-EXT-STS:vm_state\" : \"vmstate\"," + EOL + "    \"OS-EXT-SRV-ATTR:host\" : \"host\"," + EOL
             + "    \"OS-EXT-SRV-ATTR:instance_name\" : \"instancename\"," + EOL
             + "    \"OS-EXT-SRV-ATTR:hypervisor_hostname\" : \"hypervisorhostname\"," + EOL
             + "    \"OS-DCF:diskConfig\" : \"diskconfig\"," + EOL
@@ -172,8 +171,8 @@ public class ServerTest {
         String taskState = server.getTaskState();
         Assert.assertNotNull(taskState);
 
-        String powerState = server.getPowerState();
-        Assert.assertNotNull(powerState);
+        int powerState = server.getPowerState();
+        Assert.assertEquals(1, powerState);
 
         String vmState = server.getVmState();
         Assert.assertNotNull(vmState);

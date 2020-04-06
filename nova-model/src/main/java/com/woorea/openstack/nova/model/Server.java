@@ -204,7 +204,7 @@ public class Server implements Serializable {
     private String taskState;
 
     @JsonProperty("OS-EXT-STS:power_state")
-    private String powerState;
+    private int powerState;
 
     @JsonProperty("OS-EXT-STS:vm_state")
     private String vmState;
@@ -407,7 +407,7 @@ public class Server implements Serializable {
     /**
      * @return the powerState
      */
-    public String getPowerState() {
+    public int getPowerState() {
         return powerState;
     }
 
