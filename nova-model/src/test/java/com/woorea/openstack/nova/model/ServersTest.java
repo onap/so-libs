@@ -248,7 +248,7 @@ public class ServersTest {
         sb.append("      \"tenant_id\" : \"tenantid\"" + EOL);
         sb.append("    } ]," + EOL);
         sb.append("    \"OS-EXT-STS:task_state\" : \"taskstate\"," + EOL);
-        sb.append("    \"OS-EXT-STS:power_state\" : \"powerstate\"," + EOL);
+        sb.append("    \"OS-EXT-STS:power_state\" : 1," + EOL);
         sb.append("    \"OS-EXT-STS:vm_state\" : \"vmstate\"," + EOL);
         sb.append("    \"OS-EXT-SRV-ATTR:host\" : \"host\"," + EOL);
         sb.append("    \"OS-EXT-SRV-ATTR:instance_name\" : \"instancename\"," + EOL);
@@ -467,7 +467,7 @@ public class ServersTest {
         sb.append("      \"tenant_id\" : \"tenantid\"" + EOL);
         sb.append("    } ]," + EOL);
         sb.append("    \"OS-EXT-STS:task_state\" : \"taskstate\"," + EOL);
-        sb.append("    \"OS-EXT-STS:power_state\" : \"powerstate\"," + EOL);
+        sb.append("    \"OS-EXT-STS:power_state\" : 1," + EOL);
         sb.append("    \"OS-EXT-STS:vm_state\" : \"vmstate\"," + EOL);
         sb.append("    \"OS-EXT-SRV-ATTR:host\" : \"host\"," + EOL);
         sb.append("    \"OS-EXT-SRV-ATTR:instance_name\" : \"instancename\"," + EOL);
