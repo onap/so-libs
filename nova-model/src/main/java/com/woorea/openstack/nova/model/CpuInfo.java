@@ -21,9 +21,11 @@ import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CpuInfo {
@@ -38,8 +40,19 @@ public class CpuInfo {
     private List<String> features = null;
     @JsonProperty("topology")
     private Topology topology;
-    @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonCreator
+    public static CpuInfo value(String json) {
+        if (json != null && json.length() > 0) {
+            try {
+                return new ObjectMapper().readValue(json, CpuInfo.class);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 
     @JsonProperty("arch")
     public String getArch() {
@@ -89,16 +102,6 @@ public class CpuInfo {
     @JsonProperty("topology")
     public void setTopology(Topology topology) {
         this.topology = topology;
-    }
-
-    @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    @JsonAnySetter
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
     }
 
 }
