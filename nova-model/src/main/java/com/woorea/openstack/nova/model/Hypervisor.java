@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Hypervisor {
 
     @JsonProperty("cpu_info")
-    private CpuInfo cpuInfo;
+    private String cpuInfo;
     @JsonProperty("current_workload")
     private Integer currentWorkload;
     @JsonProperty("status")
@@ -64,12 +64,12 @@ public class Hypervisor {
     private Integer vcpusUsed;
 
     @JsonProperty("cpu_info")
-    public CpuInfo getCpuInfo() {
+    public String getCpuInfo() {
         return cpuInfo;
     }
 
     @JsonProperty("cpu_info")
-    public void setCpuInfo(CpuInfo cpuInfo) {
+    public void setCpuInfo(String cpuInfo) {
         this.cpuInfo = cpuInfo;
     }
 
