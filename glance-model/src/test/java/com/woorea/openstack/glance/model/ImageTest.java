@@ -20,36 +20,34 @@
 
 package com.woorea.openstack.glance.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Calendar;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class ImageTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL + "  \"image\" : {" + EOL + "    \"id\" : \"id\"," + EOL
-            + "    \"uri\" : \"uri\"," + EOL + "    \"name\" : \"name\"," + EOL + "    \"size\" : 43," + EOL
-            + "    \"checksum\" : \"checksum\"," + EOL + "    \"status\" : \"status\"," + EOL
-            + "    \"owner\" : \"owner\"," + EOL + "    \"properties\" : {" + EOL
+    private static final String JSON_FULL = "{" + EOL + "    \"id\" : \"id\"," + EOL + "    \"uri\" : \"uri\"," + EOL
+            + "    \"name\" : \"name\"," + EOL + "    \"size\" : 43," + EOL + "    \"checksum\" : \"checksum\"," + EOL
+            + "    \"status\" : \"status\"," + EOL + "    \"owner\" : \"owner\"," + EOL + "    \"properties\" : {" + EOL
             + "      \"properties-k1\" : \"properties-v1\"," + EOL + "      \"properties-k2\" : \"properties-v2\"" + EOL
             + "    }," + EOL + "    \"public\" : false," + EOL + "    \"deleted\" : false," + EOL
             + "    \"protected\" : true," + EOL + "    \"disk_format\" : \"diskformat\"," + EOL
             + "    \"container_format\" : \"containerformat\"," + EOL + "    \"virtual_size\" : 18," + EOL
             + "    \"created_at\" : 1486296000000," + EOL + "    \"updated_at\" : 1487592000000," + EOL
             + "    \"deleted_at\" : 1486209600000," + EOL + "    \"is_public\" : false," + EOL + "    \"min_ram\" : 62,"
-            + EOL + "    \"min_disk\" : 69" + EOL + "  }" + EOL + "}";
+            + EOL + "    \"min_disk\" : 69" + EOL + "  }";
 
     private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
-            .enable(SerializationFeature.INDENT_OUTPUT).enable(SerializationFeature.WRAP_ROOT_VALUE)
-            .enable(DeserializationFeature.UNWRAP_ROOT_VALUE).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
             .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
 
     @Test
