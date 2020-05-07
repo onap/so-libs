@@ -16,6 +16,10 @@
 
 package com.woorea.openstack.glance;
 
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.woorea.openstack.base.client.Entity;
 import com.woorea.openstack.base.client.HttpMethod;
@@ -28,10 +32,6 @@ import com.woorea.openstack.glance.model.ImageMember;
 import com.woorea.openstack.glance.model.ImageMembers;
 import com.woorea.openstack.glance.model.ImageUpload;
 import com.woorea.openstack.glance.model.Images;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ImagesResource {
 
@@ -126,13 +126,7 @@ public class ImagesResource {
     public class Show extends OpenStackRequest<Image> {
 
         public Show(String id) {
-            super(client, HttpMethod.HEAD, new StringBuilder(IMAGES).append(id).toString(), null, Image.class);
-        }
-
-        @Override
-        public Image execute() {
-            // custom parsing here
-            return parse(client.request(this).headers());
+            super(client, HttpMethod.GET, new StringBuilder(IMAGES).append(id).toString(), null, Image.class);
         }
     }
 
