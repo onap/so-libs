@@ -20,15 +20,15 @@
 
 package com.woorea.openstack.keystone.v3.model;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 public class ProjectsTest {
 
@@ -37,7 +37,8 @@ public class ProjectsTest {
     private static final String JSON_FULL = "{" + EOL + "  \"projects\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL
             + "    \"name\" : \"name\"," + EOL + "    \"enabled\" : false," + EOL + "    \"domain_id\" : \"domainid\""
             + EOL + "  }, {" + EOL + "    \"id\" : \"id\"," + EOL + "    \"name\" : \"name\"," + EOL
-            + "    \"enabled\" : false," + EOL + "    \"domain_id\" : \"domainid\"," + EOL + "    \"tags\" : []" + EOL + "  } ]" + EOL + "}";
+            + "    \"enabled\" : false," + EOL + "    \"domain_id\" : \"domainid\"," + EOL
+            + "    \"tags\" : [\"someTag\"]" + EOL + "  } ]" + EOL + "}";
 
     private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
             .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
@@ -61,6 +62,7 @@ public class ProjectsTest {
         List<Project> list = projects.getList();
         Assert.assertNotNull(list);
         Assert.assertEquals(2, list.size());
+        Assert.assertEquals("someTag", list.get(1).getTags().get(0));
 
         int cnt = 0;
         for (@SuppressWarnings("unused")
