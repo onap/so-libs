@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4b8742c3_0cfa91a8",
+        "filename": "keystone-model/src/test/java/com/woorea/openstack/keystone/v3/model/ProjectsTest.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 97
+      },
+      "writtenOn": "2020-07-15T21:33:07Z",
+      "side": 1,
+      "message": "Please add some values to verify that serialization and deserialization works",
+      "revId": "3515ca895c73f3fca119020f4b3cbb1ea0b00b16",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
