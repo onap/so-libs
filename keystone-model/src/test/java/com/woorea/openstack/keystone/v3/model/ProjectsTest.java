@@ -37,7 +37,7 @@ public class ProjectsTest {
     private static final String JSON_FULL = "{" + EOL + "  \"projects\" : [ {" + EOL + "    \"id\" : \"id\"," + EOL
             + "    \"name\" : \"name\"," + EOL + "    \"enabled\" : false," + EOL + "    \"domain_id\" : \"domainid\""
             + EOL + "  }, {" + EOL + "    \"id\" : \"id\"," + EOL + "    \"name\" : \"name\"," + EOL
-            + "    \"enabled\" : false," + EOL + "    \"domain_id\" : \"domainid\"" + EOL + "  } ]" + EOL + "}";
+            + "    \"enabled\" : false," + EOL + "    \"domain_id\" : \"domainid\"," + EOL + "    \"tags\" : []" + EOL + "  } ]" + EOL + "}";
 
     private ObjectMapper objectMapper = new ObjectMapper().setSerializationInclusion(Include.NON_NULL)
             .enable(SerializationFeature.INDENT_OUTPUT).enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
