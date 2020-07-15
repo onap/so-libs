@@ -16,6 +16,7 @@
 
 package com.woorea.openstack.keystone.v3.model;
 
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
@@ -30,6 +31,8 @@ public class Project {
     private String name;
 
     private Boolean enabled;
+
+    private List<String> tags;
 
     public String getId() {
         return id;
@@ -61,6 +64,14 @@ public class Project {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
 }
