@@ -19,6 +19,7 @@ package com.woorea.openstack.nova;
 
 import com.woorea.openstack.base.client.OpenStackClient;
 import com.woorea.openstack.base.client.OpenStackClientConnector;
+import com.woorea.openstack.nova.api.AvailabilityZoneResource;
 import com.woorea.openstack.nova.api.ExtensionsResource;
 import com.woorea.openstack.nova.api.FlavorsResource;
 import com.woorea.openstack.nova.api.ImagesResource;
@@ -61,6 +62,8 @@ public class Nova extends OpenStackClient {
 
     private final HypervisorsExtension hypervisor;
 
+    private final AvailabilityZoneResource availabilityZones;
+
     public Nova(String endpoint, OpenStackClientConnector connector) {
         super(endpoint, connector);
         extensions = new ExtensionsResource(this);
@@ -76,6 +79,7 @@ public class Nova extends OpenStackClient {
         quotaSets = new QuotaSetsResource(this);
         hosts = new HostsExtension(this);
         hypervisor = new HypervisorsExtension(this);
+        availabilityZones = new AvailabilityZoneResource(this);
     }
 
     public Nova(String endpoint) {
@@ -132,5 +136,9 @@ public class Nova extends OpenStackClient {
 
     public HypervisorsExtension hypervisors() {
         return hypervisor;
+    }
+
+    public AvailabilityZoneResource availabilityZones() {
+        return availabilityZones;
     }
 }
