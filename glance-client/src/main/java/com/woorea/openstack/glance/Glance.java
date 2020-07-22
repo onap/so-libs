@@ -35,11 +35,11 @@ public class Glance extends OpenStackClient {
         this(endpoint, null);
     }
 
-    public final ImagesResource images() {
+    public ImagesResource images() {
         return images;
     }
 
-    public final SharedImagesResource sharedImages() {
+    public SharedImagesResource sharedImages() {
         return sharedImages;
     }
 }
