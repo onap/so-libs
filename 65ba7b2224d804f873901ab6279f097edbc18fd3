@@ -22,6 +22,30 @@
       "revId": "65ba7b2224d804f873901ab6279f097edbc18fd3",
       "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "64acc538_b52778b5",
+        "filename": "pom.xml",
+        "patchSetId": 3
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 6729
+      },
+      "writtenOn": "2020-07-27T07:33:41Z",
+      "side": 1,
+      "message": "If we would add this to java11 profile, than when we try to build project with JDK 11 with profile java7, build will fail. By adding this to global dependencies, we ensure than project can be build on JDK 11 or newer.",
+      "parentUuid": "56313fd9_1228dfb8",
+      "range": {
+        "startLine": 228,
+        "startChar": 4,
+        "endLine": 232,
+        "endChar": 17
+      },
+      "revId": "65ba7b2224d804f873901ab6279f097edbc18fd3",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
     }
   ]
 }
