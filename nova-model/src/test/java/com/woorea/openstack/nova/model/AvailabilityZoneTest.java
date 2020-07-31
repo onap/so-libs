@@ -55,6 +55,5 @@ public class AvailabilityZoneTest {
 
         Assert.assertEquals("zoneName1", az.getName());
         Assert.assertTrue(az.getState().isAvailable());
-        Assert.assertNull(az.getHosts());
     }
 }

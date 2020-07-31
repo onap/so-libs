@@ -30,8 +30,6 @@ public class AvailabilityZone implements Serializable {
     @JsonProperty("zoneState")
     private AvailabilityZoneState state;
 
-    private String hosts;
-
     public String getName() {
         return name;
     }
@@ -46,14 +44,6 @@ public class AvailabilityZone implements Serializable {
 
     public void setState(AvailabilityZoneState state) {
         this.state = state;
-    }
-
-    public String getHosts() {
-        return hosts;
-    }
-
-    public void setHosts(String hosts) {
-        this.hosts = hosts;
     }
 
 }
