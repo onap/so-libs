@@ -32,8 +32,8 @@ public class AvailabilityZoneTest {
 
     private static final String EOL = System.lineSeparator();
 
-    private static final String JSON_FULL = "{" + EOL + "\"hosts\": null," + EOL + "\"zoneName\": \"zoneName1\"," + EOL
-            + "\"zoneState\": {" + EOL + "\"available\": true" + EOL + "}" + EOL + "}";
+    private static final String JSON_FULL = "{" + EOL + "\"zoneName\": \"zoneName1\"," + EOL + "\"zoneState\": {" + EOL
+            + "\"available\": true" + EOL + "}" + EOL + "}";
 
     private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT)
             .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
@@ -55,6 +55,5 @@ public class AvailabilityZoneTest {
 
         Assert.assertEquals("zoneName1", az.getName());
         Assert.assertTrue(az.getState().isAvailable());
-        Assert.assertNull(az.getHosts());
     }
 }

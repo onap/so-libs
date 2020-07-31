@@ -34,10 +34,9 @@ public class AvailabilityZonesTest {
     private static final String EOL = System.lineSeparator();
 
     private static final String JSON_FULL = "{" + EOL + "\"availabilityZoneInfo\": [" + EOL + "{" + EOL
-            + "\"hosts\": null," + EOL + "\"zoneName\": \"zoneName1\"," + EOL + "\"zoneState\": {" + EOL
-            + "\"available\": true" + EOL + "}" + EOL + "}," + EOL + "{" + EOL + "\"hosts\": null," + EOL
-            + "\"zoneName\": \"zoneName2\"," + EOL + "\"zoneState\": {" + EOL + "\"available\": true" + EOL + "}" + EOL
-            + "}" + EOL + "]" + EOL + "}";
+            + "\"zoneName\": \"zoneName1\"," + EOL + "\"zoneState\": {" + EOL + "\"available\": true" + EOL + "}" + EOL
+            + "}," + EOL + "{" + EOL + "\"zoneName\": \"zoneName2\"," + EOL + "\"zoneState\": {" + EOL
+            + "\"available\": true" + EOL + "}" + EOL + "}" + EOL + "]" + EOL + "}";
 
     private ObjectMapper objectMapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT)
             .enable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
