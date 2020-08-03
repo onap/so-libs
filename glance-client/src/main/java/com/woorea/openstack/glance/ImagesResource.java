@@ -94,7 +94,7 @@ public class ImagesResource {
     public class List extends OpenStackRequest<Images> {
 
         public List(boolean detail) {
-            super(client, HttpMethod.GET, detail ? IMAGES + "detail" : "images", null, Images.class);
+            super(client, HttpMethod.GET, detail ? IMAGES + "detail" : "/images", null, Images.class);
         }
     }
 
