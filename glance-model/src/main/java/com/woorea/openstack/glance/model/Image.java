@@ -129,6 +129,12 @@ public class Image implements Serializable {
     @JsonProperty("meta")
     private String meta;
 
+    @JsonProperty("os_version")
+    private String osVersion;
+
+    @JsonProperty("os_distro")
+    private String osDistro;
+
     @JsonProperty("tags")
     private List<String> tags;
 
@@ -506,6 +512,22 @@ public class Image implements Serializable {
             properties = new HashMap<>();
         }
         return properties;
+    }
+
+    public String getOsVersion() {
+        return osVersion;
+    }
+
+    public void setOsVersion(String osVersion) {
+        this.osVersion = osVersion;
+    }
+
+    public String getOsDistro() {
+        return osDistro;
+    }
+
+    public void setOsDistro(String osDistro) {
+        this.osDistro = osDistro;
     }
 
     /*
