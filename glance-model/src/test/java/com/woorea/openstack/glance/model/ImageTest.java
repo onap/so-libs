@@ -36,7 +36,8 @@ public class ImageTest {
     private static final String EOL = System.lineSeparator();
 
     private static final String JSON_FULL = "{" + EOL + "    \"id\" : \"id\"," + EOL + "    \"uri\" : \"uri\"," + EOL
-            + "    \"name\" : \"name\"," + EOL + "    \"size\" : 43," + EOL + "    \"checksum\" : \"checksum\"," + EOL
+            + "    \"name\" : \"name\"," + EOL + "    \"os_distro\" : \"gw\"," + EOL + "    \"os_version\" : \"1\","
+            + EOL + "    \"size\" : 43," + EOL + "    \"checksum\" : \"checksum\"," + EOL
             + "    \"status\" : \"status\"," + EOL + "    \"owner\" : \"owner\"," + EOL + "    \"properties\" : {" + EOL
             + "      \"properties-k1\" : \"properties-v1\"," + EOL + "      \"properties-k2\" : \"properties-v2\"" + EOL
             + "    }," + EOL + "    \"public\" : false," + EOL + "    \"deleted\" : false," + EOL
@@ -128,5 +129,12 @@ public class ImageTest {
         Calendar updatedAt = image.getUpdatedAt();
         Assert.assertNotNull(updatedAt);
         image.setUpdatedAt(updatedAt);
+
+        String distro = image.getOsDistro();
+        Assert.assertNotNull(distro);
+
+        String version = image.getOsVersion();
+        Assert.assertNotNull(version);
+
     }
 }
