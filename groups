@@ -1,4 +1,5 @@
 # UUID                                                                  	Group Name
 #
+46965ae07a2456fa13b13961bd5b6f79e0edab01                                	saml/onap-gerrit-so-libs-committers
 daebbf523be390041a1a9c0e340a6d833aae5043                                	GitHub Replication
 ldap:cn=onap-gerrit-so-libs-committers,ou=Groups,dc=freestandards,dc=org	ldap/onap-gerrit-so-libs-committers
