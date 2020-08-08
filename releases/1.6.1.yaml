@@ -1,0 +1,6 @@
+---
+distribution_type: 'maven'
+version: '1.6.1'
+project: 'so/libs'
+log_dir: 'so-libs-maven-stage-master/412/'
+ref: 'bb017a08b05d5d4f0e938538620ae8d335f85294'
