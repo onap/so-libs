@@ -12,7 +12,7 @@
 
   <groupId>org.onap.so.libs</groupId>
   <artifactId>openstack-java-sdk</artifactId>
-  <version>1.6.1-SNAPSHOT</version>
+  <version>1.6.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>so-libs</name>
   <description>OpenStack Java SDK</description>
@@ -184,6 +184,12 @@
           </plugin>
         </plugins>
       </build>
+      <activation>
+        <property>
+          <name>m2e.version</name>
+        </property>
+        <activeByDefault>true</activeByDefault>
+      </activation>
     </profile>
     <profile>
       <id>java7</id>
@@ -201,12 +207,6 @@
           </plugin>
         </plugins>
       </build>
-      <activation>
-        <property>
-          <name>m2e.version</name>
-        </property>
-        <activeByDefault>true</activeByDefault>
-      </activation>
     </profile>
   </profiles>
   <dependencies>
