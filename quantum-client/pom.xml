@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.onap.so.libs</groupId>
     <artifactId>openstack-java-sdk</artifactId>
-    <version>1.6.1-SNAPSHOT</version>
+    <version>1.6.2-SNAPSHOT</version>
   </parent>
   <groupId>org.onap.so.libs.openstack-java-sdk</groupId>
   <artifactId>quantum-client</artifactId>
