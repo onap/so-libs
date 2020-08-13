@@ -12,7 +12,7 @@
 
   <groupId>org.onap.so.libs</groupId>
   <artifactId>openstack-java-sdk</artifactId>
-  <version>1.6.2-SNAPSHOT</version>
+  <version>1.7.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>so-libs</name>
   <description>OpenStack Java SDK</description>
