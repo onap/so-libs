@@ -268,7 +268,21 @@ public class Authentication implements Serializable {
 
         }
 
+        public static final class System {
+
+            private boolean all;
+
+            public boolean isAll() {
+                return all;
+            }
+
+            public void setAll(boolean all) {
+                this.all = all;
+            }
+        }
+
         private Project project;
+        private com.woorea.openstack.keystone.v3.model.Authentication.Scope.System system;
 
         public Project getProject() {
             return project;
@@ -276,6 +290,14 @@ public class Authentication implements Serializable {
 
         public void setProject(Project project) {
             this.project = project;
+        }
+
+        public com.woorea.openstack.keystone.v3.model.Authentication.Scope.System getSystem() {
+            return system;
+        }
+
+        public void setSystem(com.woorea.openstack.keystone.v3.model.Authentication.Scope.System system) {
+            this.system = system;
         }
 
     }
