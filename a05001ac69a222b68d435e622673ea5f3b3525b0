@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3274347d_422b0844",
+        "filename": "INFO.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 481
+      },
+      "writtenOn": "2020-10-05T17:22:07Z",
+      "side": 1,
+      "message": "multiple repos is no longer supported.. please remove these and just mention \"so/libs\"",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 18
+      },
+      "revId": "a05001ac69a222b68d435e622673ea5f3b3525b0",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
