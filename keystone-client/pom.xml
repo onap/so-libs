@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.onap.so.libs</groupId>
     <artifactId>openstack-java-sdk</artifactId>
-    <version>1.7.1-SNAPSHOT</version>
+    <version>1.8.0</version>
   </parent>
   <groupId>org.onap.so.libs.openstack-java-sdk</groupId>
   <artifactId>keystone-client</artifactId>
