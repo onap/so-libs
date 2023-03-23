@@ -1,61 +1,55 @@
 .. This work is licensed under a Creative Commons Attribution 4.0 International License.
 .. http://creativecommons.org/licenses/by/4.0
-.. Copyright 2017 Huawei Intellectual Property.  All rights reserved.
-.. _release_notes:
+.. Copyright 2018 Huawei Technologies Co., Ltd.
+.. _so_libs:
 
-SO Release Notes
-================
+ONAP SO/libs Documentation
+===========================
+    Openstack Java SDK v2.0 used by SO components.
 
-Openstack Java SDK v2.0 used by SO components.
-
-Version: 1.1.0
---------------
-
-
-:Release Date: 2017-11-16
-
-
-
-**Included Features**
-
-*Ceilometer client*:
+**Ceilometer client**:
     Ceilometer client will collect, normalise and transform data produced by OpenStack services. The data it produces is intended to be used to create different views and help solve various telemetry use cases.
     
-*Glance client*: 
+**Glance client**: 
     Glance client discover, register, and retrieve virtual machine images.it provide RESTful client to query of VM image metadata as well as retrieval of the actual image.
     
-*Heat client*:
+**Heat client**:
     Heat client used for orchestrating the infrastructure resources for a cloud application based on templates in the form of text files that can be treated like code.
     
-*Keystone client*:
+**Keystone client**:
     Keystone client provides API client authentication, service discovery, and distributed multi-tenant authorization.
     
-*Nova client*:
+**Nova client**:
     To implement services and associated libraries to provide massively scalable, on demand, self service access to compute resources, including bare metal, virtual machines, and containers.
     
-*Openstack client* :
+**Openstack client** :
     Provide a single command-line interface for OpenStack services with a uniform command set and format.
     
-*Quantum client* :
+**Quantum client** :
     It provides API for delivering networking-as-a-service (NaaS) in virtual compute environments.
 
-*Swift client* :
+**Swift client** :
     Swift client provides functionalities for object storage in OpenStack. Swift is ideal for storing unstructured data that can grow without bound.
 
 
+Building SO/libs
+-----------------
 
-**Deprecation Notes**
+Build software with unit tests
+------------------------------
 
-There is a MSO 1.0.0 SO implementation existing in the pre-R1 ONAP Gerrit system.  
-The MSO1.0.0 is deprecated by the R1 release and the current release is built over this release.
-The Gerrit repos of mso/* are voided and already locked as read-only.
-Following are the deprecated SO projects in gerrit repo:
+.. code-block:: bash
 
-* mso/libs
+  cd $HOME/onap/workspace/SO/libs
+
+  $HOME/onap/apache-maven-3.3.9/bin/mvn -s $HOME/onap/.m2/settings.xml clean install
 
 
-**Other**
+Build software without unit tests
+----------------------------------
 
-===========
+.. code-block:: bash
 
-End of Release Notes
+  cd $HOME/onap/workspace/SO/libs
+
+  $HOME/onap/apache-maven-3.3.9/bin/mvn -s $HOME/onap/.m2/settings.xml -DskipTests -Dmaven.test.skip=true clean install
