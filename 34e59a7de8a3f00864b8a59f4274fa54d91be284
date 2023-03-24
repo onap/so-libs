@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ea73e28f_c6d815af",
+        "filename": "pom.xml",
+        "patchSetId": 6
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 2701
+      },
+      "writtenOn": "2023-03-24T13:51:12Z",
+      "side": 1,
+      "message": "Why we change to snaphot version?",
+      "range": {
+        "startLine": 9,
+        "startChar": 13,
+        "endLine": 9,
+        "endChar": 27
+      },
+      "revId": "34e59a7de8a3f00864b8a59f4274fa54d91be284",
+      "serverId": "14b4e41f-c4e3-4fb9-9955-6a9b5656895a",
+      "unresolved": true
+    }
+  ]
+}
