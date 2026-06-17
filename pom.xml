@@ -24,8 +24,6 @@
     <siteNexusPath>/content/sites/site/org/onap/so/libs/${project.version}</siteNexusPath>
     <format.skipValidate>false</format.skipValidate>
     <format.skipExecute>true</format.skipExecute>
-    <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    <jacoco.version>0.8.5</jacoco.version>
   </properties>
   <distributionManagement>
     <repository>
@@ -102,14 +100,14 @@
     <repository>
       <id>central</id>
       <name>Maven 2 repository</name>
-      <url>http://repo2.maven.org/maven2/</url>
+      <url>https://repo1.maven.org/maven2/</url>
     </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
       <id>central</id>
       <name>Maven 2 plugin repository</name>
-      <url>http://repo2.maven.org/maven2/</url>
+      <url>https://repo1.maven.org/maven2/</url>
     </pluginRepository>
   </pluginRepositories>
   <dependencyManagement>
@@ -313,9 +311,9 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.codehaus.gmaven</groupId>
-        <artifactId>groovy-maven-plugin</artifactId>
-        <version>2.0</version>
+        <groupId>org.codehaus.gmavenplus</groupId>
+        <artifactId>gmavenplus-plugin</artifactId>
+        <version>3.0.2</version>
         <executions>
           <!-- set absolute base path from super pom -->
           <execution>
@@ -325,36 +323,45 @@
               <goal>execute</goal>
             </goals>
             <configuration>
-              <source>
-                <![CDATA[
-                    import java.io.File;
+              <scripts>
+                <script>
+                  <![CDATA[
+                    import java.io.File
                     log.info('## define projects super pom absolute path through basepath_marker')
-                    String p = "basepath_marker";
-                    File f = null;
+                    String p = "basepath_marker"
+                    File f = null
                     if( p != null ) {
                         def _max_child_poms = 0
                         while( _max_child_poms++ < 5 ) {
-                            f = new File( p );
+                            f = new File( p )
                             if( f.exists() ) {
-                                break;
-                            }   
-                            p = "../" + p;
+                                break
+                            }
+                            p = "../" + p
                         }
                     }
                     if( f != null ) {
-                        String basePath = f.getCanonicalPath();
-                        basePath = basePath.substring( 0, basePath.lastIndexOf( File.separator ) ); 
-                        project.properties['base-path'] = basePath.replace( '\\' , '/');
-                        log.info(' - used base path = ' + project.properties['base-path'] );
+                        String basePath = f.getCanonicalPath()
+                        basePath = basePath.substring( 0, basePath.lastIndexOf( File.separator ) )
+                        project.properties['base-path'] = basePath.replace( '\\' , '/')
+                        log.info(' - used base path = ' + project.properties['base-path'] )
                     } else {
-                        log.error( 'Could not find basepath_marker marker file!' );
-                        System.stop( 0 );
+                        log.error( 'Could not find basepath_marker marker file!' )
+                        throw new RuntimeException('Could not find basepath_marker marker file!')
                     }
-                ]]>
-              </source>
+                  ]]>
+                </script>
+              </scripts>
             </configuration>
           </execution>
         </executions>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.groovy</groupId>
+            <artifactId>groovy</artifactId>
+            <version>4.0.15</version>
+          </dependency>
+        </dependencies>
       </plugin>
       <plugin>
         <groupId>net.revelc.code.formatter</groupId>
@@ -416,29 +423,6 @@
             <version>2.9.8</version>
           </dependency>
         </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco.version}</version>
-        <executions>
-          <execution>
-            <id>prepare-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <goals>
-              <goal>report</goal>
-            </goals>
-            <configuration>
-              <dataFile>${project.build.directory}/code-coverage/jacoco.exec</dataFile>
-              <outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
