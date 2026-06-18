@@ -17,7 +17,6 @@
 package com.woorea.openstack.nova.model;
 
 import java.io.Serializable;
-import javax.xml.bind.annotation.XmlElement;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
@@ -37,7 +36,6 @@ public class SecurityGroupRuleForCreate implements Serializable {
     @JsonProperty("to_port")
     private Integer toPort;
 
-    @XmlElement
     private String cidr;
 
     @JsonProperty("group_id")
