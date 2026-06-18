@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -56,15 +56,15 @@ public class ContainerTest {
         container.toString();
 
         Long bytesUsed = container.getBytesUsed();
-        Assert.assertNotNull(bytesUsed);
+        Assertions.assertNotNull(bytesUsed);
         container.setBytesUsed(bytesUsed);
 
         Integer objectCount = container.getObjectCount();
-        Assert.assertNotNull(objectCount);
+        Assertions.assertNotNull(objectCount);
         container.setObjectCount(objectCount);
 
         String name = container.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         container.setName(name);
     }
 }

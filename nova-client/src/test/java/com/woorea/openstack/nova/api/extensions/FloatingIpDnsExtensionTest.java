@@ -20,7 +20,7 @@
 package com.woorea.openstack.nova.api.extensions;
 
 import com.woorea.openstack.nova.model.FloatingIpDomain;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FloatingIpDnsExtensionTest {
 

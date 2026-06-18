@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -62,28 +62,28 @@ public class VolumeForCreateTest {
         volumeforcreate.toString();
 
         Map<String, String> metadata = volumeforcreate.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
         volumeforcreate.setMetadata(metadata);
 
         Integer snapshotId = volumeforcreate.getSnapshotId();
-        Assert.assertNotNull(snapshotId);
+        Assertions.assertNotNull(snapshotId);
         volumeforcreate.setSnapshotId(snapshotId);
 
         Integer size = volumeforcreate.getSize();
-        Assert.assertNotNull(size);
+        Assertions.assertNotNull(size);
         volumeforcreate.setSize(size);
 
         String name = volumeforcreate.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         volumeforcreate.setName(name);
 
         String description = volumeforcreate.getDescription();
-        Assert.assertNotNull(description);
+        Assertions.assertNotNull(description);
         volumeforcreate.setDescription(description);
 
         String availabilityZone = volumeforcreate.getAvailabilityZone();
-        Assert.assertNotNull(availabilityZone);
+        Assertions.assertNotNull(availabilityZone);
         volumeforcreate.setAvailabilityZone(availabilityZone);
     }
 }

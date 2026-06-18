@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.quantum.model.Subnet.IpVersion;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -67,46 +67,46 @@ public class SubnetTest {
         subnet.toString();
 
         String gw = subnet.getGw();
-        Assert.assertNotNull(gw);
+        Assertions.assertNotNull(gw);
         subnet.setGw(gw);
 
         List<String> dnsNames = subnet.getDnsNames();
-        Assert.assertNotNull(dnsNames);
-        Assert.assertEquals(2, dnsNames.size());
+        Assertions.assertNotNull(dnsNames);
+        Assertions.assertEquals(2, dnsNames.size());
         subnet.setDnsNames(dnsNames);
 
         List<Routes> hostRoutes = subnet.getHostRoutes();
-        Assert.assertNotNull(hostRoutes);
-        Assert.assertEquals(2, hostRoutes.size());
+        Assertions.assertNotNull(hostRoutes);
+        Assertions.assertEquals(2, hostRoutes.size());
         subnet.setHostRoutes(hostRoutes);
 
         String name = subnet.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         subnet.setName(name);
 
         String tenantId = subnet.getTenantId();
-        Assert.assertNotNull(tenantId);
+        Assertions.assertNotNull(tenantId);
         subnet.setTenantId(tenantId);
 
         String cidr = subnet.getCidr();
-        Assert.assertNotNull(cidr);
+        Assertions.assertNotNull(cidr);
         subnet.setCidr(cidr);
 
         String networkId = subnet.getNetworkId();
-        Assert.assertNotNull(networkId);
+        Assertions.assertNotNull(networkId);
         subnet.setNetworkId(networkId);
 
         Boolean enableDHCP = subnet.getEnableDHCP();
-        Assert.assertNotNull(enableDHCP);
+        Assertions.assertNotNull(enableDHCP);
         subnet.setEnableDHCP(enableDHCP);
 
         IpVersion ipversion = subnet.getIpversion();
-        Assert.assertNotNull(ipversion);
+        Assertions.assertNotNull(ipversion);
         subnet.setIpversion(ipversion);
 
         List<Pool> list = subnet.getList();
-        Assert.assertNotNull(list);
-        Assert.assertEquals(2, list.size());
+        Assertions.assertNotNull(list);
+        Assertions.assertEquals(2, list.size());
         subnet.setList(list);
     }
 }

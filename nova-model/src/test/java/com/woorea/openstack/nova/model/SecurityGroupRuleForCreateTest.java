@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -61,27 +61,27 @@ public class SecurityGroupRuleForCreateTest {
         securitygroupruleforcreate.toString();
 
         String parentGroupId = securitygroupruleforcreate.getParentGroupId();
-        Assert.assertNotNull(parentGroupId);
+        Assertions.assertNotNull(parentGroupId);
         securitygroupruleforcreate.setParentGroupId(parentGroupId);
 
         String ipProtocol = securitygroupruleforcreate.getIpProtocol();
-        Assert.assertNotNull(ipProtocol);
+        Assertions.assertNotNull(ipProtocol);
         securitygroupruleforcreate.setIpProtocol(ipProtocol);
 
         String groupId = securitygroupruleforcreate.getGroupId();
-        Assert.assertNotNull(groupId);
+        Assertions.assertNotNull(groupId);
         securitygroupruleforcreate.setGroupId(groupId);
 
         Integer fromPort = securitygroupruleforcreate.getFromPort();
-        Assert.assertNotNull(fromPort);
+        Assertions.assertNotNull(fromPort);
         securitygroupruleforcreate.setFromPort(fromPort);
 
         String cidr = securitygroupruleforcreate.getCidr();
-        Assert.assertNotNull(cidr);
+        Assertions.assertNotNull(cidr);
         securitygroupruleforcreate.setCidr(cidr);
 
         Integer toPort = securitygroupruleforcreate.getToPort();
-        Assert.assertNotNull(toPort);
+        Assertions.assertNotNull(toPort);
         securitygroupruleforcreate.setToPort(toPort);
     }
 }

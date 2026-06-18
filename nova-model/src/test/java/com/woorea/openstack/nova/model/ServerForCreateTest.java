@@ -27,8 +27,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.ServerForCreate.SecurityGroup;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -73,70 +73,70 @@ public class ServerForCreateTest {
         serverforcreate.toString();
 
         Map<String, String> metadata = serverforcreate.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
         serverforcreate.setMetadata(metadata);
 
         Integer max = serverforcreate.getMax();
-        Assert.assertNotNull(max);
+        Assertions.assertNotNull(max);
         serverforcreate.setMax(max);
 
         List<NetworkForCreate> networks = serverforcreate.getNetworks();
-        Assert.assertNotNull(networks);
-        Assert.assertEquals(2, networks.size());
+        Assertions.assertNotNull(networks);
+        Assertions.assertEquals(2, networks.size());
         serverforcreate.setNetworks(networks);
 
         String userData = serverforcreate.getUserData();
-        Assert.assertNotNull(userData);
+        Assertions.assertNotNull(userData);
         serverforcreate.setUserData(userData);
 
         Integer min = serverforcreate.getMin();
-        Assert.assertNotNull(min);
+        Assertions.assertNotNull(min);
         serverforcreate.setMin(min);
 
         List<PersonalityFile> personality = serverforcreate.getPersonality();
-        Assert.assertNotNull(personality);
-        Assert.assertEquals(2, personality.size());
+        Assertions.assertNotNull(personality);
+        Assertions.assertEquals(2, personality.size());
         serverforcreate.setPersonality(personality);
 
         String name = serverforcreate.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         serverforcreate.setName(name);
 
         String flavorRef = serverforcreate.getFlavorRef();
-        Assert.assertNotNull(flavorRef);
+        Assertions.assertNotNull(flavorRef);
         serverforcreate.setFlavorRef(flavorRef);
 
         String keyName = serverforcreate.getKeyName();
-        Assert.assertNotNull(keyName);
+        Assertions.assertNotNull(keyName);
         serverforcreate.setKeyName(keyName);
 
         String adminPass = serverforcreate.getAdminPass();
-        Assert.assertNotNull(adminPass);
+        Assertions.assertNotNull(adminPass);
         serverforcreate.setAdminPass(adminPass);
 
         String imageRef = serverforcreate.getImageRef();
-        Assert.assertNotNull(imageRef);
+        Assertions.assertNotNull(imageRef);
         serverforcreate.setImageRef(imageRef);
 
         String accessIPv6 = serverforcreate.getAccessIPv6();
-        Assert.assertNotNull(accessIPv6);
+        Assertions.assertNotNull(accessIPv6);
         serverforcreate.setAccessIPv6(accessIPv6);
 
         String diskConfig = serverforcreate.getDiskConfig();
-        Assert.assertNotNull(diskConfig);
+        Assertions.assertNotNull(diskConfig);
         serverforcreate.setDiskConfig(diskConfig);
 
         List<SecurityGroup> securityGroups = serverforcreate.getSecurityGroups();
-        Assert.assertNotNull(securityGroups);
-        Assert.assertEquals(2, securityGroups.size());
+        Assertions.assertNotNull(securityGroups);
+        Assertions.assertEquals(2, securityGroups.size());
 
         String availabilityZone = serverforcreate.getAvailabilityZone();
-        Assert.assertNotNull(availabilityZone);
+        Assertions.assertNotNull(availabilityZone);
         serverforcreate.setAvailabilityZone(availabilityZone);
 
         String accessIPv4 = serverforcreate.getAccessIPv4();
-        Assert.assertNotNull(accessIPv4);
+        Assertions.assertNotNull(accessIPv4);
         serverforcreate.setAccessIPv4(accessIPv4);
     }
 }

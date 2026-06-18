@@ -23,9 +23,9 @@ package com.woorea.openstack.nova.api;
 import com.woorea.openstack.base.client.OpenStackClientMockUtils;
 import com.woorea.openstack.nova.Nova;
 import com.woorea.openstack.nova.model.*;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import java.util.Collections;
 
@@ -44,7 +44,7 @@ public class ServersResourceTest {
     public static final String CONSOLE_TYPE = "console_type";
     private ServersResource serversResource = null;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         Nova client = new Nova(NOVA_ENDPOINT, OpenStackClientMockUtils.getInstance().getConnector());
         serversResource = client.servers();
@@ -56,7 +56,7 @@ public class ServersResourceTest {
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Servers.class, expectedServers);
         final ServersResource.List list = serversResource.list(true);
         final Servers actualServers = list.execute();
-        Assert.assertEquals(expectedServers, actualServers);
+        Assertions.assertEquals(expectedServers, actualServers);
     }
 
     @Test
@@ -66,7 +66,7 @@ public class ServersResourceTest {
         ServerForCreate createServer = createServerForCreate();
         final ServersResource.Boot boot = serversResource.boot(createServer);
         final Server actualServer = boot.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class ServersResourceTest {
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
         final ServersResource.Show show = serversResource.show(SERVER_KEY);
         final Server actualServer = show.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class ServersResourceTest {
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Metadata.class, expectedServer);
         final ServersResource.ShowMetadata show = serversResource.showMetadata(SERVER_KEY);
         final Metadata actualServer = show.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ServersResourceTest {
         final ServersResource.CreateOrUpdateMetadata metadataCreateUpdate =
                 serversResource.createOrUpdateMetadata(SERVER_KEY, metadata);
         final Metadata actualServer = metadataCreateUpdate.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -106,7 +106,7 @@ public class ServersResourceTest {
         final ServersResource.ReplaceMetadata metadataCreateUpdate =
                 serversResource.replaceMetadata(SERVER_KEY, metadata);
         final Metadata actualServer = metadataCreateUpdate.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -129,7 +129,7 @@ public class ServersResourceTest {
         final ServersResource.UpdateServer metadataCreateUpdate =
                 serversResource.update(SERVER_NAME, SERVER_KEY, I_PV_4, "");
         final Server actualServer = metadataCreateUpdate.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -139,7 +139,7 @@ public class ServersResourceTest {
         final ServersResource.ChangePasswordAction metadataCreateUpdate =
                 serversResource.changePassword(SERVER_NAME, SERVER_NAME);
         final Server actualServer = metadataCreateUpdate.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -155,7 +155,7 @@ public class ServersResourceTest {
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
         final ServersResource.RebuildAction metadataCreateUpdate = serversResource.rebuild(SERVER_NAME, rebuild);
         final Server actualServer = metadataCreateUpdate.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -165,7 +165,7 @@ public class ServersResourceTest {
         final ServersResource.ResizeAction metadataCreateUpdate =
                 serversResource.resize(SERVER_NAME, SERVER_FLAVOR, DISK_CONFIG);
         final Server actualServer = metadataCreateUpdate.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -174,7 +174,7 @@ public class ServersResourceTest {
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
         final ServersResource.ConfirmResizeAction metadataCreateUpdate = serversResource.confirmResize(SERVER_NAME);
         final Server actualServer = metadataCreateUpdate.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -183,7 +183,7 @@ public class ServersResourceTest {
         OpenStackClientMockUtils.getInstance().mockRequestResponse(Server.class, expectedServer);
         final ServersResource.RevertResizeAction metadataCreateUpdate = serversResource.revertResize(SERVER_NAME);
         final Server actualServer = metadataCreateUpdate.execute();
-        Assert.assertEquals(expectedServer, actualServer);
+        Assertions.assertEquals(expectedServer, actualServer);
     }
 
     @Test
@@ -212,7 +212,7 @@ public class ServersResourceTest {
         final ServersResource.GetVncConsoleServer metadataCreateUpdate =
                 serversResource.getVncConsole(SERVER_NAME, CONSOLE_TYPE);
         final ServerAction.VncConsole actualConsole = metadataCreateUpdate.execute();
-        Assert.assertEquals(console, actualConsole);
+        Assertions.assertEquals(console, actualConsole);
     }
 
     @Test
@@ -222,7 +222,7 @@ public class ServersResourceTest {
         final ServersResource.GetConsoleOutputServer metadataCreateUpdate =
                 serversResource.getConsoleOutput(SERVER_NAME, Integer.MAX_VALUE);
         final ServerAction.ConsoleOutput actualConsole = metadataCreateUpdate.execute();
-        Assert.assertEquals(console, actualConsole);
+        Assertions.assertEquals(console, actualConsole);
     }
 
     @Test
@@ -318,7 +318,7 @@ public class ServersResourceTest {
         final ServersResource.ListVolumeAttachments metadataCreateUpdate =
                 serversResource.listVolumeAttachments(SERVER_NAME);
         final VolumeAttachments actualVolumeAttachments = metadataCreateUpdate.execute();
-        Assert.assertEquals(volumeAttachments, actualVolumeAttachments);
+        Assertions.assertEquals(volumeAttachments, actualVolumeAttachments);
     }
 
     @Test
@@ -328,7 +328,7 @@ public class ServersResourceTest {
         final ServersResource.ShowVolumeAttachment metadataCreateUpdate =
                 serversResource.showVolumeAttachment(SERVER_NAME, "volume_id");
         final VolumeAttachment actualVolumeAttachment = metadataCreateUpdate.execute();
-        Assert.assertEquals(volumeAttachment, actualVolumeAttachment);
+        Assertions.assertEquals(volumeAttachment, actualVolumeAttachment);
     }
 
     private ServerForCreate createServerForCreate() {

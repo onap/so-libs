@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -70,84 +70,84 @@ public class NetworkTest {
         network.toString();
 
         String broadcast = network.getBroadcast();
-        Assert.assertNotNull(broadcast);
+        Assertions.assertNotNull(broadcast);
 
         String gatewayV6 = network.getGatewayV6();
-        Assert.assertNotNull(gatewayV6);
+        Assertions.assertNotNull(gatewayV6);
 
         String dns2 = network.getDns2();
-        Assert.assertNotNull(dns2);
+        Assertions.assertNotNull(dns2);
 
         String bridgeInterface = network.getBridgeInterface();
-        Assert.assertNotNull(bridgeInterface);
+        Assertions.assertNotNull(bridgeInterface);
 
         String dns1 = network.getDns1();
-        Assert.assertNotNull(dns1);
+        Assertions.assertNotNull(dns1);
 
         String cidrV6 = network.getCidrV6();
-        Assert.assertNotNull(cidrV6);
+        Assertions.assertNotNull(cidrV6);
 
         String deletedAt = network.getDeletedAt();
-        Assert.assertNotNull(deletedAt);
+        Assertions.assertNotNull(deletedAt);
 
         String vlan = network.getVlan();
-        Assert.assertNotNull(vlan);
+        Assertions.assertNotNull(vlan);
 
         String netmask = network.getNetmask();
-        Assert.assertNotNull(netmask);
+        Assertions.assertNotNull(netmask);
 
         String netmaskV6 = network.getNetmaskV6();
-        Assert.assertNotNull(netmaskV6);
+        Assertions.assertNotNull(netmaskV6);
 
         Boolean injected = network.getInjected();
-        Assert.assertNotNull(injected);
+        Assertions.assertNotNull(injected);
 
         String host = network.getHost();
-        Assert.assertNotNull(host);
+        Assertions.assertNotNull(host);
 
         String cidr = network.getCidr();
-        Assert.assertNotNull(cidr);
+        Assertions.assertNotNull(cidr);
 
         String id = network.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
 
         String projectId = network.getProjectId();
-        Assert.assertNotNull(projectId);
+        Assertions.assertNotNull(projectId);
 
         String vpnPublicAddress = network.getVpnPublicAddress();
-        Assert.assertNotNull(vpnPublicAddress);
+        Assertions.assertNotNull(vpnPublicAddress);
 
         String label = network.getLabel();
-        Assert.assertNotNull(label);
+        Assertions.assertNotNull(label);
 
         String priority = network.getPriority();
-        Assert.assertNotNull(priority);
+        Assertions.assertNotNull(priority);
 
         String vpnPublicPort = network.getVpnPublicPort();
-        Assert.assertNotNull(vpnPublicPort);
+        Assertions.assertNotNull(vpnPublicPort);
 
         String createdAt = network.getCreatedAt();
-        Assert.assertNotNull(createdAt);
+        Assertions.assertNotNull(createdAt);
 
         Boolean deleted = network.getDeleted();
-        Assert.assertNotNull(deleted);
+        Assertions.assertNotNull(deleted);
 
         String rxtxBase = network.getRxtxBase();
-        Assert.assertNotNull(rxtxBase);
+        Assertions.assertNotNull(rxtxBase);
 
         String dhcpStart = network.getDhcpStart();
-        Assert.assertNotNull(dhcpStart);
+        Assertions.assertNotNull(dhcpStart);
 
         Boolean multiHost = network.getMultiHost();
-        Assert.assertNotNull(multiHost);
+        Assertions.assertNotNull(multiHost);
 
         String bridge = network.getBridge();
-        Assert.assertNotNull(bridge);
+        Assertions.assertNotNull(bridge);
 
         String gateway = network.getGateway();
-        Assert.assertNotNull(gateway);
+        Assertions.assertNotNull(gateway);
 
         String updatedAt = network.getUpdatedAt();
-        Assert.assertNotNull(updatedAt);
+        Assertions.assertNotNull(updatedAt);
     }
 }

@@ -22,7 +22,7 @@ package com.woorea.openstack.heat;
 import com.woorea.openstack.base.client.OpenStackClient;
 import com.woorea.openstack.heat.model.CreateStackParam;
 import com.woorea.openstack.heat.model.UpdateStackParam;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class StackResourceTest {
 

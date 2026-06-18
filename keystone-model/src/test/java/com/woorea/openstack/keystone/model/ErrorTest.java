@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -57,12 +57,12 @@ public class ErrorTest {
         error.toString();
 
         Integer code = error.getCode();
-        Assert.assertNotNull(code);
+        Assertions.assertNotNull(code);
 
         String title = error.getTitle();
-        Assert.assertNotNull(title);
+        Assertions.assertNotNull(title);
 
         String message = error.getMessage();
-        Assert.assertNotNull(message);
+        Assertions.assertNotNull(message);
     }
 }

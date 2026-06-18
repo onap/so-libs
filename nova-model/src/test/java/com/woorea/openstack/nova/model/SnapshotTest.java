@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,24 +59,24 @@ public class SnapshotTest {
         snapshot.toString();
 
         String createdAt = snapshot.getCreatedAt();
-        Assert.assertNotNull(createdAt);
+        Assertions.assertNotNull(createdAt);
 
         Integer size = snapshot.getSize();
-        Assert.assertNotNull(size);
+        Assertions.assertNotNull(size);
 
         String name = snapshot.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
 
         String volumeId = snapshot.getVolumeId();
-        Assert.assertNotNull(volumeId);
+        Assertions.assertNotNull(volumeId);
 
         String description = snapshot.getDescription();
-        Assert.assertNotNull(description);
+        Assertions.assertNotNull(description);
 
         String id = snapshot.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
 
         String status = snapshot.getStatus();
-        Assert.assertNotNull(status);
+        Assertions.assertNotNull(status);
     }
 }

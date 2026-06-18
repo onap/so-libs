@@ -31,8 +31,8 @@ import com.woorea.openstack.keystone.v3.model.Token.Service;
 import com.woorea.openstack.keystone.v3.model.Token.User;
 import java.util.Calendar;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -85,42 +85,42 @@ public class TokenTest {
         token.toString();
 
         List<String> methods = token.getMethods();
-        Assert.assertNotNull(methods);
-        Assert.assertEquals(2, methods.size());
+        Assertions.assertNotNull(methods);
+        Assertions.assertEquals(2, methods.size());
         token.setMethods(methods);
 
         List<Service> catalog = token.getCatalog();
-        Assert.assertNotNull(catalog);
-        Assert.assertEquals(2, catalog.size());
+        Assertions.assertNotNull(catalog);
+        Assertions.assertEquals(2, catalog.size());
         token.setCatalog(catalog);
 
         Domain domain = token.getDomain();
-        Assert.assertNotNull(domain);
+        Assertions.assertNotNull(domain);
         token.setDomain(domain);
 
         List<Role> roles = token.getRoles();
-        Assert.assertNotNull(roles);
-        Assert.assertEquals(2, roles.size());
+        Assertions.assertNotNull(roles);
+        Assertions.assertEquals(2, roles.size());
         token.setRoles(roles);
 
         Project project = token.getProject();
-        Assert.assertNotNull(project);
+        Assertions.assertNotNull(project);
         token.setProject(project);
 
         Calendar issuedAt = token.getIssuedAt();
-        Assert.assertNotNull(issuedAt);
+        Assertions.assertNotNull(issuedAt);
         token.setIssuedAt(issuedAt);
 
         String id = token.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         token.setId(id);
 
         User user = token.getUser();
-        Assert.assertNotNull(user);
+        Assertions.assertNotNull(user);
         token.setUser(user);
 
         Calendar expiresAt = token.getExpiresAt();
-        Assert.assertNotNull(expiresAt);
+        Assertions.assertNotNull(expiresAt);
         token.setExpiresAt(expiresAt);
     }
 }

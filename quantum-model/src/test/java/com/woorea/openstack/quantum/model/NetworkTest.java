@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -69,40 +69,40 @@ public class NetworkTest {
         network.toString();
 
         Boolean shared = network.getShared();
-        Assert.assertNotNull(shared);
+        Assertions.assertNotNull(shared);
         network.setShared(shared);
 
         String providerNetworkType = network.getProviderNetworkType();
-        Assert.assertNotNull(providerNetworkType);
+        Assertions.assertNotNull(providerNetworkType);
         network.setProviderNetworkType(providerNetworkType);
 
         Boolean routerExternal = network.getRouterExternal();
-        Assert.assertNotNull(routerExternal);
+        Assertions.assertNotNull(routerExternal);
         network.setRouterExternal(routerExternal);
 
         Integer providerSegmentationId = network.getProviderSegmentationId();
-        Assert.assertNotNull(providerSegmentationId);
+        Assertions.assertNotNull(providerSegmentationId);
         network.setProviderSegmentationId(providerSegmentationId);
 
         List<Segment> segments = network.getSegments();
-        Assert.assertNotNull(segments);
-        Assert.assertEquals(2, segments.size());
+        Assertions.assertNotNull(segments);
+        Assertions.assertEquals(2, segments.size());
         network.setSegments(segments);
 
         Boolean adminStateUp = network.getAdminStateUp();
-        Assert.assertNotNull(adminStateUp);
+        Assertions.assertNotNull(adminStateUp);
         network.setAdminStateUp(adminStateUp);
 
         String tenantId = network.getTenantId();
-        Assert.assertNotNull(tenantId);
+        Assertions.assertNotNull(tenantId);
         network.setTenantId(tenantId);
 
         String name = network.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         network.setName(name);
 
         String providerPhysicalNetwork = network.getProviderPhysicalNetwork();
-        Assert.assertNotNull(providerPhysicalNetwork);
+        Assertions.assertNotNull(providerPhysicalNetwork);
         network.setProviderPhysicalNetwork(providerPhysicalNetwork);
     }
 }

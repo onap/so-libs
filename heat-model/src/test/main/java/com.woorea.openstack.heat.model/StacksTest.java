@@ -19,7 +19,7 @@
  */
 package com.woorea.openstack.heat.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;

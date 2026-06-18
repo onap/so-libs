@@ -20,30 +20,39 @@
 package com.woorea.openstack.keystone.v3.api;
 
 import com.woorea.openstack.keystone.model.Role;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ProjectGroupRolesResourceTest {
 
     ProjectGroupRolesResource projectGroupRolesResource = new ProjectGroupRolesResource(null, "test");
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void createTest() throws Exception {
-        projectGroupRolesResource.create(new Role());
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> {
+            projectGroupRolesResource.create(new Role());
+        });
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void showTest() throws Exception {
-        projectGroupRolesResource.show("test");
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> {
+            projectGroupRolesResource.show("test");
+        });
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void updateTest() throws Exception {
-        projectGroupRolesResource.update("test", new Role());
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> {
+            projectGroupRolesResource.update("test", new Role());
+        });
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void deleteTest() throws Exception {
-        projectGroupRolesResource.delete("test");
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> {
+            projectGroupRolesResource.delete("test");
+        });
     }
 
 }

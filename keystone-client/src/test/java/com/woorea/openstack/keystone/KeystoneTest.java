@@ -20,9 +20,9 @@
 package com.woorea.openstack.keystone;
 
 import com.woorea.openstack.base.client.OpenStackClientConnector;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import javax.swing.table.TableStringConverter;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class KeystoneTest {
 

@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -57,15 +57,15 @@ public class SegmentTest {
         segment.toString();
 
         String providerNetworkType = segment.getProviderNetworkType();
-        Assert.assertNotNull(providerNetworkType);
+        Assertions.assertNotNull(providerNetworkType);
         segment.setProviderNetworkType(providerNetworkType);
 
         Integer providerSegmentationId = segment.getProviderSegmentationId();
-        Assert.assertNotNull(providerSegmentationId);
+        Assertions.assertNotNull(providerSegmentationId);
         segment.setProviderSegmentationId(providerSegmentationId);
 
         String providerPhysicalNetwork = segment.getProviderPhysicalNetwork();
-        Assert.assertNotNull(providerPhysicalNetwork);
+        Assertions.assertNotNull(providerPhysicalNetwork);
         segment.setProviderPhysicalNetwork(providerPhysicalNetwork);
     }
 }

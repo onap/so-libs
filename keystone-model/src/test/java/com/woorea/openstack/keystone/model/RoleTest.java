@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -58,18 +58,18 @@ public class RoleTest {
         role.toString();
 
         String name = role.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         role.setName(name);
 
         String description = role.getDescription();
-        Assert.assertNotNull(description);
+        Assertions.assertNotNull(description);
         role.setDescription(description);
 
         String id = role.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
 
         String enabled = role.getEnabled();
-        Assert.assertNotNull(enabled);
+        Assertions.assertNotNull(enabled);
         role.setEnabled(enabled);
     }
 }

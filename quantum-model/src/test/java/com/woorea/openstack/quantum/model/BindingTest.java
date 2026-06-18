@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.quantum.model.Port.Binding;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -62,25 +62,25 @@ public class BindingTest {
         binding.toString();
 
         String vnicType = binding.getVnicType();
-        Assert.assertNotNull(vnicType);
+        Assertions.assertNotNull(vnicType);
         binding.setVnicType(vnicType);
 
         Map<String, Object> vifDetails = binding.getVifDetails();
-        Assert.assertNotNull(vifDetails);
-        Assert.assertEquals(2, vifDetails.size());
+        Assertions.assertNotNull(vifDetails);
+        Assertions.assertEquals(2, vifDetails.size());
         binding.setVifDetails(vifDetails);
 
         Map<String, Object> profile = binding.getProfile();
-        Assert.assertNotNull(profile);
-        Assert.assertEquals(2, profile.size());
+        Assertions.assertNotNull(profile);
+        Assertions.assertEquals(2, profile.size());
         binding.setProfile(profile);
 
         String hostId = binding.getHostId();
-        Assert.assertNotNull(hostId);
+        Assertions.assertNotNull(hostId);
         binding.setHostId(hostId);
 
         String vifType = binding.getVifType();
-        Assert.assertNotNull(vifType);
+        Assertions.assertNotNull(vifType);
         binding.setVifType(vifType);
     }
 }

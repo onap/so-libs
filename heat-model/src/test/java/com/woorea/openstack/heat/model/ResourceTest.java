@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Date;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -64,41 +64,41 @@ public class ResourceTest {
         resource.toString();
 
         Date updatedTime = resource.getUpdatedTime();
-        Assert.assertNotNull(updatedTime);
+        Assertions.assertNotNull(updatedTime);
         resource.setUpdatedTime(updatedTime);
 
         String physicalResourceId = resource.getPhysicalResourceId();
-        Assert.assertNotNull(physicalResourceId);
+        Assertions.assertNotNull(physicalResourceId);
         resource.setPhysicalResourceId(physicalResourceId);
 
         List<String> requiredBy = resource.getRequiredBy();
-        Assert.assertNotNull(requiredBy);
-        Assert.assertEquals(2, requiredBy.size());
+        Assertions.assertNotNull(requiredBy);
+        Assertions.assertEquals(2, requiredBy.size());
         resource.setRequiredBy(requiredBy);
 
         String statusReason = resource.getStatusReason();
-        Assert.assertNotNull(statusReason);
+        Assertions.assertNotNull(statusReason);
         resource.setStatusReason(statusReason);
 
         String name = resource.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         resource.setName(name);
 
         List<Link> links = resource.getLinks();
-        Assert.assertNotNull(links);
-        Assert.assertEquals(2, links.size());
+        Assertions.assertNotNull(links);
+        Assertions.assertEquals(2, links.size());
         resource.setLinks(links);
 
         String logicalResourceId = resource.getLogicalResourceId();
-        Assert.assertNotNull(logicalResourceId);
+        Assertions.assertNotNull(logicalResourceId);
         resource.setLogicalResourceId(logicalResourceId);
 
         String type = resource.getType();
-        Assert.assertNotNull(type);
+        Assertions.assertNotNull(type);
         resource.setType(type);
 
         String status = resource.getStatus();
-        Assert.assertNotNull(status);
+        Assertions.assertNotNull(status);
         resource.setStatus(status);
     }
 }

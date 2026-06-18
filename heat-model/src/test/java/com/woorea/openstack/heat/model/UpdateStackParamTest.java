@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -61,33 +61,33 @@ public class UpdateStackParamTest {
         updatestackparam.toString();
 
         String template = updatestackparam.getTemplate();
-        Assert.assertNotNull(template);
+        Assertions.assertNotNull(template);
         updatestackparam.setTemplate(template);
 
         String environment = updatestackparam.getEnvironment();
-        Assert.assertNotNull(environment);
+        Assertions.assertNotNull(environment);
         updatestackparam.setEnvironment(environment);
 
         int timeoutMinutes = updatestackparam.getTimeoutMinutes();
-        Assert.assertNotNull(timeoutMinutes);
+        Assertions.assertNotNull(timeoutMinutes);
         updatestackparam.setTimeoutMinutes(timeoutMinutes);
 
         boolean disableRollback = updatestackparam.getDisableRollback();
-        Assert.assertNotNull(disableRollback);
+        Assertions.assertNotNull(disableRollback);
         updatestackparam.setDisableRollback(disableRollback);
 
         Map<String, Object> files = updatestackparam.getFiles();
-        Assert.assertNotNull(files);
-        Assert.assertEquals(2, files.size());
+        Assertions.assertNotNull(files);
+        Assertions.assertEquals(2, files.size());
         updatestackparam.setFiles(files);
 
         Map<String, Object> parameters = updatestackparam.getParameters();
-        Assert.assertNotNull(parameters);
-        Assert.assertEquals(2, parameters.size());
+        Assertions.assertNotNull(parameters);
+        Assertions.assertEquals(2, parameters.size());
         updatestackparam.setParameters(parameters);
 
         String templateUrl = updatestackparam.getTemplateUrl();
-        Assert.assertNotNull(templateUrl);
+        Assertions.assertNotNull(templateUrl);
         updatestackparam.setTemplateUrl(templateUrl);
     }
 }

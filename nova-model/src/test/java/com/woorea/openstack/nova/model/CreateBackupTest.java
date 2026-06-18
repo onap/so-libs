@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.ServerAction.CreateBackup;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -61,20 +61,20 @@ public class CreateBackupTest {
         createbackup.toString();
 
         Map<String, String> metadata = createbackup.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
         createbackup.setMetadata(metadata);
 
         String rotation = createbackup.getRotation();
-        Assert.assertNotNull(rotation);
+        Assertions.assertNotNull(rotation);
         createbackup.setRotation(rotation);
 
         String name = createbackup.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         createbackup.setName(name);
 
         String type = createbackup.getType();
-        Assert.assertNotNull(type);
+        Assertions.assertNotNull(type);
         createbackup.setType(type);
     }
 }

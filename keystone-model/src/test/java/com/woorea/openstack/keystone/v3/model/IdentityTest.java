@@ -28,8 +28,8 @@ import com.woorea.openstack.keystone.v3.model.Authentication.Identity;
 import com.woorea.openstack.keystone.v3.model.Authentication.Identity.Password;
 import com.woorea.openstack.keystone.v3.model.Authentication.Identity.Token;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -64,16 +64,16 @@ public class IdentityTest {
         identity.toString();
 
         Password password = identity.getPassword();
-        Assert.assertNotNull(password);
+        Assertions.assertNotNull(password);
         identity.setPassword(password);
 
         List<String> methods = identity.getMethods();
-        Assert.assertNotNull(methods);
-        Assert.assertEquals(2, methods.size());
+        Assertions.assertNotNull(methods);
+        Assertions.assertEquals(2, methods.size());
         identity.setMethods(methods);
 
         Token token = identity.getToken();
-        Assert.assertNotNull(token);
+        Assertions.assertNotNull(token);
         identity.setToken(token);
     }
 }

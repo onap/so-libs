@@ -19,15 +19,18 @@
  */
 package com.woorea.openstack.keystone.v3.api;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class RolesResourceTest {
 
     RolesResource rolesResource = new RolesResource(null);
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void usersTest() throws Exception {
-        rolesResource.users("domainid", "userid");
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            rolesResource.users("domainid", "userid");
+        });
     }
 
 }

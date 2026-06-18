@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Limits.RateLimit.LimitEntry;
 import java.util.Calendar;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,21 +59,21 @@ public class LimitEntryTest {
         limitentry.toString();
 
         String unit = limitentry.getUnit();
-        Assert.assertNotNull(unit);
+        Assertions.assertNotNull(unit);
 
         String verb = limitentry.getVerb();
-        Assert.assertNotNull(verb);
+        Assertions.assertNotNull(verb);
 
         Integer available = limitentry.getAvailable();
-        Assert.assertNotNull(available);
+        Assertions.assertNotNull(available);
 
         Calendar nextAvailable = limitentry.getNextAvailable();
-        Assert.assertNotNull(nextAvailable);
+        Assertions.assertNotNull(nextAvailable);
 
         Integer value = limitentry.getValue();
-        Assert.assertNotNull(value);
+        Assertions.assertNotNull(value);
 
         Integer remaining = limitentry.getRemaining();
-        Assert.assertNotNull(remaining);
+        Assertions.assertNotNull(remaining);
     }
 }

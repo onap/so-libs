@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,20 +59,20 @@ public class KeyPairTest {
         keypair.toString();
 
         String privateKey = keypair.getPrivateKey();
-        Assert.assertNotNull(privateKey);
+        Assertions.assertNotNull(privateKey);
 
         String name = keypair.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         keypair.setName(name);
 
         String fingerprint = keypair.getFingerprint();
-        Assert.assertNotNull(fingerprint);
+        Assertions.assertNotNull(fingerprint);
 
         String publicKey = keypair.getPublicKey();
-        Assert.assertNotNull(publicKey);
+        Assertions.assertNotNull(publicKey);
         keypair.setPublicKey(publicKey);
 
         String userId = keypair.getUserId();
-        Assert.assertNotNull(userId);
+        Assertions.assertNotNull(userId);
     }
 }

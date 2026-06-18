@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -58,19 +58,19 @@ public class VolumeAttachmentTest {
         volumeattachment.toString();
 
         String volumeId = volumeattachment.getVolumeId();
-        Assert.assertNotNull(volumeId);
+        Assertions.assertNotNull(volumeId);
         volumeattachment.setVolumeId(volumeId);
 
         String id = volumeattachment.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         volumeattachment.setId(id);
 
         String device = volumeattachment.getDevice();
-        Assert.assertNotNull(device);
+        Assertions.assertNotNull(device);
         volumeattachment.setDevice(device);
 
         String serverId = volumeattachment.getServerId();
-        Assert.assertNotNull(serverId);
+        Assertions.assertNotNull(serverId);
         volumeattachment.setServerId(serverId);
     }
 }

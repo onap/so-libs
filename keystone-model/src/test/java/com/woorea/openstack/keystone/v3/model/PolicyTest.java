@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -60,24 +60,24 @@ public class PolicyTest {
         policy.toString();
 
         Map<String, String> blob = policy.getBlob();
-        Assert.assertNotNull(blob);
-        Assert.assertEquals(2, blob.size());
+        Assertions.assertNotNull(blob);
+        Assertions.assertEquals(2, blob.size());
         policy.setBlob(blob);
 
         String id = policy.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         policy.setId(id);
 
         String type = policy.getType();
-        Assert.assertNotNull(type);
+        Assertions.assertNotNull(type);
         policy.setType(type);
 
         String userId = policy.getUserId();
-        Assert.assertNotNull(userId);
+        Assertions.assertNotNull(userId);
         policy.setUserId(userId);
 
         String projectId = policy.getProjectId();
-        Assert.assertNotNull(projectId);
+        Assertions.assertNotNull(projectId);
         policy.setProjectId(projectId);
     }
 }

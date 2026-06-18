@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -62,43 +62,43 @@ public class ImageFromVolumeTest {
         imagefromvolume.toString();
 
         String image_name = imagefromvolume.getImage_name();
-        Assert.assertNotNull(image_name);
+        Assertions.assertNotNull(image_name);
         imagefromvolume.setImage_name(image_name);
 
         String display_description = imagefromvolume.getDisplay_description();
-        Assert.assertNotNull(display_description);
+        Assertions.assertNotNull(display_description);
         imagefromvolume.setDisplay_description(display_description);
 
         String updates_at = imagefromvolume.getUpdates_at();
-        Assert.assertNotNull(updates_at);
+        Assertions.assertNotNull(updates_at);
         imagefromvolume.setUpdates_at(updates_at);
 
         String volume_type = imagefromvolume.getVolume_type();
-        Assert.assertNotNull(volume_type);
+        Assertions.assertNotNull(volume_type);
         imagefromvolume.setVolume_type(volume_type);
 
         String size = imagefromvolume.getSize();
-        Assert.assertNotNull(size);
+        Assertions.assertNotNull(size);
         imagefromvolume.setSize(size);
 
         String disk_format = imagefromvolume.getDisk_format();
-        Assert.assertNotNull(disk_format);
+        Assertions.assertNotNull(disk_format);
         imagefromvolume.setDisk_format(disk_format);
 
         String id = imagefromvolume.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         imagefromvolume.setId(id);
 
         String image_id = imagefromvolume.getImage_id();
-        Assert.assertNotNull(image_id);
+        Assertions.assertNotNull(image_id);
         imagefromvolume.setImage_id(image_id);
 
         String container_format = imagefromvolume.getContainer_format();
-        Assert.assertNotNull(container_format);
+        Assertions.assertNotNull(container_format);
         imagefromvolume.setContainer_format(container_format);
 
         String status = imagefromvolume.getStatus();
-        Assert.assertNotNull(status);
+        Assertions.assertNotNull(status);
         imagefromvolume.setStatus(status);
     }
 }

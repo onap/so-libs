@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -56,11 +56,11 @@ public class LinkTest {
         link.toString();
 
         String rel = link.getRel();
-        Assert.assertNotNull(rel);
+        Assertions.assertNotNull(rel);
         link.setRel(rel);
 
         String href = link.getHref();
-        Assert.assertNotNull(href);
+        Assertions.assertNotNull(href);
         link.setHref(href);
     }
 }

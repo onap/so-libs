@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.ServerAction.ChangePassword;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -58,7 +58,7 @@ public class ChangePasswordTest {
         changepassword.toString();
 
         String adminPass = changepassword.getAdminPass();
-        Assert.assertNotNull(adminPass);
+        Assertions.assertNotNull(adminPass);
         changepassword.setAdminPass(adminPass);
     }
 }

@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -56,11 +56,11 @@ public class RouterForAddInterfaceTest {
         routerforaddinterface.toString();
 
         String subnetId = routerforaddinterface.getSubnetId();
-        Assert.assertNotNull(subnetId);
+        Assertions.assertNotNull(subnetId);
         routerforaddinterface.setSubnetId(subnetId);
 
         String routerId = routerforaddinterface.getRouterId();
-        Assert.assertNotNull(routerId);
+        Assertions.assertNotNull(routerId);
         routerforaddinterface.setRouterId(routerId);
     }
 }

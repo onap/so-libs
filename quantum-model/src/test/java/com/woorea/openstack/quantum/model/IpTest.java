@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.quantum.model.Port.Ip;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -57,11 +57,11 @@ public class IpTest {
         ip.toString();
 
         String subnetId = ip.getSubnetId();
-        Assert.assertNotNull(subnetId);
+        Assertions.assertNotNull(subnetId);
         ip.setSubnetId(subnetId);
 
         String address = ip.getAddress();
-        Assert.assertNotNull(address);
+        Assertions.assertNotNull(address);
         ip.setAddress(address);
     }
 }

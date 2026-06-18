@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,15 +59,15 @@ public class FloatingIpDomainTest {
         floatingipdomain.toString();
 
         String domain = floatingipdomain.getDomain();
-        Assert.assertNotNull(domain);
+        Assertions.assertNotNull(domain);
 
         String scope = floatingipdomain.getScope();
-        Assert.assertNotNull(scope);
+        Assertions.assertNotNull(scope);
 
         String project = floatingipdomain.getProject();
-        Assert.assertNotNull(project);
+        Assertions.assertNotNull(project);
 
         String availabilityZone = floatingipdomain.getAvailabilityZone();
-        Assert.assertNotNull(availabilityZone);
+        Assertions.assertNotNull(availabilityZone);
     }
 }

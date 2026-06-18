@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.heat.model.Explanation.Error;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -58,12 +58,12 @@ public class ErrorTest {
         error.toString();
 
         String type = error.getType();
-        Assert.assertNotNull(type);
+        Assertions.assertNotNull(type);
 
         String message = error.getMessage();
-        Assert.assertNotNull(message);
+        Assertions.assertNotNull(message);
 
         String traceback = error.getTraceback();
-        Assert.assertNotNull(traceback);
+        Assertions.assertNotNull(traceback);
     }
 }

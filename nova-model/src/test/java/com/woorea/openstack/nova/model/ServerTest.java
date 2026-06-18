@@ -22,8 +22,8 @@ package com.woorea.openstack.nova.model;
 
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -149,112 +149,112 @@ public class ServerTest {
         server.toString();
 
         Map<String, List<Address>> addresses = server.getAddresses();
-        Assert.assertNotNull(addresses);
+        Assertions.assertNotNull(addresses);
 
         List<Address> address = addresses.get("addresses-k1");
-        Assert.assertEquals(2, address.size());
-        Assert.assertEquals(4, address.get(0).getVersion());
+        Assertions.assertEquals(2, address.size());
+        Assertions.assertEquals(4, address.get(0).getVersion());
 
         Map<String, String> metadata = server.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
 
         String hostId = server.getHostId();
-        Assert.assertNotNull(hostId);
+        Assertions.assertNotNull(hostId);
 
         String uuid = server.getUuid();
-        Assert.assertNotNull(uuid);
+        Assertions.assertNotNull(uuid);
 
         String userId = server.getUserId();
-        Assert.assertNotNull(userId);
+        Assertions.assertNotNull(userId);
 
         String taskState = server.getTaskState();
-        Assert.assertNotNull(taskState);
+        Assertions.assertNotNull(taskState);
 
         int powerState = server.getPowerState();
-        Assert.assertEquals(1, powerState);
+        Assertions.assertEquals(1, powerState);
 
         String vmState = server.getVmState();
-        Assert.assertNotNull(vmState);
+        Assertions.assertNotNull(vmState);
 
         String tenantId = server.getTenantId();
-        Assert.assertNotNull(tenantId);
+        Assertions.assertNotNull(tenantId);
 
         String configDrive = server.getConfigDrive();
-        Assert.assertNotNull(configDrive);
+        Assertions.assertNotNull(configDrive);
 
         String host = server.getHost();
-        Assert.assertNotNull(host);
+        Assertions.assertNotNull(host);
 
         String keyName = server.getKeyName();
-        Assert.assertNotNull(keyName);
+        Assertions.assertNotNull(keyName);
 
         List<Link> links = server.getLinks();
-        Assert.assertNotNull(links);
-        Assert.assertEquals(2, links.size());
+        Assertions.assertNotNull(links);
+        Assertions.assertEquals(2, links.size());
 
         String id = server.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
 
         String launchedAt = server.getLaunchedAt();
-        Assert.assertNotNull(launchedAt);
+        Assertions.assertNotNull(launchedAt);
 
         Image image = server.getImage();
-        Assert.assertNotNull(image);
+        Assertions.assertNotNull(image);
         server.setImage(image);
 
         String terminatedAt = server.getTerminatedAt();
-        Assert.assertNotNull(terminatedAt);
+        Assertions.assertNotNull(terminatedAt);
 
         String created = server.getCreated();
-        Assert.assertNotNull(created);
+        Assertions.assertNotNull(created);
 
         Fault fault = server.getFault();
-        Assert.assertNotNull(fault);
+        Assertions.assertNotNull(fault);
 
         String hypervisorHostname = server.getHypervisorHostname();
-        Assert.assertNotNull(hypervisorHostname);
+        Assertions.assertNotNull(hypervisorHostname);
 
         Flavor flavor = server.getFlavor();
-        Assert.assertNotNull(flavor);
+        Assertions.assertNotNull(flavor);
         server.setFlavor(flavor);
 
         String instanceName = server.getInstanceName();
-        Assert.assertNotNull(instanceName);
+        Assertions.assertNotNull(instanceName);
 
         List<IdResourceEntity> osExtendedVolumesAttached = server.getOsExtendedVolumesAttached();
-        Assert.assertNotNull(osExtendedVolumesAttached);
-        Assert.assertEquals(2, osExtendedVolumesAttached.size());
+        Assertions.assertNotNull(osExtendedVolumesAttached);
+        Assertions.assertEquals(2, osExtendedVolumesAttached.size());
 
         String name = server.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
 
         Integer progress = server.getProgress();
-        Assert.assertNotNull(progress);
+        Assertions.assertNotNull(progress);
 
         String adminPass = server.getAdminPass();
-        Assert.assertNotNull(adminPass);
+        Assertions.assertNotNull(adminPass);
 
         String accessIPv6 = server.getAccessIPv6();
-        Assert.assertNotNull(accessIPv6);
+        Assertions.assertNotNull(accessIPv6);
 
         String diskConfig = server.getDiskConfig();
-        Assert.assertNotNull(diskConfig);
+        Assertions.assertNotNull(diskConfig);
 
         List<SecurityGroup> securityGroups = server.getSecurityGroups();
-        Assert.assertNotNull(securityGroups);
-        Assert.assertEquals(2, securityGroups.size());
+        Assertions.assertNotNull(securityGroups);
+        Assertions.assertEquals(2, securityGroups.size());
 
         String updated = server.getUpdated();
-        Assert.assertNotNull(updated);
+        Assertions.assertNotNull(updated);
 
         String availabilityZone = server.getAvailabilityZone();
-        Assert.assertNotNull(availabilityZone);
+        Assertions.assertNotNull(availabilityZone);
 
         String accessIPv4 = server.getAccessIPv4();
-        Assert.assertNotNull(accessIPv4);
+        Assertions.assertNotNull(accessIPv4);
 
         String status = server.getStatus();
-        Assert.assertNotNull(status);
+        Assertions.assertNotNull(status);
     }
 }

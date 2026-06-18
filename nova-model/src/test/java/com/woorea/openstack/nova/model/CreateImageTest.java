@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.ServerAction.CreateImage;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -60,12 +60,12 @@ public class CreateImageTest {
         createimage.toString();
 
         Map<String, String> metadata = createimage.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
         createimage.setMetadata(metadata);
 
         String name = createimage.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         createimage.setName(name);
     }
 }

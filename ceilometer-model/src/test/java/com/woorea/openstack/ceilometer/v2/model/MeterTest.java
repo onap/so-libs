@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -57,21 +57,21 @@ public class MeterTest {
         meter.toString();
 
         String unit = meter.getUnit();
-        Assert.assertNotNull(unit);
+        Assertions.assertNotNull(unit);
 
         String resource = meter.getResource();
-        Assert.assertNotNull(resource);
+        Assertions.assertNotNull(resource);
 
         String name = meter.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
 
         String project = meter.getProject();
-        Assert.assertNotNull(project);
+        Assertions.assertNotNull(project);
 
         String type = meter.getType();
-        Assert.assertNotNull(type);
+        Assertions.assertNotNull(type);
 
         String user = meter.getUser();
-        Assert.assertNotNull(user);
+        Assertions.assertNotNull(user);
     }
 }

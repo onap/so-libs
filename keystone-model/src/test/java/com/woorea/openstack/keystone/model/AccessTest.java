@@ -28,8 +28,8 @@ import com.woorea.openstack.keystone.model.Access.Service;
 import com.woorea.openstack.keystone.model.Access.User;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -90,17 +90,17 @@ public class AccessTest {
         access.toString();
 
         List<Service> serviceCatalog = access.getServiceCatalog();
-        Assert.assertNotNull(serviceCatalog);
-        Assert.assertEquals(2, serviceCatalog.size());
+        Assertions.assertNotNull(serviceCatalog);
+        Assertions.assertEquals(2, serviceCatalog.size());
 
         Map<String, Object> metadata = access.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
 
         User user = access.getUser();
-        Assert.assertNotNull(user);
+        Assertions.assertNotNull(user);
 
         Token token = access.getToken();
-        Assert.assertNotNull(token);
+        Assertions.assertNotNull(token);
     }
 }

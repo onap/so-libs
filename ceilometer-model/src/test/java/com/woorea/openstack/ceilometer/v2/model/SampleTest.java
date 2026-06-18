@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -63,37 +63,37 @@ public class SampleTest {
         sample.toString();
 
         String counterName = sample.getCounterName();
-        Assert.assertNotNull(counterName);
+        Assertions.assertNotNull(counterName);
 
         Map<String, Object> metadata = sample.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
 
         String resource = sample.getResource();
-        Assert.assertNotNull(resource);
+        Assertions.assertNotNull(resource);
 
         String counterVolume = sample.getCounterVolume();
-        Assert.assertNotNull(counterVolume);
+        Assertions.assertNotNull(counterVolume);
 
         String project = sample.getProject();
-        Assert.assertNotNull(project);
+        Assertions.assertNotNull(project);
 
         String counterUnit = sample.getCounterUnit();
-        Assert.assertNotNull(counterUnit);
+        Assertions.assertNotNull(counterUnit);
 
         String source = sample.getSource();
-        Assert.assertNotNull(source);
+        Assertions.assertNotNull(source);
 
         String counterType = sample.getCounterType();
-        Assert.assertNotNull(counterType);
+        Assertions.assertNotNull(counterType);
 
         String message = sample.getMessage();
-        Assert.assertNotNull(message);
+        Assertions.assertNotNull(message);
 
         String user = sample.getUser();
-        Assert.assertNotNull(user);
+        Assertions.assertNotNull(user);
 
         String timestamp = sample.getTimestamp();
-        Assert.assertNotNull(timestamp);
+        Assertions.assertNotNull(timestamp);
     }
 }

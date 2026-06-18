@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -65,52 +65,52 @@ public class FlavorTest {
         flavor.toString();
 
         Integer rxtxQuota = flavor.getRxtxQuota();
-        Assert.assertNotNull(rxtxQuota);
+        Assertions.assertNotNull(rxtxQuota);
         flavor.setRxtxQuota(rxtxQuota);
 
         String swap = flavor.getSwap();
-        Assert.assertNotNull(swap);
+        Assertions.assertNotNull(swap);
         flavor.setSwap(swap);
 
         Float rxtxFactor = flavor.getRxtxFactor();
-        Assert.assertNotNull(rxtxFactor);
+        Assertions.assertNotNull(rxtxFactor);
         flavor.setRxtxFactor(rxtxFactor);
 
         Integer ephemeral = flavor.getEphemeral();
-        Assert.assertNotNull(ephemeral);
+        Assertions.assertNotNull(ephemeral);
         flavor.setEphemeral(ephemeral);
 
         Integer vcpus = flavor.getVcpus();
-        Assert.assertNotNull(vcpus);
+        Assertions.assertNotNull(vcpus);
         flavor.setVcpus(vcpus);
 
         Integer rxtxCap = flavor.getRxtxCap();
-        Assert.assertNotNull(rxtxCap);
+        Assertions.assertNotNull(rxtxCap);
         flavor.setRxtxCap(rxtxCap);
 
         Integer disk = flavor.getDisk();
-        Assert.assertNotNull(disk);
+        Assertions.assertNotNull(disk);
         flavor.setDisk(disk);
 
         String name = flavor.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         flavor.setName(name);
 
         List<Link> links = flavor.getLinks();
-        Assert.assertNotNull(links);
-        Assert.assertEquals(2, links.size());
+        Assertions.assertNotNull(links);
+        Assertions.assertEquals(2, links.size());
         flavor.setLinks(links);
 
         Boolean disabled = flavor.getDisabled();
-        Assert.assertNotNull(disabled);
+        Assertions.assertNotNull(disabled);
         flavor.setDisabled(disabled);
 
         String id = flavor.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         flavor.setId(id);
 
         Integer ram = flavor.getRam();
-        Assert.assertNotNull(ram);
+        Assertions.assertNotNull(ram);
         flavor.setRam(ram);
     }
 }

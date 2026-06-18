@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -61,37 +61,37 @@ public class CreateStackParamTest {
         createstackparam.toString();
 
         String template = createstackparam.getTemplate();
-        Assert.assertNotNull(template);
+        Assertions.assertNotNull(template);
         createstackparam.setTemplate(template);
 
         String environment = createstackparam.getEnvironment();
-        Assert.assertNotNull(environment);
+        Assertions.assertNotNull(environment);
         createstackparam.setEnvironment(environment);
 
         int timeoutMinutes = createstackparam.getTimeoutMinutes();
-        Assert.assertNotNull(timeoutMinutes);
+        Assertions.assertNotNull(timeoutMinutes);
         createstackparam.setTimeoutMinutes(timeoutMinutes);
 
         boolean disableRollback = createstackparam.getDisableRollback();
-        Assert.assertNotNull(disableRollback);
+        Assertions.assertNotNull(disableRollback);
         createstackparam.setDisableRollback(disableRollback);
 
         Map<String, Object> files = createstackparam.getFiles();
-        Assert.assertNotNull(files);
-        Assert.assertEquals(2, files.size());
+        Assertions.assertNotNull(files);
+        Assertions.assertEquals(2, files.size());
         createstackparam.setFiles(files);
 
         String stackName = createstackparam.getStackName();
-        Assert.assertNotNull(stackName);
+        Assertions.assertNotNull(stackName);
         createstackparam.setStackName(stackName);
 
         Map<String, Object> parameters = createstackparam.getParameters();
-        Assert.assertNotNull(parameters);
-        Assert.assertEquals(2, parameters.size());
+        Assertions.assertNotNull(parameters);
+        Assertions.assertEquals(2, parameters.size());
         createstackparam.setParameters(parameters);
 
         String templateUrl = createstackparam.getTemplateUrl();
-        Assert.assertNotNull(templateUrl);
+        Assertions.assertNotNull(templateUrl);
         createstackparam.setTemplateUrl(templateUrl);
     }
 }

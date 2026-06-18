@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Calendar;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,27 +59,27 @@ public class ObjectTest {
         object.toString();
 
         String subdir = object.getSubdir();
-        Assert.assertNotNull(subdir);
+        Assertions.assertNotNull(subdir);
         object.setSubdir(subdir);
 
         Calendar lastModified = object.getLastModified();
-        Assert.assertNotNull(lastModified);
+        Assertions.assertNotNull(lastModified);
         object.setLastModified(lastModified);
 
         int bytes = object.getBytes();
-        Assert.assertNotNull(bytes);
+        Assertions.assertNotNull(bytes);
         object.setBytes(bytes);
 
         String name = object.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         object.setName(name);
 
         String hash = object.getHash();
-        Assert.assertNotNull(hash);
+        Assertions.assertNotNull(hash);
         object.setHash(hash);
 
         String contentType = object.getContentType();
-        Assert.assertNotNull(contentType);
+        Assertions.assertNotNull(contentType);
         object.setContentType(contentType);
     }
 }

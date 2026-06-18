@@ -21,8 +21,8 @@
 package com.woorea.openstack.nova.model;
 
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -57,15 +57,15 @@ public class AvailabilityZonesTest {
         AvailabilityZones azs = objectMapper.readValue(JSON_FULL, AvailabilityZones.class);
 
         List<AvailabilityZone> list = azs.getList();
-        Assert.assertNotNull(list);
-        Assert.assertEquals(2, list.size());
-        Assert.assertEquals("zoneName1", azs.getList().get(0).getName());
+        Assertions.assertNotNull(list);
+        Assertions.assertEquals(2, list.size());
+        Assertions.assertEquals("zoneName1", azs.getList().get(0).getName());
 
         int cnt = 0;
         for (@SuppressWarnings("unused")
         AvailabilityZone x : azs) {
             ++cnt;
         }
-        Assert.assertEquals(2, cnt);
+        Assertions.assertEquals(2, cnt);
     }
 }

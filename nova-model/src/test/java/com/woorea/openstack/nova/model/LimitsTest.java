@@ -27,8 +27,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Limits.AbsoluteLimit;
 import com.woorea.openstack.nova.model.Limits.RateLimit;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -87,10 +87,10 @@ public class LimitsTest {
         limits.toString();
 
         List<RateLimit> rate = limits.getRate();
-        Assert.assertNotNull(rate);
-        Assert.assertEquals(2, rate.size());
+        Assertions.assertNotNull(rate);
+        Assertions.assertEquals(2, rate.size());
 
         AbsoluteLimit absolute = limits.getAbsolute();
-        Assert.assertNotNull(absolute);
+        Assertions.assertNotNull(absolute);
     }
 }

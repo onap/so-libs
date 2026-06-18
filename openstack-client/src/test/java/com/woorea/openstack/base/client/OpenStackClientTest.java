@@ -20,9 +20,9 @@
 
 package com.woorea.openstack.base.client;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class OpenStackClientTest {
@@ -36,7 +36,7 @@ public class OpenStackClientTest {
     private OpenStackRequest<String> conflictRequest = new OpenStackRequest<>();
     private OpenStackRequest<String> notAuthorizedRequest = new OpenStackRequest<>();
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         final OpenStackClientConnector clientConnector = mockClientConnector();
         client = new OpenStackClient(CLIENT_ENDPOINT, clientConnector);
@@ -54,17 +54,21 @@ public class OpenStackClientTest {
         final OpenStackRequest<Entity> request = client.get(OS_REQUEST_PATH, Entity.class);
         final Entity<String> resp = client.execute(request);
 
-        Assert.assertEquals(SUCCESS, resp.getEntity());
+        Assertions.assertEquals(SUCCESS, resp.getEntity());
     }
 
-    @Test(expected = OpenStackResponseException.class)
+    @Test
     public void executeNotAuthorized() {
         client.token(TOKEN);
-        client.execute(notAuthorizedRequest);
+        Assertions.assertThrows(OpenStackResponseException.class, () -> {
+            client.execute(notAuthorizedRequest);
+        });
     }
 
-    @Test(expected = OpenStackResponseException.class)
+    @Test
     public void executeConflict() {
-        client.execute(conflictRequest);
+        Assertions.assertThrows(OpenStackResponseException.class, () -> {
+            client.execute(conflictRequest);
+        });
     }
 }

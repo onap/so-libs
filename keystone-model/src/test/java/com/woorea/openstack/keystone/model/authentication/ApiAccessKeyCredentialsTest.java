@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.model.authentication.AccessKey.ApiAccessKeyCredentials;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,11 +59,11 @@ public class ApiAccessKeyCredentialsTest {
         apiaccesskeycredentials.toString();
 
         String secretKey = apiaccesskeycredentials.getSecretKey();
-        Assert.assertNotNull(secretKey);
+        Assertions.assertNotNull(secretKey);
         apiaccesskeycredentials.setSecretKey(secretKey);
 
         String accessKey = apiaccesskeycredentials.getAccessKey();
-        Assert.assertNotNull(accessKey);
+        Assertions.assertNotNull(accessKey);
         apiaccesskeycredentials.setAccessKey(accessKey);
     }
 }

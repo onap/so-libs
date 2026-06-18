@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -63,18 +63,18 @@ public class TenantsTest {
         tenants.toString();
 
         List<Link> links = tenants.getLinks();
-        Assert.assertNotNull(links);
-        Assert.assertEquals(2, links.size());
+        Assertions.assertNotNull(links);
+        Assertions.assertEquals(2, links.size());
 
         List<Tenant> list = tenants.getList();
-        Assert.assertNotNull(list);
-        Assert.assertEquals(2, list.size());
+        Assertions.assertNotNull(list);
+        Assertions.assertEquals(2, list.size());
 
         int cnt = 0;
         for (@SuppressWarnings("unused")
         Tenant x : tenants) {
             ++cnt;
         }
-        Assert.assertEquals(2, cnt);
+        Assertions.assertEquals(2, cnt);
     }
 }

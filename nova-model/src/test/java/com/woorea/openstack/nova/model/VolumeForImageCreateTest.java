@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -60,27 +60,27 @@ public class VolumeForImageCreateTest {
         volumeforimagecreate.toString();
 
         String image_name = volumeforimagecreate.getImage_name();
-        Assert.assertNotNull(image_name);
+        Assertions.assertNotNull(image_name);
         volumeforimagecreate.setImage_name(image_name);
 
         String tenantId = volumeforimagecreate.getTenantId();
-        Assert.assertNotNull(tenantId);
+        Assertions.assertNotNull(tenantId);
         volumeforimagecreate.setTenantId(tenantId);
 
         String volumeId = volumeforimagecreate.getVolumeId();
-        Assert.assertNotNull(volumeId);
+        Assertions.assertNotNull(volumeId);
         volumeforimagecreate.setVolumeId(volumeId);
 
         String disk_format = volumeforimagecreate.getDisk_format();
-        Assert.assertNotNull(disk_format);
+        Assertions.assertNotNull(disk_format);
         volumeforimagecreate.setDisk_format(disk_format);
 
         Boolean force = volumeforimagecreate.getForce();
-        Assert.assertNotNull(force);
+        Assertions.assertNotNull(force);
         volumeforimagecreate.setForce(force);
 
         String container_format = volumeforimagecreate.getContainer_format();
-        Assert.assertNotNull(container_format);
+        Assertions.assertNotNull(container_format);
         volumeforimagecreate.setContainer_format(container_format);
     }
 }

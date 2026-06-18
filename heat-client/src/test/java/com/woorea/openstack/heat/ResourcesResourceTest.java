@@ -20,7 +20,7 @@
 package com.woorea.openstack.heat;
 
 import com.woorea.openstack.base.client.OpenStackClient;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ResourcesResourceTest {
 

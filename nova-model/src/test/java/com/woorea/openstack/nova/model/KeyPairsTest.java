@@ -25,9 +25,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -51,7 +51,7 @@ public class KeyPairsTest {
     // serialize into JSON correctly. It is probably not an operational
     // issue because KeyPairs is only used to represent the response to
     // the GET os-keypairs request.
-    @Ignore
+    @Disabled
     @Test
     public void testSerialization() throws Exception {
         System.out.println("CLASS: " + KeyPairs.class.getName());
@@ -68,13 +68,13 @@ public class KeyPairsTest {
         keypairs.toString();
 
         List<KeyPair> list = keypairs.getList();
-        Assert.assertNotNull(list);
+        Assertions.assertNotNull(list);
 
         int cnt = 0;
         for (@SuppressWarnings("unused")
         KeyPair x : keypairs) {
             ++cnt;
         }
-        Assert.assertEquals(2, cnt);
+        Assertions.assertEquals(2, cnt);
     }
 }

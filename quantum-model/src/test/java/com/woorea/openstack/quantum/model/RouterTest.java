@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -63,32 +63,32 @@ public class RouterTest {
         router.toString();
 
         List<HostRoute> routes = router.getRoutes();
-        Assert.assertNotNull(routes);
-        Assert.assertEquals(2, routes.size());
+        Assertions.assertNotNull(routes);
+        Assertions.assertEquals(2, routes.size());
         router.setRoutes(routes);
 
         String admin_state_up = router.getAdminStateUp();
-        Assert.assertNotNull(admin_state_up);
+        Assertions.assertNotNull(admin_state_up);
         router.setAdminStateUp(admin_state_up);
 
         String name = router.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         router.setName(name);
 
         String tenantId = router.getTenantId();
-        Assert.assertNotNull(tenantId);
+        Assertions.assertNotNull(tenantId);
         router.setTenantId(tenantId);
 
         GatewayInfo externalGatewayInfo = router.getExternalGatewayInfo();
-        Assert.assertNotNull(externalGatewayInfo);
+        Assertions.assertNotNull(externalGatewayInfo);
         router.setExternalGatewayInfo(externalGatewayInfo);
 
         String id = router.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         router.setId(id);
 
         String status = router.getStatus();
-        Assert.assertNotNull(status);
+        Assertions.assertNotNull(status);
         router.setStatus(status);
     }
 }

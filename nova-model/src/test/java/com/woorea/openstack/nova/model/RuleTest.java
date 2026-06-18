@@ -27,8 +27,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.SecurityGroup.Rule;
 import com.woorea.openstack.nova.model.SecurityGroup.Rule.Group;
 import com.woorea.openstack.nova.model.SecurityGroup.Rule.IpRange;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -64,27 +64,27 @@ public class RuleTest {
         rule.toString();
 
         String parentGroupId = rule.getParentGroupId();
-        Assert.assertNotNull(parentGroupId);
+        Assertions.assertNotNull(parentGroupId);
 
         String ipProtocol = rule.getIpProtocol();
-        Assert.assertNotNull(ipProtocol);
+        Assertions.assertNotNull(ipProtocol);
 
         IpRange ipRange = rule.getIpRange();
-        Assert.assertNotNull(ipRange);
+        Assertions.assertNotNull(ipRange);
 
         Integer fromPort = rule.getFromPort();
-        Assert.assertNotNull(fromPort);
+        Assertions.assertNotNull(fromPort);
 
         String name = rule.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
 
         String id = rule.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
 
         Integer toPort = rule.getToPort();
-        Assert.assertNotNull(toPort);
+        Assertions.assertNotNull(toPort);
 
         Group group = rule.getGroup();
-        Assert.assertNotNull(group);
+        Assertions.assertNotNull(group);
     }
 }

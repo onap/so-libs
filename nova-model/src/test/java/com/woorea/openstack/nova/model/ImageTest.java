@@ -28,8 +28,8 @@ import com.woorea.openstack.nova.model.Image.Server;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -72,51 +72,51 @@ public class ImageTest {
         image.toString();
 
         Server server = image.getServer();
-        Assert.assertNotNull(server);
+        Assertions.assertNotNull(server);
 
         Map<String, String> metadata = image.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
         image.setMetadata(metadata);
 
         Long size = image.getSize();
-        Assert.assertNotNull(size);
+        Assertions.assertNotNull(size);
 
         Calendar created = image.getCreated();
-        Assert.assertNotNull(created);
+        Assertions.assertNotNull(created);
         image.setCreated(created);
 
         Integer minRam = image.getMinRam();
-        Assert.assertNotNull(minRam);
+        Assertions.assertNotNull(minRam);
         image.setMinRam(minRam);
 
         String name = image.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         image.setName(name);
 
         Integer progress = image.getProgress();
-        Assert.assertNotNull(progress);
+        Assertions.assertNotNull(progress);
         image.setProgress(progress);
 
         List<Link> links = image.getLinks();
-        Assert.assertNotNull(links);
-        Assert.assertEquals(2, links.size());
+        Assertions.assertNotNull(links);
+        Assertions.assertEquals(2, links.size());
         image.setLinks(links);
 
         String id = image.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         image.setId(id);
 
         Calendar updated = image.getUpdated();
-        Assert.assertNotNull(updated);
+        Assertions.assertNotNull(updated);
         image.setUpdated(updated);
 
         Integer minDisk = image.getMinDisk();
-        Assert.assertNotNull(minDisk);
+        Assertions.assertNotNull(minDisk);
         image.setMinDisk(minDisk);
 
         String status = image.getStatus();
-        Assert.assertNotNull(status);
+        Assertions.assertNotNull(status);
         image.setStatus(status);
     }
 }

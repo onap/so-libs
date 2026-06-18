@@ -21,8 +21,8 @@
 package com.woorea.openstack.keystone.v3.model;
 
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -60,15 +60,15 @@ public class ProjectsTest {
         projects.toString();
 
         List<Project> list = projects.getList();
-        Assert.assertNotNull(list);
-        Assert.assertEquals(2, list.size());
-        Assert.assertEquals("someTag", list.get(1).getTags().get(0));
+        Assertions.assertNotNull(list);
+        Assertions.assertEquals(2, list.size());
+        Assertions.assertEquals("someTag", list.get(1).getTags().get(0));
 
         int cnt = 0;
         for (@SuppressWarnings("unused")
         Project x : projects) {
             ++cnt;
         }
-        Assert.assertEquals(2, cnt);
+        Assertions.assertEquals(2, cnt);
     }
 }

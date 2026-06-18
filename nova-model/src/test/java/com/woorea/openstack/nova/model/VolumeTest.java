@@ -27,8 +27,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -69,38 +69,38 @@ public class VolumeTest {
         volume.toString();
 
         String volumeType = volume.getVolumeType();
-        Assert.assertNotNull(volumeType);
+        Assertions.assertNotNull(volumeType);
 
         String createdAt = volume.getCreatedAt();
-        Assert.assertNotNull(createdAt);
+        Assertions.assertNotNull(createdAt);
 
         Map<String, String> metadata = volume.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
 
         List<Map<String, Object>> attachments = volume.getAttachments();
-        Assert.assertNotNull(attachments);
-        Assert.assertEquals(2, attachments.size());
+        Assertions.assertNotNull(attachments);
+        Assertions.assertEquals(2, attachments.size());
 
         String snapshotId = volume.getSnapshotId();
-        Assert.assertNotNull(snapshotId);
+        Assertions.assertNotNull(snapshotId);
 
         Integer size = volume.getSize();
-        Assert.assertNotNull(size);
+        Assertions.assertNotNull(size);
 
         String name = volume.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
 
         String description = volume.getDescription();
-        Assert.assertNotNull(description);
+        Assertions.assertNotNull(description);
 
         String id = volume.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
 
         String availabilityZone = volume.getAvailabilityZone();
-        Assert.assertNotNull(availabilityZone);
+        Assertions.assertNotNull(availabilityZone);
 
         String status = volume.getStatus();
-        Assert.assertNotNull(status);
+        Assertions.assertNotNull(status);
     }
 }

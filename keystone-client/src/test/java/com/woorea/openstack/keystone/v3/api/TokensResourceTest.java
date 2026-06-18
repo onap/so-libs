@@ -20,7 +20,8 @@
 package com.woorea.openstack.keystone.v3.api;
 
 import com.woorea.openstack.keystone.v3.model.Authentication;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TokensResourceTest {
 
@@ -31,9 +32,11 @@ public class TokensResourceTest {
         tokensResource.authenticate(new Authentication());
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void showTest() throws Exception {
-        tokensResource.show();
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            tokensResource.show();
+        });
     }
 
 }

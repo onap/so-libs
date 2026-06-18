@@ -27,8 +27,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.quantum.model.Port.Binding;
 import com.woorea.openstack.quantum.model.Port.Ip;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -71,45 +71,45 @@ public class PortTest {
         port.toString();
 
         String deviceOwner = port.getDeviceOwner();
-        Assert.assertNotNull(deviceOwner);
+        Assertions.assertNotNull(deviceOwner);
         port.setDeviceOwner(deviceOwner);
 
         Boolean adminStateUp = port.getAdminStateUp();
-        Assert.assertNotNull(adminStateUp);
+        Assertions.assertNotNull(adminStateUp);
         port.setAdminStateUp(adminStateUp);
 
         String name = port.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         port.setName(name);
 
         String tenantId = port.getTenantId();
-        Assert.assertNotNull(tenantId);
+        Assertions.assertNotNull(tenantId);
         port.setTenantId(tenantId);
 
         Binding binding = port.getBinding();
-        Assert.assertNotNull(binding);
+        Assertions.assertNotNull(binding);
         port.setBinding(binding);
 
         String macAddress = port.getMacAddress();
-        Assert.assertNotNull(macAddress);
+        Assertions.assertNotNull(macAddress);
         port.setMacAddress(macAddress);
 
         String networkId = port.getNetworkId();
-        Assert.assertNotNull(networkId);
+        Assertions.assertNotNull(networkId);
         port.setNetworkId(networkId);
 
         List<Ip> list = port.getList();
-        Assert.assertNotNull(list);
-        Assert.assertEquals(2, list.size());
+        Assertions.assertNotNull(list);
+        Assertions.assertEquals(2, list.size());
         port.setList(list);
 
         List<String> securityGroups = port.getSecurityGroups();
-        Assert.assertNotNull(securityGroups);
-        Assert.assertEquals(2, securityGroups.size());
+        Assertions.assertNotNull(securityGroups);
+        Assertions.assertEquals(2, securityGroups.size());
         port.setSecurityGroups(securityGroups);
 
         String deviceId = port.getDeviceId();
-        Assert.assertNotNull(deviceId);
+        Assertions.assertNotNull(deviceId);
         port.setDeviceId(deviceId);
     }
 }

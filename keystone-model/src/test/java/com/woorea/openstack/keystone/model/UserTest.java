@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,31 +59,31 @@ public class UserTest {
         user.toString();
 
         String password = user.getPassword();
-        Assert.assertNotNull(password);
+        Assertions.assertNotNull(password);
         user.setPassword(password);
 
         String name = user.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         user.setName(name);
 
         String tenantId = user.getTenantId();
-        Assert.assertNotNull(tenantId);
+        Assertions.assertNotNull(tenantId);
         user.setTenantId(tenantId);
 
         String id = user.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         user.setId(id);
 
         String email = user.getEmail();
-        Assert.assertNotNull(email);
+        Assertions.assertNotNull(email);
         user.setEmail(email);
 
         Boolean enabled = user.getEnabled();
-        Assert.assertNotNull(enabled);
+        Assertions.assertNotNull(enabled);
         user.setEnabled(enabled);
 
         String username = user.getUsername();
-        Assert.assertNotNull(username);
+        Assertions.assertNotNull(username);
         user.setUsername(username);
     }
 }

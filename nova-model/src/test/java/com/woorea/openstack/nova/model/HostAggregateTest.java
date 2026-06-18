@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -64,32 +64,32 @@ public class HostAggregateTest {
         hostaggregate.toString();
 
         String createdAt = hostaggregate.getCreatedAt();
-        Assert.assertNotNull(createdAt);
+        Assertions.assertNotNull(createdAt);
 
         Map<String, String> metadata = hostaggregate.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
 
         String deletedAt = hostaggregate.getDeletedAt();
-        Assert.assertNotNull(deletedAt);
+        Assertions.assertNotNull(deletedAt);
 
         Boolean deleted = hostaggregate.getDeleted();
-        Assert.assertNotNull(deleted);
+        Assertions.assertNotNull(deleted);
 
         List<String> hosts = hostaggregate.getHosts();
-        Assert.assertNotNull(hosts);
-        Assert.assertEquals(2, hosts.size());
+        Assertions.assertNotNull(hosts);
+        Assertions.assertEquals(2, hosts.size());
 
         String name = hostaggregate.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
 
         Integer id = hostaggregate.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
 
         String availabilityZone = hostaggregate.getAvailabilityZone();
-        Assert.assertNotNull(availabilityZone);
+        Assertions.assertNotNull(availabilityZone);
 
         String updatedAt = hostaggregate.getUpdatedAt();
-        Assert.assertNotNull(updatedAt);
+        Assertions.assertNotNull(updatedAt);
     }
 }

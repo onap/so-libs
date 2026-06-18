@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.ServerAction.Resize;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -58,11 +58,11 @@ public class ResizeTest {
         resize.toString();
 
         String flavorRef = resize.getFlavorRef();
-        Assert.assertNotNull(flavorRef);
+        Assertions.assertNotNull(flavorRef);
         resize.setFlavorRef(flavorRef);
 
         String diskConfig = resize.getDiskConfig();
-        Assert.assertNotNull(diskConfig);
+        Assertions.assertNotNull(diskConfig);
         resize.setDiskConfig(diskConfig);
     }
 }

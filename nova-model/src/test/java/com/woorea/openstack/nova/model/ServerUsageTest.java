@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.SimpleTenantUsage.ServerUsage;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -61,39 +61,39 @@ public class ServerUsageTest {
         serverusage.toString();
 
         String flavor = serverusage.getFlavor();
-        Assert.assertNotNull(flavor);
+        Assertions.assertNotNull(flavor);
 
         Integer memoryMb = serverusage.getMemoryMb();
-        Assert.assertNotNull(memoryMb);
+        Assertions.assertNotNull(memoryMb);
 
         Double hours = serverusage.getHours();
-        Assert.assertNotNull(hours);
+        Assertions.assertNotNull(hours);
 
         String instanceId = serverusage.getInstanceId();
-        Assert.assertNotNull(instanceId);
+        Assertions.assertNotNull(instanceId);
 
         Integer localDiskSize = serverusage.getLocalDiskSize();
-        Assert.assertNotNull(localDiskSize);
+        Assertions.assertNotNull(localDiskSize);
 
         String endedAt = serverusage.getEndedAt();
-        Assert.assertNotNull(endedAt);
+        Assertions.assertNotNull(endedAt);
 
         String name = serverusage.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
 
         String tenantId = serverusage.getTenantId();
-        Assert.assertNotNull(tenantId);
+        Assertions.assertNotNull(tenantId);
 
         String startedAt = serverusage.getStartedAt();
-        Assert.assertNotNull(startedAt);
+        Assertions.assertNotNull(startedAt);
 
         String state = serverusage.getState();
-        Assert.assertNotNull(state);
+        Assertions.assertNotNull(state);
 
         Integer vcpus = serverusage.getVcpus();
-        Assert.assertNotNull(vcpus);
+        Assertions.assertNotNull(vcpus);
 
         Integer uptime = serverusage.getUptime();
-        Assert.assertNotNull(uptime);
+        Assertions.assertNotNull(uptime);
     }
 }

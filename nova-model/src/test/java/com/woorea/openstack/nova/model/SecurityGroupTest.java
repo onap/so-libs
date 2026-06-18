@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.ServerForCreate.SecurityGroup;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -56,7 +56,7 @@ public class SecurityGroupTest {
         securitygroup.toString();
 
         String name = securitygroup.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         securitygroup.setName(name);
     }
 }

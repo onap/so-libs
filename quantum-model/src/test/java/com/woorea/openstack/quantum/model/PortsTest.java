@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -80,8 +80,8 @@ public class PortsTest {
         ports.toString();
 
         List<Port> list = ports.getList();
-        Assert.assertNotNull(list);
-        Assert.assertEquals(2, list.size());
+        Assertions.assertNotNull(list);
+        Assertions.assertEquals(2, list.size());
         ports.setList(list);
 
         int cnt = 0;
@@ -89,6 +89,6 @@ public class PortsTest {
         Port x : ports) {
             ++cnt;
         }
-        Assert.assertEquals(2, cnt);
+        Assertions.assertEquals(2, cnt);
     }
 }

@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -62,59 +62,59 @@ public class QuotaSetTest {
         quotaset.toString();
 
         Integer injectedFileContentBytes = quotaset.getInjectedFileContentBytes();
-        Assert.assertNotNull(injectedFileContentBytes);
+        Assertions.assertNotNull(injectedFileContentBytes);
         quotaset.setInjectedFileContentBytes(injectedFileContentBytes);
 
         Integer injectedFiles = quotaset.getInjectedFiles();
-        Assert.assertNotNull(injectedFiles);
+        Assertions.assertNotNull(injectedFiles);
         quotaset.setInjectedFiles(injectedFiles);
 
         Integer instances = quotaset.getInstances();
-        Assert.assertNotNull(instances);
+        Assertions.assertNotNull(instances);
         quotaset.setInstances(instances);
 
         Integer gigabytes = quotaset.getGigabytes();
-        Assert.assertNotNull(gigabytes);
+        Assertions.assertNotNull(gigabytes);
         quotaset.setGigabytes(gigabytes);
 
         Integer metadataItems = quotaset.getMetadataItems();
-        Assert.assertNotNull(metadataItems);
+        Assertions.assertNotNull(metadataItems);
         quotaset.setMetadataItems(metadataItems);
 
         Integer volumes = quotaset.getVolumes();
-        Assert.assertNotNull(volumes);
+        Assertions.assertNotNull(volumes);
         quotaset.setVolumes(volumes);
 
         Integer injectedFilePathBytes = quotaset.getInjectedFilePathBytes();
-        Assert.assertNotNull(injectedFilePathBytes);
+        Assertions.assertNotNull(injectedFilePathBytes);
         quotaset.setInjectedFilePathBytes(injectedFilePathBytes);
 
         Integer securityGroupRules = quotaset.getSecurityGroupRules();
-        Assert.assertNotNull(securityGroupRules);
+        Assertions.assertNotNull(securityGroupRules);
         quotaset.setSecurityGroupRules(securityGroupRules);
 
         Integer floatingIps = quotaset.getFloatingIps();
-        Assert.assertNotNull(floatingIps);
+        Assertions.assertNotNull(floatingIps);
         quotaset.setFloatingIps(floatingIps);
 
         Integer cores = quotaset.getCores();
-        Assert.assertNotNull(cores);
+        Assertions.assertNotNull(cores);
         quotaset.setCores(cores);
 
         String id = quotaset.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         quotaset.setId(id);
 
         Integer securityGroups = quotaset.getSecurityGroups();
-        Assert.assertNotNull(securityGroups);
+        Assertions.assertNotNull(securityGroups);
         quotaset.setSecurityGroups(securityGroups);
 
         Integer ram = quotaset.getRam();
-        Assert.assertNotNull(ram);
+        Assertions.assertNotNull(ram);
         quotaset.setRam(ram);
 
         Integer keyPairs = quotaset.getKeyPairs();
-        Assert.assertNotNull(keyPairs);
+        Assertions.assertNotNull(keyPairs);
         quotaset.setKeyPairs(keyPairs);
     }
 }

@@ -21,8 +21,8 @@
 package com.woorea.openstack.nova.model;
 
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -504,14 +504,14 @@ public class ServersTest {
         servers.toString();
 
         List<Server> list = servers.getList();
-        Assert.assertNotNull(list);
-        Assert.assertEquals(2, list.size());
+        Assertions.assertNotNull(list);
+        Assertions.assertEquals(2, list.size());
 
         int cnt = 0;
         for (@SuppressWarnings("unused")
         Server x : servers) {
             ++cnt;
         }
-        Assert.assertEquals(2, cnt);
+        Assertions.assertEquals(2, cnt);
     }
 }

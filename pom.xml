@@ -24,6 +24,8 @@
     <siteNexusPath>/content/sites/site/org/onap/so/libs/${project.version}</siteNexusPath>
     <format.skipValidate>false</format.skipValidate>
     <format.skipExecute>true</format.skipExecute>
+    <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    <jacoco.version>0.8.12</jacoco.version>
   </properties>
   <distributionManagement>
     <repository>
@@ -115,37 +117,31 @@
       <dependency>
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpcore</artifactId>
-        <version>4.4.4</version>
+        <version>4.4.16</version>
         <scope>compile</scope>
       </dependency>
       <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.12</version>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>5.10.2</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
-        <artifactId>mockito-all</artifactId>
-        <version>1.10.19</version>
+        <artifactId>mockito-core</artifactId>
+        <version>5.11.0</version>
         <scope>test</scope>
       </dependency>
       <dependency>
-        <groupId>org.powermock</groupId>
-        <artifactId>powermock-api-mockito</artifactId>
-        <version>1.6.2</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.powermock</groupId>
-        <artifactId>powermock-module-junit4</artifactId>
-        <version>1.6.2</version>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-junit-jupiter</artifactId>
+        <version>5.11.0</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.skyscreamer</groupId>
         <artifactId>jsonassert</artifactId>
-        <version>1.4.0</version>
+        <version>1.5.1</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -172,7 +168,7 @@
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.1</version>
+            <version>3.12.1</version>
             <configuration>
               <forceJavacCompilerUse>true</forceJavacCompilerUse>
               <source>11</source>
@@ -188,23 +184,6 @@
         </property>
         <activeByDefault>true</activeByDefault>
       </activation>
-    </profile>
-    <profile>
-      <id>java7</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.1</version>
-            <configuration>
-              <source>1.7</source>
-              <target>1.7</target>
-              <encoding>UTF-8</encoding>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
   </profiles>
   <dependencies>
@@ -234,17 +213,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.4</version>
+        <version>3.6.3</version>
         <configuration>
           <failOnError>false</failOnError>
-          <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
-          <docletArtifact>
-            <groupId>org.umlgraph</groupId>
-            <artifactId>umlgraph</artifactId>
-            <version>5.6</version>
-          </docletArtifact>
-          <additionalparam>-views</additionalparam>
-          <useStandardDocletOptions>true</useStandardDocletOptions>
         </configuration>
       </plugin>
     </plugins>
@@ -255,7 +226,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>2.19.1</version>
+          <version>3.2.5</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -264,42 +235,37 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-site-plugin</artifactId>
-        <version>3.6</version>
+        <version>3.12.1</version>
         <dependencies>
           <dependency>
             <groupId>org.apache.maven.wagon</groupId>
             <artifactId>wagon-webdav-jackrabbit</artifactId>
-            <version>2.10</version>
+            <version>3.5.3</version>
           </dependency>
         </dependencies>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.19.1</version>
+        <version>3.2.5</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-deploy-plugin</artifactId>
-        <version>2.8</version>
+        <version>3.1.1</version>
         <configuration>
           <skip />
         </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.9</version>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>2.6</version>
+        <version>3.3.1</version>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>2.2.1</version>
+        <version>3.3.0</version>
         <executions>
           <execution>
             <id>attach-sources</id>
@@ -420,7 +386,7 @@
           <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.9.8</version>
+            <version>2.14.2</version>
           </dependency>
         </dependencies>
       </plugin>

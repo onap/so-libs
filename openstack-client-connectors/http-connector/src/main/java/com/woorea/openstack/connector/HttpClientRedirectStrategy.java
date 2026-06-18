@@ -22,7 +22,6 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.ProtocolException;
-import org.apache.http.annotation.Immutable;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
 import org.apache.http.client.methods.HttpDelete;
@@ -39,7 +38,6 @@ import org.apache.http.protocol.HttpContext;
  * A custom strategy is needed for the Openstack API, which can also send 302 on a DELETE (by name) request, expecting
  * the client to follow the redirect to perform the actual deletion.
  */
-@Immutable
 public class HttpClientRedirectStrategy extends DefaultRedirectStrategy {
 
     /**

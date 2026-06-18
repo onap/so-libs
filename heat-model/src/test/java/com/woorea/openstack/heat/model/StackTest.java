@@ -28,8 +28,8 @@ import com.woorea.openstack.heat.model.Stack.Output;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -74,50 +74,50 @@ public class StackTest {
         stack.toString();
 
         Date updatedTime = stack.getUpdatedTime();
-        Assert.assertNotNull(updatedTime);
+        Assertions.assertNotNull(updatedTime);
         stack.setUpdatedTime(updatedTime);
 
         List<Output> outputs = stack.getOutputs();
-        Assert.assertNotNull(outputs);
-        Assert.assertEquals(2, outputs.size());
+        Assertions.assertNotNull(outputs);
+        Assertions.assertEquals(2, outputs.size());
 
         String stackStatus = stack.getStackStatus();
-        Assert.assertNotNull(stackStatus);
+        Assertions.assertNotNull(stackStatus);
         stack.setStackStatus(stackStatus);
 
         String description = stack.getDescription();
-        Assert.assertNotNull(description);
+        Assertions.assertNotNull(description);
         stack.setDescription(description);
 
         Map<String, Object> files = stack.getFiles();
-        Assert.assertNotNull(files);
-        Assert.assertEquals(2, files.size());
+        Assertions.assertNotNull(files);
+        Assertions.assertEquals(2, files.size());
         stack.setFiles(files);
 
         List<Link> links = stack.getLinks();
-        Assert.assertNotNull(links);
-        Assert.assertEquals(2, links.size());
+        Assertions.assertNotNull(links);
+        Assertions.assertEquals(2, links.size());
         stack.setLinks(links);
 
         String stackName = stack.getStackName();
-        Assert.assertNotNull(stackName);
+        Assertions.assertNotNull(stackName);
         stack.setStackName(stackName);
 
         String id = stack.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         stack.setId(id);
 
         Date creationTime = stack.getCreationTime();
-        Assert.assertNotNull(creationTime);
+        Assertions.assertNotNull(creationTime);
         stack.setCreationTime(creationTime);
 
         Map<String, Object> parameters = stack.getParameters();
-        Assert.assertNotNull(parameters);
-        Assert.assertEquals(2, parameters.size());
+        Assertions.assertNotNull(parameters);
+        Assertions.assertEquals(2, parameters.size());
         stack.setParameters(parameters);
 
         String stackStatusReason = stack.getStackStatusReason();
-        Assert.assertNotNull(stackStatusReason);
+        Assertions.assertNotNull(stackStatusReason);
         stack.setStackStatusReason(stackStatusReason);
     }
 }

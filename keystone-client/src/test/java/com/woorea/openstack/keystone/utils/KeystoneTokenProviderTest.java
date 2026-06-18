@@ -19,16 +19,18 @@
  */
 package com.woorea.openstack.keystone.utils;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class KeystoneTokenProviderTest {
 
     KeystoneTokenProvider keystoneTokenProvider = new KeystoneTokenProvider("endpoint", "username", "password");
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void getAccessByTenant() throws Exception {
-        keystoneTokenProvider.getAccessByTenant("id-123");
+        assertThrows(NullPointerException.class, () -> {
+            keystoneTokenProvider.getAccessByTenant("id-123");
+        });
     }
 
     @Test

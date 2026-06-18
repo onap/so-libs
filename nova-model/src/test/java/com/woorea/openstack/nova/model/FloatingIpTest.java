@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -58,18 +58,18 @@ public class FloatingIpTest {
         floatingip.toString();
 
         String instanceId = floatingip.getInstanceId();
-        Assert.assertNotNull(instanceId);
+        Assertions.assertNotNull(instanceId);
 
         String ip = floatingip.getIp();
-        Assert.assertNotNull(ip);
+        Assertions.assertNotNull(ip);
 
         String pool = floatingip.getPool();
-        Assert.assertNotNull(pool);
+        Assertions.assertNotNull(pool);
 
         String fixedIp = floatingip.getFixedIp();
-        Assert.assertNotNull(fixedIp);
+        Assertions.assertNotNull(fixedIp);
 
         String id = floatingip.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
     }
 }

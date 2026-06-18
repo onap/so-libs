@@ -27,8 +27,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.ServerAction.Rebuild;
 import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -66,37 +66,37 @@ public class RebuildTest {
         rebuild.toString();
 
         Map<String, String> metadata = rebuild.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
         rebuild.setMetadata(metadata);
 
         List<PersonalityFile> personality = rebuild.getPersonality();
-        Assert.assertNotNull(personality);
-        Assert.assertEquals(2, personality.size());
+        Assertions.assertNotNull(personality);
+        Assertions.assertEquals(2, personality.size());
         rebuild.setPersonality(personality);
 
         String name = rebuild.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         rebuild.setName(name);
 
         String adminPass = rebuild.getAdminPass();
-        Assert.assertNotNull(adminPass);
+        Assertions.assertNotNull(adminPass);
         rebuild.setAdminPass(adminPass);
 
         String imageRef = rebuild.getImageRef();
-        Assert.assertNotNull(imageRef);
+        Assertions.assertNotNull(imageRef);
         rebuild.setImageRef(imageRef);
 
         String accessIPv6 = rebuild.getAccessIPv6();
-        Assert.assertNotNull(accessIPv6);
+        Assertions.assertNotNull(accessIPv6);
         rebuild.setAccessIPv6(accessIPv6);
 
         String diskConfig = rebuild.getDiskConfig();
-        Assert.assertNotNull(diskConfig);
+        Assertions.assertNotNull(diskConfig);
         rebuild.setDiskConfig(diskConfig);
 
         String accessIPv4 = rebuild.getAccessIPv4();
-        Assert.assertNotNull(accessIPv4);
+        Assertions.assertNotNull(accessIPv4);
         rebuild.setAccessIPv4(accessIPv4);
     }
 }

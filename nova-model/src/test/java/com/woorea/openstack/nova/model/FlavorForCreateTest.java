@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,35 +59,35 @@ public class FlavorForCreateTest {
         flavorforcreate.toString();
 
         String disk = flavorforcreate.getDisk();
-        Assert.assertNotNull(disk);
+        Assertions.assertNotNull(disk);
         flavorforcreate.setDisk(disk);
 
         String swap = flavorforcreate.getSwap();
-        Assert.assertNotNull(swap);
+        Assertions.assertNotNull(swap);
         flavorforcreate.setSwap(swap);
 
         String name = flavorforcreate.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         flavorforcreate.setName(name);
 
         Float rxtxFactor = flavorforcreate.getRxtxFactor();
-        Assert.assertNotNull(rxtxFactor);
+        Assertions.assertNotNull(rxtxFactor);
         flavorforcreate.setRxtxFactor(rxtxFactor);
 
         Integer ephemeral = flavorforcreate.getEphemeral();
-        Assert.assertNotNull(ephemeral);
+        Assertions.assertNotNull(ephemeral);
         flavorforcreate.setEphemeral(ephemeral);
 
         String id = flavorforcreate.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         flavorforcreate.setId(id);
 
         String vcpus = flavorforcreate.getVcpus();
-        Assert.assertNotNull(vcpus);
+        Assertions.assertNotNull(vcpus);
         flavorforcreate.setVcpus(vcpus);
 
         Integer ram = flavorforcreate.getRam();
-        Assert.assertNotNull(ram);
+        Assertions.assertNotNull(ram);
         flavorforcreate.setRam(ram);
     }
 }

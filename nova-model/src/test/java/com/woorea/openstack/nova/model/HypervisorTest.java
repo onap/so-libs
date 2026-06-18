@@ -23,7 +23,7 @@ package com.woorea.openstack.nova.model;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

@@ -22,8 +22,8 @@ package com.woorea.openstack.glance.model;
 
 import java.util.Calendar;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -67,74 +67,74 @@ public class ImageTest {
         image.toString();
 
         String owner = image.getOwner();
-        Assert.assertNotNull(owner);
+        Assertions.assertNotNull(owner);
         image.setOwner(owner);
 
         String containerFormat = image.getContainerFormat();
-        Assert.assertNotNull(containerFormat);
+        Assertions.assertNotNull(containerFormat);
         image.setContainerFormat(containerFormat);
 
         String uri = image.getUri();
-        Assert.assertNotNull(uri);
+        Assertions.assertNotNull(uri);
         image.setUri(uri);
 
         Calendar createdAt = image.getCreatedAt();
-        Assert.assertNotNull(createdAt);
+        Assertions.assertNotNull(createdAt);
         image.setCreatedAt(createdAt);
 
         Calendar deletedAt = image.getDeletedAt();
-        Assert.assertNotNull(deletedAt);
+        Assertions.assertNotNull(deletedAt);
         image.setDeletedAt(deletedAt);
 
         Long size = image.getSize();
-        Assert.assertNotNull(size);
+        Assertions.assertNotNull(size);
         image.setSize(size);
 
         Integer minRam = image.getMinRam();
-        Assert.assertNotNull(minRam);
+        Assertions.assertNotNull(minRam);
         image.setMinRam(minRam);
 
         String diskFormat = image.getDiskFormat();
-        Assert.assertNotNull(diskFormat);
+        Assertions.assertNotNull(diskFormat);
         image.setDiskFormat(diskFormat);
 
         String checksum = image.getChecksum();
-        Assert.assertNotNull(checksum);
+        Assertions.assertNotNull(checksum);
         image.setChecksum(checksum);
 
         String name = image.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         image.setName(name);
 
         String id = image.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         image.setId(id);
 
         Long virtualSize = image.getVirtualSize();
-        Assert.assertNotNull(virtualSize);
+        Assertions.assertNotNull(virtualSize);
         image.setVirtualSize(virtualSize);
 
         Map<String, Object> properties = image.getProperties();
-        Assert.assertNotNull(properties);
-        Assert.assertEquals(2, properties.size());
+        Assertions.assertNotNull(properties);
+        Assertions.assertEquals(2, properties.size());
 
         Integer minDisk = image.getMinDisk();
-        Assert.assertNotNull(minDisk);
+        Assertions.assertNotNull(minDisk);
         image.setMinDisk(minDisk);
 
         String status = image.getStatus();
-        Assert.assertNotNull(status);
+        Assertions.assertNotNull(status);
         image.setStatus(status);
 
         Calendar updatedAt = image.getUpdatedAt();
-        Assert.assertNotNull(updatedAt);
+        Assertions.assertNotNull(updatedAt);
         image.setUpdatedAt(updatedAt);
 
         String distro = image.getOsDistro();
-        Assert.assertNotNull(distro);
+        Assertions.assertNotNull(distro);
 
         String version = image.getOsVersion();
-        Assert.assertNotNull(version);
+        Assertions.assertNotNull(version);
 
     }
 }

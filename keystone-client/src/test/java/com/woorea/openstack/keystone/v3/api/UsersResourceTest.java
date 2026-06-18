@@ -19,25 +19,32 @@
  */
 package com.woorea.openstack.keystone.v3.api;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class UsersResourceTest {
 
     UsersResource usersResource = new UsersResource(null);
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void groupsTest() throws Exception {
-        usersResource.groups("id");
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            usersResource.groups("id");
+        });
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void projectsTest() throws Exception {
-        usersResource.projects("uid");
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            usersResource.projects("uid");
+        });
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void rolesTest() throws Exception {
-        usersResource.roles("uid");
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            usersResource.roles("uid");
+        });
     }
 
 }

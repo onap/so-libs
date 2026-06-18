@@ -27,8 +27,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.SimpleTenantUsage.ServerUsage;
 import java.math.BigDecimal;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -74,36 +74,36 @@ public class SimpleTenantUsageTest {
         simpletenantusage.toString();
 
         BigDecimal totalMemoryMbUsage = simpletenantusage.getTotalMemoryMbUsage();
-        Assert.assertNotNull(totalMemoryMbUsage);
+        Assertions.assertNotNull(totalMemoryMbUsage);
         simpletenantusage.setTotalMemoryMbUsage(totalMemoryMbUsage);
 
         String stop = simpletenantusage.getStop();
-        Assert.assertNotNull(stop);
+        Assertions.assertNotNull(stop);
         simpletenantusage.setStop(stop);
 
         BigDecimal totalVcpusUsage = simpletenantusage.getTotalVcpusUsage();
-        Assert.assertNotNull(totalVcpusUsage);
+        Assertions.assertNotNull(totalVcpusUsage);
         simpletenantusage.setTotalVcpusUsage(totalVcpusUsage);
 
         String tenantId = simpletenantusage.getTenantId();
-        Assert.assertNotNull(tenantId);
+        Assertions.assertNotNull(tenantId);
         simpletenantusage.setTenantId(tenantId);
 
         String start = simpletenantusage.getStart();
-        Assert.assertNotNull(start);
+        Assertions.assertNotNull(start);
         simpletenantusage.setStart(start);
 
         List<ServerUsage> serverUsages = simpletenantusage.getServerUsages();
-        Assert.assertNotNull(serverUsages);
-        Assert.assertEquals(2, serverUsages.size());
+        Assertions.assertNotNull(serverUsages);
+        Assertions.assertEquals(2, serverUsages.size());
         simpletenantusage.setServerUsages(serverUsages);
 
         BigDecimal totalLocalGbUsage = simpletenantusage.getTotalLocalGbUsage();
-        Assert.assertNotNull(totalLocalGbUsage);
+        Assertions.assertNotNull(totalLocalGbUsage);
         simpletenantusage.setTotalLocalGbUsage(totalLocalGbUsage);
 
         String totalHours = simpletenantusage.getTotalHours();
-        Assert.assertNotNull(totalHours);
+        Assertions.assertNotNull(totalHours);
         simpletenantusage.setTotalHours(totalHours);
     }
 }

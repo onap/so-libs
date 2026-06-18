@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.math.BigDecimal;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -60,36 +60,36 @@ public class StatisticsTest {
         statistics.toString();
 
         BigDecimal duration = statistics.getDuration();
-        Assert.assertNotNull(duration);
+        Assertions.assertNotNull(duration);
 
         BigDecimal period = statistics.getPeriod();
-        Assert.assertNotNull(period);
+        Assertions.assertNotNull(period);
 
         BigDecimal avg = statistics.getAvg();
-        Assert.assertNotNull(avg);
+        Assertions.assertNotNull(avg);
 
         BigDecimal min = statistics.getMin();
-        Assert.assertNotNull(min);
+        Assertions.assertNotNull(min);
 
         String durationStart = statistics.getDurationStart();
-        Assert.assertNotNull(durationStart);
+        Assertions.assertNotNull(durationStart);
 
         BigDecimal max = statistics.getMax();
-        Assert.assertNotNull(max);
+        Assertions.assertNotNull(max);
 
         String durationEnd = statistics.getDurationEnd();
-        Assert.assertNotNull(durationEnd);
+        Assertions.assertNotNull(durationEnd);
 
         BigDecimal count = statistics.getCount();
-        Assert.assertNotNull(count);
+        Assertions.assertNotNull(count);
 
         BigDecimal sum = statistics.getSum();
-        Assert.assertNotNull(sum);
+        Assertions.assertNotNull(sum);
 
         String periodStart = statistics.getPeriodStart();
-        Assert.assertNotNull(periodStart);
+        Assertions.assertNotNull(periodStart);
 
         String periodEnd = statistics.getPeriodEnd();
-        Assert.assertNotNull(periodEnd);
+        Assertions.assertNotNull(periodEnd);
     }
 }

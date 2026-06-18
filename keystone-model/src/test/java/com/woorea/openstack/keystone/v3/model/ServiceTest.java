@@ -27,8 +27,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Token.Service;
 import com.woorea.openstack.keystone.v3.model.Token.Service.Endpoint;
 import java.util.List;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -65,16 +65,16 @@ public class ServiceTest {
         service.toString();
 
         List<Endpoint> endpoints = service.getEndpoints();
-        Assert.assertNotNull(endpoints);
-        Assert.assertEquals(2, endpoints.size());
+        Assertions.assertNotNull(endpoints);
+        Assertions.assertEquals(2, endpoints.size());
         service.setEndpoints(endpoints);
 
         String id = service.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         service.setId(id);
 
         String type = service.getType();
-        Assert.assertNotNull(type);
+        Assertions.assertNotNull(type);
         service.setType(type);
     }
 }

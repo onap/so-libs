@@ -19,7 +19,7 @@
 
 package com.woorea.openstack.keystone.model;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class MetadataTest {
 

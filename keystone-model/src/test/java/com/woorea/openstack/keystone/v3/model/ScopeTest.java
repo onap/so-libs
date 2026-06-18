@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Authentication.Scope;
 import com.woorea.openstack.keystone.v3.model.Authentication.Scope.Project;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,7 +59,7 @@ public class ScopeTest {
         scope.toString();
 
         Project project = scope.getProject();
-        Assert.assertNotNull(project);
+        Assertions.assertNotNull(project);
         scope.setProject(project);
     }
 }

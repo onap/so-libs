@@ -24,8 +24,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,27 +59,27 @@ public class EndpointTest {
         endpoint.toString();
 
         String publicURL = endpoint.getPublicURL();
-        Assert.assertNotNull(publicURL);
+        Assertions.assertNotNull(publicURL);
         endpoint.setPublicURL(publicURL);
 
         String internalURL = endpoint.getInternalURL();
-        Assert.assertNotNull(internalURL);
+        Assertions.assertNotNull(internalURL);
         endpoint.setInternalURL(internalURL);
 
         String id = endpoint.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         endpoint.setId(id);
 
         String region = endpoint.getRegion();
-        Assert.assertNotNull(region);
+        Assertions.assertNotNull(region);
         endpoint.setRegion(region);
 
         String serviceId = endpoint.getServiceId();
-        Assert.assertNotNull(serviceId);
+        Assertions.assertNotNull(serviceId);
         endpoint.setServiceId(serviceId);
 
         String adminURL = endpoint.getAdminURL();
-        Assert.assertNotNull(adminURL);
+        Assertions.assertNotNull(adminURL);
         endpoint.setAdminURL(adminURL);
     }
 }

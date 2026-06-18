@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.ServerAction.AssociateFloatingIp;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -58,7 +58,7 @@ public class AssociateFloatingIpTest {
         associatefloatingip.toString();
 
         String address = associatefloatingip.getAddress();
-        Assert.assertNotNull(address);
+        Assertions.assertNotNull(address);
         associatefloatingip.setAddress(address);
     }
 }

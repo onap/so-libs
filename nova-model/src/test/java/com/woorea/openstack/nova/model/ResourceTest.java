@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Host.ResourceWrapper.Resource;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -57,18 +57,18 @@ public class ResourceTest {
         resource.toString();
 
         Integer memoryMb = resource.getMemoryMb();
-        Assert.assertNotNull(memoryMb);
+        Assertions.assertNotNull(memoryMb);
 
         String host = resource.getHost();
-        Assert.assertNotNull(host);
+        Assertions.assertNotNull(host);
 
         String project = resource.getProject();
-        Assert.assertNotNull(project);
+        Assertions.assertNotNull(project);
 
         Integer cpu = resource.getCpu();
-        Assert.assertNotNull(cpu);
+        Assertions.assertNotNull(cpu);
 
         Integer diskGb = resource.getDiskGb();
-        Assert.assertNotNull(diskGb);
+        Assertions.assertNotNull(diskGb);
     }
 }

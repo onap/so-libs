@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Calendar;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -61,31 +61,31 @@ public class CloudpipeTest {
         cloudpipe.toString();
 
         Calendar createdAt = cloudpipe.getCreatedAt();
-        Assert.assertNotNull(createdAt);
+        Assertions.assertNotNull(createdAt);
         cloudpipe.setCreatedAt(createdAt);
 
         String instanceId = cloudpipe.getInstanceId();
-        Assert.assertNotNull(instanceId);
+        Assertions.assertNotNull(instanceId);
         cloudpipe.setInstanceId(instanceId);
 
         String publicIp = cloudpipe.getPublicIp();
-        Assert.assertNotNull(publicIp);
+        Assertions.assertNotNull(publicIp);
         cloudpipe.setPublicIp(publicIp);
 
         String publicPort = cloudpipe.getPublicPort();
-        Assert.assertNotNull(publicPort);
+        Assertions.assertNotNull(publicPort);
         cloudpipe.setPublicPort(publicPort);
 
         String state = cloudpipe.getState();
-        Assert.assertNotNull(state);
+        Assertions.assertNotNull(state);
         cloudpipe.setState(state);
 
         String projectId = cloudpipe.getProjectId();
-        Assert.assertNotNull(projectId);
+        Assertions.assertNotNull(projectId);
         cloudpipe.setProjectId(projectId);
 
         String internalIp = cloudpipe.getInternalIp();
-        Assert.assertNotNull(internalIp);
+        Assertions.assertNotNull(internalIp);
         cloudpipe.setInternalIp(internalIp);
     }
 }

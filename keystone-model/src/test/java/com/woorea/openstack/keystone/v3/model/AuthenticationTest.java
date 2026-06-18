@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Authentication.Identity;
 import com.woorea.openstack.keystone.v3.model.Authentication.Scope;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -67,11 +67,11 @@ public class AuthenticationTest {
         authentication.toString();
 
         Identity identity = authentication.getIdentity();
-        Assert.assertNotNull(identity);
+        Assertions.assertNotNull(identity);
         authentication.setIdentity(identity);
 
         Scope scope = authentication.getScope();
-        Assert.assertNotNull(scope);
+        Assertions.assertNotNull(scope);
         authentication.setScope(scope);
     }
 }

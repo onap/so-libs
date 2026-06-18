@@ -20,8 +20,8 @@
 
 package com.woorea.openstack.nova.model;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -57,19 +57,19 @@ public class AddressTest {
         address.toString();
 
         String type = address.getType();
-        Assert.assertNotNull(type);
+        Assertions.assertNotNull(type);
         address.setType(type);
 
         String addr = address.getAddr();
-        Assert.assertNotNull(addr);
+        Assertions.assertNotNull(addr);
         address.setAddr(addr);
 
         int version = address.getVersion();
-        Assert.assertNotNull(version);
+        Assertions.assertNotNull(version);
         address.setVersion(version);
 
         String macAddr = address.getMacAddr();
-        Assert.assertNotNull(macAddr);
+        Assertions.assertNotNull(macAddr);
         address.setMacAddr(macAddr);
     }
 }

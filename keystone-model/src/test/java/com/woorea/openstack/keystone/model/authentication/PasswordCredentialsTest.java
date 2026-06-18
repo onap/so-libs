@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.model.authentication.UsernamePassword.PasswordCredentials;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -57,11 +57,11 @@ public class PasswordCredentialsTest {
         passwordcredentials.toString();
 
         String password = passwordcredentials.getPassword();
-        Assert.assertNotNull(password);
+        Assertions.assertNotNull(password);
         passwordcredentials.setPassword(password);
 
         String username = passwordcredentials.getUsername();
-        Assert.assertNotNull(username);
+        Assertions.assertNotNull(username);
         passwordcredentials.setUsername(username);
     }
 }

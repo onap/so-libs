@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Token.Service.Endpoint;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -58,27 +58,27 @@ public class EndpointTest {
         endpoint.toString();
 
         String legacyEndpointId = endpoint.getLegacyEndpointId();
-        Assert.assertNotNull(legacyEndpointId);
+        Assertions.assertNotNull(legacyEndpointId);
         endpoint.setLegacyEndpointId(legacyEndpointId);
 
         String id = endpoint.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         endpoint.setId(id);
 
         String region = endpoint.getRegion();
-        Assert.assertNotNull(region);
+        Assertions.assertNotNull(region);
         endpoint.setRegion(region);
 
         String interfaceProperty = endpoint.getInterface();
-        Assert.assertNotNull(interfaceProperty);
+        Assertions.assertNotNull(interfaceProperty);
         endpoint.setInterface(interfaceProperty);
 
         String url = endpoint.getUrl();
-        Assert.assertNotNull(url);
+        Assertions.assertNotNull(url);
         endpoint.setUrl(url);
 
         Boolean enabled = endpoint.getEnabled();
-        Assert.assertNotNull(enabled);
+        Assertions.assertNotNull(enabled);
         endpoint.setEnabled(enabled);
     }
 }

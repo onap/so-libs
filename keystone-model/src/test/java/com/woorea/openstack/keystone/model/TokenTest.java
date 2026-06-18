@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Calendar;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,15 +59,15 @@ public class TokenTest {
         token.toString();
 
         Calendar expires = token.getExpires();
-        Assert.assertNotNull(expires);
+        Assertions.assertNotNull(expires);
 
         String id = token.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
 
         Calendar issued_at = token.getIssued_at();
-        Assert.assertNotNull(issued_at);
+        Assertions.assertNotNull(issued_at);
 
         Tenant tenant = token.getTenant();
-        Assert.assertNotNull(tenant);
+        Assertions.assertNotNull(tenant);
     }
 }

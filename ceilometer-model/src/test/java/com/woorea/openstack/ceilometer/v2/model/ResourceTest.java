@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.Map;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,19 +59,19 @@ public class ResourceTest {
         resource.toString();
 
         Map<String, Object> metadata = resource.getMetadata();
-        Assert.assertNotNull(metadata);
-        Assert.assertEquals(2, metadata.size());
+        Assertions.assertNotNull(metadata);
+        Assertions.assertEquals(2, metadata.size());
 
         String resourceProperty = resource.getResource();
-        Assert.assertNotNull(resourceProperty);
+        Assertions.assertNotNull(resourceProperty);
 
         String project = resource.getProject();
-        Assert.assertNotNull(project);
+        Assertions.assertNotNull(project);
 
         String user = resource.getUser();
-        Assert.assertNotNull(user);
+        Assertions.assertNotNull(user);
 
         String timestamp = resource.getTimestamp();
-        Assert.assertNotNull(timestamp);
+        Assertions.assertNotNull(timestamp);
     }
 }

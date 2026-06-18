@@ -25,8 +25,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.nova.model.Limits.AbsoluteLimit;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -67,81 +67,81 @@ public class AbsoluteLimitTest {
         absolutelimit.toString();
 
         Integer maxTotalRAMSize = absolutelimit.getMaxTotalRAMSize();
-        Assert.assertNotNull(maxTotalRAMSize);
+        Assertions.assertNotNull(maxTotalRAMSize);
 
         Integer maxTotalInstances = absolutelimit.getMaxTotalInstances();
-        Assert.assertNotNull(maxTotalInstances);
+        Assertions.assertNotNull(maxTotalInstances);
 
         Integer serverMetaUsed = absolutelimit.getServerMetaUsed();
-        Assert.assertNotNull(serverMetaUsed);
+        Assertions.assertNotNull(serverMetaUsed);
 
         Integer maxTotalKeypairs = absolutelimit.getMaxTotalKeypairs();
-        Assert.assertNotNull(maxTotalKeypairs);
+        Assertions.assertNotNull(maxTotalKeypairs);
 
         Integer maxTotalVolumeGigabytes = absolutelimit.getMaxTotalVolumeGigabytes();
-        Assert.assertNotNull(maxTotalVolumeGigabytes);
+        Assertions.assertNotNull(maxTotalVolumeGigabytes);
 
         Integer totalSecurityGroupsUsed = absolutelimit.getTotalSecurityGroupsUsed();
-        Assert.assertNotNull(totalSecurityGroupsUsed);
+        Assertions.assertNotNull(totalSecurityGroupsUsed);
 
         Integer maxTotalVolumes = absolutelimit.getMaxTotalVolumes();
-        Assert.assertNotNull(maxTotalVolumes);
+        Assertions.assertNotNull(maxTotalVolumes);
 
         Integer maxImageMeta = absolutelimit.getMaxImageMeta();
-        Assert.assertNotNull(maxImageMeta);
+        Assertions.assertNotNull(maxImageMeta);
 
         Integer imageMetaUsed = absolutelimit.getImageMetaUsed();
-        Assert.assertNotNull(imageMetaUsed);
+        Assertions.assertNotNull(imageMetaUsed);
 
         Integer totalVolumeGigabytesUsed = absolutelimit.getTotalVolumeGigabytesUsed();
-        Assert.assertNotNull(totalVolumeGigabytesUsed);
+        Assertions.assertNotNull(totalVolumeGigabytesUsed);
 
         Integer maxSecurityGroupRules = absolutelimit.getMaxSecurityGroupRules();
-        Assert.assertNotNull(maxSecurityGroupRules);
+        Assertions.assertNotNull(maxSecurityGroupRules);
 
         Integer totalCoresUsed = absolutelimit.getTotalCoresUsed();
-        Assert.assertNotNull(totalCoresUsed);
+        Assertions.assertNotNull(totalCoresUsed);
 
         Integer totalVolumesUsed = absolutelimit.getTotalVolumesUsed();
-        Assert.assertNotNull(totalVolumesUsed);
+        Assertions.assertNotNull(totalVolumesUsed);
 
         Integer maxTotalFloatingIps = absolutelimit.getMaxTotalFloatingIps();
-        Assert.assertNotNull(maxTotalFloatingIps);
+        Assertions.assertNotNull(maxTotalFloatingIps);
 
         Integer maxPersonality = absolutelimit.getMaxPersonality();
-        Assert.assertNotNull(maxPersonality);
+        Assertions.assertNotNull(maxPersonality);
 
         Integer personalityUsed = absolutelimit.getPersonalityUsed();
-        Assert.assertNotNull(personalityUsed);
+        Assertions.assertNotNull(personalityUsed);
 
         Integer maxSecurityGroups = absolutelimit.getMaxSecurityGroups();
-        Assert.assertNotNull(maxSecurityGroups);
+        Assertions.assertNotNull(maxSecurityGroups);
 
         Integer securityGroupRulesUsed = absolutelimit.getSecurityGroupRulesUsed();
-        Assert.assertNotNull(securityGroupRulesUsed);
+        Assertions.assertNotNull(securityGroupRulesUsed);
 
         Integer maxTotalCores = absolutelimit.getMaxTotalCores();
-        Assert.assertNotNull(maxTotalCores);
+        Assertions.assertNotNull(maxTotalCores);
 
         Integer maxServerMeta = absolutelimit.getMaxServerMeta();
-        Assert.assertNotNull(maxServerMeta);
+        Assertions.assertNotNull(maxServerMeta);
 
         Integer maxPersonalitySize = absolutelimit.getMaxPersonalitySize();
-        Assert.assertNotNull(maxPersonalitySize);
+        Assertions.assertNotNull(maxPersonalitySize);
 
         Integer personalitySizeUsed = absolutelimit.getPersonalitySizeUsed();
-        Assert.assertNotNull(personalitySizeUsed);
+        Assertions.assertNotNull(personalitySizeUsed);
 
         Integer totalKeyPairsUsed = absolutelimit.getTotalKeyPairsUsed();
-        Assert.assertNotNull(totalKeyPairsUsed);
+        Assertions.assertNotNull(totalKeyPairsUsed);
 
         Integer totalFloatingIpsUsed = absolutelimit.getTotalFloatingIpsUsed();
-        Assert.assertNotNull(totalFloatingIpsUsed);
+        Assertions.assertNotNull(totalFloatingIpsUsed);
 
         Integer totalInstancesUsed = absolutelimit.getTotalInstancesUsed();
-        Assert.assertNotNull(totalInstancesUsed);
+        Assertions.assertNotNull(totalInstancesUsed);
 
         Integer totalRAMUsed = absolutelimit.getTotalRAMUsed();
-        Assert.assertNotNull(totalRAMUsed);
+        Assertions.assertNotNull(totalRAMUsed);
     }
 }

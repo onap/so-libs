@@ -26,8 +26,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.woorea.openstack.keystone.v3.model.Token.Domain;
 import com.woorea.openstack.keystone.v3.model.Token.Project;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
@@ -59,15 +59,15 @@ public class ProjectTest {
         project.toString();
 
         Domain domain = project.getDomain();
-        Assert.assertNotNull(domain);
+        Assertions.assertNotNull(domain);
         project.setDomain(domain);
 
         String name = project.getName();
-        Assert.assertNotNull(name);
+        Assertions.assertNotNull(name);
         project.setName(name);
 
         String id = project.getId();
-        Assert.assertNotNull(id);
+        Assertions.assertNotNull(id);
         project.setId(id);
     }
 }
