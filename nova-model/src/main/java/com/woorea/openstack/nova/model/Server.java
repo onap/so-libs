@@ -24,6 +24,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.woorea.openstack.nova.model.Server.Addresses.Address;
 
 @JsonRootName("server")
@@ -163,6 +164,7 @@ public class Server implements Serializable {
 
     private List<Link> links;
 
+    @JsonDeserialize(using = ImageReferenceDeserializer.class)
     private Image image;
 
     private Flavor flavor;

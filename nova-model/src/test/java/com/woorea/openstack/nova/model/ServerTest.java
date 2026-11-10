@@ -257,4 +257,30 @@ public class ServerTest {
         String status = server.getStatus();
         Assertions.assertNotNull(status);
     }
+
+    private static final ObjectMapper WRAPPED_READER =
+            new ObjectMapper().enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
+                    .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
+    @Test
+    public void emptyImageReferenceDeserializesAsNull() throws Exception {
+        Server server = WRAPPED_READER
+                .readValue("{\"server\":{\"id\":\"s1\",\"image\":\"\",\"flavor\":{\"id\":\"f1\"}}}", Server.class);
+        Assertions.assertNull(server.getImage());
+        Assertions.assertEquals("f1", server.getFlavor().getId());
+    }
+
+    @Test
+    public void imageReferenceObjectStillDeserializes() throws Exception {
+        Server server = WRAPPED_READER.readValue("{\"server\":{\"id\":\"s1\",\"image\":{\"id\":\"i1\","
+                + "\"links\":[{\"rel\":\"bookmark\",\"href\":\"http://nova/images/i1\"}]}}}", Server.class);
+        Assertions.assertEquals("i1", server.getImage().getId());
+        Assertions.assertEquals("bookmark", server.getImage().getLinks().get(0).getRel());
+    }
+
+    @Test
+    public void nullImageReferenceDeserializesAsNull() throws Exception {
+        Server server = WRAPPED_READER.readValue("{\"server\":{\"id\":\"s1\",\"image\":null}}", Server.class);
+        Assertions.assertNull(server.getImage());
+    }
 }
