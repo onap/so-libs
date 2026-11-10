@@ -12,11 +12,6 @@
   <description>OpenStack Quantum Client</description>
   <dependencies>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
       <groupId>org.onap.so.libs.openstack-java-sdk</groupId>
       <artifactId>openstack-client</artifactId>
       <version>${project.version}</version>
