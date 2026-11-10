@@ -10,4 +10,11 @@
   <artifactId>cinder-model</artifactId>
   <name>OpenStack Cinder Model</name>
   <description>OpenStack Cinder Model</description>
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
 </project>

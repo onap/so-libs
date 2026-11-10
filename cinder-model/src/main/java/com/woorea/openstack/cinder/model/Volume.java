@@ -21,11 +21,80 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @JsonRootName("volume")
 public class Volume implements Serializable {
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class Attachment implements Serializable {
+
+        @JsonProperty("server_id")
+        private String serverId;
+
+        @JsonProperty("attachment_id")
+        private String attachmentId;
+
+        @JsonProperty("volume_id")
+        private String volumeId;
+
+        private String device;
+
+        @JsonProperty("host_name")
+        private String hostName;
+
+        private String id;
+
+        public String getServerId() {
+            return serverId;
+        }
+
+        public void setServerId(String serverId) {
+            this.serverId = serverId;
+        }
+
+        public String getAttachmentId() {
+            return attachmentId;
+        }
+
+        public void setAttachmentId(String attachmentId) {
+            this.attachmentId = attachmentId;
+        }
+
+        public String getVolumeId() {
+            return volumeId;
+        }
+
+        public void setVolumeId(String volumeId) {
+            this.volumeId = volumeId;
+        }
+
+        public String getDevice() {
+            return device;
+        }
+
+        public void setDevice(String device) {
+            this.device = device;
+        }
+
+        public String getHostName() {
+            return hostName;
+        }
+
+        public void setHostName(String hostName) {
+            this.hostName = hostName;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+    }
 
     private String id;
 
@@ -60,7 +129,7 @@ public class Volume implements Serializable {
 
     private List<Link> links;
 
-    private List<Map<String, Object>> attachments;
+    private List<Attachment> attachments;
 
     private Map<String, String> metadata;
 
@@ -137,7 +206,7 @@ public class Volume implements Serializable {
         this.snapshotId = snapshotId;
     }
 
-    public void setAttachments(List<Map<String, Object>> attachments) {
+    public void setAttachments(List<Attachment> attachments) {
         this.attachments = attachments;
     }
 
@@ -205,7 +274,7 @@ public class Volume implements Serializable {
     /**
      * @return the attachments
      */
-    public List<Map<String, Object>> getAttachments() {
+    public List<Attachment> getAttachments() {
         return attachments;
     }
 

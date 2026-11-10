@@ -112,4 +112,13 @@ public class PortTest {
         Assertions.assertNotNull(deviceId);
         port.setDeviceId(deviceId);
     }
+
+    @Test
+    public void bindingIsPresentWhenNoBindingFieldsAreSent() throws Exception {
+        ObjectMapper reader = new ObjectMapper().enable(DeserializationFeature.UNWRAP_ROOT_VALUE)
+                .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+        Port port = reader.readValue("{\"port\":{\"id\":\"p1\",\"network_id\":\"n1\"}}", Port.class);
+        Assertions.assertNotNull(port.getBinding());
+        Assertions.assertNull(port.getBinding().getVnicType());
+    }
 }
